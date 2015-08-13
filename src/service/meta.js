@@ -33,7 +33,7 @@ var meta = {
     step: 0.5,
   },
 
-  range: 30,
+  range: 30
 };
 
 export default meta;

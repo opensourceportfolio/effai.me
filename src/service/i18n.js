@@ -99,6 +99,6 @@ var i18n = {
         placeholder: 'rate of withdrawl',
         name: 'withdrawl',
         type: 'percent',
-    },
+    }
 };
 export default i18n;
