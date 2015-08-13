@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var babel = require('gulp-babel');
 
-gulp.task('default', ['compile', 'copy-lib', 'copy-font']);
+gulp.task('default', ['compile', 'copy-lib', 'copy-font', 'copy-style']);
 
 gulp.task('copy-lib', function() {
   return gulp.src(['src/lib/*'])
@@ -10,8 +10,13 @@ gulp.task('copy-lib', function() {
 });
 
 gulp.task('copy-font', function() {
-  return gulp.src(['src/font/*/*.*'])
+  return gulp.src(['src/font/**/*.*'])
     .pipe(gulp.dest('dist/font'));
+});
+
+gulp.task('copy-style', function() {
+  return gulp.src(['src/style/**/*.*'])
+    .pipe(gulp.dest('dist/style'));
 });
 
 gulp.task('compile', function() {
