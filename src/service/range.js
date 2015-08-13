@@ -29,7 +29,7 @@ export default class Range {
         }, {
           name: this.i18n.networth.chart.goalLabel,
           data: [],
-        }],
+        }]
       };
 
     for (var i = 0; i < this.count; i++) {
@@ -78,7 +78,7 @@ export default class Range {
       propSeries = [],
       rangeData = {
         labels: [],
-        series: [],
+        series: []
       };
 
     stateCopy[prop] = min;
