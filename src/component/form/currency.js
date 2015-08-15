@@ -1,4 +1,5 @@
 import React from 'lib/react';
+import formatter from 'service/formatter';
 
 export class Currency extends React.Component {
 
@@ -16,7 +17,8 @@ export class Currency extends React.Component {
     return (
       <div className="input-field col s12">
         <i className="mdi-editor-attach-money prefix"></i>
-        <input className="validate" defaultValue={this.props.value} onChange={this.handleChange.bind(this)} required type="number" />
+        <input className="validate form__input" defaultValue={this.props.value} onChange={this.handleChange.bind(this)} required type="number" />
+        <label className="form__label">{formatter.currency(this.props.value)}</label>
         <label className="active" htmlFor={this.props.name}>
           {this.props.placeholder}
         </label>
