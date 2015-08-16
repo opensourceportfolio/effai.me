@@ -4,19 +4,6 @@ import { Navbar } from 'component/navbar';
 import { Title } from 'component/title';
 import { FICard } from 'component/card/fiCard';
 
-function debounce(fn, delay){
-  var timer = null;
-  return function () {
-    var context = this, args = arguments;
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-      fn.apply(context, args);
-    }, delay);
-  };
-}
-
-var _timer;
-
 export class FICalculator extends React.Component {
   constructor() {
     super();
@@ -33,10 +20,7 @@ export class FICalculator extends React.Component {
   }
 
   handleChange(name, value) {
-    clearTimeout(_timer);
-    _timer = setTimeout(function () {
-      this.setState({[name]: value});
-    }.bind(this), 250);
+    this.setState({[name]: value});
   }
 
   render() {

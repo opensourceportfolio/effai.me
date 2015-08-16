@@ -15,7 +15,7 @@ export class Counter extends React.Component {
     return (
       <div onClick={this.tick.bind(this)}>
         Clicks: {this.state.count}
-        <input value={this.state.value} onChange={this.update.bind(this)} />
+        <input onChange={this.update.bind(this)} value={this.state.value} />
         {this.state.value}
       </div>
     );

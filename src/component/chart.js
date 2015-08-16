@@ -17,7 +17,10 @@ export class Chart extends React.Component {
   }
 
   componentDidUpdate() {
-    this.chart.update(this.props.data);
+    clearTimeout(this._timer);
+    this._timer = setTimeout(function () {
+      this.chart.update(this.props.data);
+    }.bind(this), 250);
   }
 
   _capitalize(s)

@@ -18,7 +18,7 @@ export class Currency extends React.Component {
     return (
       <div className={className}>
         <i className="mdi-editor-attach-money prefix"></i>
-        <input className="validate form__input" defaultValue={this.props.value} onChange={this.handleChange.bind(this)} required type="number" />
+        <input className="validate form__input" defaultValue={this.props.value} onChange={this.handleChange.bind(this)} pattern="\d*" required type="number" />
         <label className="form__label">{formatter.currency(this.props.value)}</label>
         <label className="active" htmlFor={this.props.name}>
           {this.props.placeholder}
