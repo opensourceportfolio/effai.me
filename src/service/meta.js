@@ -1,6 +1,7 @@
 var meta = {
   networth: {
     type: 'currency',
+    max: 999999,
   },
 
   savings: {

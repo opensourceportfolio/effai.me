@@ -1,5 +1,6 @@
 import React from 'lib/react';
 import i18n from 'service/i18n';
+import $ from 'jquery';
 import { Navbar } from 'component/navbar';
 import { Title } from 'component/title';
 import { FICard } from 'component/card/fiCard';
@@ -17,6 +18,18 @@ export class FICalculator extends React.Component {
       inflation: 3,
       withdrawl: 4,
     };
+
+    this.touchFix();
+  }
+
+  touchFix() {
+    if ('ontouchstart' in window) {
+      $(document).on('focus', 'input', function() {
+        $('.navbar-fixed nav').css('position', 'absolute');
+      }).on('blur', 'input', function() {
+        $('.navbar-fixed nav').css('position', 'fixed');
+      });
+    }
   }
 
   handleChange(name, value) {
