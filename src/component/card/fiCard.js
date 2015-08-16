@@ -27,7 +27,7 @@ export class FICard extends React.Component {
 
     switch (this.props.inputType) {
       case 'currency':
-        inputType = <Currency name={name} onChange={handleChange} placeholder={placeholder} value={value} />;
+        inputType = <Currency className="col s12" name={name} onChange={handleChange} placeholder={placeholder} value={value} />;
         break;
       case 'percent':
         inputType = <Percent name={name} onChange={handleChange} placeholder={placeholder} value={value} />;

@@ -1,5 +1,6 @@
 import React from 'lib/react';
 import { PeriodSelection } from 'component/form/periodSelection';
+import { Currency } from 'component/form/currency';
 
 export class Period extends React.Component {
   constructor(props) {
@@ -22,11 +23,7 @@ export class Period extends React.Component {
     var handleRateChange = this.handleRateChange.bind(this);
     return (
       <div>
-        <div className="input-field col s6">
-          <i className="mdi-editor-attach-money prefix"></i>
-          <input className="validate" defaultValue={this.props.value} onChange={handleValueChange} required type="number" />
-          <label className="active">{this.props.placeholder}</label>
-        </div>
+        <Currency className="col s6" name={this.props.name} onChange={handleValueChange} placeholder={this.props.placeholder} value={this.props.value} />
         <div className="input-field col s6">
           <PeriodSelection current={this.props.rate} onChange={handleRateChange} />
         </div>
