@@ -8,6 +8,12 @@
   }
 }
 
+@media only screen and (max-width: 992px) {
+  nav .brand-logo {
+    font-size: 1.8rem;
+  }
+}
+
 .input-field .prefix ~ .form__input {
   opacity: 0;
   position: absolute;
@@ -28,4 +34,9 @@
 
 .input-field .prefix ~ .form__input:focus + .form__label {
   opacity: 0;
+}
+
+.icon-percent::before {
+    content: '%';
+    font-weight: bold;
 }

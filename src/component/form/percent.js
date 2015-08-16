@@ -18,10 +18,10 @@ export class Percent extends React.Component {
 
     return (
       <div className="input-field col s12">
-        <i className="mdi-action-announcement prefix"></i>
-        <input className="validate" defaultValue={this.props.value} max={metadata.max} min={metadata.min} onChange={this.handleChange.bind(this)} required step={metadata.step} type="number" />
+        <i className="icon-percent prefix"></i>
+        <input className="validate" defaultValue={this.props.value} max={metadata.max} min={metadata.min} onChange={this.handleChange.bind(this)} required step={metadata.step} type="range" />
         <label className="active" htmlFor={name}>
-          {this.props.placeholder}
+          {this.props.placeholder} ({this.props.value}%)
         </label>
       </div>
     );

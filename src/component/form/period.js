@@ -7,8 +7,7 @@ export class Period extends React.Component {
     super(props);
   }
 
-  handleValueChange(event) {
-    var value = parseInt(event.target.value);
+  handleValueChange(name, value) {
     value = !value ? 0 : value;
     this.props.onChange(this.props.name, value);
   }
