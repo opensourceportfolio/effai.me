@@ -35,6 +35,8 @@ var i18n = {
           myLabel: 'Your networth',
           goalLabel: 'Your goal',
           formatter: helper.year,
+          xAxisLabel: 'Years',
+          yAxisLabel: 'Net worth',
         },
         placeholder: 'your net worth',
         name: 'networth',
@@ -46,6 +48,8 @@ var i18n = {
         text: `How much money do you put aside into savings and investments each period?`,
         chart: {
           formatter: helper.currency,
+          xAxisLabel: 'Savings rate',
+          yAxisLabel: 'Years to FI',
         },
         placeholder: 'your savings rate',
         name: 'savings',
@@ -58,6 +62,8 @@ var i18n = {
                value is to look at your spendings today.`,
         chart: {
           formatter: helper.currency,
+          xAxisLabel: 'Goal',
+          yAxisLabel: 'Years to FI',
         },
         placeholder: 'your goal',
         name: 'goal',
@@ -70,6 +76,8 @@ var i18n = {
               100 years or so averaged at around 3-4%`,
         chart: {
           formatter: helper.percent,
+          xAxisLabel: 'Inflation',
+          yAxisLabel: 'Years to FI',
         },
         placeholder: 'future inflation',
         name: 'inflation',
@@ -82,6 +90,8 @@ var i18n = {
                your money safe in a bank account?`,
         chart: {
           formatter: helper.percent,
+          xAxisLabel: 'Rate of return',
+          yAxisLabel: 'Years to FI',
         },
         placeholder: 'rate of return',
         name: 'ror',
@@ -95,6 +105,8 @@ var i18n = {
                cash portfolios will probably require a lower rate.`,
         chart: {
           formatter: helper.percent,
+          xAxisLabel: 'Rate of withdrawl',
+          yAxisLabel: 'Years to FI',
         },
         placeholder: 'rate of withdrawl',
         name: 'withdrawl',

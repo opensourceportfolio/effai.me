@@ -1,5 +1,6 @@
 import React from 'lib/react';
 import Chartist from 'lib/chartist';
+import 'lib/shim/chartist/axisTitle';
 
 export class Chart extends React.Component {
 
@@ -11,8 +12,36 @@ export class Chart extends React.Component {
   componentDidMount() {
     var type = this._capitalize(this.props.type);
     var $chart = React.findDOMNode(this.refs.chart);
-    this.chart = new Chartist[type]($chart, this.props.data, {
-      height: 300,
+
+    require(['lib/chartist-plugin-axistitle'], () => {
+      this.chart = new Chartist[type]($chart, this.props.data, {
+        height: 300,
+        chartPadding: {
+            bottom: 20
+        },
+        plugins: [
+          Chartist.plugins.ctAxisTitle({
+            axisX: {
+              axisTitle: this.props.xlabel,
+              axisClass: '',
+              offset: {
+                x: 0,
+                y: 40
+              },
+              textAnchor: 'middle'
+            },
+            axisY: {
+              axisTitle: this.props.ylabel,
+              axisClass: '',
+              offset: {
+                x: 0,
+                y: 0
+              },
+              flipTitle: false
+            }
+          })
+        ]
+      });
     });
   }
 

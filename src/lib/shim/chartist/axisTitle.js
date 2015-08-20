@@ -1,0 +1,3 @@
+import 'lib/chartist';
+
+require([]);

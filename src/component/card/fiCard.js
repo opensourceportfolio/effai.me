@@ -23,8 +23,11 @@ export class FICard extends React.Component {
     var rate = this.props.status[name + 'Rate'];
     var value = this.props.status[name];
     var inputType;
+    var xlabel = i18n[name].chart.xAxisLabel;
+    var ylabel = i18n[name].chart.yAxisLabel;
 
-
+    console.log(data);
+    
     switch (this.props.inputType) {
       case 'currency':
         inputType = <Currency className="col s12" name={name} onChange={handleChange} placeholder={placeholder} value={value} />;
@@ -39,7 +42,7 @@ export class FICard extends React.Component {
     return (
       <Card>
         <CardContent text={i18n[name].text} title={i18n[name].title}>
-          <Chart data={data} type={this.props.chartType} />
+          <Chart data={data} name={name} type={this.props.chartType} xlabel={xlabel} ylabel={ylabel} />
         </CardContent>
         <CardAction>
           {inputType}

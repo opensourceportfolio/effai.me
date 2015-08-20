@@ -21,7 +21,9 @@ gulp.task('copy-style', function() {
 
 gulp.task('compile', function() {
   return gulp.src(['src/**/*.js', '!src/lib/*'])
-    .pipe(sourcemaps.init())
+    .pipe(sourcemaps.init({
+      loadMaps: 'inline'
+    }))
     .pipe(babel({'modules': 'amd'}))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist'));
