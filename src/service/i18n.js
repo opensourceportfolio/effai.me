@@ -1,6 +1,6 @@
 var helper = {
   year(val) {
-    return 'Year ' + val;
+    return val;
   },
 
   currency(val) {

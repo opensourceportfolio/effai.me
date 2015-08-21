@@ -17,7 +17,19 @@ export class Chart extends React.Component {
       this.chart = new Chartist[type]($chart, this.props.data, {
         height: 300,
         chartPadding: {
-            bottom: 20
+          bottom: 20
+        },
+        axisY: {
+          labelInterpolationFnc: function(value) {
+            if (value > 0) {
+              var e = parseInt(Math.log(value) / Math.log(1000)),
+                extension = ['', 'k', 'M', 'B', 'T'];
+
+              return  (value / Math.pow(1000, e)).toFixed(1) + extension[e];
+            } else {
+              return value;
+            }
+          }
         },
         plugins: [
           Chartist.plugins.ctAxisTitle({
