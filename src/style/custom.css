@@ -22,6 +22,7 @@
 
 .input-field .prefix ~ .form__input:focus {
   opacity: 1;
+  position: static;
   width: calc(100% - 3rem - 20px);
 }
 
@@ -30,10 +31,11 @@
   display: block;
   line-height: 3rem;
   border-bottom: 1px solid #9e9e9e;
+  margin-bottom: 15px;
 }
 
 .input-field .prefix ~ .form__input:focus + .form__label {
-  opacity: 0;
+  display: none;
 }
 
 .icon-percent::before {

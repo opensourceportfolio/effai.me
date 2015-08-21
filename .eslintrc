@@ -9,7 +9,7 @@
           2,
           "always"
       ],
-      "comma-danble": [0],
+      "comma-dangle": [0],
       "no-underscore-dangle": 0,
       "react/jsx-boolean-value": 1,
       "react/jsx-no-undef": 1,
