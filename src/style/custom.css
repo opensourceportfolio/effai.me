@@ -38,6 +38,11 @@
   display: none;
 }
 
+.icon-dollar::before {
+    content: '$';
+    font-weight: bold;
+}
+
 .icon-percent::before {
     content: '%';
     font-weight: bold;

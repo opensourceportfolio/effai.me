@@ -36,7 +36,7 @@ var i18n = {
           goalLabel: 'Your goal',
           formatter: helper.year,
           xAxisLabel: 'Years',
-          yAxisLabel: 'Net worth',
+          yAxisLabel: 'Passive income',
         },
         placeholder: 'your net worth',
         name: 'networth',

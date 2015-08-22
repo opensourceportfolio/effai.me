@@ -6,7 +6,7 @@ export class Title extends React.Component {
       <div className="row">
         <div className="col s12">
           <h4>{this.props.value}</h4>
-          <hr />
+          <div className="divider" />
         </div>
       </div>
     );

@@ -32,7 +32,7 @@ export default class Range {
         }]
       };
 
-    for (var i = 0; i < this.count; i++) {
+    for (var i = 0; i <= this.count; i++) {
       year = i * this.skip;
       networth = this.calculator.networth(state, year);
       futureGoal = Math.ceil(goal * Math.pow(inflation, year));

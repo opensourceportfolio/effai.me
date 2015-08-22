@@ -26,18 +26,16 @@ export class FICard extends React.Component {
     var xlabel = i18n[name].chart.xAxisLabel;
     var ylabel = i18n[name].chart.yAxisLabel;
 
-    console.log(data);
-    
     switch (this.props.inputType) {
-      case 'currency':
-        inputType = <Currency className="col s12" name={name} onChange={handleChange} placeholder={placeholder} value={value} />;
-        break;
-      case 'percent':
-        inputType = <Percent name={name} onChange={handleChange} placeholder={placeholder} value={value} />;
-        break;
-      case 'period':
-        inputType = <Period name={name} onChange={handleChange} placeholder={placeholder} rate={rate} value={value} />;
-        break;
+    case 'currency':
+      inputType = <Currency className="col s12" name={name} onChange={handleChange} placeholder={placeholder} value={value} />;
+      break;
+    case 'percent':
+      inputType = <Percent name={name} onChange={handleChange} placeholder={placeholder} value={value} />;
+      break;
+    case 'period':
+      inputType = <Period name={name} onChange={handleChange} placeholder={placeholder} rate={rate} value={value} />;
+      break;
     }
     return (
       <Card>
