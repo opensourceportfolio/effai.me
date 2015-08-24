@@ -18,18 +18,6 @@ export class FICalculator extends React.Component {
       inflation: 3,
       withdrawl: 4,
     };
-
-    this.touchFix();
-  }
-
-  touchFix() {
-    if ('ontouchstart' in window) {
-      $(document).on('focus', 'input', function() {
-        $('.navbar-fixed nav').css('position', 'absolute');
-      }).on('blur', 'input', function() {
-        $('.navbar-fixed nav').css('position', 'fixed');
-      });
-    }
   }
 
   handleChange(name, value) {
@@ -47,7 +35,6 @@ export class FICalculator extends React.Component {
           <FICard chartType="line" inputType="currency" name="networth" onChange={handleChange} status={this.state} />
           <FICard chartType="bar" inputType="period" name="savings" onChange={handleChange} status={this.state} />
 
-
           <Title value={i18n.title.prediction} />
           <FICard chartType="bar" inputType="period" name="goal" onChange={handleChange} status={this.state} />
           <FICard chartType="bar" inputType="percent" name="ror" onChange={handleChange} status={this.state} />
@@ -55,7 +42,6 @@ export class FICalculator extends React.Component {
 
           <Title value={i18n.title.advanced} />
           <FICard chartType="bar" inputType="percent" name="withdrawl" onChange={handleChange} status={this.state} />
-
         </div>
       </div>
     );
