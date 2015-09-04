@@ -1,6 +1,5 @@
 import React from 'lib/react';
 import Chartist from 'lib/chartist';
-import 'lib/shim/chartist/axisTitle';
 
 export class Chart extends React.Component {
 
@@ -13,7 +12,7 @@ export class Chart extends React.Component {
     var type = this._capitalize(this.props.type);
     var $chart = React.findDOMNode(this.refs.chart);
 
-    require(['lib/chartist-plugin-axistitle'], () => {
+    require(['lib/chartist/axisTitle'], () => {
 
       this.chart = new Chartist[type]($chart, this.props.data, {
         height: 300,

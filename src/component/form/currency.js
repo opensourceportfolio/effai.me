@@ -1,10 +1,16 @@
 import React from 'lib/react';
+import componentHandler from 'lib/mdl';
 import formatter from 'service/formatter';
 
 export class Currency extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    var node = React.findDOMNode(this.refs.currency);
+    componentHandler.upgradeElement(node);
   }
 
   handleChange(event) {
@@ -14,13 +20,15 @@ export class Currency extends React.Component {
   }
 
   render() {
-    var className = this.props.className + ' input-field';
     return (
-      <div className={className}>
-        <i className="icon-dollar prefix"></i>
-        <input className="validate form__input" defaultValue={this.props.value} onChange={this.handleChange.bind(this)} pattern="\d*" required type="number" />
-        <label className="form__label">{formatter.currency(this.props.value)}</label>
-        <label className="active" htmlFor={this.props.name}>
+      <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label' ref="currency">
+        <input className="mdl-textfield__input"
+          defaultValue={this.props.value}
+          onChange={this.handleChange.bind(this)}
+          pattern="\d*"
+          required
+          type="number" />
+        <label className="mdl-textfield__label" htmlFor={this.props.name}>
           {this.props.placeholder}
         </label>
       </div>

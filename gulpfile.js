@@ -2,10 +2,10 @@ var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var babel = require('gulp-babel');
 
-gulp.task('default', ['compile', 'copy-lib', 'copy-font', 'copy-style']);
+gulp.task('default', ['compile', 'copy-lib', 'copy-font']);
 
 gulp.task('copy-lib', function() {
-  return gulp.src(['src/lib/*'])
+  return gulp.src(['src/lib/**/*'])
     .pipe(gulp.dest('dist/lib'));
 });
 
@@ -14,13 +14,8 @@ gulp.task('copy-font', function() {
     .pipe(gulp.dest('dist/font'));
 });
 
-gulp.task('copy-style', function() {
-  return gulp.src(['src/style/**/*.*'])
-    .pipe(gulp.dest('dist/style'));
-});
-
 gulp.task('compile', function() {
-  return gulp.src(['src/**/*.js', '!src/lib/*'])
+  return gulp.src(['src/**/*.js', '!src/lib/**/*.js'])
     .pipe(sourcemaps.init({
       loadMaps: 'inline'
     }))

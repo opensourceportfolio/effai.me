@@ -1,0 +1,39 @@
+.mdl-layout__content {
+  padding: 20px;
+  padding-bottom: 300px;
+}
+
+.mdl-title {
+  width: 800px;
+  margin: 40px auto 20px;
+}
+
+.mdl-card {
+  max-width: 800px;
+  margin: 0 auto;
+  width: auto;
+}
+
+.mdl-card + .mdl-card {
+  margin-top: 20px;
+}
+
+.mdl-card__media {
+  background: white;
+  padding: 10px;
+}
+
+.mdl-label {
+  font-size: 12px;
+  color: rgb(255,87,34);
+}
+
+.mdl-textfield {
+  width: 100%;
+}
+
+.mdl-select {
+  width: 100%;
+  margin: 20px 0;
+  font-size: 16px;
+}

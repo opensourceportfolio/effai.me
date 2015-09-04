@@ -21,9 +21,15 @@ export class Period extends React.Component {
     var handleValueChange = this.handleValueChange.bind(this);
     var handleRateChange = this.handleRateChange.bind(this);
     return (
-      <div>
-        <Currency className="col s6" name={this.props.name} onChange={handleValueChange} placeholder={this.props.placeholder} value={this.props.value} />
-        <div className="input-field col s6">
+      <div className="mdl-grid">
+        <div className="mdl-cell mdl-cell--6-col-desktop mdl-cell--6-col-phone">
+          <Currency
+          name={this.props.name}
+          onChange={handleValueChange}
+          placeholder={this.props.placeholder}
+          value={this.props.value} />
+        </div>
+        <div className="mdl-cell mdl-cell--6-col-desktop mdl-cell--6-col-phone">
           <PeriodSelection current={this.props.rate} onChange={handleRateChange} />
         </div>
       </div>

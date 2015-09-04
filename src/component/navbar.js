@@ -23,15 +23,13 @@ export class Navbar extends React.Component {
     }
 
     return (
-      <div className="navbar-fixed">
-        <nav>
-          <div className="nav-wrapper">
-            <a className="brand-logo" href="#">
-              FI in: {fiAge}
-            </a>
-          </div>
-        </nav>
-      </div>
+      <header className="mdl-layout__header">
+        <div className="mdl-layout__header-row">
+          <span className="mdl-layout-title">
+            FI in: {fiAge}
+          </span>
+        </div>
+      </header>
     );
   }
 }

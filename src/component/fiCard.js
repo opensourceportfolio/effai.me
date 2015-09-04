@@ -1,9 +1,11 @@
 import React from 'lib/react';
 import i18n from 'service/i18n';
 import Range from 'service/range';
-import { Card } from 'component/card';
-import { CardContent } from 'component/card/cardContent';
+import { Card } from 'component/card/card';
 import { CardAction } from 'component/card/cardAction';
+import { CardMedia } from 'component/card/cardMedia';
+import { CardSupporting } from 'component/card/cardSupporting';
+import { CardTitle } from 'component/card/cardTitle';
 import { Currency } from 'component/form/currency';
 import { Percent } from 'component/form/percent';
 import { Period } from 'component/form/period';
@@ -28,7 +30,7 @@ export class FICard extends React.Component {
 
     switch (this.props.inputType) {
     case 'currency':
-      inputType = <Currency className="col s12" name={name} onChange={handleChange} placeholder={placeholder} value={value} />;
+      inputType = <Currency name={name} onChange={handleChange} placeholder={placeholder} value={value} />;
       break;
     case 'percent':
       inputType = <Percent name={name} onChange={handleChange} placeholder={placeholder} value={value} />;
@@ -39,14 +41,15 @@ export class FICard extends React.Component {
     }
     return (
       <Card>
-        <CardContent text={i18n[name].text} title={i18n[name].title}>
+        <CardTitle text={i18n[name].title} />
+        <CardSupporting text={i18n[name].text} />
+        <CardMedia>
           <Chart data={data} name={name} type={this.props.chartType} xlabel={xlabel} ylabel={ylabel} />
-        </CardContent>
+        </CardMedia>
         <CardAction>
           {inputType}
         </CardAction>
       </Card>
     );
-
   }
 }

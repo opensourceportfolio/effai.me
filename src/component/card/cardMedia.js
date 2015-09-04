@@ -1,10 +1,10 @@
 import React from 'lib/react';
 
-export class CardAction extends React.Component {
+export class CardMedia extends React.Component {
 
   render() {
     return (
-      <div className="mdl-card__actions">
+      <div className="mdl-card__media">
         { this.props.children }
       </div>
     );
