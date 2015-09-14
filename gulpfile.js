@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var babel = require('gulp-babel');
+var watch = require('gulp-watch');
 
 gulp.task('default', ['compile', 'copy-lib', 'copy-font']);
 
@@ -25,5 +26,5 @@ gulp.task('compile', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/*.js', ['default']);
+  watch('src/**/*.js', ['default']);
 });

@@ -12,7 +12,7 @@ export class Percent extends React.Component {
   }
 
   handleChange(event) {
-    var value = parseInt(event.target.value);
+    var value = parseFloat(event.target.value);
     value = !value ? 0 : value;
     this.props.onChange(this.props.name, value);
   }
@@ -33,7 +33,8 @@ export class Percent extends React.Component {
           <div className="mdl-cell--11-col">
             <input className="mdl-slider mdl-js-slider"
               defaultValue={this.props.value}
-              max={metadata.max} min={metadata.min}
+              max={metadata.max}
+              min={metadata.min}
               onChange={this.handleChange.bind(this)}
               ref="percent"
               required

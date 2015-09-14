@@ -24,10 +24,12 @@ export class Navbar extends React.Component {
 
     return (
       <header className="mdl-layout__header">
+        <div className="mdl-layout-icon"></div>
         <div className="mdl-layout__header-row">
           <span className="mdl-layout-title">
             FI in: {fiAge}
           </span>
+          <div className="mdl-layout-spacer"></div>
         </div>
       </header>
     );
