@@ -12,14 +12,14 @@ export class Percent extends React.Component {
   }
 
   handleChange(event) {
-    var value = parseFloat(event.target.value);
+    let value = parseFloat(event.target.value);
     value = !value ? 0 : value;
     this.props.onChange(this.props.name, value);
   }
 
   render() {
-    var name = this.props.name;
-    var metadata = meta[name];
+    let name = this.props.name;
+    let metadata = meta[name];
 
     return (
       <div>
@@ -27,10 +27,7 @@ export class Percent extends React.Component {
           {this.props.placeholder} ({this.props.value}%)
         </label>
         <div className="mdl-grid">
-          <div className="mdl-cell--1-col">
-            <i className="icon-percent"></i>
-          </div>
-          <div className="mdl-cell--11-col">
+          <div className="mdl-cell--12-col">
             <input className="mdl-slider mdl-js-slider"
               defaultValue={this.props.value}
               max={metadata.max}

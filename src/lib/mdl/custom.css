@@ -37,19 +37,19 @@
   font-size: 16px;
 }
 
-.mdl-textfield__masked > .mdl-textfield__input {
+.mdl-textfield__masked .mdl-textfield__input {
   position: absolute;
   top: 21px;
   opacity: 0;
 }
 
-.mdl-textfield__masked > .mdl-textfield__input:focus {
+.mdl-textfield__masked .mdl-textfield__input:focus {
   opacity: 1;
   position: static;
   width: 100%;
 }
 
-.mdl-textfield__masked > .mdl-textfield__mask {
+.mdl-textfield__masked .mdl-textfield__mask {
   position: static;
   display: block;
   border-bottom: 1px solid #9e9e9e;
@@ -57,6 +57,6 @@
   height: 18px;
 }
 
-.mdl-textfield__masked > .mdl-textfield__input:focus ~ .mdl-textfield__mask {
+.mdl-textfield__masked .mdl-textfield__input:focus ~ .mdl-textfield__mask {
   display: none;
 }
