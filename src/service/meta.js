@@ -1,4 +1,4 @@
-var meta = {
+let meta = {
   networth: {
     type: 'currency',
     max: 999999,

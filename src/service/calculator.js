@@ -9,7 +9,7 @@ export default class Calculator {
   }
 
   networth(state, years) {
-    var networth = parseInt(state.networth),
+    let networth = parseInt(state.networth),
       ror = this.toFraction(state.ror),
       savings = this.toAnnual(state.savings, state.savingsRate),
       inflation = this.toFraction(state.inflation),
@@ -17,7 +17,7 @@ export default class Calculator {
       futureSavings = savings * Math.pow(inflation, years),
       futureNetworth = networth * Math.pow(ror, years);
 
-    var f1 = 1 - Math.pow(factor, years + 1),
+    let f1 = 1 - Math.pow(factor, years + 1),
       f2 = 1 - factor;
 
     if (inflation === ror) {
@@ -28,7 +28,7 @@ export default class Calculator {
   }
 
   calculate(state) {
-    var networth = parseInt(state.networth),
+    let networth = parseInt(state.networth),
       ror = this.toFraction(state.ror),
       savings = this.toAnnual(state.savings, state.savingsRate),
       inflation = this.toFraction(state.inflation),
@@ -39,11 +39,11 @@ export default class Calculator {
     if (inflation === ror) {
       return Math.ceil((wealth - networth) / savings);
     } else {
-      var z = ror / inflation,
+      let z = ror / inflation,
         f1 = savings - wealth + z * wealth,
         f2 = networth * z - networth + savings * z;
 
-      var result = Math.log(f1 / f2) / Math.log(z);
+      let result = Math.log(f1 / f2) / Math.log(z);
 
       return Math.ceil(result);
     }

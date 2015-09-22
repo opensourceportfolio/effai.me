@@ -1,23 +1,23 @@
-var helper = {
+let helper = {
   year(val) {
-      return val;
-    },
+    return val;
+  },
 
   currency(val) {
-    return '$' + val;
+    return `$${val}`;
   },
 
   percent(val) {
-    return val + '%';
+    return `${val}%`;
   },
 };
 
-var i18n = {
+let i18n = {
   fiStatus: {
     done: 'Done',
     never: 'Never',
-    formatter: function(val) {
-      return val + ' years';
+    formatter(val) {
+      return `${val} years`;
     },
   },
 
@@ -118,4 +118,5 @@ var i18n = {
     type: 'percent',
   }
 };
+
 export default i18n;

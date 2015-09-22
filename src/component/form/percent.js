@@ -8,7 +8,7 @@ export class Percent extends React.Component {
 
   componentDidMount() {
     let node = React.findDOMNode(this.refs.percent);
-    
+
     componentHandler.upgradeElement(node);
   }
 

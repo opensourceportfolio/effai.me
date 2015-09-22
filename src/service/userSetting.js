@@ -1,6 +1,6 @@
 export default {
   get() {
-    var settings = window.localStorage.getItem('ficalculator');
+    let settings = window.localStorage.getItem('ficalculator');
 
     if (!settings) {
       settings = {
@@ -20,7 +20,7 @@ export default {
     return settings;
   },
 
-  set(value){
+  set(value) {
     window.localStorage.setItem('ficalculator', JSON.stringify(value));
   }
 };

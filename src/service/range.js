@@ -14,7 +14,7 @@ export default class Range {
 
   networth(state) {
 
-    var inflation = this.calculator.toFraction(state.inflation),
+    let inflation = this.calculator.toFraction(state.inflation),
       withdrawl = this.calculator.toFraction(state.withdrawl) - 1,
       goal = state.goal,
       futureGoal,
@@ -32,7 +32,7 @@ export default class Range {
         }]
       };
 
-    for (var i = 0; i <= this.count; i++) {
+    for (let i = 0; i <= this.count; i++) {
       year = i * this.skip;
       networth = this.calculator.networth(state, year);
       futureGoal = Math.ceil(goal * Math.pow(inflation, year));
@@ -70,7 +70,7 @@ export default class Range {
   }
 
   _calculateRange(state, prop) {
-    var stateCopy = $.extend(true, {}, state),
+    let stateCopy = $.extend(true, {}, state),
       formatter = this.i18n[prop].chart.formatter,
       step = Math.round(stateCopy[prop] * 0.2),
       min = this._min(state[prop], meta[prop].min, step),
@@ -83,10 +83,10 @@ export default class Range {
 
     stateCopy[prop] = min;
 
-    for(var i = 0; i < this.count; i++){
+    for (let i = 0; i < this.count; i++) {
       fiAge = this.calculator.calculate(stateCopy);
 
-      if (fiAge >= 0 ){
+      if (fiAge >= 0 ) {
         rangeData.labels.push(formatter(stateCopy[prop]));
         propSeries.push(fiAge);
       }
@@ -100,12 +100,12 @@ export default class Range {
   }
 
   _min(current, min, step) {
-    var starting2 = current - step * 2,
+    let starting2 = current - step * 2,
       starting1 = current - step;
 
     if (starting2 > min) {
       return starting2;
-    } else if (starting1 > min){
+    } else if (starting1 > min) {
       return starting1;
     } else {
       return min;

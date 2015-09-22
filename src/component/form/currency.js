@@ -17,14 +17,14 @@ export class Currency extends React.Component {
 
   handleChange(event) {
     let value = parseInt(event.target.value);
-    
+
     value = $.isNumeric(value) ? value : '';
     this.props.onChange(this.props.name, value);
   }
 
   render() {
     return (
-      <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__masked' ref="currency">
+      <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__masked" ref="currency">
         <input className="mdl-textfield__input"
           defaultValue={this.props.value}
           onChange={this.handleChange.bind(this)}

@@ -19,7 +19,7 @@ export class Period extends React.Component {
     let value = parseInt(event.target.value);
 
     value = $.isNumeric(value) ? value : '';
-    this.props.onChange(`${this.props.name} Rate`, value);
+    this.props.onChange(`${this.props.name}Rate`, value);
   }
 
   render() {
