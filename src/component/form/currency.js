@@ -10,12 +10,14 @@ export class Currency extends React.Component {
   }
 
   componentDidMount() {
-    var node = React.findDOMNode(this.refs.currency);
+    let node = React.findDOMNode(this.refs.currency);
+
     componentHandler.upgradeElement(node);
   }
 
   handleChange(event) {
-    var value = parseInt(event.target.value);
+    let value = parseInt(event.target.value);
+    
     value = $.isNumeric(value) ? value : '';
     this.props.onChange(this.props.name, value);
   }

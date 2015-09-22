@@ -20,7 +20,7 @@
     //Possible Errors
     //The following rules point out areas where you might have made mistakes.
 
-    "comma-dangle": [2, "always-multiline"], //disallow or enforce trailing commas (recommended)
+    "comma-dangle": [0], //disallow or enforce trailing commas (recommended)
     "no-cond-assign": [2], //disallow assignment in conditional expressions (recommended)
     "no-console": [2], //disallow use of console in the node environment (recommended)
     "no-constant-condition": [2], //disallow use of constant expressions in conditions (recommended)
@@ -33,7 +33,7 @@
     "no-empty": [2], //disallow empty statements (recommended)
     "no-ex-assign": [2], //disallow assigning to the exception in a catch block (recommended)
     "no-extra-boolean-cast": [2], //disallow double-negation boolean casts in a boolean context (recommended)
-    "no-extra-parens": [2], //disallow unnecessary parentheses
+    "no-extra-parens": [0], //disallow unnecessary parentheses
     "no-extra-semi": [2], //disallow unnecessary semicolons (recommended)
     "no-func-assign": [2], //disallow overwriting functions written as function declarations (recommended)
     "no-inner-declarations": [2, "both"], //disallow function or variable declarations in nested blocks (recommended)
@@ -216,7 +216,7 @@
     "no-var": [2], //require let or const instead of var
     "object-shorthand": [2], //require method and property shorthand syntax for object literals
     "prefer-arrow-callback": [2], //suggest using arrow functions as callbacks
-    "prefer-const": [2], //suggest using const declaration for variables that are never modified after declared
+    "prefer-const": [0], //suggest using const declaration for variables that are never modified after declared
     "prefer-spread": [2], //suggest using the spread operator instead of .apply().
     "prefer-reflect": [0], //suggest using Reflect methods where applicable
     "prefer-template": [2], //suggest using template literals instead of strings concatenation
@@ -224,7 +224,7 @@
 
     //React
 
-    "react/display-name": [2],
+    "react/display-name": [0],
     "react/jsx-boolean-value": [2, "never"],
     "react/jsx-closing-bracket-location": [2],
     "react/jsx-curly-spacing": [2],
@@ -244,7 +244,7 @@
     "react/no-multi-comp": [2],
     "react/no-set-state": [0],
     "react/no-unknown-property": [2],
-    "react/prop-types": [2],
+    "react/prop-types": [0],
     "react/react-in-jsx-scope": [2],
     "react/require-extension": [0],
     "react/self-closing-comp": [2],

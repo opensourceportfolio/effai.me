@@ -1,6 +1,5 @@
 import React from 'lib/react';
 import i18n from 'service/i18n';
-import $ from 'lib/jquery';
 import userSetting from 'service/userSetting';
 import { Navbar } from 'component/mdl/layout/navbar';
 import { Drawer } from 'component/mdl/layout/drawer';
@@ -13,7 +12,8 @@ export class FICalculator extends React.Component {
   }
 
   componentDidMount() {
-    var node = React.findDOMNode(this.refs.ficalculator);
+    let node = React.findDOMNode(this.refs.ficalculator);
+
     componentHandler.upgradeElement(node);
   }
 
@@ -33,14 +33,14 @@ export class FICalculator extends React.Component {
   }
 
   render() {
-    var handleChange = this.handleChange.bind(this);
+    let handleChange = this.handleChange.bind(this);
 
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref="ficalculator">
         <Navbar status={this.state} />
         <Drawer links={this.links} />
         <main className="mdl-layout__content">
-        
+
           <h3 className="mdl-title">{i18n.title.current}</h3>
 
           <FICard

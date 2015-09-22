@@ -7,12 +7,14 @@ export class Percent extends React.Component {
   }
 
   componentDidMount() {
-    var node = React.findDOMNode(this.refs.percent);
+    let node = React.findDOMNode(this.refs.percent);
+    
     componentHandler.upgradeElement(node);
   }
 
   handleChange(event) {
     let value = parseFloat(event.target.value);
+
     value = !value ? 0 : value;
     this.props.onChange(this.props.name, value);
   }
