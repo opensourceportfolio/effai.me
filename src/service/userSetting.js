@@ -6,9 +6,7 @@ export default {
       settings = {
         networth: 50000,
         savings: 1000,
-        savingsRate: 1,
-        goal: 50000,
-        goalRate: 2,
+        goal: 4500,
         ror: 8,
         inflation: 3,
         withdrawl: 4,

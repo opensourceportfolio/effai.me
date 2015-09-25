@@ -51,7 +51,7 @@ export class FICalculator extends React.Component {
             status={this.state} />
 
           <FICard chartType="bar"
-            inputType="period"
+            inputType="currency"
             name="savings"
             onChange={handleChange}
             status={this.state} />
@@ -60,7 +60,7 @@ export class FICalculator extends React.Component {
 
           <FICard
             chartType="bar"
-            inputType="period"
+            inputType="currency"
             name="goal"
             onChange={handleChange}
             status={this.state} />

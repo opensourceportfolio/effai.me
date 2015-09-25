@@ -50,7 +50,7 @@ let i18n = {
 
   savings: {
     title: 'Savings rate',
-    text: `How much money do you put aside into savings and investments each period?`,
+    text: `How much money do you put aside into savings and investments each month?`,
     chart: {
       formatter: helper.currency,
       xAxisLabel: 'Savings rate',
@@ -58,12 +58,12 @@ let i18n = {
     },
     placeholder: 'your savings rate',
     name: 'savings',
-    type: 'period',
+    type: 'currency',
   },
 
   goal: {
     title: 'Your goal',
-    text: `How much money do you need per period to be financially independent. One way to estimate this
+    text: `How much money do you need per month to be financially independent. One way to estimate this
                value is to look at your spendings today.`,
     chart: {
       formatter: helper.currency,
@@ -72,7 +72,7 @@ let i18n = {
     },
     placeholder: 'your goal',
     name: 'goal',
-    type: 'period',
+    type: 'currency',
   },
 
   inflation: {

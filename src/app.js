@@ -2,8 +2,8 @@ import React from 'lib/react';
 import Router from 'lib/react/router';
 import { FICalculator } from 'component/ficalculator';
 
-var Route = Router.Route;
-var routes = (
+let Route = Router.Route;
+let routes = (
   <Route handler={FICalculator} />
 );
 

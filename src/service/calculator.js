@@ -4,14 +4,10 @@ export default class Calculator {
     return 1 + num / 100;
   }
 
-  toAnnual(amount, period) {
-    return parseInt(period) === 2 ? parseInt(amount) : parseInt(amount) * 12;
-  }
-
   networth(state, years) {
     let networth = parseInt(state.networth),
       ror = this.toFraction(state.ror),
-      savings = this.toAnnual(state.savings, state.savingsRate),
+      savings = state.savings * 12,
       inflation = this.toFraction(state.inflation),
       factor = ror / inflation,
       futureSavings = savings * Math.pow(inflation, years),
@@ -29,11 +25,11 @@ export default class Calculator {
 
   calculate(state) {
     let networth = parseInt(state.networth),
-      ror = this.toFraction(state.ror),
-      savings = this.toAnnual(state.savings, state.savingsRate),
+      ror = this.toFraction(state .ror),
+      savings = state.savings * 12,
       inflation = this.toFraction(state.inflation),
       withdrawl = this.toFraction(state.withdrawl) - 1,
-      goal = this.toAnnual(state.goal, state.goalRate),
+      goal = state.goal * 12,
       wealth = goal / withdrawl;
 
     if (inflation === ror) {
