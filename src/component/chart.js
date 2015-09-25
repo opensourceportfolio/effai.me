@@ -7,13 +7,16 @@ export class Chart extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {type: this._capitalize(this.props.type)};
+    this.state = {
+      type: this._capitalize(this.props.type)
+    };
   }
 
   componentDidMount() {
     let type = this._capitalize(this.props.type);
     let $chart = React.findDOMNode(this.refs.chart);
     let options = {
+      duration: 1000,
       height: 300,
       chartPadding: {
         bottom: 20,
@@ -50,6 +53,35 @@ export class Chart extends React.Component {
     }));
 
     this.chart = new Chartist[type]($chart, this.props.data, options);
+
+    this.chart.on('draw', (data) => {
+      if (data.type === 'bar') {
+        data.element.animate({
+          y2: {
+            dur: options.duration,
+            from: data.y1,
+            to: data.y2,
+            easing: Chartist.Svg.Easing.easeOutQuint
+          },
+          opacity: {
+            dur: options.duration,
+            from: 0,
+            to: 1,
+            easing: Chartist.Svg.Easing.easeOutQuint
+          }
+        });
+      } else if (data.type === 'line') {
+        data.element.animate({
+          d: {
+            dur: options.duration,
+            from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+            to: data.path.clone().stringify(),
+            easing: Chartist.Svg.Easing.easeOutQuint
+          }
+        });
+      }
+    });
+
   }
 
   componentDidUpdate() {
@@ -68,15 +100,15 @@ export class Chart extends React.Component {
       let e = parseInt(Math.log(value) / Math.log(1000)),
         extension = ['', 'k', 'M', 'B', 'T'];
 
-      return  (value / Math.pow(1000, e)).toFixed(0) + extension[e];
+      return (value / Math.pow(1000, e)).toFixed(0) + extension[e];
     } else {
       return value;
     }
   }
 
   render() {
-    return (
-      <div className="ct-chart" ref="chart"></div>
+    return ( < div className = "ct-chart"
+      ref = "chart" > < /div>
     );
   }
 }
