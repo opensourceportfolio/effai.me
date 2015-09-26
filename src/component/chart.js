@@ -65,17 +65,23 @@ export class Chart extends React.Component {
           },
         });
       } else if (data.type === 'line') {
+        if (!this._previousPath[data.index]) {
+          this._previousPath[data.index] = data.path.clone().scale(1, 0).translate(0, data.chartRect.height());
+        }
         data.element.animate({
           d: {
             dur: options.duration,
-            from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+            from: this._previousPath[data.index].stringify(),
             to: data.path.clone().stringify(),
             easing: Chartist.Svg.Easing.easeOutQuint
           }
         });
+
+        this._previousPath[data.index] = data.path.clone();
       }
     });
 
+    this._previousPath = [];
     this._previousData = this.props.data;
 
   }
