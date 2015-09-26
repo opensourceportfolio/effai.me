@@ -59,16 +59,10 @@ export class Chart extends React.Component {
         data.element.animate({
           y2: {
             dur: options.duration,
-            from: data.y1,
+            from: this._previousData.series[0][data.index],
             to: data.y2,
             easing: Chartist.Svg.Easing.easeOutQuint
           },
-          opacity: {
-            dur: options.duration,
-            from: 0,
-            to: 1,
-            easing: Chartist.Svg.Easing.easeOutQuint
-          }
         });
       } else if (data.type === 'line') {
         data.element.animate({
@@ -81,6 +75,8 @@ export class Chart extends React.Component {
         });
       }
     });
+
+    this._previousData = this.props.data;
 
   }
 
