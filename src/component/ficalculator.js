@@ -84,6 +84,7 @@ export class FICalculator extends React.Component {
             onChange={handleChange}
             status={this.state} />
 
+          <a className="fi-opensource" href="https://github.com/opensourceportfolio/ficalculator3/">open source on github</a>
         </main>
       </div>
     );

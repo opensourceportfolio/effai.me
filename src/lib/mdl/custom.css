@@ -79,3 +79,13 @@
 .mdl-textfield__masked .mdl-textfield__input:focus ~ .mdl-textfield__mask {
   display: none;
 }
+
+.fi-opensource {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  position: relative;
+  top: 80px;
+  text-decoration: none;
+  color: rgb(82, 166, 255);
+}
