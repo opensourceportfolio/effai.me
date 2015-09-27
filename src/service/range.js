@@ -1,21 +1,22 @@
 import $ from 'lib/jquery';
-import Calculator from 'service/calculator';
+import calculator from 'service/calculator';
 import i18n from 'service/i18n';
 import meta from 'service/meta';
 
 export default class Range {
 
-  constructor() {
-    this.calculator = new Calculator();
-    this.i18n = i18n;
-    this.count = 5;
-    this.skip = meta.range / this.count;
+  static get count() {
+    return 5;
   }
 
-  networth(state) {
+  static get skip() {
+    return meta.range / Range.count;
+  }
 
-    let inflation = this.calculator.toFraction(state.inflation),
-      withdrawl = this.calculator.toFraction(state.withdrawl) - 1,
+  static networth(state) {
+
+    let inflation = calculator.toFraction(state.inflation),
+      withdrawl = calculator.toFraction(state.withdrawl) - 1,
       goal = state.goal,
       futureGoal,
       year,
@@ -24,20 +25,20 @@ export default class Range {
       rangeData = {
         labels: [],
         series: [{
-          name: this.i18n.networth.chart.myLabel,
+          name: i18n.networth.chart.myLabel,
           data: [],
         }, {
-          name: this.i18n.networth.chart.goalLabel,
+          name: i18n.networth.chart.goalLabel,
           data: [],
         }]
       };
 
-    for (let i = 0; i <= this.count; i++) {
-      year = i * this.skip;
-      networth = this.calculator.networth(state, year);
+    for (let i = 0; i <= Range.count; i++) {
+      year = i * Range.skip;
+      networth = calculator.networth(state, year);
       futureGoal = Math.ceil(goal * Math.pow(inflation, year));
 
-      rangeData.labels.push(this.i18n.networth.chart.formatter(year));
+      rangeData.labels.push(i18n.networth.chart.formatter(year));
       cashflow = networth * withdrawl;
       if (state.goalRate === 1) {
         cashflow /= 12;
@@ -49,31 +50,31 @@ export default class Range {
     return rangeData;
   }
 
-  savings(state) {
-    return this._calculateRange(state, 'savings');
+  static savings(state) {
+    return Range._calculateRange(state, 'savings');
   }
 
-  goal(state) {
-    return this._calculateRange(state, 'goal');
+  static goal(state) {
+    return Range._calculateRange(state, 'goal');
   }
 
-  inflation(state) {
-    return this._calculateRange(state, 'inflation');
+  static inflation(state) {
+    return Range._calculateRange(state, 'inflation');
   }
 
-  ror(state) {
-    return this._calculateRange(state, 'ror');
+  static ror(state) {
+    return Range._calculateRange(state, 'ror');
   }
 
-  withdrawl(state) {
-    return this._calculateRange(state, 'withdrawl');
+  static withdrawl(state) {
+    return Range._calculateRange(state, 'withdrawl');
   }
 
-  _calculateRange(state, prop) {
+  static _calculateRange(state, prop) {
     let stateCopy = $.extend(true, {}, state),
-      formatter = this.i18n[prop].chart.formatter,
+      formatter = i18n[prop].chart.formatter,
       step = Math.round(stateCopy[prop] * 0.2),
-      min = this._min(state[prop], meta[prop].min, step),
+      min = Range._min(state[prop], meta[prop].min, step),
       fiAge,
       propSeries = [],
       rangeData = {
@@ -83,8 +84,8 @@ export default class Range {
 
     stateCopy[prop] = min;
 
-    for (let i = 0; i < this.count; i++) {
-      fiAge = this.calculator.calculate(stateCopy);
+    for (let i = 0; i < Range.count; i++) {
+      fiAge = calculator.calculate(stateCopy);
 
       if (fiAge >= 0 ) {
         rangeData.labels.push(formatter(stateCopy[prop]));
@@ -99,7 +100,7 @@ export default class Range {
     return rangeData;
   }
 
-  _min(current, min, step) {
+  static _min(current, min, step) {
     let starting2 = current - step * 2,
       starting1 = current - step;
 

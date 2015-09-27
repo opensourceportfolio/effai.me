@@ -1,5 +1,4 @@
 import React from 'lib/react';
-import meta from 'service/meta';
 
 export class Percent extends React.Component {
   constructor(props) {
@@ -9,7 +8,7 @@ export class Percent extends React.Component {
   componentDidMount() {
     let node = React.findDOMNode(this.refs.percent);
 
-    componentHandler.upgradeElement(node);
+    window.componentHandler.upgradeElement(node);
   }
 
   handleChange(event) {
@@ -21,7 +20,6 @@ export class Percent extends React.Component {
 
   render() {
     let name = this.props.name;
-    let metadata = meta[name];
 
     return (
       <div>
@@ -32,12 +30,12 @@ export class Percent extends React.Component {
           <div className="mdl-cell--12-col">
             <input className="mdl-slider mdl-js-slider"
               defaultValue={this.props.value}
-              max={metadata.max}
-              min={metadata.min}
+              min={this.props.meta.min}
+              max={this.props.meta.max}
               onChange={this.handleChange.bind(this)}
               ref="percent"
               required
-              step={metadata.step}
+              step={this.props.meta.step}
               type="range" />
           </div>
         </div>

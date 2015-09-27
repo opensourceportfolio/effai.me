@@ -6,7 +6,7 @@ export class CardTitle extends React.Component {
     return (
       <div className="mdl-card__title">
         <h4>
-          { this.props.text }
+          {this.props.text}
         </h4>
       </div>
     );

@@ -30,6 +30,8 @@ export class Currency extends React.Component {
           onChange={this.handleChange.bind(this)}
           pattern="\d*"
           required
+          min={this.props.meta.min}
+          max={this.props.meta.max}
           type="number" />
         <label className="mdl-textfield__mask">
           {formatter.currency(this.props.value)}

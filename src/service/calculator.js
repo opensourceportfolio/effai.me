@@ -1,14 +1,14 @@
 export default class Calculator {
 
-  toFraction(num) {
+  static toFraction(num) {
     return 1 + num / 100;
   }
 
-  networth(state, years) {
+  static networth(state, years) {
     let networth = parseInt(state.networth),
-      ror = this.toFraction(state.ror),
+      ror = Calculator.toFraction(state.ror),
       savings = state.savings * 12,
-      inflation = this.toFraction(state.inflation),
+      inflation = Calculator.toFraction(state.inflation),
       factor = ror / inflation,
       futureSavings = savings * Math.pow(inflation, years),
       futureNetworth = networth * Math.pow(ror, years);
@@ -23,12 +23,12 @@ export default class Calculator {
     }
   }
 
-  calculate(state) {
+  static calculate(state) {
     let networth = parseInt(state.networth),
-      ror = this.toFraction(state .ror),
+      ror = Calculator.toFraction(state .ror),
       savings = state.savings * 12,
-      inflation = this.toFraction(state.inflation),
-      withdrawl = this.toFraction(state.withdrawl) - 1,
+      inflation = Calculator.toFraction(state.inflation),
+      withdrawl = Calculator.toFraction(state.withdrawl) - 1,
       goal = state.goal * 12,
       wealth = goal / withdrawl;
 
