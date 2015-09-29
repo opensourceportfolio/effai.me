@@ -39,10 +39,7 @@ export default class Range {
       futureGoal = Math.ceil(goal * Math.pow(inflation, year));
 
       rangeData.labels.push(i18n.networth.chart.formatter(year));
-      cashflow = networth * withdrawl;
-      if (state.goalRate === 1) {
-        cashflow /= 12;
-      }
+      cashflow = networth * withdrawl / 12;
       rangeData.series[0].data.push(cashflow);
       rangeData.series[1].data.push(futureGoal);
     }
