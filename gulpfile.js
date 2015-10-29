@@ -2,8 +2,11 @@ var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var babel = require('gulp-babel');
 var watch = require('gulp-watch');
+var postcss = require('gulp-postcss');
+var cssnext = require('cssnext');
+var cssNested = require('postcss-nested');
 
-gulp.task('default', ['compile', 'copy-lib', 'copy-font']);
+gulp.task('default', ['compile', 'css', 'copy-lib', 'copy-font']);
 
 gulp.task('copy-lib', function() {
   return gulp.src(['src/lib/**/*'])
@@ -13,6 +16,17 @@ gulp.task('copy-lib', function() {
 gulp.task('copy-font', function() {
   return gulp.src(['src/font/**/*.*'])
     .pipe(gulp.dest('dist/font'));
+});
+
+gulp.task('css', function() {
+  var processors = [
+    cssnext,
+    cssNested
+  ];
+
+  gulp.src(['src/css/**/*.css'])
+    .pipe(postcss(processors))
+    .pipe(gulp.dest("dist/css"))
 });
 
 gulp.task('compile', function() {

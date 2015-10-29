@@ -1,16 +1,20 @@
 let meta = {
   networth: {
-    max: 999999,
+    min: 0,
+    max: 1000000,
+    step: 100,
   },
 
   savings: {
     min: 0,
-    step: 1,
+    max: 15000,
+    step: 100,
   },
 
   goal: {
     min: 0,
-    step: 1,
+    max: 15000,
+    step: 100,
   },
 
   inflation: {
@@ -31,7 +35,7 @@ let meta = {
     step: 0.5,
   },
 
-  range: 45,
+  range: 42,
 };
 
 export default meta;

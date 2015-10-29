@@ -7,7 +7,7 @@ export class Chart extends React.Component {
 
   componentDidMount() {
     let $chart = React.findDOMNode(this.refs.chart);
-    let ChartType = this.props.chartType;
+    let ChartType = this.props.type;
 
     if (ChartType) {
       this.chart = new ChartType($chart)

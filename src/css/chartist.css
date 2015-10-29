@@ -1,0 +1,73 @@
+.ct-chart {
+  position: relative;
+}
+
+.ct-line {
+  stroke-width: 5px;
+}
+
+.ct-series-a {
+  .ct-line {
+    stroke: #009688;
+  }
+
+  .ct-point {
+    stroke: #00695C;
+  }
+
+  .ct-bar:nth-child(4) {
+    stroke: #009688;
+  }
+}
+
+.ct-series-b {
+  .ct-line {
+    stroke: #F44336;
+  }
+
+  .ct-point {
+    stroke: #C62828;
+  }
+}
+
+.ct-legend {
+  position: absolute;
+  z-index: 10;
+  list-style: none;
+  top: 20px;
+  left: 30px;
+
+  li {
+    position: relative;
+    padding-left: 23px;
+    margin-bottom: 3px;
+
+    &:before {
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      left: 0;
+      content: '';
+      border: 3px solid transparent;
+      border-radius: 2px;
+    }
+
+    &.ct-series-0:before {
+      background-color: #009688;
+    }
+
+    &.ct-series-1:before {
+      background-color: #F44336;
+    }
+
+    &.inactive:before {
+      background: transparent;
+    }
+  }
+
+  &.ct-legend-inside {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

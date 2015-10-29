@@ -16,25 +16,29 @@ export class Currency extends React.Component {
   }
 
   handleChange(event) {
-    let value = parseInt(event.target.value);
+    if ($(event.target).is(':valid')) {
+      let value = parseInt(event.target.value);
 
-    value = $.isNumeric(value) ? value : '';
-    this.props.onChange(this.props.name, value);
+      value = $.isNumeric(value) ? value : '';
+      this.props.onChange(this.props.name, value);
+    }
   }
 
   render() {
+    let value = this.props.value;
+
     return (
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__masked" ref="currency">
         <input className="mdl-textfield__input"
-          defaultValue={this.props.value}
+          defaultValue={value}
           onChange={this.handleChange.bind(this)}
           pattern="\d*"
           required
-          min={this.props.meta.min}
-          max={this.props.meta.max}
+          min={this.props.rangeInfo.min}
+          max={this.props.rangeInfo.max}
           type="number" />
         <label className="mdl-textfield__mask">
-          {formatter.currency(this.props.value)}
+          {formatter.currency(value)}
         </label>
         <label className="mdl-textfield__label" htmlFor={this.props.name}>
           {this.props.placeholder}

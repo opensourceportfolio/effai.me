@@ -5,7 +5,7 @@ export default class Calculator {
   }
 
   static networth(state, years) {
-    let networth = parseInt(state.networth),
+    let networth = parseInt(state.networth) || 0,
       ror = Calculator.toFraction(state.ror),
       savings = state.savings * 12,
       inflation = Calculator.toFraction(state.inflation),
@@ -23,8 +23,14 @@ export default class Calculator {
     }
   }
 
+  static monthlyYield(state, years) {
+    let networth = Calculator.networth(state, years);
+
+    return Math.floor(networth * state.withdrawl / 100 / 12);
+  }
+
   static calculate(state) {
-    let networth = parseInt(state.networth),
+    let networth = parseInt(state.networth) || 0,
       ror = Calculator.toFraction(state .ror),
       savings = state.savings * 12,
       inflation = Calculator.toFraction(state.inflation),
@@ -32,8 +38,12 @@ export default class Calculator {
       goal = state.goal * 12,
       wealth = goal / withdrawl;
 
-    if (inflation === ror) {
-      return Math.ceil((wealth - networth) / savings);
+    if (goal === 0) {
+      return 0;
+    } else if (networth === 0 && savings === 0) {
+      return 65;
+    } else if (inflation === ror) {
+      return Math.max(Math.ceil((wealth - networth) / savings), 0);
     } else {
       let z = ror / inflation,
         f1 = savings - wealth + z * wealth,
@@ -41,9 +51,12 @@ export default class Calculator {
 
       let result = Math.log(f1 / f2) / Math.log(z);
 
-      return Math.ceil(result);
+      return Math.max(Math.ceil(result), 0);
     }
+  }
 
+  static compound(amount, rate, years) {
+    return amount * Math.pow(rate, years);
   }
 
 

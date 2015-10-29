@@ -9,8 +9,11 @@
   "author": "leontager",
   "license": "ISC",
   "dependencies": {
+    "cssnext": "^1.8.4",
     "gulp": "^3.9.0",
-    "gulp-babel": "^5.1.0"
+    "gulp-babel": "^5.1.0",
+    "postcss": "^5.0.8",
+    "postcss-nested": "^1.0.0"
   },
   "devDependencies": {
     "gulp-sourcemaps": "^1.5.2",

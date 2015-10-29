@@ -1,16 +1,16 @@
 import React from 'lib/react';
+import $ from 'lib/jquery';
 import componentHandler from 'lib/mdl';
 import i18n from 'service/i18n';
 import userSetting from 'service/userSetting';
 import formatter from 'service/formatter';
-import range from 'service/range';
-import meta from 'service/meta';
+import Calculator from 'service/calculator';
 import { Navbar } from 'component/mdl/layout/navbar';
-import { FICard } from 'component/fiCard';
-import { BarChart } from 'component/chart/bar';
-import { LineChart } from 'component/chart/line';
-import { Currency } from 'component/form/currency';
-import { Percent } from 'component/form/percent';
+import { Networth } from 'component/fi/card/networth';
+import { Savings } from 'component/fi/card/savings';
+import { Goal } from 'component/fi/card/goal';
+import { ROR } from 'component/fi/card/ror';
+import { Inflation } from 'component/fi/card/inflation';
 
 export class FICalculator extends React.Component {
   constructor() {
@@ -29,60 +29,33 @@ export class FICalculator extends React.Component {
   }
 
   handleChange(name, value) {
-    this.setState({[name]: value});
+    let val = $.isNumeric(value) ? parseFloat(value) : null;
+
+    this.setState({[name]: val});
   }
 
   render() {
     let handleChange = this.handleChange.bind(this);
+    let years = Calculator.calculate(this.state);
 
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref="ficalculator">
-        <Navbar title={formatter.fiAge(this.state)} />
+        <Navbar title={formatter.fiAge(years)} />
         <main className="mdl-layout__content">
 
           <h3 className="mdl-title">{i18n.title.current}</h3>
 
-          <FICard
-            chart={{type: LineChart, data: range.networth(this.state)}}
-            input={{type: Currency, meta: meta.networth}}
-            name="networth"
-            text={i18n.networth}
-            onChange={handleChange}
-            status={this.state} />
+          <Networth status={this.state} onChange={handleChange} />
 
-          <FICard
-            chart={{type: BarChart, data: range.savings(this.state)}}
-            input={{type: Currency, meta: meta.savings}}
-            name="savings"
-            text={i18n.savings}
-            onChange={handleChange}
-            status={this.state} />
+          <Savings status={this.state} onChange={handleChange} />
 
           <h3 className="mdl-title">{i18n.title.prediction}</h3>
 
-          <FICard
-            chart={{type: BarChart, data: range.goal(this.state)}}
-            input={{type: Currency, meta: meta.goal}}
-            name="goal"
-            text={i18n.goal}
-            onChange={handleChange}
-            status={this.state} />
+          <Goal status={this.state} onChange={handleChange} />
 
-          <FICard
-            chart={{type: BarChart, data: range.ror(this.state)}}
-            input={{type: Percent, meta: meta.ror}}
-            name="ror"
-            text={i18n.ror}
-            onChange={handleChange}
-            status={this.state} />
+          <ROR status={this.state} onChange={handleChange} />
 
-          <FICard
-            chart={{type: BarChart, data: range.inflation(this.state)}}
-            input={{type: Percent, meta: meta.inflation}}
-            name="inflation"
-            text={i18n.inflation}
-            onChange={handleChange}
-            status={this.state} />
+          <Inflation status={this.state} onChange={handleChange} />
 
           <a className="fi-opensource" href="https://github.com/opensourceportfolio/ficalculator3/">open source on github</a>
         </main>
