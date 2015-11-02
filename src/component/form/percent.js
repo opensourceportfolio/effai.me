@@ -1,4 +1,5 @@
 import React from 'lib/react';
+import componentHandler from 'lib/mdl';
 
 export class Percent extends React.Component {
   constructor(props) {
@@ -6,9 +7,9 @@ export class Percent extends React.Component {
   }
 
   componentDidMount() {
-    let node = React.findDOMNode(this.refs.percent);
+    let node = this.refs.percent;
 
-    window.componentHandler.upgradeElement(node);
+    componentHandler.upgradeElement(node);
   }
 
   handleChange(event) {

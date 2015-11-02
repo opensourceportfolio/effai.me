@@ -7,9 +7,6 @@ import { BarChart } from 'component/chart/bar';
 import { Percent } from 'component/form/percent';
 
 export class ROR extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let status = this.props.status;

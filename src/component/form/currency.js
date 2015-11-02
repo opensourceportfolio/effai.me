@@ -5,12 +5,8 @@ import formatter from 'service/formatter';
 
 export class Currency extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
-    let node = React.findDOMNode(this.refs.currency);
+    let node = this.refs.currency;
 
     componentHandler.upgradeElement(node);
   }

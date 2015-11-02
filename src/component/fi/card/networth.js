@@ -8,9 +8,6 @@ import { LineChart } from 'component/chart/line';
 import { Currency } from 'component/form/currency';
 
 export class Networth extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let status = this.props.status;

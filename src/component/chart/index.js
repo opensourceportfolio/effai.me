@@ -6,7 +6,7 @@ import 'lib/chartist/legend';
 export class Chart extends React.Component {
 
   componentDidMount() {
-    let $chart = React.findDOMNode(this.refs.chart);
+    let $chart = this.refs.chart;
     let ChartType = this.props.type;
 
     if (ChartType) {

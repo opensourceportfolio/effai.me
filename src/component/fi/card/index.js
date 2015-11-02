@@ -10,9 +10,6 @@ import { CardTitle } from 'component/card/cardTitle';
 import { Chart } from 'component/chart/index';
 
 export class FICard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let { name, text, chart, rangeInfo } = this.props;

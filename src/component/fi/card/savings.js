@@ -8,9 +8,6 @@ import { BarChart } from 'component/chart/bar';
 import { Currency } from 'component/form/currency';
 
 export class Savings extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let status = this.props.status;
