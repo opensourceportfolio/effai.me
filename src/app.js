@@ -1,13 +1,14 @@
 import React from 'lib/react';
 import ReactDOM from 'lib/react/dom';
-import Router from 'lib/react/router';
+import { Router, Route } from 'lib/react/router';
 import { FICalculator } from 'component/ficalculator';
+import { FISettings } from 'component/fisettings';
 
-let Route = Router.Route;
 let routes = (
-  <Route handler={FICalculator} />
+  <Router>
+    <Route path="/settings" component={FISettings} />
+    <Route path="*" component={FICalculator} />
+  </ Router>
 );
 
-Router.run(routes, Router.HashLocation, (Root) => {
-  ReactDOM.render(<Root/>, document.getElementById('app-ficalculator'));
-});
+ReactDOM.render(routes, document.getElementById('app-ficalculator'));
