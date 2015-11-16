@@ -29,11 +29,12 @@ export class FICalculator extends React.Component {
   render() {
     let handleChange = this.handleChange.bind(this);
     let years = Calculator.calculate(this.state);
+    let options = [{text: i18n.menu.option}];
 
     return (
       <div className="mdl-layout__container">
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref="ficalculator">
-          <Navbar title={formatter.fiAge(years)} />
+          <Navbar title={formatter.fiAge(years)} options={options} />
           <main className="mdl-layout__content">
 
             <h3 className="mdl-title">{i18n.title.current}</h3>

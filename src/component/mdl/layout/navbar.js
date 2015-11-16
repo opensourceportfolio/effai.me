@@ -1,21 +1,18 @@
 import React from 'lib/react';
-import i18n from 'service/i18n';
+import { Menu } from 'component/mdl/layout/menu';
 
 export class Navbar extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.i18n = i18n;
-  }
   render() {
+    let menu = this.props.options ? <Menu options={this.props.options} /> : null;
+
     return (
       <header className="mdl-layout__header">
-        <div className="mdl-layout-icon"></div>
         <div className="mdl-layout__header-row">
           <span className="mdl-layout-title">
             {this.props.title}
           </span>
-          <div className="mdl-layout-spacer"></div>
+          {menu}
         </div>
       </header>
     );

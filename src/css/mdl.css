@@ -2,6 +2,12 @@
   padding: 0 20px 100px;
 }
 
+.mdl-header__menu {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+}
+
 .mdl-title {
   width: 800px;
   margin: 40px auto 20px;

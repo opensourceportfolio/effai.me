@@ -21,6 +21,10 @@ let i18n = {
     },
   },
 
+  menu: {
+    option: 'settings',
+  },
+
   title: {
     current: 'Current state',
     prediction: 'Prediction',
