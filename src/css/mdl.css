@@ -8,6 +8,10 @@
   top: 15px;
 }
 
+.mdl-menu__item a {
+  text-decoration: none;
+}
+
 .mdl-title {
   width: 800px;
   margin: 40px auto 20px;

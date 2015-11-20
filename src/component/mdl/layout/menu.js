@@ -1,5 +1,6 @@
 import React from 'lib/react';
 import componentHandler from 'lib/mdl';
+import { Link } from 'lib/react/router';
 
 export class Menu extends React.Component {
 
@@ -12,7 +13,9 @@ export class Menu extends React.Component {
   render() {
     let options = this.props.options.map((item, index) => {
       return (
-        <li key={index} className="mdl-menu__item">{item.text}</li>
+        <li key={index} className="mdl-menu__item">
+          <Link to={item.url}>{item.text}</ Link>
+        </li>
       );
     });
 
