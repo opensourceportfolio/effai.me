@@ -17,6 +17,8 @@ export class Currency extends React.Component {
 
       value = $.isNumeric(value) ? value : '';
       this.props.onChange(this.props.name, value);
+    } else {
+      this.props.onChange(this.props.name, null);
     }
   }
 
@@ -25,6 +27,7 @@ export class Currency extends React.Component {
 
     return (
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__masked" ref="currency">
+        <span className="mdl-textfield-icon">$</span>
         <input className="mdl-textfield__input"
           defaultValue={value}
           onChange={this.handleChange.bind(this)}
@@ -34,10 +37,10 @@ export class Currency extends React.Component {
           max={this.props.rangeInfo.max}
           type="number" />
         <label className="mdl-textfield__mask">
-          {formatter.currency(value)}
+          {value == null ? '' : formatter.formattedNumber(value)}
         </label>
         <label className="mdl-textfield__label" htmlFor={this.props.name}>
-          {this.props.placeholder}
+          {value == null ? this.props.text.error : this.props.text.placeholder}
         </label>
       </div>
     );

@@ -64,6 +64,11 @@
 
 .mdl-textfield {
   width: 100%;
+
+  &.is-invalid:not(.is-focused) .mdl-textfield__label{
+    top: 24px;
+  }
+
 }
 
 .mdl-textfield__masked {
@@ -80,6 +85,15 @@
     }
   }
 
+  .mdl-textfield-icon {
+    position: absolute;
+    padding: 4px 0;
+
+    + .mdl-textfield__input, ~ .mdl-textfield__mask, ~ .mdl-textfield__label {
+      padding-left: 12px;
+    }
+  }
+
   .mdl-textfield__mask {
     position: static;
     display: block;
@@ -91,5 +105,4 @@
   .mdl-textfield__input:focus ~ .mdl-textfield__mask {
     display: none;
   }
-
 }

@@ -2,36 +2,30 @@ import React from 'lib/react';
 import i18n from 'service/i18n';
 import meta from 'service/meta';
 import formatter from 'service/formatter';
-import calculator from 'service/calculator';
 import { FICard } from 'component/fi/card/index';
 import { BarChart } from 'component/chart/bar';
 import { Currency } from 'component/form/currency';
 
-export class Savings extends React.Component {
+export class HousePrice extends React.Component  {
 
   render() {
-    let status = this.props.status;
-    let text = i18n.savings;
-    let years = calculator.calculate(status);
-    let inflation = calculator.toFraction(status.inflation);
-    let fiSavings = formatter.currency(calculator.compound(status.savings, inflation, years));
+    let text = i18n.housePrice;
 
     return (
       <FICard
         chart={{
           type: BarChart,
-          fn: FICard.chartFn('savings', status),
+          fn: FICard.chartFn('housePrice', status),
           formatter: formatter.currency,
-          text: i18n.savings.chart
+          text: i18n.housePrice.chart,
         }}
         input={{ type: Currency, onChange: this.props.onChange }}
-        rangeInfo={meta.savings}
-        name="savings"
+        rangeInfo={meta.housePrice}
+        name="housePrice"
         text={{
           title: text.title,
           supporting: text.supporting,
-          error: i18n.error.between(meta.savings.min, meta.savings.max),
-          placeholder: text.placeholder(fiSavings)
+          placeholder: text.placeholder,
         }}
         status={status} />
     );

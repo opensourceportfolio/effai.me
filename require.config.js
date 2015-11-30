@@ -6,6 +6,7 @@ requirejs.config({
   'map': {
     '*':{
       'react': 'lib/react',
+      'redux': 'lib/redux',
       'lib/jquery': 'jquery',
     },
   },
@@ -16,4 +17,4 @@ requirejs.config({
   }
 });
 
-requirejs(['app']);
+requirejs(['root']);

@@ -31,7 +31,7 @@ export class FICard extends React.Component {
           <Chart data={data} type={chart.type} xlabel={xlabel} ylabel={ylabel} />
         </CardMedia>
         <CardAction>
-          {React.createElement(type, { name, onChange, placeholder: text.placeholder, value, rangeInfo })}
+          {React.createElement(type, { name, onChange, text, value, rangeInfo })}
         </CardAction>
       </Card>
     );

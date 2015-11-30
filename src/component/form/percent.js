@@ -26,7 +26,7 @@ export class Percent extends React.Component {
     return (
       <div>
         <label className="mdl-label" htmlFor={name}>
-          {this.props.placeholder} ({this.props.value}%)
+          {this.props.text.placeholder} ({this.props.value}%)
         </label>
         <div className="mdl-grid">
           <div className="mdl-cell--12-col">

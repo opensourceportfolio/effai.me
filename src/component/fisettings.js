@@ -1,12 +1,19 @@
 import React from 'lib/react';
+import { connect } from 'lib/react/react-redux';
+import { changeValue } from 'action/fi';
 import i18n from 'service/i18n';
 import meta from 'service/meta';
 import { Percent } from 'component/form/percent';
 
-export class FISettings extends React.Component {
+class FISettings extends React.Component {
+
+  handleChange(name, value) {
+    this.props.dispatch(changeValue(name, value));
+  }
 
   render() {
-    let { handleChange, status } = this.props;
+    let { status } = this.props;
+    let handleChange = this.handleChange.bind(this);
 
     return (
       <div className="mdl-grid">
@@ -15,7 +22,7 @@ export class FISettings extends React.Component {
           <Percent
             name="withdrawl"
             onChange={handleChange}
-            placeholder={i18n.withdrawl.placeholder}
+            text={{placeholder: i18n.withdrawl.placeholder}}
             value={status.withdrawl}
             rangeInfo={meta.withdrawl} />
         </div>
@@ -24,3 +31,5 @@ export class FISettings extends React.Component {
   }
 
 }
+
+export default connect((p) => p)(FISettings);

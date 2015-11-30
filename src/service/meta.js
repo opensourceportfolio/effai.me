@@ -35,6 +35,12 @@ let meta = {
     step: 0.5,
   },
 
+  housePrice: {
+    min: 0,
+    max: 5000000,
+    step: 500,
+  },
+
   range: 42,
 };
 

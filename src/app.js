@@ -1,60 +1,50 @@
 import React from 'lib/react';
-import ReactDOM from 'lib/react/dom';
-import $ from 'lib/jquery';
-import { Router, Route, IndexRoute } from 'lib/react/router';
+import { createStore } from 'lib/redux';
+import { Provider } from 'lib/react/react-redux';
+import { userInput } from 'reducer/fi';
+import { loadData } from 'action/fi';
 import i18n from 'service/i18n';
 import userSetting from 'service/userSetting';
 import formatter from 'service/formatter';
 import Calculator from 'service/calculator';
 import { Navbar } from 'component/mdl/layout/navbar';
-import { FICalculator } from 'component/ficalculator';
-import { FISettings } from 'component/fisettings';
 
-class App extends React.Component {
+let store = createStore(userInput);
+
+export default class App extends React.Component {
 
   componentWillMount() {
-    this.state = userSetting.get();
-  }
+    let data = userSetting.get();
 
-  componentDidUpdate() {
-    userSetting.set(this.state);
-  }
+    store.subscribe(() => {
+      let state = store.getState();
 
-  handleChange(name, value) {
-    let val = $.isNumeric(value) ? parseFloat(value) : null;
+      this.setState(state);
+      userSetting.set(state);
+    });
 
-    this.setState({[name]: val});
+    store.dispatch(loadData(data));
   }
 
   render() {
     let status = this.state;
     let years = Calculator.calculate(status);
     let options = [{text: i18n.menu.option, url: '/settings'}];
-    let handleChange = this.handleChange.bind(this);
 
     return (
-      <div className="mdl-layout__container">
-        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref="ficalculator">
-          <Navbar title={formatter.fiAge(years)} options={options} />
-          <main className="mdl-layout__content">
+      <Provider store={store}>
+        <div className="mdl-layout__container">
+          <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref="ficalculator">
+            <Navbar title={formatter.fiAge(years)} options={options} />
+            <main className="mdl-layout__content">
 
-            {React.cloneElement(this.props.children, { handleChange, status })}
+              {React.cloneElement(this.props.children, { status })}
 
-            <a className="fi-opensource" href="https://github.com/opensourceportfolio/ficalculator3/">open source on github</a>
-          </main>
+              <a className="fi-opensource" href="https://github.com/opensourceportfolio/ficalculator3/">open source on github</a>
+            </main>
+          </div>
         </div>
-      </div>
+      </Provider>
     );
   }
 }
-
-let routes = (
-  <Router>
-    <Route path="/" component={App}>
-      <IndexRoute component={FICalculator} />
-      <Route path="settings" component={FISettings} />
-    </ Route>
-  </ Router>
-);
-
-ReactDOM.render(routes, document.getElementById('app-ficalculator'));

@@ -28,12 +28,17 @@ let i18n = {
   title: {
     current: 'Current state',
     prediction: 'Prediction',
+    housing: 'Housing',
   },
 
   link: {
     investments: 'Investments',
     prediction: 'Prediction',
     housing: 'Housing',
+  },
+
+  error: {
+    between: (min, max) => `You must enter a number between ${min} and ${max}`,
   },
 
   networth: {
@@ -120,6 +125,17 @@ let i18n = {
     placeholder: 'rate of withdrawl',
     name: 'withdrawl',
     type: 'percent',
+  },
+
+  housePrice: {
+    title: 'House price',
+    supporting: `If you were to sell the house today, how much could you sell it for?`,
+    chart: {
+      formatter: helper.currency,
+      xlabel: 'Price',
+      ylabel: 'Year',
+    },
+    placeholder: 'Current Value of the house'
   }
 };
 

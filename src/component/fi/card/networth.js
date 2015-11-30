@@ -43,6 +43,7 @@ export class Networth extends React.Component {
         text={{
           title: text.title,
           supporting: text.supporting,
+          error: i18n.error.between(meta.networth.min, meta.networth.max),
           placeholder: text.placeholder(fiNetworth)
         }}
         status={status} />

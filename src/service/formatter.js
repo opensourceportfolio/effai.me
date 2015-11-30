@@ -3,17 +3,21 @@ import i18n from 'service/i18n';
 import meta from 'service/meta';
 
 export default class Formatter {
-  static currency(number) {
+  static formattedNumber(number) {
     if ($.isNumeric(number)) {
       let p = parseFloat(number).toFixed(2).split('.');
       let val = p[0].split('').reverse().reduce((acc, num, i) => {
         return num + (i && !(i % 3) ? ',' : '') + acc;
       }, '');
 
-      return `$${val}`;
+      return `${val}`;
     } else {
       return '';
     }
+  }
+
+  static currency(number) {
+    return `$${Formatter.formattedNumber(number)}`;
   }
 
   static percent(number) {
