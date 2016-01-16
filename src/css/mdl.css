@@ -1,5 +1,5 @@
 .mdl-layout__content {
-  padding: 0 20px 100px;
+  padding: 0 0 100px;
 }
 
 .mdl-header__menu {
@@ -14,7 +14,7 @@
 
 .mdl-title {
   width: 800px;
-  margin: 40px auto 20px;
+  margin: 40px 10px 20px;
 }
 
 .mdl-card {

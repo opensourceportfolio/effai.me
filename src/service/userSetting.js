@@ -19,7 +19,7 @@ export default {
       settings = JSON.parse(settings);
     }
 
-    return $.extend(settings, defaults);
+    return $.extend(defaults, settings);
   },
 
   set(value) {

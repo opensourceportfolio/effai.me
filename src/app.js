@@ -7,7 +7,7 @@ import i18n from 'service/i18n';
 import userSetting from 'service/userSetting';
 import formatter from 'service/formatter';
 import Calculator from 'service/calculator';
-import { Navbar } from 'component/mdl/layout/navbar';
+import { Header } from 'component/mdl/layout/header/index';
 
 let store = createStore(userInput);
 
@@ -29,13 +29,17 @@ export default class App extends React.Component {
   render() {
     let status = this.state;
     let years = Calculator.calculate(status);
-    let options = [{text: i18n.menu.option, url: '/settings'}];
+    let options = { row: [
+      {text: i18n.header.links.known, url: '#/known', isActive: false},
+      {text: i18n.header.links.prediction, url: '#/prediction'},
+      {text: i18n.header.links.target, url: '#/target'},
+    ]};
 
     return (
       <Provider store={store}>
         <div className="mdl-layout__container">
-          <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref="ficalculator">
-            <Navbar title={formatter.fiAge(years)} options={options} />
+          <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header is-upgraded" ref="ficalculator">
+            <Header title={formatter.fiAge(years)} options={options} />
             <main className="mdl-layout__content">
 
               {React.cloneElement(this.props.children, { status })}

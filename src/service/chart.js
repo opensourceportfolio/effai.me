@@ -25,8 +25,9 @@ export default class ChartRange {
   static xrange(value, rangeInfo) {
     let { min, max } = rangeInfo;
     let step = Math.max(value * 0.1, rangeInfo.step);
-    let start = Range.start(value, { min, max, step }, CHART_COUNT);
-    let xrange = Range.generate(CHART_COUNT, start, step);
+    let minStep = Math.max(rangeInfo.step, Math.floor(step / rangeInfo.step) * rangeInfo.step);
+    let start = Range.start(value, { min, max, step: minStep }, CHART_COUNT);
+    let xrange = Range.generate(CHART_COUNT, start, minStep);
 
     return xrange;
   }

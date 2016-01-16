@@ -21,13 +21,19 @@ let i18n = {
     },
   },
 
-  menu: {
-    option: 'settings',
+  header: {
+    links: {
+      home: 'home',
+      known: 'Knowns',
+      prediction: 'Predictions',
+      target: 'Target',
+    }
   },
 
   title: {
     current: 'Current state',
     prediction: 'Prediction',
+    target: 'Target for the future',
     housing: 'Housing',
   },
 
