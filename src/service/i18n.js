@@ -1,16 +1,4 @@
-let helper = {
-  year(val) {
-    return val;
-  },
-
-  currency(val) {
-    return `$${val}`;
-  },
-
-  percent(val) {
-    return `${val}%`;
-  },
-};
+import formatter from 'service/formatter';
 
 let i18n = {
   fiStatus: {
@@ -53,7 +41,6 @@ let i18n = {
                Other assets can be included as well but remember to adjust your rate of return accordingly.`,
     chart: {
       legend: ['Your passive income', 'Your goal'],
-      formatter: helper.year,
       xlabel: 'Years',
       ylabel: 'Passive income',
     },
@@ -67,7 +54,7 @@ let i18n = {
     title: 'Savings rate',
     supporting: `How much money do you put aside into savings and investments each month?`,
     chart: {
-      formatter: helper.currency,
+      formatter: formatter.formattedCurrency,
       xlabel: 'Savings rate',
       ylabel: 'Years to FI',
     },
@@ -81,7 +68,7 @@ let i18n = {
     supporting: `How much money do you need per month to be financially independent. One way to estimate this
                value is to look at your spendings today.`,
     chart: {
-      formatter: helper.currency,
+      formatter: formatter.formattedCurrency,
       xlabel: 'Goal',
       ylabel: 'Years to FI',
     },
@@ -95,7 +82,7 @@ let i18n = {
     supporting: `What do you think inflation will look like in the future. Long term inflation over the last
               100 years or so averaged at around 3-4%`,
     chart: {
-      formatter: helper.percent,
+      formatter: formatter.percent,
       xlabel: 'Inflation',
       ylabel: 'Years to FI',
     },
@@ -109,7 +96,7 @@ let i18n = {
     supporting: `What kind of return are you expecting on your savings? Are you investing in stocks or keeping
                your money safe in a bank account?`,
     chart: {
-      formatter: helper.percent,
+      formatter: formatter.percent,
       xlabel: 'Rate of return',
       ylabel: 'Years to FI',
     },
@@ -124,7 +111,7 @@ let i18n = {
                Studies show that 4% rate is a safe rate to withdraw an all stock portfolio. Bond and
                cash portfolios will probably require a lower rate.`,
     chart: {
-      formatter: helper.percent,
+      formatter: formatter.percent,
       xlabel: 'Rate of withdrawl',
       ylabel: 'Years to FI',
     },
@@ -137,7 +124,7 @@ let i18n = {
     title: 'House price',
     supporting: `If you were to sell the house today, how much could you sell it for?`,
     chart: {
-      formatter: helper.currency,
+      formatter: formatter.formattedCurrency,
       xlabel: 'Price',
       ylabel: 'Year',
     },

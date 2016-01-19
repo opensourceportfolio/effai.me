@@ -14,14 +14,14 @@ export class Savings extends React.Component {
     let text = i18n.savings;
     let years = calculator.calculate(status);
     let inflation = calculator.toFraction(status.inflation);
-    let fiSavings = formatter.currency(calculator.compound(status.savings, inflation, years));
+    let fiSavings = formatter.formattedCurrency(calculator.compound(status.savings, inflation, years));
 
     return (
       <FICard
         chart={{
           type: BarChart,
           fn: FICard.chartFn('savings', status),
-          formatter: formatter.currency,
+          formatter: { x: formatter.longCurrency },
           text: i18n.savings.chart
         }}
         input={{ type: Currency, onChange: this.props.onChange }}

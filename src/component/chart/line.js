@@ -4,8 +4,8 @@ import {Chart} from 'component/chart/index';
 
 export class LineChart {
 
-  constructor() {
-    this.options = Chart.options;
+  constructor(options) {
+    this.options = Chart.options(options);
     this._previousPath = [];
 
     return this;

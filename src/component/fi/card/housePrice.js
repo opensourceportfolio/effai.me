@@ -16,7 +16,7 @@ export class HousePrice extends React.Component  {
         chart={{
           type: BarChart,
           fn: FICard.chartFn('housePrice', status),
-          formatter: formatter.currency,
+          formatter: { y: formatter.currency },
           text: i18n.housePrice.chart,
         }}
         input={{ type: Currency, onChange: this.props.onChange }}

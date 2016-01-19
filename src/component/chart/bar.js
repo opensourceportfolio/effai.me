@@ -4,8 +4,8 @@ import {Chart} from 'component/chart/index';
 
 export class BarChart {
 
-  constructor() {
-    this.options = Chart.options;
+  constructor(options) {
+    this.options = Chart.options(options);
 
     return this;
   }
@@ -39,7 +39,7 @@ export class BarChart {
         data.element.animate({
           y2: {
             dur: this.options.duration,
-            from: this._previousData.series[0][data.index],
+            from: this._previousData.series[0].data[data.index],
             to: data.y2,
             easing: Chartist.Svg.Easing.easeOutQuint
           },

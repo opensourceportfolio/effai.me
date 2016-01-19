@@ -14,14 +14,14 @@ export class Goal extends React.Component {
     let text = i18n.goal;
     let years = calculator.calculate(status);
     let inflation = calculator.toFraction(status.inflation);
-    let fiGoal = formatter.currency(calculator.compound(status.goal, inflation, years));
+    let fiGoal = formatter.formattedCurrency(calculator.compound(status.goal, inflation, years));
 
     return (
       <FICard
         chart={{
           type: BarChart,
           fn: FICard.chartFn('goal', status),
-          formatter: formatter.currency,
+          formatter: { x: formatter.longCurrency },
           text: i18n.goal.chart,
         }}
         input={{ type: Currency, onChange: this.props.onChange }}

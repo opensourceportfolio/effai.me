@@ -10,7 +10,7 @@ export class Chart extends React.Component {
     let ChartType = this.props.type;
 
     if (ChartType) {
-      this.chart = new ChartType($chart)
+      this.chart = new ChartType(this.props.options)
                     .setLegend()
                     .setAxisLabels(this.props.xlabel, this.props.ylabel)
                     .build($chart, this.props.data)
@@ -28,19 +28,8 @@ export class Chart extends React.Component {
 
   render() {
     return (
-      <div className="ct-chart" ref="chart"></div>
+      <div className="ct-chart ct-perfect-fourth" ref="chart"></div>
     );
-  }
-
-  static _labelInterpolationFnc(value) {
-    if (value > 0) {
-      let e = parseInt(Math.log(value) / Math.log(1000)),
-        extension = ['', 'k', 'M', 'B', 'T'];
-
-      return (value / Math.pow(1000, e)).toFixed(0) + extension[e];
-    } else {
-      return value;
-    }
   }
 
   static get axis() {
@@ -66,17 +55,13 @@ export class Chart extends React.Component {
     });
   }
 
-  static get options() {
+  static options(override) {
     return $.extend({}, {
       duration: 1000,
-      height: 300,
       chartPadding: {
         bottom: 20,
       },
-      axisY: {
-        labelInterpolationFnc: Chart._labelInterpolationFnc,
-      },
       plugins: [],
-    });
+    }, override);
   }
 }

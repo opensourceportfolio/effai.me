@@ -3,9 +3,9 @@ import { createStore } from 'lib/redux';
 import { Provider } from 'lib/react/react-redux';
 import { userInput } from 'reducer/fi';
 import { loadData } from 'action/fi';
+import meta from 'service/meta';
 import i18n from 'service/i18n';
 import userSetting from 'service/userSetting';
-import formatter from 'service/formatter';
 import Calculator from 'service/calculator';
 import { Header } from 'component/mdl/layout/header/index';
 
@@ -39,7 +39,7 @@ export default class App extends React.Component {
       <Provider store={store}>
         <div className="mdl-layout__container">
           <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header is-upgraded" ref="ficalculator">
-            <Header title={formatter.fiAge(years)} options={options} />
+            <Header title={App.fiAge(years)} options={options} />
             <main className="mdl-layout__content">
 
               {React.cloneElement(this.props.children, { status })}
@@ -50,5 +50,20 @@ export default class App extends React.Component {
         </div>
       </Provider>
     );
+  }
+
+
+  static fiAge(years) {
+    let age = 0;
+
+    if (years <= 0) {
+      age = i18n.fiStatus.done;
+    } else if (isNaN(years) || years > meta.range) {
+      age = i18n.fiStatus.never;
+    } else {
+      age = i18n.fiStatus.formatter(years);
+    }
+
+    return `FI in: ${age}`;
   }
 }

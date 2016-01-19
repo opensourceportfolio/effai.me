@@ -12,6 +12,7 @@ import { Chart } from 'component/chart/index';
 export class FICard extends React.Component {
 
   render() {
+    let chartOptions = {};
     let { name, text, chart, rangeInfo } = this.props;
     let value = this.props.status[name];
     let { type, onChange } = this.props.input;
@@ -21,14 +22,21 @@ export class FICard extends React.Component {
     let chartRangeInfo = chart.rangeInfo ? chart.rangeInfo : rangeInfo;
     let xrange = ChartService.xrange(chartValue, chartRangeInfo);
     let yrange = ChartService.yrange(xrange, chartRangeInfo, chart.fn);
-    let data = ChartService.toModel(xrange, yrange, chart.formatter, chartRangeInfo.legend);
+    let data = ChartService.toModel(xrange, yrange, chartRangeInfo.legend);
+
+    if (chart.formatter) {
+      let identity = (e) => e;
+
+      chartOptions.axisX = { labelInterpolationFnc: chart.formatter.x || identity };
+      chartOptions.axisY = { labelInterpolationFnc: chart.formatter.y || identity };
+    }
 
     return (
       <Card>
         <CardTitle text={text.title} />
         <CardSupporting text={text.supporting} />
         <CardMedia>
-          <Chart data={data} type={chart.type} xlabel={xlabel} ylabel={ylabel} />
+          <Chart data={data} type={chart.type} xlabel={xlabel} ylabel={ylabel} options={chartOptions} />
         </CardMedia>
         <CardAction>
           {React.createElement(type, { name, onChange, text, value, rangeInfo })}

@@ -1,8 +1,7 @@
 import $ from 'lib/jquery';
-import i18n from 'service/i18n';
-import meta from 'service/meta';
 
 export default class Formatter {
+
   static formattedNumber(number) {
     if ($.isNumeric(number)) {
       let p = parseFloat(number).toFixed(2).split('.');
@@ -16,8 +15,32 @@ export default class Formatter {
     }
   }
 
+  static longNumber(value) {
+    if (value > 0) {
+      let e = parseInt(Math.log(value) / Math.log(1000)),
+        extension = ['', 'k', 'M', 'B', 'T'],
+        fix = e !== 0  ? 1 : 0;
+
+      return (value / Math.pow(1000, e)).toFixed(fix) + extension[e];
+    } else {
+      return value;
+    }
+  }
+
   static currency(number) {
-    return `$${Formatter.formattedNumber(number)}`;
+    return `$${number}`;
+  }
+
+  static formattedCurrency(number) {
+    let num = Formatter.formattedNumber(number);
+
+    return Formatter.currency(num);
+  }
+
+  static longCurrency(number) {
+    let num = Formatter.longNumber(number);
+
+    return Formatter.currency(num);
   }
 
   static percent(number) {
@@ -28,17 +51,4 @@ export default class Formatter {
     }
   }
 
-  static fiAge(years) {
-    let age = 0;
-
-    if (years <= 0) {
-      age = i18n.fiStatus.done;
-    } else if (isNaN(years) || years > meta.range) {
-      age = i18n.fiStatus.never;
-    } else {
-      age = i18n.fiStatus.formatter(years);
-    }
-
-    return `FI in: ${age}`;
-  }
 }

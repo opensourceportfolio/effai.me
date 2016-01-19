@@ -2,7 +2,7 @@ import React from 'lib/react';
 import i18n from 'service/i18n';
 import meta from 'service/meta';
 import Calculator from 'service/calculator';
-import Formatter from 'service/formatter';
+import formatter from 'service/formatter';
 import { FICard } from 'component/fi/card/index';
 import { LineChart } from 'component/chart/line';
 import { Currency } from 'component/form/currency';
@@ -12,7 +12,7 @@ export class Networth extends React.Component {
   render() {
     let status = this.props.status;
     let years = Calculator.calculate(status);
-    let fiNetworth = Formatter.currency(Calculator.networth(status, years));
+    let fiNetworth = formatter.formattedCurrency(Calculator.networth(status, years));
     let min = 0;
     let max = Math.min(years + 7, meta.range);
     let step = Math.min((years + 7) / 7, 7);
@@ -35,6 +35,7 @@ export class Networth extends React.Component {
           value: 0,
           rangeInfo: { min, max, step, legend: i18n.networth.chart.legend },
           fn: [monthlyYield, compoundFn],
+          formatter: {  y: formatter.longCurrency },
           text: i18n.networth.chart
         }}
         input={{ type: Currency, onChange: this.props.onChange }}

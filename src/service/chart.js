@@ -5,18 +5,15 @@ const CHART_COUNT = 7;
 
 export default class ChartRange {
 
-  static toModel(labels, chartData, formatter, legend) {
+  static toModel(labels, chartData, legend) {
     let chartLegend = legend || [];
-    let noop = (v) => v;
 
     return {
-      labels: labels.map(formatter || noop),
+      labels,
       series: chartData.map((series, i) => {
         return {
           name: chartLegend[i],
-          data: series.map((e) => {
-            return e;
-          }),
+          data: series,
         };
       })
     };
