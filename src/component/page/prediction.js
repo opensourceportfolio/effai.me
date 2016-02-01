@@ -1,10 +1,9 @@
 import React from 'lib/react';
 import { connect } from 'lib/react/react-redux';
 import { changeValue } from 'action/fi';
-import i18n from 'service/i18n';
-import { Goal } from 'component/fi/card/goal';
-import { ROR } from 'component/fi/card/ror';
-import { Inflation } from 'component/fi/card/inflation';
+import { i18n } from 'service/i18n';
+import ROR from 'component/fi/card/ror';
+import Inflation from 'component/fi/card/inflation';
 
 class Prediction extends React.Component {
 

@@ -1,6 +1,6 @@
 import React from 'lib/react';
 
-export class Drawer extends React.Component {
+export default class Drawer extends React.Component {
   render() {
     let links = this.props.links.map((link) => {
       return (

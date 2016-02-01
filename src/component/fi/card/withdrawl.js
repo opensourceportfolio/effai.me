@@ -1,12 +1,12 @@
 import React from 'lib/react';
-import i18n from 'service/i18n';
-import meta from 'service/meta';
-import formatter from 'service/formatter';
-import { FICard } from 'component/fi/card/index';
-import { BarChart } from 'component/chart/bar';
-import { Percent } from 'component/form/percent';
+import { i18n } from 'service/i18n';
+import { meta } from 'service/meta';
+import { percent } from 'service/formatter';
+import FICard from 'component/fi/card/index';
+import BarChart from 'component/chart/bar';
+import Percent from 'component/form/percent';
 
-export class Withdrawl extends React.Component {
+export default class Withdrawl extends React.Component {
 
   render() {
     let status = this.props.status;
@@ -16,7 +16,7 @@ export class Withdrawl extends React.Component {
         chart={{
           type: BarChart,
           fn: FICard.chartFn('withdrawl', status),
-          formatter: { x: formatter.percent },
+          formatter: { x: percent },
           text: i18n.withdrawl.chart,
         }}
         input={{ type: Percent, onChange: this.props.onChange }}

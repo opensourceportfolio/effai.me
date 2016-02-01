@@ -1,9 +1,9 @@
 import React from 'lib/react';
 import { connect } from 'lib/react/react-redux';
 import { changeValue } from 'action/fi';
-import i18n from 'service/i18n';
-import { Networth } from 'component/fi/card/networth';
-import { Savings } from 'component/fi/card/savings';
+import { i18n } from 'service/i18n';
+import Networth from 'component/fi/card/networth';
+import Savings from 'component/fi/card/savings';
 
 class Known extends React.Component {
 

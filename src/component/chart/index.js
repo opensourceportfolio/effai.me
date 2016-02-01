@@ -3,7 +3,7 @@ import $ from 'lib/jquery';
 import 'lib/chartist/axisTitle';
 import 'lib/chartist/legend';
 
-export class Chart extends React.Component {
+export default class Chart extends React.Component {
 
   componentDidMount() {
     let $chart = this.refs.chart;

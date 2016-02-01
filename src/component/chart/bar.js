@@ -1,8 +1,8 @@
 import Chartist from 'lib/chartist';
 import 'lib/chartist/axisTitle';
-import {Chart} from 'component/chart/index';
+import Chart from 'component/chart/index';
 
-export class BarChart {
+export default class BarChart {
 
   constructor(options) {
     this.options = Chart.options(options);

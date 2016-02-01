@@ -1,11 +1,8 @@
 {
-  "name": "ficalculator",
+  "name": "effai.me",
   "version": "1.0.0",
   "description": "Financial independence calculator",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "leontager",
   "license": "ISC",
   "dependencies": {

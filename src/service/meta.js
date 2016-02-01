@@ -1,4 +1,4 @@
-let meta = {
+export let meta = {
   networth: {
     min: 0,
     max: 1000000,
@@ -43,5 +43,3 @@ let meta = {
 
   range: 42,
 };
-
-export default meta;

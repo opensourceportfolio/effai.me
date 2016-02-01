@@ -2,7 +2,7 @@ import React from 'lib/react';
 import componentHandler from 'lib/mdl';
 import { Link } from 'lib/react/router';
 
-export class Menu extends React.Component {
+export default class Menu extends React.Component {
 
   componentDidMount() {
     let node = this.refs.menu;

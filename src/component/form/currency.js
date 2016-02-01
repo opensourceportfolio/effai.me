@@ -1,9 +1,9 @@
 import React from 'lib/react';
 import $ from 'lib/jquery';
 import componentHandler from 'lib/mdl';
-import formatter from 'service/formatter';
+import { formattedNumber } from 'service/formatter';
 
-export class Currency extends React.Component {
+export default class Currency extends React.Component {
 
   componentDidMount() {
     let node = this.refs.currency;
@@ -37,7 +37,7 @@ export class Currency extends React.Component {
           max={this.props.rangeInfo.max}
           type="number" />
         <label className="mdl-textfield__mask">
-          {value == null ? '' : formatter.formattedNumber(value)}
+          {value == null ? '' : formattedNumber(value)}
         </label>
         <label className="mdl-textfield__label" htmlFor={this.props.name}>
           {value == null ? this.props.text.error : this.props.text.placeholder}

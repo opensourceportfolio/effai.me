@@ -1,31 +1,27 @@
 import React from 'lib/react';
-import i18n from 'service/i18n';
-import meta from 'service/meta';
-import Calculator from 'service/calculator';
-import formatter from 'service/formatter';
-import { FICard } from 'component/fi/card/index';
-import { LineChart } from 'component/chart/line';
-import { Currency } from 'component/form/currency';
+import { i18n } from 'service/i18n';
+import { meta } from 'service/meta';
+import { years, networth, toFraction, compound, monthlyYield } from 'service/calculator';
+import { formattedCurrency, longCurrency } from 'service/formatter';
+import FICard from 'component/fi/card/index';
+import LineChart from 'component/chart/line';
+import Currency from 'component/form/currency';
 
-export class Networth extends React.Component {
+export default class Networth extends React.Component {
 
   render() {
     let status = this.props.status;
-    let years = Calculator.calculate(status);
-    let fiNetworth = formatter.formattedCurrency(Calculator.networth(status, years));
+    let yrs = years(status);
+    let fiNetworth = formattedCurrency(networth(status, yrs));
     let min = 0;
-    let max = Math.min(years + 7, meta.range);
-    let step = Math.min((years + 7) / 7, 7);
+    let max = Math.min(yrs + 7, meta.range);
+    let step = Math.min((yrs + 7) / 7, 7);
     let text = i18n.networth;
 
     let compoundFn = (v) => {
-      let inflation = Calculator.toFraction(status.inflation);
+      let inflation = toFraction(status.inflation);
 
-      return Calculator.compound(status.goal, inflation, parseFloat(v));
-    };
-
-    let monthlyYield = (v) => {
-      return Calculator.monthlyYield(status, parseFloat(v));
+      return compound(status.goal, inflation, parseFloat(v));
     };
 
     return (
@@ -34,8 +30,8 @@ export class Networth extends React.Component {
           type: LineChart,
           value: 0,
           rangeInfo: { min, max, step, legend: i18n.networth.chart.legend },
-          fn: [monthlyYield, compoundFn],
-          formatter: {  y: formatter.longCurrency },
+          fn: [(v) => monthlyYield(status, parseFloat(v)), compoundFn],
+          formatter: {  y: longCurrency },
           text: i18n.networth.chart
         }}
         input={{ type: Currency, onChange: this.props.onChange }}

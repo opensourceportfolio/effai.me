@@ -1,8 +1,8 @@
 import $ from 'lib/jquery';
 import { LOAD_DATA, CHANGE_VALUE } from 'action/fi';
-import userSetting from 'service/userSetting';
+import { get } from 'service/userSetting';
 
-let previousState = userSetting.get();
+let previousState = get();
 
 export function userInput(state = previousState, action) {
   switch (action.type) {

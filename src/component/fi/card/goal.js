@@ -1,27 +1,27 @@
 import React from 'lib/react';
-import i18n from 'service/i18n';
-import meta from 'service/meta';
-import formatter from 'service/formatter';
-import calculator from 'service/calculator';
-import { FICard } from 'component/fi/card/index';
-import { BarChart } from 'component/chart/bar';
-import { Currency } from 'component/form/currency';
+import { i18n } from 'service/i18n';
+import { meta } from 'service/meta';
+import { formattedCurrency, longCurrency} from 'service/formatter';
+import { years, toFraction, compound  } from 'service/calculator';
+import FICard from 'component/fi/card/index';
+import BarChart from 'component/chart/bar';
+import Currency from 'component/form/currency';
 
-export class Goal extends React.Component {
+export default class Goal extends React.Component {
 
   render() {
     let status = this.props.status;
     let text = i18n.goal;
-    let years = calculator.calculate(status);
-    let inflation = calculator.toFraction(status.inflation);
-    let fiGoal = formatter.formattedCurrency(calculator.compound(status.goal, inflation, years));
+    let yrs = years(status);
+    let inflation = toFraction(status.inflation);
+    let fiGoal = formattedCurrency(compound(status.goal, inflation, yrs));
 
     return (
       <FICard
         chart={{
           type: BarChart,
           fn: FICard.chartFn('goal', status),
-          formatter: { x: formatter.longCurrency },
+          formatter: { x: longCurrency },
           text: i18n.goal.chart,
         }}
         input={{ type: Currency, onChange: this.props.onChange }}

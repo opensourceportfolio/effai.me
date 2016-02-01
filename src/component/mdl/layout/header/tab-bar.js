@@ -1,7 +1,7 @@
 import React from 'lib/react';
-import { Tab } from 'component/mdl/layout/header/tab';
+import Tab from 'component/mdl/layout/header/tab';
 
-export class TabBar extends React.Component {
+export default class TabBar extends React.Component {
 
   render() {
     let links = null;

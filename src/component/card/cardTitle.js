@@ -1,6 +1,6 @@
 import React from 'lib/react';
 
-export class CardTitle extends React.Component {
+export default class CardTitle extends React.Component {
 
   render() {
     return (

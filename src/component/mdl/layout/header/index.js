@@ -1,7 +1,7 @@
 import React from 'lib/react';
-import { TabBar } from 'component/mdl/layout/header/tab-bar';
+import TabBar from 'component/mdl/layout/header/tab-bar';
 
-export class Header extends React.Component {
+export default class Header extends React.Component {
 
   render() {
     let row = null;

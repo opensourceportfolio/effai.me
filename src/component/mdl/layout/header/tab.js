@@ -1,6 +1,6 @@
 import React from 'lib/react';
 
-export class Tab extends React.Component {
+export default class Tab extends React.Component {
 
   render() {
     let className = 'mdl-layout__tab';

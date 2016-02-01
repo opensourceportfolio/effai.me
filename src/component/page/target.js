@@ -1,9 +1,9 @@
 import React from 'lib/react';
 import { connect } from 'lib/react/react-redux';
 import { changeValue } from 'action/fi';
-import i18n from 'service/i18n';
-import { Goal } from 'component/fi/card/goal';
-import { Withdrawl } from 'component/fi/card/withdrawl';
+import { i18n } from 'service/i18n';
+import Goal from 'component/fi/card/goal';
+import Withdrawl from 'component/fi/card/withdrawl';
 
 class Target extends React.Component {
 

@@ -1,15 +1,15 @@
 import React from 'lib/react';
 import $ from 'lib/jquery';
-import Calculator from 'service/calculator';
-import ChartService from 'service/chart';
-import { Card } from 'component/card/index';
-import { CardAction } from 'component/card/cardAction';
-import { CardMedia } from 'component/card/cardMedia';
-import { CardSupporting } from 'component/card/cardSupporting';
-import { CardTitle } from 'component/card/cardTitle';
-import { Chart } from 'component/chart/index';
+import { years } from 'service/calculator';
+import { xrange, yrange, toModel } from 'service/chart';
+import Card from 'component/card/index';
+import CardAction from 'component/card/cardAction';
+import CardMedia from 'component/card/cardMedia';
+import CardSupporting from 'component/card/cardSupporting';
+import CardTitle from 'component/card/cardTitle';
+import Chart from 'component/chart/index';
 
-export class FICard extends React.Component {
+export default class FICard extends React.Component {
 
   render() {
     let chartOptions = {};
@@ -20,9 +20,9 @@ export class FICard extends React.Component {
     let { xlabel, ylabel } = chart.text;
     let chartValue = chart.value == null ? value : chart.value;
     let chartRangeInfo = chart.rangeInfo ? chart.rangeInfo : rangeInfo;
-    let xrange = ChartService.xrange(chartValue, chartRangeInfo);
-    let yrange = ChartService.yrange(xrange, chartRangeInfo, chart.fn);
-    let data = ChartService.toModel(xrange, yrange, chartRangeInfo.legend);
+    let xval = xrange(chartValue, chartRangeInfo);
+    let yval = yrange(xval, chartRangeInfo, chart.fn);
+    let data = toModel(xval, yval, chartRangeInfo.legend);
 
     if (chart.formatter) {
       let identity = (e) => e;
@@ -50,7 +50,7 @@ export class FICard extends React.Component {
 
     return (e) => {
       stateCopy[name] = e;
-      return Calculator.calculate(stateCopy);
+      return years(stateCopy);
     };
   }
 }

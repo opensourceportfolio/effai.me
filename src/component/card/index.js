@@ -1,6 +1,6 @@
 import React from 'lib/react';
 
-export class Card extends React.Component {
+export default class Card extends React.Component {
 
   render() {
     return (

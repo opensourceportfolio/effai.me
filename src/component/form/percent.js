@@ -1,7 +1,7 @@
 import React from 'lib/react';
 import componentHandler from 'lib/mdl';
 
-export class Percent extends React.Component {
+export default class Percent extends React.Component {
   constructor(props) {
     super(props);
   }
