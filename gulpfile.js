@@ -1,7 +1,7 @@
 'use strict';
 let gulp = require('gulp');
 let changed = require('gulp-changed');
-let watch = require('gulp-watch');
+// let watch = require('gulp-watch');
 let postcss = require('gulp-postcss');
 let cssnext = require('cssnext');
 let cssNested = require('postcss-nested');
@@ -26,6 +26,6 @@ gulp.task('css', () => {
     .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('watch', () => {
-  watch('src/**/*.js', ['default']);
-});
+// gulp.task('watch', () => {
+//   watch('src/**/*.js', ['default']);
+// });

@@ -113,12 +113,6 @@ IF EXIST "%DEPLOYMENT_TARGET%\gulpfile.js" (
   popd
 )
 
-:: 5. Run jspm
-IF EXIST "%DEPLOYMENT_TARGET%\config.js" (
-  call :ExecuteCmd .\node_modules\.bin\jspm install
-  exitWithMessageOnError "jspm failed"
-)
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Post deployment stub
