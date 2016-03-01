@@ -1,21 +1,20 @@
-'use strict';
-let gulp = require('gulp');
-let changed = require('gulp-changed');
-// let watch = require('gulp-watch');
-let postcss = require('gulp-postcss');
-let cssnext = require('cssnext');
-let cssNested = require('postcss-nested');
+var gulp = require('gulp');
+var changed = require('gulp-changed');
+// var watch = require('gulp-watch');
+var postcss = require('gulp-postcss');
+var cssnext = require('cssnext');
+var cssNested = require('postcss-nested');
 
 gulp.task('default', ['css', 'copy-font']);
 
-gulp.task('copy-font', () => {
+gulp.task('copy-font', function () {
   return gulp.src(['src/font/**/*.*'])
     .pipe(changed('dist/font'))
     .pipe(gulp.dest('dist/font'));
 });
 
-gulp.task('css', () => {
-  let processors = [
+gulp.task('css', function () {
+  var processors = [
     cssnext,
     cssNested
   ];
@@ -26,6 +25,6 @@ gulp.task('css', () => {
     .pipe(gulp.dest('dist/css'));
 });
 
-// gulp.task('watch', () => {
+// gulp.task('watch', function () {
 //   watch('src/**/*.js', ['default']);
 // });
