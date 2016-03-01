@@ -108,7 +108,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
 :: 4. Restore Gulp packages and run Gulp tasks
 IF /I "gulpfile.js" NEQ "" (
   echo Running Gulp deployment: Starting %TIME%
-  call :ExecuteCmd "%DEPLOYMENT_SOURCE%\node_modules\.bin\gulp"
+  call :ExecuteCmd "%DEPLOYMENT_TARGET%\node_modules\.bin\gulp"
   echo Running Gulp deployment: Finished %TIME%
   IF !ERRORLEVEL! NEQ 0 goto error
 )
@@ -116,7 +116,7 @@ IF /I "gulpfile.js" NEQ "" (
 :: 5. Install JSPM packages
 IF /I "gulpfile.js" NEQ "" (
   echo Running JSPM install: Starting %TIME%
-  call :ExecuteCmd "%DEPLOYMENT_SOURCE%\node_modules\.bin\jspm" install
+  call :ExecuteCmd "%DEPLOYMENT_TARGET%\node_modules\.bin\jspm" install
   echo Running JSPM install: Finished %TIME%
   IF !ERRORLEVEL! NEQ 0 goto error
 )
