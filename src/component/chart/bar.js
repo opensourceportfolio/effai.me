@@ -1,59 +1,37 @@
+import React from 'lib/react';
 import Chartist from 'lib/chartist';
 import 'lib/chartist/axisTitle';
-import Chart from 'component/chart/index';
+import ChartBase from 'component/chart/index';
 
-export default class BarChart {
+export default class Bar extends React.Component {
 
-  constructor(options) {
-    this.options = Chart.options(options);
-
-    return this;
+  animate(chart, data, previousData, duration) {
+    if (data.type === 'bar') {
+      data.element.animate({
+        y2: {
+          dur: duration,
+          from: previousData ? previousData.series[0].data[data.index] : 0,
+          to: data.y2,
+          easing: Chartist.Svg.Easing.easeOutQuint
+        },
+      });
+    }
   }
 
-  build($chart, data) {
-    this.chart = new Chartist.Bar($chart, data, this.options);
-    this._previousData = data;
+  render() {
+    let data = this.props.data;
+    let options = ChartBase.options(this.props.options);
 
-    return this;
-  }
+    let axis = ChartBase.axis;
 
-  setLegend() {
-    // no implementation yet
-    return this;
-  }
+    axis.axisX.axisTitle = this.props.xlabel;
+    axis.axisY.axisTitle = this.props.ylabel;
 
-  setAxisLabels(xlabel, ylabel) {
-    let axis = Chart.axis;
+    options.plugins.push(Chartist.plugins.ctAxisTitle(axis));
 
-    axis.axisX.axisTitle = xlabel;
-    axis.axisY.axisTitle = ylabel;
-
-    this.options.plugins.push(Chartist.plugins.ctAxisTitle(axis));
-
-    return this;
-  }
-
-  animate() {
-    this.chart.on('draw', (data) => {
-      if (data.type === 'bar') {
-        data.element.animate({
-          y2: {
-            dur: this.options.duration,
-            from: this._previousData.series[0].data[data.index],
-            to: data.y2,
-            easing: Chartist.Svg.Easing.easeOutQuint
-          },
-        });
-      }
-    });
-
-    return this;
-  }
-
-  update(data) {
-    this.chart.update(data);
-
-    return this;
+    return (
+      <ChartBase type={Chartist.Bar} data={data} options={options} ondraw={this.animate} />
+    );
   }
 
 }

@@ -1,27 +1,24 @@
 import React from 'lib/react';
 import $ from 'lib/jquery';
-import 'lib/chartist/axisTitle';
-import 'lib/chartist/legend';
 
 export default class Chart extends React.Component {
 
   componentDidMount() {
     let $chart = this.refs.chart;
+    let { options, data, ondraw } = this.props;
     let ChartType = this.props.type;
 
-    if (ChartType) {
-      this.chart = new ChartType(this.props.options)
-                    .setLegend()
-                    .setAxisLabels(this.props.xlabel, this.props.ylabel)
-                    .build($chart, this.props.data)
-                    .animate()
-                    ;
-    }
+    this.chart = new ChartType($chart, data, options);
+
+    this.chart.on('draw', (e) => {
+      ondraw(this.chart, e, this._previousData, 1000);
+    });
   }
 
   componentDidUpdate() {
     clearTimeout(this._timer);
     this._timer = setTimeout(() => {
+      this._previousData = this.chart.data;
       this.chart.update(this.props.data);
     }, 250);
   }
@@ -57,7 +54,6 @@ export default class Chart extends React.Component {
 
   static options(override) {
     return $.extend({}, {
-      duration: 1000,
       chartPadding: {
         bottom: 20,
       },

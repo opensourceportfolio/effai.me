@@ -2,12 +2,11 @@ import React from 'lib/react';
 import $ from 'lib/jquery';
 import { years } from 'service/calculator';
 import { xrange, yrange, toModel } from 'service/chart';
-import Card from 'component/card/index';
-import CardAction from 'component/card/cardAction';
-import CardMedia from 'component/card/cardMedia';
-import CardSupporting from 'component/card/cardSupporting';
-import CardTitle from 'component/card/cardTitle';
-import Chart from 'component/chart/index';
+import Card from 'component/mdl/card/index';
+import CardAction from 'component/mdl/card/cardAction';
+import CardMedia from 'component/mdl/card/cardMedia';
+import CardSupporting from 'component/mdl/card/cardSupporting';
+import CardTitle from 'component/mdl/card/cardTitle';
 
 export default class FICard extends React.Component {
 
@@ -36,7 +35,7 @@ export default class FICard extends React.Component {
         <CardTitle text={text.title} />
         <CardSupporting text={text.supporting} />
         <CardMedia>
-          <Chart data={data} type={chart.type} xlabel={xlabel} ylabel={ylabel} options={chartOptions} />
+          {React.createElement(chart.type, { data, xlabel, ylabel, options: chartOptions })}
         </CardMedia>
         <CardAction>
           {React.createElement(type, { name, onChange, text, value, rangeInfo })}

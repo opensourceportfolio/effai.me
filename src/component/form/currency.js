@@ -1,6 +1,6 @@
 import React from 'lib/react';
 import $ from 'lib/jquery';
-import componentHandler from 'lib/mdl';
+import { componentHandler } from 'lib/mdl';
 import { formattedNumber } from 'service/formatter';
 
 export default class Currency extends React.Component {

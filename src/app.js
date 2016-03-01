@@ -30,9 +30,9 @@ export default class App extends React.Component {
     let status = this.state;
     let yrs = years(status);
     let options = { row: [
-      {text: i18n.header.links.known, url: '#/known', isActive: false},
-      {text: i18n.header.links.prediction, url: '#/prediction'},
-      {text: i18n.header.links.target, url: '#/target'},
+      {text: i18n.header.links.known, url: 'known', isActive: false},
+      {text: i18n.header.links.prediction, url: 'prediction'},
+      {text: i18n.header.links.target, url: 'target'},
     ]};
 
     return (

@@ -1,67 +1,45 @@
+import React from 'lib/react';
 import Chartist from 'lib/chartist';
 import 'lib/chartist/axisTitle';
-import Chart from 'component/chart/index';
+import 'lib/chartist/legend';
+import ChartBase from 'component/chart/index';
 
-export default class LineChart {
+export default class Line extends React.Component {
 
-  constructor(options) {
-    this.options = Chart.options(options);
-    this._previousPath = [];
+  animate(chart, data, previousOptions, duration) {
+    let previousPoint;
 
-    return this;
-  }
+    if (data.type === 'line') {
 
-  build($chart, data) {
-    this.chart = new Chartist.Line($chart, data, this.options);
+      previousPoint = data.path.clone().scale(1, 0).translate(0, data.chartRect.height());
 
-    return this;
-  }
-
-  setLegend() {
-    this.options.plugins.push(Chartist.plugins.legend());
-
-    return this;
-  }
-
-  setAxisLabels(xlabel, ylabel) {
-    let axis = Chart.axis;
-
-    axis.axisX.axisTitle = xlabel;
-    axis.axisY.axisTitle = ylabel;
-
-    this.options.plugins.push(Chartist.plugins.ctAxisTitle(axis));
-
-    return this;
-  }
-
-  animate() {
-    this.chart.on('draw', (data) => {
-      if (data.type === 'line') {
-
-        if (!this._previousPath[data.index]) {
-          this._previousPath[data.index] = data.path.clone().scale(1, 0).translate(0, data.chartRect.height());
+      data.element.animate({
+        d: {
+          dur: duration,
+          from: previousPoint.stringify(),
+          to: data.path.clone().stringify(),
+          easing: Chartist.Svg.Easing.easeOutQuint
         }
-
-        data.element.animate({
-          d: {
-            dur: this.options.duration,
-            from: this._previousPath[data.index].stringify(),
-            to: data.path.clone().stringify(),
-            easing: Chartist.Svg.Easing.easeOutQuint
-          }
-        });
-
-        this._previousPath[data.index] = data.path;
-      }
-    });
-
-    return this;
+      });
+    }
   }
 
-  update(data) {
-    this.chart.update(data);
+  render() {
+    let data = this.props.data;
+    let options = ChartBase.options(this.props.options);
 
-    return this;
+    options.plugins.push(Chartist.plugins.legend());
+
+    let axis = ChartBase.axis;
+
+    axis.axisX.axisTitle = this.props.xlabel;
+    axis.axisY.axisTitle = this.props.ylabel;
+
+    options.plugins.push(Chartist.plugins.ctAxisTitle(axis));
+
+    return (
+      <ChartBase type={Chartist.Line} data={data} options={options} ondraw={this.animate} />
+    );
   }
 
 }

@@ -2,4 +2,4 @@
 
 A way to calculate your financial independence age
 
-http://ficalculator.azurewebsites.net
+http://effai.me
