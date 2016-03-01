@@ -114,7 +114,7 @@ IF /I "gulpfile.js" NEQ "" (
 )
 
 :: 5. Install JSPM packages
-IF /I "gulpfile.js" NEQ "" (
+IF /I "config.js" NEQ "" (
   echo Running JSPM install: Starting %TIME%
   call :ExecuteCmd "%DEPLOYMENT_TARGET%\node_modules\.bin\jspm" install
   echo Running JSPM install: Finished %TIME%
