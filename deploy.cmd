@@ -100,17 +100,25 @@ call :SelectNodeVersion
 :: 3. Install npm packages
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! install
+  call :ExecuteCmd !NPM_CMD! install --production
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
 
-:: 4. Run gulp
-IF EXIST "%DEPLOYMENT_TARGET%\gulpfile.js" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd .\node_modules\.bin\gulp
+:: 4. Restore Gulp packages and run Gulp tasks
+IF /I "gulpfile.js" NEQ "" (
+  echo Running Gulp deployment: Starting %TIME%
+  call :ExecuteCmd "%DEPLOYMENT_SOURCE%\node_modules\.bin\gulp"
+  echo Running Gulp deployment: Finished %TIME%
   IF !ERRORLEVEL! NEQ 0 goto error
-  popd
+)
+
+:: 5. Install JSPM packages
+IF /I "gulpfile.js" NEQ "" (
+  echo Running JSPM install: Starting %TIME%
+  call :ExecuteCmd "%DEPLOYMENT_SOURCE%\node_modules\.bin\jspm" install
+  echo Running JSPM install: Finished %TIME%
+  IF !ERRORLEVEL! NEQ 0 goto error
 )
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

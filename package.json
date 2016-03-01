@@ -1,6 +1,7 @@
 {
   "name": "effai.me",
   "version": "1.0.0",
+  "engines" : { "node" : ">=5.7.0" },
   "description": "Financial independence calculator",
   "main": "index.js",
   "author": "leontager",
