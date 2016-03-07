@@ -1,39 +1,31 @@
 System.config({
-  baseURL: "src",
+  baseURL: "dist",
   defaultJSExtensions: true,
-  transpiler: "babel",
-  babelOptions: {
-    "optional": [
-      "runtime",
-      "optimisation.modules.system"
-    ]
-  },
+  transpiler: false,
   paths: {
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
 
   map: {
-    "babel": "npm:babel-core@5.8.35",
-    "babel-runtime": "npm:babel-runtime@5.8.35",
-    "chartist": "npm:chartist@0.9.6",
-    "core-js": "npm:core-js@1.2.6",
-    "lib/chartist": "npm:chartist@0.9.6",
+    "chartist": "npm:chartist@0.9.7",
+    "jquery": "npm:jquery@2.2.1",
+    "lib/chartist": "npm:chartist@0.9.7",
     "lib/chartist/axisTitle": "github:opensourceportfolio/chartist-plugin-axistitle@0.2",
     "lib/chartist/legend": "github:CodeYellowBV/chartist-plugin-legend@0.2.1",
-    "lib/jquery": "npm:jquery@2.2.0",
-    "lib/mdl": "github:google/material-design-lite@1.1.1",
+    "lib/jquery": "npm:jquery@2.2.1",
+    "lib/mdl": "github:google/material-design-lite@1.1.2",
     "lib/react": "npm:react@0.14.7",
     "lib/react/dom": "npm:react-dom@0.14.7",
     "lib/react/react-redux": "npm:react-redux@4.4.0",
-    "lib/react/redux": "npm:react-redux@4.4.0",
     "lib/react/router": "npm:react-router@2.0.0",
     "lib/redux": "npm:redux@3.3.1",
+    "material-design-lite": "github:google/material-design-lite@1.1.2",
+    "opensourceportfolio/chartist-plugin-axistitle": "github:opensourceportfolio/chartist-plugin-axistitle@0.2",
     "react": "npm:react@0.14.7",
     "react-dom": "npm:react-dom@0.14.7",
     "react-redux": "npm:react-redux@4.4.0",
     "react-router": "npm:react-router@2.0.0",
-    "redux": "npm:redux@3.3.1",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -42,9 +34,6 @@ System.config({
     },
     "github:jspm/nodelibs-events@0.1.1": {
       "events": "npm:events@1.0.2"
-    },
-    "github:jspm/nodelibs-path@0.1.0": {
-      "path-browserify": "npm:path-browserify@0.0.0"
     },
     "github:jspm/nodelibs-process@0.1.2": {
       "process": "npm:process@0.11.2"
@@ -58,9 +47,6 @@ System.config({
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
     },
-    "npm:babel-runtime@5.8.35": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
     "npm:buffer@3.6.0": {
       "base64-js": "npm:base64-js@0.0.8",
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
@@ -69,25 +55,17 @@ System.config({
       "isarray": "npm:isarray@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:core-js@1.2.6": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
-    },
     "npm:core-util-is@1.0.2": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:fbjs@0.6.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:history@2.0.0": {
-      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+    "npm:history@2.0.1": {
       "deep-equal": "npm:deep-equal@1.0.1",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
       "invariant": "npm:invariant@2.2.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "query-string": "npm:query-string@3.0.0",
+      "query-string": "npm:query-string@3.0.1",
       "warning": "npm:warning@2.1.0"
     },
     "npm:inherits@2.0.1": {
@@ -100,7 +78,7 @@ System.config({
     "npm:isarray@1.0.0": {
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
-    "npm:lodash@4.5.0": {
+    "npm:lodash@4.6.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -110,13 +88,10 @@ System.config({
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
-    "npm:path-browserify@0.0.0": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
     "npm:process@0.11.2": {
       "assert": "github:jspm/nodelibs-assert@0.1.0"
     },
-    "npm:query-string@3.0.0": {
+    "npm:query-string@3.0.1": {
       "strict-uri-encode": "npm:strict-uri-encode@1.1.0"
     },
     "npm:react-dom@0.14.7": {
@@ -125,7 +100,7 @@ System.config({
     "npm:react-redux@4.4.0": {
       "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.5",
       "invariant": "npm:invariant@2.2.0",
-      "lodash": "npm:lodash@4.5.0",
+      "lodash": "npm:lodash@4.6.1",
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "react": "npm:react@0.14.7",
@@ -134,7 +109,7 @@ System.config({
     "npm:react-router@2.0.0": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "history": "npm:history@2.0.0",
+      "history": "npm:history@2.0.1",
       "invariant": "npm:invariant@2.2.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "warning": "npm:warning@2.1.0"
@@ -154,8 +129,8 @@ System.config({
       "string_decoder": "npm:string_decoder@0.10.31"
     },
     "npm:redux@3.3.1": {
-      "lodash": "npm:lodash@4.5.0",
-      "lodash-es": "npm:lodash-es@4.5.0",
+      "lodash": "npm:lodash@4.6.1",
+      "lodash-es": "npm:lodash-es@4.6.1",
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
