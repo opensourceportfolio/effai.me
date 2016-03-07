@@ -120,6 +120,8 @@ IF /I "gulpfile.js" NEQ "" (
 IF /I "config.js" NEQ "" (
   echo Running JSPM install: Starting %TIME%
   pushd "%DEPLOYMENT_TARGET%"
+  echo "increasing timeout"
+  call :ExecuteCmd ".\node_modules\.bin\jspm.cmd" config registries.npm.timeouts.download 1800
   echo "installing JSPM packages"
   call :ExecuteCmd ".\node_modules\.bin\jspm.cmd" install
   if !ERRORLEVEL! NEQ 0 goto error
