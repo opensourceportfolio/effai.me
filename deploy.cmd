@@ -125,6 +125,8 @@ IF /I "config.js" NEQ "" (
   echo "installing JSPM packages"
   call :ExecuteCmd ".\node_modules\.bin\jspm.cmd" install
   if !ERRORLEVEL! NEQ 0 goto error
+  echo "bundle for production"
+  call .\node_modules\.bin\jspm.cmd bundle root --inject
   popd
   echo Running JSPM install: Finished %TIME%
 )
