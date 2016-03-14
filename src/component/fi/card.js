@@ -6,7 +6,7 @@ import Media from 'component/mdl/card/media';
 import Supporting from 'component/mdl/card/supporting';
 import Title from 'component/mdl/card/title';
 
-const Card = (props) => {
+const FICard = (props) => {
   let chartOptions = {};
   let { name, text, chart, rangeInfo } = props;
   let value = props.status[name];
@@ -40,4 +40,4 @@ const Card = (props) => {
   );
 };
 
-export default Card;
+export default FICard;
