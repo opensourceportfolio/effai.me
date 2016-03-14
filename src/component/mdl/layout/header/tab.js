@@ -1,17 +1,16 @@
 import React from 'lib/react';
 import { Link } from 'lib/react/router';
 
-export default class Tab extends React.Component {
+const Tab = (props) => {
+  let className = 'mdl-layout__tab';
 
-  render() {
-    let className = 'mdl-layout__tab';
-
-    if (window.location.pathname.startsWith(`/${this.props.url}`) || this.props.isActive) {
-      className = `${className} is-active`;
-    }
-
-    return (
-      <Link ref="tab" className={className} to={this.props.url}>{this.props.text}</Link>
-    );
+  if (window.location.pathname.startsWith(`/${props.url}`) || props.isActive) {
+    className = `${className} is-active`;
   }
-}
+
+  return (
+    <Link className={className} to={props.url}>{props.text}</Link>
+  );
+};
+
+export default Tab;

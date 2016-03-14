@@ -2,7 +2,7 @@ import React from 'lib/react';
 import Chartist from 'lib/chartist';
 import 'lib/chartist/axisTitle';
 import 'lib/chartist/legend';
-import ChartBase from 'component/chart/index';
+import ChartBase from 'component/chart';
 
 export default class Line extends React.Component {
 

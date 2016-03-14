@@ -7,7 +7,7 @@ import { meta } from 'service/meta';
 import { i18n } from 'service/i18n';
 import { get, set, } from 'service/userSetting';
 import { years } from 'service/calculator';
-import Header from 'component/mdl/layout/header/index';
+import Header from 'component/mdl/layout/header';
 
 let store = createStore(userInput);
 

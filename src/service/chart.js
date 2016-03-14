@@ -1,5 +1,6 @@
-import $ from 'lib/jquery';
+import R from 'lib/ramda';
 import { start, generate } from 'service/range';
+import { years } from 'service/calculator';
 
 export const CHART_COUNT = 7;
 
@@ -29,10 +30,20 @@ export function xrange(value, rangeInfo) {
 
 export function yrange(xval, rangeInfo, fn) {
 
-  let fns = $.isArray(fn) ? fn : [fn];
+  let fns = R.isArrayLike(fn) ? fn : [fn];
   let yval = fns.map((rangeFn) => {
     return xval.map(rangeFn);
   });
 
   return yval;
+}
+
+// TODO: refactor this
+export function chartFn(name, state) {
+  let stateCopy = Object.assign({}, state);
+
+  return (e) => {
+    stateCopy[name] = e;
+    return years(stateCopy);
+  };
 }

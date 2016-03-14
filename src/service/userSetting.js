@@ -1,5 +1,3 @@
-import $ from 'lib/jquery';
-
 export function get() {
   let settings = window.localStorage.getItem('ficalculator');
   let defaults  = {
@@ -18,7 +16,7 @@ export function get() {
     settings = JSON.parse(settings);
   }
 
-  return $.extend(defaults, settings);
+  return Object.assign(defaults, settings);
 }
 
 export function set(value) {

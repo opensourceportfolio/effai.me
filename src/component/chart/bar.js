@@ -1,7 +1,7 @@
 import React from 'lib/react';
 import Chartist from 'lib/chartist';
 import 'lib/chartist/axisTitle';
-import ChartBase from 'component/chart/index';
+import ChartBase from 'component/chart';
 
 export default class Bar extends React.Component {
 

@@ -6,7 +6,7 @@ import Known from 'component/page/known';
 import Prediction from 'component/page/prediction';
 import Target from 'component/page/target';
 
-let routes = (
+const routes = (
   <Router history={browserHistory}>
     <Redirect from="/" to="known"/>
     <Route path="/" component={App}>

@@ -1,7 +1,7 @@
-import $ from 'lib/jquery';
+import R from 'lib/ramda';
 
 export function formattedNumber(number) {
-  if ($.isNumeric(number)) {
+  if (R.is(Number, number)) {
     let p = parseFloat(number).toFixed(2).split('.');
     let val = p[0].split('').reverse().reduce((acc, num, i) => {
       return num + (i && !(i % 3) ? ',' : '') + acc;
@@ -42,7 +42,7 @@ export function longCurrency(number) {
 }
 
 export function percent(number) {
-  if ($.isNumeric(number)) {
+  if (R.is(Number, number)) {
     return `${number}%`;
   } else {
     return '';

@@ -2,28 +2,26 @@ import React from 'lib/react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { percent } from 'service/formatter';
-import FICard from 'component/fi/card/index';
+import { chartFn } from 'service/chart';
+import Card from 'component/fi/card';
 import BarChart from 'component/chart/bar';
 import Percent from 'component/form/percent';
 
-export default class ROR extends React.Component {
+const ROR = (props) => {
+  return (
+    <Card
+      chart={{
+        type: BarChart,
+        fn: chartFn('ror', props.status),
+        formatter: { x: percent },
+        text: i18n.ror.chart
+      }}
+      input={{ type: Percent, onChange: props.onChange }}
+      rangeInfo={meta.ror}
+      name="ror"
+      text={i18n.ror}
+      status={props.status} />
+  );
+};
 
-  render() {
-    let status = this.props.status;
-
-    return (
-      <FICard
-        chart={{
-          type: BarChart,
-          fn: FICard.chartFn('ror', status),
-          formatter: { x: percent },
-          text: i18n.ror.chart
-        }}
-        input={{ type: Percent, onChange: this.props.onChange }}
-        rangeInfo={meta.ror}
-        name="ror"
-        text={i18n.ror}
-        status={status} />
-    );
-  }
-}
+export default ROR;

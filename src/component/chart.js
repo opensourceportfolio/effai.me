@@ -1,5 +1,4 @@
 import React from 'lib/react';
-import $ from 'lib/jquery';
 
 export default class Chart extends React.Component {
 
@@ -30,7 +29,7 @@ export default class Chart extends React.Component {
   }
 
   static get axis() {
-    return $.extend({}, {
+    return {
       axisX: {
         axisTitle: '',
         axisClass: '',
@@ -49,11 +48,11 @@ export default class Chart extends React.Component {
         },
         flipTitle: false,
       },
-    });
+    };
   }
 
   static options(override) {
-    return $.extend({}, {
+    return Object.assign({}, {
       chartPadding: {
         bottom: 20,
       },

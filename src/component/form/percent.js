@@ -2,9 +2,6 @@ import React from 'lib/react';
 import { componentHandler } from 'lib/mdl';
 
 export default class Percent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     let node = this.refs.percent;

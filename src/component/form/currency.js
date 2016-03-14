@@ -1,5 +1,5 @@
 import React from 'lib/react';
-import $ from 'lib/jquery';
+import R from 'lib/ramda';
 import { componentHandler } from 'lib/mdl';
 import { formattedNumber } from 'service/formatter';
 
@@ -12,10 +12,10 @@ export default class Currency extends React.Component {
   }
 
   handleChange(event) {
-    if ($(event.target).is(':valid')) {
+    if (event.target.validity.valid) {
       let value = parseInt(event.target.value);
 
-      value = $.isNumeric(value) ? value : '';
+      value = R.is(Number, value) ? value : '';
       this.props.onChange(this.props.name, value);
     } else {
       this.props.onChange(this.props.name, null);
