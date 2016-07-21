@@ -11,8 +11,27 @@ var cssnext = require('postcss-cssnext');
 var cssNested = require('postcss-nested');
 var browserSync = require('browser-sync').create();
 var history = require('connect-history-api-fallback');
+var rjs = require('gulp-requirejs-optimize');
 
-gulp.task('default', ['compile', 'css', 'copy-font']);
+gulp.task('default', ['copy-lib', 'compile', 'css', 'copy-font']);
+
+gulp.task('copy-lib', function() {
+  return gulp.src([
+    'node_modules/chartist/dist/chartist.js',
+    'node_modules/chartist-plugin-axistitle/dist/chartist-plugin-axistitle.js',
+    'node_modules/chartist-plugin-legend/chartist-plugin-legend.js',
+    'node_modules/jquery/dist/jquery.js',
+    'node_modules/material-design-lite/dist/material.js',
+    'node_modules/ramda/dist/ramda.js',
+    'node_modules/react/dist/react.js',
+    'node_modules/react-dom/dist/react-dom.js',
+    'node_modules/react-redux/dist/react-redux.js',
+    'node_modules/react-router/umd/ReactRouter.js',
+    'node_modules/redux/dist/redux.js',
+    'node_modules/requirejs/require.js',
+  ])
+    .pipe(gulp.dest('dist/lib'));
+});
 
 gulp.task('copy-font', function() {
   return gulp.src(['src/font/**/*.*'])
@@ -41,12 +60,20 @@ gulp.task('compile', function() {
       loadMaps: 'inline'
     }))
     .pipe(babel({
-      presets: ['es2015'],
-      plugins: ['transform-react-jsx'],
+      presets: ['es2016'],
+      plugins: ['transform-react-jsx', 'transform-es2015-modules-amd'],
     }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist'))
     .pipe(browserSync.stream());
+});
+
+gulp.task('bundle', function() {
+  return gulp.src('dist/root.js')
+    .pipe(rjs({
+      'baseUrl': 'dist',
+    }))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('dev', function() {

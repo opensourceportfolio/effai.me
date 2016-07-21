@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<script src="dist/jspm_packages/system.src.js"></script>
-<script src="config.js"></script>
 <html>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <head>
@@ -15,8 +13,7 @@
   </head>
   <body>
     <div id="app-ficalculator" />
-    <script>
-      System.import('root.js');
-    </script>
+    <script data-main="dist/root" src="dist/lib/require.js"></script>
+    <script src="require.config.js"></script>
   </body>
 </html>
