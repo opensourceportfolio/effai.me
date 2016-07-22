@@ -61,15 +61,15 @@ gulp.task('build-css', function() {
 });
 
 gulp.task('compile', function() {
-  return gulp.src(['src/**/*.js', '!src/jspm_packages/**/*.js'])
+  return gulp.src(['src/**/*.js'])
     .pipe(plumber())
     .pipe(changed('dist'))
     .pipe(sourcemaps.init({
       loadMaps: 'inline'
     }))
     .pipe(babel({
-      presets: ['es2016'],
-      plugins: ['transform-react-jsx', 'transform-es2015-modules-amd'],
+      presets: ['es2015', 'es2016', 'react'],
+      plugins: ['transform-es2015-modules-amd'],
     }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist'))

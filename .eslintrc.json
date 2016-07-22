@@ -4,7 +4,7 @@
     "node": true,
     "amd": true,
     "mocha": true,
-    "es6": true,
+    "es6": true
   },
 
   "parserOptions": {
@@ -18,6 +18,8 @@
   "plugins": [
     "react"
   ],
+
+  "extends": ["plugin:react/recommended"],
 
   "rules": {
     //Possible Errors
@@ -219,8 +221,6 @@
     "prefer-spread": [2], //suggest using the spread operator instead of .apply().
     "prefer-reflect": [0], //suggest using Reflect methods where applicable
     "prefer-template": [2], //suggest using template literals instead of strings concatenation
-    "require-yield": [2], //disallow generator functions that do not have yield
-
-    //React
+    "require-yield": [2] //disallow generator functions that do not have yield
   }
 }
