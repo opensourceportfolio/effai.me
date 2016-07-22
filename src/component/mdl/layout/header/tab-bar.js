@@ -14,10 +14,8 @@ const TabBar = (props) => {
   }
 
   return (
-    <div className="mdl-layout__tab-bar-container mdl-js-ripple-effect">
-      <div className="mdl-layout__tab-bar mdl-js-ripple-effect is-casting-shadow mdl-js-ripple-effect--ignore-events">
-        {links}
-      </div>
+    <div className="mdl-layout__tab-bar mdl-js-ripple-effect is-casting-shadow mdl-js-ripple-effect--ignore-events">
+      {links}
     </div>
   );
 };

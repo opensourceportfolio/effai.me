@@ -49,29 +49,5 @@
     "postcss-cssnext": "^2.4.0",
     "postcss-nested": "^1.0.0",
     "redux-devtools": "^3.3.1"
-  },
-  "jspm": {
-    "directories": {
-      "baseURL": "dist"
-    },
-    "configFile": "config.js",
-    "dependencies": {
-      "CodeYellowBV/chartist-plugin-legend": "github:CodeYellowBV/chartist-plugin-legend@0.2.1",
-      "chartist": "npm:chartist@^0.9.7",
-      "jquery": "npm:jquery@^2.2.1",
-      "lib/ramda": "npm:ramda@^0.19.1",
-      "material-design-lite": "github:google/material-design-lite@^1.1.2",
-      "opensourceportfolio/chartist-plugin-axistitle": "github:opensourceportfolio/chartist-plugin-axistitle@0.2",
-      "react": "npm:react@^0.14.7",
-      "react-dom": "npm:react-dom@^0.14.7",
-      "react-redux": "npm:react-redux@^4.4.0",
-      "react-router": "npm:react-router@^2.0.0"
-    },
-    "devDependencies": {},
-    "overrides": {
-      "github:google/material-design-lite@1.1.2": {
-        "main": "material.js"
-      }
-    }
   }
 }

@@ -116,21 +116,6 @@ IF /I "gulpfile.js" NEQ "" (
   echo Running Gulp deployment: Finished %TIME%
 )
 
-:: 5. Install JSPM packages
-IF /I "config.js" NEQ "" (
-  echo Running JSPM install: Starting %TIME%
-  pushd "%DEPLOYMENT_TARGET%"
-  echo "increasing timeout"
-  call .\node_modules\.bin\jspm.cmd config registries.npm.timeouts.download 1800
-  echo "installing JSPM packages"
-  call :ExecuteCmd ".\node_modules\.bin\jspm.cmd" install
-  if !ERRORLEVEL! NEQ 0 goto error
-  echo "bundle for production"
-  call .\node_modules\.bin\jspm.cmd bundle root --inject
-  popd
-  echo Running JSPM install: Finished %TIME%
-)
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Post deployment stub

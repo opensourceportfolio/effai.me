@@ -13,6 +13,7 @@ var browserSync = require('browser-sync').create();
 var history = require('connect-history-api-fallback');
 var rjs = require('gulp-requirejs-optimize');
 
+gulp.task('css', ['copy-css', 'build-css']);
 gulp.task('default', ['copy-lib', 'compile', 'css', 'copy-font']);
 
 gulp.task('copy-lib', function() {
@@ -29,8 +30,14 @@ gulp.task('copy-lib', function() {
     'node_modules/react-router/umd/ReactRouter.js',
     'node_modules/redux/dist/redux.js',
     'node_modules/requirejs/require.js',
-  ])
-    .pipe(gulp.dest('dist/lib'));
+  ]).pipe(gulp.dest('dist/lib'));
+});
+
+gulp.task('copy-css', function() {
+  return gulp.src([
+    'node_modules/chartist/dist/chartist.css',
+    'node_modules/material-design-lite/dist/material.red-amber.min.css',
+  ]).pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('copy-font', function() {
@@ -39,16 +46,15 @@ gulp.task('copy-font', function() {
     .pipe(gulp.dest('dist/font'));
 });
 
-gulp.task('css', function() {
+gulp.task('build-css', function() {
   var processors = [
     cssnext,
     cssNested
   ];
 
-  gulp.src(['src/css/**/*.css'])
-    .pipe(changed('dist/css'))
+  gulp.src(['src/css/custom/*.css'])
     .pipe(postcss(processors))
-    .pipe(gulp.dest('dist/css'))
+    .pipe(gulp.dest('dist/css/custom'))
     .pipe(browserSync.stream());
 });
 
