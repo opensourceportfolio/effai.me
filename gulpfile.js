@@ -13,6 +13,8 @@ var browserSync = require('browser-sync').create();
 var history = require('connect-history-api-fallback');
 var rjs = require('gulp-requirejs-optimize');
 
+require('es6-promise').polyfill();
+
 gulp.task('css', ['copy-css', 'build-css']);
 gulp.task('default', ['copy-lib', 'compile', 'css', 'copy-font']);
 
