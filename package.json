@@ -44,7 +44,6 @@
     "gulp-requirejs-optimize": "^1.2.0",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-watch": "^4.3.5",
-    "jspm": "^0.16.30",
     "postcss": "^5.0.8",
     "postcss-cssnext": "^2.4.0",
     "postcss-nested": "^1.0.0",
