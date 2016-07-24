@@ -1,5 +1,6 @@
 import React from 'lib/react';
 import { createStore } from 'lib/redux';
+import componentHandler from 'lib/mdl';
 import { Provider } from 'lib/react/react-redux';
 import { userInput } from 'reducer/fi';
 import { loadData } from 'action/fi';
@@ -24,6 +25,10 @@ export default class App extends React.Component {
     });
 
     store.dispatch(loadData(data));
+  }
+
+  componentDidMount() {
+    componentHandler.upgradeAllRegistered();
   }
 
   render() {
