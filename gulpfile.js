@@ -17,9 +17,15 @@ var clean = require('gulp-clean');
 require('es6-promise').polyfill();
 
 gulp.task('css', ['copy-css', 'build-css']);
-gulp.task('default', ['clean', 'copy-lib', 'compile', 'css', 'copy-font']);
+gulp.task('js', ['copy-lib', 'compile']);
+gulp.task('default', ['css', 'js', 'copy-font']);
 
-gulp.task('copy-lib', function() {
+gulp.task('clean', function() {
+  return gulp.src('dist', {read: false})
+        .pipe(clean());
+});
+
+gulp.task('copy-lib', ['clean'], function() {
   return gulp.src([
     'node_modules/chartist/dist/chartist.js',
     'node_modules/chartist-plugin-axistitle/dist/chartist-plugin-axistitle.js',
@@ -36,20 +42,20 @@ gulp.task('copy-lib', function() {
   ]).pipe(gulp.dest('dist/lib'));
 });
 
-gulp.task('copy-css', function() {
+gulp.task('copy-css', ['clean'], function() {
   return gulp.src([
     'node_modules/chartist/dist/chartist.css',
     'node_modules/material-design-lite/dist/material.red-amber.min.css',
   ]).pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('copy-font', function() {
+gulp.task('copy-font', ['clean'], function() {
   return gulp.src(['src/font/**/*.*'])
     .pipe(changed('dist/font'))
     .pipe(gulp.dest('dist/font'));
 });
 
-gulp.task('build-css', function() {
+gulp.task('build-css', ['copy-css'], function() {
   var processors = [
     cssnext,
     cssNested,
@@ -61,7 +67,7 @@ gulp.task('build-css', function() {
     .pipe(browserSync.stream());
 });
 
-gulp.task('compile', function() {
+gulp.task('compile', ['clean'], function() {
   return gulp.src(['src/**/*.js'])
     .pipe(plumber())
     .pipe(changed('dist'))
@@ -96,9 +102,4 @@ gulp.task('dev', function() {
 
   gulp.watch('src/**/*.js', ['compile']);
   gulp.watch('src/**/*.css', ['css']);
-});
-
-gulp.task('clean', function() {
-  return gulp.src('dist', {read: false})
-        .pipe(clean());
 });
