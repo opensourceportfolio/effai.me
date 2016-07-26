@@ -6,19 +6,19 @@ import { userInput } from 'reducer/fi';
 import { loadData } from 'action/fi';
 import { meta } from 'service/meta';
 import { i18n } from 'service/i18n';
-import { get, set, } from 'service/userSetting';
+import { get, set } from 'service/userSetting';
 import { years } from 'service/calculator';
 import Header from 'component/mdl/layout/header';
 
-let store = createStore(userInput);
+const store = createStore(userInput);
 
 export default class App extends React.Component {
 
   componentWillMount() {
-    let data = get();
+    const data = get();
 
     store.subscribe(() => {
-      let state = store.getState();
+      const state = store.getState();
 
       this.setState(state);
       set(state);
@@ -32,9 +32,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    let status = this.state;
-    let yrs = years(status);
-    let options = { row: [
+    const status = this.state;
+    const yrs = years(status);
+    const options = { row: [
       {text: i18n.header.links.known, url: 'known', isActive: false},
       {text: i18n.header.links.prediction, url: 'prediction'},
       {text: i18n.header.links.target, url: 'target'},
@@ -43,9 +43,9 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <div className="mdl-layout__container">
-          <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header is-upgraded" ref="ficalculator">
+          <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header is-upgraded">
             <Header title={App.fiAge(yrs)} options={options} />
-            <main className="mdl-layout__content">
+            <main className="mdl-layout__content" ref="content">
 
               {React.cloneElement(this.props.children, { status })}
 

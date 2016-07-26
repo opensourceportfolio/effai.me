@@ -6,8 +6,12 @@ import Known from 'component/page/known';
 import Prediction from 'component/page/prediction';
 import Target from 'component/page/target';
 
-const routes = (
-  <Router history={browserHistory}>
+const scrollTop = () => {
+  document.getElementsByTagName('main')[0].scrollTop = 0;
+};
+
+const routes =
+  <Router onUpdate={() => scrollTop()} history={browserHistory}>
     <Redirect from="/" to="known"/>
     <Route path="/" component={App}>
       <Route path="known" component={Known} />
@@ -16,6 +20,6 @@ const routes = (
       <Redirect from="*" to="known"/>
     </ Route>
   </ Router>
-);
+;
 
 ReactDOM.render(routes, document.getElementById('app-ficalculator'));

@@ -2,8 +2,8 @@ import R from 'lib/ramda';
 
 export function formattedNumber(number) {
   if (R.is(Number, number)) {
-    let p = parseFloat(number).toFixed(2).split('.');
-    let val = p[0].split('').reverse().reduce((acc, num, i) => {
+    const p = parseFloat(number).toFixed(2).split('.');
+    const val = p[0].split('').reverse().reduce((acc, num, i) => {
       return num + (i && !(i % 3) ? ',' : '') + acc;
     }, '');
 
@@ -15,11 +15,11 @@ export function formattedNumber(number) {
 
 export function longNumber(value) {
   if (value > 0) {
-    let e = parseInt(Math.log(value) / Math.log(1000)),
+    const e = parseInt(Math.log(value) / Math.log(1000)),
       extension = ['', 'k', 'M', 'B', 'T'],
-      fix = e !== 0 ? 1 : 0;
+      fix = e === 0 ? 0 : 1;
 
-    return (value / Math.pow(1000, e)).toFixed(fix) + extension[e];
+    return parseFloat((value / Math.pow(1000, e)).toFixed(fix)) + extension[e];
   } else {
     return value;
   }
@@ -30,13 +30,13 @@ export function currency(number) {
 }
 
 export function formattedCurrency(number) {
-  let num = formattedNumber(number);
+  const num = formattedNumber(number);
 
   return currency(num);
 }
 
 export function longCurrency(number) {
-  let num = longNumber(number);
+  const num = longNumber(number);
 
   return currency(num);
 }

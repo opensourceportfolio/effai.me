@@ -3,9 +3,9 @@ import React from 'lib/react';
 export default class Chart extends React.Component {
 
   componentDidMount() {
-    let $chart = this.refs.chart;
-    let { options, data, ondraw } = this.props;
-    let ChartType = this.props.type;
+    const $chart = this.refs.chart;
+    const { options, data, ondraw } = this.props;
+    const ChartType = this.props.type;
 
     this.chart = new ChartType($chart, data, options);
 

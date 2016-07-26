@@ -7,30 +7,28 @@ import ChartBase from 'component/chart';
 export default class Line extends React.Component {
 
   animate(chart, data, previousOptions, duration) {
-    let previousPoint;
-
     if (data.type === 'line') {
 
-      previousPoint = data.path.clone().scale(1, 0).translate(0, data.chartRect.height());
+      const previousPoint = data.path.clone().scale(1, 0).translate(0, data.chartRect.height());
 
       data.element.animate({
         d: {
           dur: duration,
           from: previousPoint.stringify(),
           to: data.path.clone().stringify(),
-          easing: Chartist.Svg.Easing.easeOutQuint
-        }
+          easing: Chartist.Svg.Easing.easeOutQuint,
+        },
       });
     }
   }
 
   render() {
-    let data = this.props.data;
-    let options = ChartBase.options(this.props.options);
+    const data = this.props.data;
+    const options = ChartBase.options(this.props.options);
 
     options.plugins.push(Chartist.plugins.legend());
 
-    let axis = ChartBase.axis;
+    const axis = ChartBase.axis;
 
     axis.axisX.axisTitle = this.props.xlabel;
     axis.axisY.axisTitle = this.props.ylabel;

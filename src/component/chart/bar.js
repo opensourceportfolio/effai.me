@@ -10,19 +10,19 @@ export default class Bar extends React.Component {
       data.element.animate({
         y2: {
           dur: duration,
-          from: previousData ? previousData.series[0].data[data.index] : 0,
+          from: previousData ? previousData.series[0].data[data.index] || 0 : 0,
           to: data.y2,
-          easing: Chartist.Svg.Easing.easeOutQuint
+          easing: Chartist.Svg.Easing.easeOutQuint,
         },
       });
     }
   }
 
   render() {
-    let data = this.props.data;
-    let options = ChartBase.options(this.props.options);
+    const data = this.props.data;
+    const options = ChartBase.options(this.props.options);
 
-    let axis = ChartBase.axis;
+    const axis = ChartBase.axis;
 
     axis.axisX.axisTitle = this.props.xlabel;
     axis.axisY.axisTitle = this.props.ylabel;

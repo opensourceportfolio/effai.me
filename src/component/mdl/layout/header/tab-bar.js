@@ -3,7 +3,7 @@ import Tab from 'component/mdl/layout/header/tab';
 
 const TabBar = (props) => {
   let links = null;
-  let options = props.options;
+  const options = props.options;
 
   if (options && options) {
     links = options.map((tab, i) => {

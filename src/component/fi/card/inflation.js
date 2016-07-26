@@ -3,26 +3,36 @@ import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { percent } from 'service/formatter';
 import { chartFn } from 'service/chart';
-import Card from 'component/fi/card';
+import ChartCard from 'component/fi/chart-card';
 import BarChart from 'component/chart/bar';
 import Percent from 'component/form/percent';
 
-const Inflation = (props) => {
-  let status = props.status;
+const Inflation = ({status, onChange}) => {
+  const name = 'inflation';
+  const text = i18n[name];
+  const value = status[name];
+
+  const chart = {
+    type: BarChart,
+    fn: chartFn(name, status),
+    formatter: { x: percent },
+    text: i18n[name].chart,
+    value: status[name],
+    rangeInfo: meta[name],
+  };
+
+  const input = {
+    name,
+    onChange,
+    text,
+    value,
+    rangeInfo: meta[name],
+  };
 
   return (
-    <Card
-      chart={{
-        type: BarChart,
-        fn: chartFn('inflation', status),
-        formatter: { x: percent },
-        text: i18n.inflation.chart,
-      }}
-      input={{ type: Percent, onChange: props.onChange }}
-      rangeInfo={meta.inflation}
-      name="inflation"
-      text={i18n.inflation}
-      status={status} />
+    <ChartCard title={text.title} supporting={text.supporting} chart={chart}>
+      <Percent {...input} />
+    </ ChartCard>
   );
 };
 

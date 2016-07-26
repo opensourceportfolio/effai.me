@@ -12,11 +12,12 @@ var cssNested = require('postcss-nested');
 var browserSync = require('browser-sync').create();
 var history = require('connect-history-api-fallback');
 var rjs = require('gulp-requirejs-optimize');
+var clean = require('gulp-clean');
 
 require('es6-promise').polyfill();
 
 gulp.task('css', ['copy-css', 'build-css']);
-gulp.task('default', ['copy-lib', 'compile', 'css', 'copy-font']);
+gulp.task('default', ['clean', 'copy-lib', 'compile', 'css', 'copy-font']);
 
 gulp.task('copy-lib', function() {
   return gulp.src([
@@ -51,7 +52,7 @@ gulp.task('copy-font', function() {
 gulp.task('build-css', function() {
   var processors = [
     cssnext,
-    cssNested
+    cssNested,
   ];
 
   gulp.src(['src/css/custom/*.css'])
@@ -65,7 +66,7 @@ gulp.task('compile', function() {
     .pipe(plumber())
     .pipe(changed('dist'))
     .pipe(sourcemaps.init({
-      loadMaps: 'inline'
+      loadMaps: 'inline',
     }))
     .pipe(babel({
       presets: ['es2015', 'es2016', 'react'],
@@ -89,10 +90,15 @@ gulp.task('dev', function() {
     injectChanges: true,
     server: {
       baseDir: './',
-      middleware: [history()]
-    }
+      middleware: [history()],
+    },
   });
 
   gulp.watch('src/**/*.js', ['compile']);
   gulp.watch('src/**/*.css', ['css']);
+});
+
+gulp.task('clean', function() {
+  return gulp.src('dist', {read: false})
+        .pipe(clean());
 });

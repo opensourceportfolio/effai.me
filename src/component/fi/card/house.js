@@ -1,24 +1,24 @@
 import React from 'lib/react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
-import { percent } from 'service/formatter';
+import { currency } from 'service/formatter';
 import { chartFn } from 'service/chart';
 import ChartCard from 'component/fi/chart-card';
 import BarChart from 'component/chart/bar';
-import Percent from 'component/form/percent';
+import Currency from 'component/form/currency';
 
-const ROR = ({status, onChange}) => {
-  const name = 'ror';
-  const text = i18n[name];
-  const value = status[name];
+const House = ({onChange}) => {
+  const name = 'house';
+  const text = i18n.house;
+  const value = status.house;
 
   const chart = {
     type: BarChart,
     fn: chartFn(name, status),
-    formatter: { x: percent },
-    text: i18n[name].chart,
-    value,
-    rangeInfo: meta[name],
+    formatter: { y: currency },
+    text: i18n.housePrice.chart,
+    value: status.house,
+    rangeInfo: meta.goal,
   };
 
   const input = {
@@ -26,14 +26,14 @@ const ROR = ({status, onChange}) => {
     onChange,
     text,
     value,
-    rangeInfo: meta[name],
+    rangeInfo: meta.goal,
   };
 
   return (
     <ChartCard title={text.title} supporting={text.supporting} chart={chart}>
-      <Percent {...input} />
+      <Currency {...input} />
     </ ChartCard>
   );
 };
 
-export default ROR;
+export default House;

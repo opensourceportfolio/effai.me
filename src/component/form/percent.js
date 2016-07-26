@@ -4,21 +4,20 @@ import componentHandler from 'lib/mdl';
 export default class Percent extends React.Component {
 
   componentDidMount() {
-    let node = this.refs.percent;
+    const node = this.refs.percent;
 
     componentHandler.upgradeElement(node);
   }
 
   handleChange(event) {
-    let value = parseFloat(event.target.value);
+    const value = parseFloat(event.target.value) || 0;
 
-    value = !value ? 0 : value;
     this.props.onChange(this.props.name, value);
   }
 
   render() {
-    let value = this.props.value ? this.props.value : '';
-    let name = this.props.name;
+    const value = this.props.value ? this.props.value : '';
+    const name = this.props.name;
 
     return (
       <div>

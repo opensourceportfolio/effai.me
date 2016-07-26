@@ -3,7 +3,7 @@ import TabBar from 'component/mdl/layout/header/tab-bar';
 
 const Header = (props) => {
   let row = null;
-  let options = props.options;
+  const options = props.options;
 
   if (options && options.row) {
     row = <TabBar options={options.row}/>;

@@ -1,6 +1,6 @@
 import { formattedCurrency, percent } from 'service/formatter';
 
-export let i18n = {
+export const i18n = {
   fiStatus: {
     done: 'Done',
     never: 'Never',
@@ -15,7 +15,7 @@ export let i18n = {
       known: 'Knowns',
       prediction: 'Predictions',
       target: 'Target',
-    }
+    },
   },
 
   title: {
@@ -52,7 +52,7 @@ export let i18n = {
 
   savings: {
     title: 'Savings rate',
-    supporting: `How much money do you put aside into savings and investments each month?`,
+    supporting: 'How much money do you put aside into savings and investments each month?',
     chart: {
       formatter: formattedCurrency,
       xlabel: 'Savings rate',
@@ -122,12 +122,12 @@ export let i18n = {
 
   housePrice: {
     title: 'House price',
-    supporting: `If you were to sell the house today, how much could you sell it for?`,
+    supporting: 'If you were to sell the house today, how much could you sell it for?',
     chart: {
       formatter: formattedCurrency,
       xlabel: 'Price',
       ylabel: 'Year',
     },
-    placeholder: 'Current Value of the house'
-  }
+    placeholder: 'Current Value of the house',
+  },
 };

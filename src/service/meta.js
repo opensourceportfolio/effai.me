@@ -1,4 +1,4 @@
-export let meta = {
+export const meta = {
   networth: {
     min: 0,
     max: 1000000,

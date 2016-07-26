@@ -1,6 +1,7 @@
 export function get() {
-  let settings = window.localStorage.getItem('ficalculator');
-  let defaults  = {
+  const str = window.localStorage.getItem('ficalculator');
+  const settings = str ? JSON.parse(str) : {};
+  const defaults  = {
     networth: 50000,
     savings: 1000,
     goal: 4500,
@@ -9,12 +10,6 @@ export function get() {
     withdrawl: 4,
     housePrice: 300000,
   };
-
-  if (!settings) {
-    settings = {};
-  } else {
-    settings = JSON.parse(settings);
-  }
 
   return Object.assign(defaults, settings);
 }

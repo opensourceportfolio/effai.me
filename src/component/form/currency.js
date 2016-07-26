@@ -6,7 +6,7 @@ import { formattedNumber } from 'service/formatter';
 export default class Currency extends React.Component {
 
   componentDidMount() {
-    let node = this.refs.currency;
+    const node = this.refs.currency;
 
     componentHandler.upgradeElement(node);
   }

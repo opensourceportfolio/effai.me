@@ -12,8 +12,8 @@ class Prediction extends React.Component {
   }
 
   render() {
-    let handleChange = this.handleChange.bind(this);
-    let status = this.props.status;
+    const handleChange = this.handleChange.bind(this);
+    const status = this.props.status;
 
     return (
       <div>
