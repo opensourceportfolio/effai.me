@@ -120,7 +120,7 @@ export const i18n = {
     type: 'percent',
   },
 
-  housePrice: {
+  house: {
     title: 'House price',
     supporting: 'If you were to sell the house today, how much could you sell it for?',
     chart: {
@@ -129,5 +129,7 @@ export const i18n = {
       ylabel: 'Year',
     },
     placeholder: 'Current Value of the house',
+    name: 'house',
+    type: 'currency',
   },
 };

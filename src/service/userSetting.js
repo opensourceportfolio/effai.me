@@ -8,7 +8,7 @@ export function get() {
     ror: 8,
     inflation: 3,
     withdrawl: 4,
-    housePrice: 300000,
+    house: 300000,
   };
 
   return Object.assign(defaults, settings);

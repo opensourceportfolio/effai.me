@@ -7,7 +7,7 @@ import ChartCard from 'component/fi/chart-card';
 import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
 
-const House = ({onChange}) => {
+const House = ({onChange, status}) => {
   const name = 'house';
   const text = i18n.house;
   const value = status.house;
@@ -16,7 +16,7 @@ const House = ({onChange}) => {
     type: BarChart,
     fn: chartFn(name, status),
     formatter: { y: currency },
-    text: i18n.housePrice.chart,
+    text: i18n.house.chart,
     value: status.house,
     rangeInfo: meta.goal,
   };
@@ -26,7 +26,7 @@ const House = ({onChange}) => {
     onChange,
     text,
     value,
-    rangeInfo: meta.goal,
+    rangeInfo: meta.house,
   };
 
   return (

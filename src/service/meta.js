@@ -35,7 +35,7 @@ export const meta = {
     step: 0.5,
   },
 
-  housePrice: {
+  house: {
     min: 0,
     max: 5000000,
     step: 500,

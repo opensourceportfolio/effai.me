@@ -4,6 +4,7 @@ import { changeValue } from 'action/fi';
 import { i18n } from 'service/i18n';
 import Networth from 'component/fi/card/networth';
 import Savings from 'component/fi/card/savings';
+import House from 'component/fi/card/house';
 
 class Known extends React.Component {
 
@@ -22,6 +23,8 @@ class Known extends React.Component {
         <Networth status={status} onChange={handleChange} />
 
         <Savings status={status} onChange={handleChange} />
+
+        <House status={status} onChange={handleChange} />
 
       </div>
     );
