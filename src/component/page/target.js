@@ -1,5 +1,5 @@
 import React from 'lib/react';
-import { connect } from 'lib/react/react-redux';
+import { connect } from 'lib/react-redux';
 import { changeValue } from 'action/fi';
 import { i18n } from 'service/i18n';
 import Goal from 'component/fi/card/goal';

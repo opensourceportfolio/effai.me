@@ -1,7 +1,8 @@
 import React from 'lib/react';
 import { createStore } from 'lib/redux';
 import componentHandler from 'lib/mdl';
-import { Provider } from 'lib/react/react-redux';
+import 'lib/mdl/dist/material.red-amber.min.css';
+import { Provider } from 'lib/react-redux';
 import { userInput } from 'reducer/fi';
 import { loadData } from 'action/fi';
 import { meta } from 'service/meta';

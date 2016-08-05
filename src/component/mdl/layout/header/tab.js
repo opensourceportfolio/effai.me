@@ -1,5 +1,5 @@
 import React from 'lib/react';
-import { Link } from 'lib/react/router';
+import { Link } from 'lib/react-router';
 
 const Tab = (props) => {
   let className = 'mdl-layout__tab';

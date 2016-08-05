@@ -1,5 +1,6 @@
 import React from 'lib/react';
 import componentHandler from 'lib/mdl';
+import 'lib/mdl/dist/material.red-amber.min.css';
 
 export default class Percent extends React.Component {
 

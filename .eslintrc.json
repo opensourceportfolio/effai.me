@@ -248,23 +248,6 @@
   },
 
   "settings": {
-    "import/resolver": {
-      "node": {
-        "moduleDirectory": ["src/"]
-      }
-    },
-    "import/core-modules": [
-      "lib/chartist",
-      "lib/chartist/axisTitle",
-      "lib/chartist/legend",
-      "lib/jquery",
-      "lib/mdl",
-      "lib/ramda",
-      "lib/react",
-      "lib/react/dom",
-      "lib/react/react-redux",
-      "lib/react/router",
-      "lib/redux"
-    ]
+    "import/resolver": "webpack"
   }
 }

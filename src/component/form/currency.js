@@ -1,6 +1,7 @@
 import React from 'lib/react';
 import R from 'lib/ramda';
 import componentHandler from 'lib/mdl';
+import 'lib/mdl/dist/material.red-amber.min.css';
 import { formattedNumber } from 'service/formatter';
 
 export default class Currency extends React.Component {
