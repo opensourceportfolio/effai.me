@@ -105,15 +105,15 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   popd
 )
 
-:: 4. Restore Gulp packages and run Gulp tasks
-IF /I "gulpfile.js" NEQ "" (
-  echo Running Gulp deployment: Starting %TIME%
+:: 4. Restore webpack packages and run webpack tasks
+IF /I "webpack.config.js" NEQ "" (
+  echo Running webpack deployment: Starting %TIME%
   pushd "%DEPLOYMENT_TARGET%"
-  echo "Building web site using Gulp"
-  call :ExecuteCmd ".\node_modules\.bin\gulp.cmd"
+  echo "Building web site using webpack"
+  call :ExecuteCmd ".\node_modules\.bin\webpack.cmd"
   if !ERRORLEVEL! NEQ 0 goto error
   popd
-  echo Running Gulp deployment: Finished %TIME%
+  echo Running webpack deployment: Finished %TIME%
 )
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

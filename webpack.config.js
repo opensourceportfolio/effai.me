@@ -1,8 +1,11 @@
 const path = require('path');
+const cssnext = require('postcss-cssnext');
+const precss = require('precss');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 
-  entry: './src/root.js',
+  entry: ['./src/root.js'],
 
   output: {
     filename: 'bundle.js',
@@ -11,11 +14,14 @@ module.exports = {
 
   module: {
     loaders: [{
+      include: require.resolve('material-design-lite'),
+      loader: 'exports?window.componentHandler',
+    }, {
       test: /(\.js)$/,
       loader: 'babel',
     }, {
       test: /\.css$/,
-      loader: 'style!css',
+      loader: 'style!css!postcss',
     }],
   },
 
@@ -36,4 +42,14 @@ module.exports = {
       'lib/redux': 'redux'
     },
   },
+
+  plugins: [
+    new CleanWebpackPlugin(['dist'], {
+      verbose: true,
+    })
+  ],
+
+  postcss: () => {
+    return [cssnext, precss];
+  }
 };
