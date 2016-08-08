@@ -1,3 +1,4 @@
+/* eslint object-shorthand: [0] */
 const path = require('path');
 const cssnext = require('postcss-cssnext');
 const precss = require('precss');
@@ -49,7 +50,7 @@ module.exports = {
     })
   ],
 
-  postcss() {
+  postcss: function() {
     return [cssnext, precss];
   }
 };
