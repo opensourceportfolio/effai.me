@@ -49,7 +49,7 @@ module.exports = {
     })
   ],
 
-  postcss: () => {
+  postcss() {
     return [cssnext, precss];
   }
 };
