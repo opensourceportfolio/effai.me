@@ -16,7 +16,7 @@
     "babel-runtime": "^6.11.6",
     "chartist": "^0.9.8",
     "chartist-plugin-axistitle": "git+https://github.com/opensourceportfolio/chartist-plugin-axistitle.git",
-    "chartist-plugin-legend": "git+https://github.com/CodeYellowBV/chartist-plugin-legend.git",
+    "chartist-plugin-legend": "^0.3.2",
     "material-design-lite": "^1.1.3",
     "ramda": "^0.22.0",
     "react": "^15.2.1",
