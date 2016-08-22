@@ -1,5 +1,6 @@
 {
   "presets" : ["es2015", "react"],
+  "plugins": ["react-hot-loader/babel"],
   "ignore": [
     "node_modules/**/*.js"
   ]

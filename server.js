@@ -10,7 +10,7 @@ new WebpackDevServer(webpack(config), {
 }).listen(3000, 'localhost', (err) => {
   if (err) {
     console.log(err);
+  } else {
+    console.log('Listening at http://localhost:3000/');
   }
-
-  console.log('Listening at http://localhost:3000/');
 });

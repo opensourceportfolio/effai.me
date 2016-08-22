@@ -2,11 +2,16 @@
 const path = require('path');
 const cssnext = require('postcss-cssnext');
 const precss = require('precss');
-//const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
 
-  entry: ['./src/root.js'],
+  entry: [
+    'webpack-dev-server/client?http://localhost:3000', // WebpackDevServer host and port
+    'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
+    'react-hot-loader/patch',
+    './src/root.js'
+  ],
 
   output: {
     filename: 'bundle.js',
@@ -19,7 +24,7 @@ module.exports = {
       loader: 'exports?window.componentHandler',
     }, {
       test: /(\.js)$/,
-      loader: 'babel',
+      loaders: ['babel'],
     }, {
       test: /\.css$/,
       loader: 'style!css!postcss',
@@ -45,10 +50,14 @@ module.exports = {
   },
 
   plugins: [
-    // new CleanWebpackPlugin(['dist'], {
-    //   verbose: true,
-    // })
+    new webpack.HotModuleReplacementPlugin(),
   ],
+
+  devServer: {
+    hot: true,
+    contentBase: './',
+    stats: {colors: true},
+  },
 
   postcss: function() {
     return [cssnext, precss];

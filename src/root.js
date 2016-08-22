@@ -1,5 +1,6 @@
 import React from 'lib/react';
 import ReactDOM from 'lib/react-dom';
+import { AppContainer } from 'react-hot-loader';
 import { Router, Route, Redirect, browserHistory } from 'lib/react-router';
 import App from 'app';
 import Known from 'component/page/known';
@@ -26,4 +27,17 @@ const routes =
   </ Router>
 ;
 
-ReactDOM.render(routes, document.getElementById('app-ficalculator'));
+const app =
+  <AppContainer>
+    {routes}
+  </AppContainer>
+;
+
+ReactDOM.render(app, document.getElementById('app-ficalculator'));
+
+// Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./app', () => {
+    ReactDOM.render(app, document.getElementById('root'));
+  });
+}
