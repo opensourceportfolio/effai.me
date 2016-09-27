@@ -24,7 +24,7 @@ export default class Currency extends React.Component {
   }
 
   render() {
-    let value = this.props.value;
+    const value = this.props.value;
 
     return (
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__masked" ref="currency">
