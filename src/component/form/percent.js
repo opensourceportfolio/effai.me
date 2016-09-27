@@ -1,5 +1,7 @@
 import React from 'lib/react';
+import R from 'lib/ramda';
 import componentHandler from 'lib/mdl';
+import { percent } from 'service/formatter';
 import 'lib/mdl/dist/material.red-amber.min.css';
 
 export default class Percent extends React.Component {
@@ -17,27 +19,25 @@ export default class Percent extends React.Component {
   }
 
   render() {
-    const value = this.props.value ? this.props.value : '';
-    const name = this.props.name;
+    const { name, text, rangeInfo, value = '' } = this.props;
+    const placeholder = R.is(Function, text.placeholder) ? text.placeholder(value) : text.placeholder;
 
     return (
-      <div>
-        <label className="mdl-label" htmlFor={name}>
-          {this.props.text.placeholder} ({this.props.value}%)
+      <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__masked" ref="percent">
+        <input className="mdl-textfield__input"
+          defaultValue={value}
+          onChange={this.handleChange.bind(this)}
+          pattern="[\d\.]*"
+          required
+          min={rangeInfo.min}
+          max={rangeInfo.max}
+          type="phone" />
+        <label className="mdl-textfield__mask">
+          {value == null ? '' : percent(value)}
         </label>
-        <div className="mdl-grid">
-          <div className="mdl-cell--12-col">
-            <input className="mdl-slider mdl-js-slider"
-              defaultValue={value}
-              min={this.props.rangeInfo.min}
-              max={this.props.rangeInfo.max}
-              onChange={this.handleChange.bind(this)}
-              ref="percent"
-              required
-              step={this.props.rangeInfo.step}
-              type="range" />
-          </div>
-        </div>
+        <label className="mdl-textfield__label" htmlFor={name}>
+          {value == null ? text.error : placeholder}
+        </label>
       </div>
     );
   }

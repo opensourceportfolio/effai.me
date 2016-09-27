@@ -8,7 +8,11 @@ export function get() {
     ror: 8,
     inflation: 3,
     withdrawl: 4,
-    house: 300000,
+    price: 300000,
+    rate: 4,
+    term: 30,
+    downpayment: 60000,
+    houseGrowth: 3,
   };
 
   return Object.assign(defaults, settings);

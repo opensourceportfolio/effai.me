@@ -1,12 +1,16 @@
 export function toFraction(num) {
-  return 1 + (num / 100);
+  return num / 100;
+}
+
+export function toAddedFraction(num) {
+  return 1 + toFraction(num);
 }
 
 export function networth(state, yrs) {
   const currentNetworth = parseInt(state.networth) || 0;
-  const ror = toFraction(state.ror);
+  const ror = toAddedFraction(state.ror);
   const savings = state.savings * 12;
-  const inflation = toFraction(state.inflation);
+  const inflation = toAddedFraction(state.inflation);
   const factor = ror / inflation;
   const futureSavings = savings * Math.pow(inflation, yrs);
   const futureNetworth = currentNetworth * Math.pow(ror, yrs);
@@ -29,10 +33,10 @@ export function monthlyYield(state, yrs) {
 
 export function years(state) {
   const currentNetworth = parseInt(state.networth) || 0;
-  const ror = toFraction(state.ror);
+  const ror = toAddedFraction(state.ror);
   const savings = state.savings * 12;
-  const inflation = toFraction(state.inflation);
-  const withdrawl = toFraction(state.withdrawl) - 1;
+  const inflation = toAddedFraction(state.inflation);
+  const withdrawl = toAddedFraction(state.withdrawl) - 1;
   const goal = state.goal * 12;
   const wealth = goal / withdrawl;
 
@@ -53,6 +57,10 @@ export function years(state) {
   }
 }
 
+export function percentage(amount, rate) {
+  return amount * toFraction(rate);
+}
+
 export function compound(amount, rate, yrs) {
-  return amount * Math.pow(rate, yrs);
+  return amount * Math.pow(toAddedFraction(rate), yrs);
 }

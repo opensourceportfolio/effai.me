@@ -2,7 +2,7 @@ import React from 'lib/react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { formattedCurrency, longCurrency } from 'service/formatter';
-import { years, toFraction, compound } from 'service/calculator';
+import { years, compound } from 'service/calculator';
 import { chartFn } from 'service/chart';
 import ChartCard from 'component/fi/chart-card';
 import BarChart from 'component/chart/bar';
@@ -12,8 +12,7 @@ const Savings = ({status, onChange}) => {
   const name = 'savings';
   const value = status[name];
   const yrs = years(status);
-  const inflation = toFraction(status.inflation);
-  const fiSavings = formattedCurrency(compound(status.savings, inflation, yrs));
+  const fiSavings = formattedCurrency(compound(status.savings, status.inflation, yrs));
 
   const text = {
     error: i18n.error.between(meta.savings.min, meta.savings.max),

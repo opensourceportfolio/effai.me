@@ -4,17 +4,17 @@ import componentHandler from 'lib/mdl';
 import 'lib/mdl/dist/material.red-amber.min.css';
 import { formattedNumber } from 'service/formatter';
 
-export default class Currency extends React.Component {
+export default class PlainNumber extends React.Component {
 
   componentDidMount() {
-    const node = this.refs.currency;
+    const node = this.refs.plainNumber;
 
     componentHandler.upgradeElement(node);
   }
 
-  handleChange({ target }) {
-    if (target.validity.valid) {
-      let value = parseInt(target.value);
+  handleChange(event) {
+    if (event.target.validity.valid) {
+      let value = parseInt(event.target.value);
 
       value = R.is(Number, value) ? value : '';
       this.props.onChange(this.props.name, value);
@@ -28,8 +28,7 @@ export default class Currency extends React.Component {
     const placeholder = R.is(Function, text.placeholder) ? text.placeholder(value) : text.placeholder;
 
     return (
-      <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__masked" ref="currency">
-        <span className="mdl-textfield-icon">$</span>
+      <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__masked" ref="plainNumber">
         <input className="mdl-textfield__input"
           defaultValue={value}
           onChange={this.handleChange.bind(this)}

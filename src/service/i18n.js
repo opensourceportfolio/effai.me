@@ -46,8 +46,6 @@ export const i18n = {
     },
     validation: '',
     placeholder: (v) => `your net worth (retire with ${v})`,
-    name: 'networth',
-    type: 'currency',
   },
 
   savings: {
@@ -59,8 +57,6 @@ export const i18n = {
       ylabel: 'Years to FI',
     },
     placeholder: (v) => `your savings (${v} adjusted to inflation)`,
-    name: 'savings',
-    type: 'currency',
   },
 
   goal: {
@@ -73,8 +69,6 @@ export const i18n = {
       ylabel: 'Years to FI',
     },
     placeholder: (v) => `your goal (${v} adjusted to inflation)`,
-    name: 'goal',
-    type: 'currency',
   },
 
   inflation: {
@@ -86,9 +80,7 @@ export const i18n = {
       xlabel: 'Inflation',
       ylabel: 'Years to FI',
     },
-    placeholder: 'future inflation',
-    name: 'inflation',
-    type: 'percent',
+    placeholder: 'Future rate of inflation',
   },
 
   ror: {
@@ -100,9 +92,7 @@ export const i18n = {
       xlabel: 'Rate of return',
       ylabel: 'Years to FI',
     },
-    placeholder: 'rate of return',
-    name: 'ror',
-    type: 'percent',
+    placeholder: 'Rate of return',
   },
 
   withdrawl: {
@@ -115,9 +105,7 @@ export const i18n = {
       xlabel: 'Rate of withdrawl',
       ylabel: 'Years to FI',
     },
-    placeholder: 'rate of withdrawl',
-    name: 'withdrawl',
-    type: 'percent',
+    placeholder: 'Rate of withdrawl',
   },
 
   house: {
@@ -125,11 +113,23 @@ export const i18n = {
     supporting: 'If you were to sell the house today, how much could you sell it for?',
     chart: {
       formatter: formattedCurrency,
-      xlabel: 'Price',
-      ylabel: 'Year',
+      xlabel: 'Year',
+      ylabel: 'Debt',
     },
-    placeholder: 'Current Value of the house',
-    name: 'house',
-    type: 'currency',
+    price: {
+      placeholder: 'The price of your house',
+    },
+    rate: {
+      placeholder: (v) => `Mortgage rate (${formattedCurrency(v)})`,
+    },
+    term: {
+      placeholder: 'Mortgage term',
+    },
+    downpayment: {
+      placeholder: (v) => `Your downpayment (${formattedCurrency(v)})`,
+    },
+    houseGrowth: {
+      placeholder: (v) => `Growth (Your house will be worth ${formattedCurrency(v)})`,
+    }
   },
 };

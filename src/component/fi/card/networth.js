@@ -1,7 +1,7 @@
 import React from 'lib/react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
-import { years, networth, toFraction, compound, monthlyYield } from 'service/calculator';
+import { years, networth, compound, monthlyYield } from 'service/calculator';
 import { formattedCurrency, longCurrency } from 'service/formatter';
 import ChartCard from 'component/fi/chart-card';
 import LineChart from 'component/chart/line';
@@ -17,9 +17,7 @@ const Networth = ({status, onChange}) => {
   const step = Math.min((yrs + 7) / 7, 7);
 
   const compoundFn = (v) => {
-    const inflation = toFraction(status.inflation);
-
-    return compound(status.goal, inflation, parseFloat(v));
+    return compound(status.goal, status.inflation, parseFloat(v));
   };
 
   const text = {

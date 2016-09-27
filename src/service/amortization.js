@@ -25,7 +25,7 @@ export function ppmt(rate, period, nperiod, presentValue, futureValue, type) {
   }
 
   const pmtval = pmt(rate, nperiod, presentValue, futureValue, type);
-  const ipmtval = ipmt(presentValue, pmt, rate, period - 1);
+  const ipmtval = ipmt(presentValue, pmtval, rate, period - 1);
 
   return pmtval - ipmtval;
 }
