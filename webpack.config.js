@@ -2,7 +2,7 @@
 const path = require('path');
 const cssnext = require('postcss-cssnext');
 const precss = require('precss');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+//const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 
@@ -45,9 +45,9 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      verbose: true,
-    })
+    // new CleanWebpackPlugin(['dist'], {
+    //   verbose: true,
+    // })
   ],
 
   postcss: function() {
