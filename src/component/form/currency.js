@@ -12,9 +12,9 @@ export default class Currency extends React.Component {
     componentHandler.upgradeElement(node);
   }
 
-  handleChange(event) {
-    if (event.target.validity.valid) {
-      let value = parseInt(event.target.value);
+  handleChange({ target }) {
+    if (target.validity.valid) {
+      let value = parseInt(target.value);
 
       value = R.is(Number, value) ? value : '';
       this.props.onChange(this.props.name, value);

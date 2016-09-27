@@ -1,9 +1,9 @@
 import React from 'lib/react';
 
-const Media = (props) => {
+const Media = ({ children }) => {
   return (
     <div className="mdl-card__media">
-      {props.children}
+      {children}
     </div>
   );
 };

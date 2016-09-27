@@ -1,9 +1,9 @@
 import React from 'lib/react';
 
-const Action = (props) => {
+const Action = ({ children }) => {
   return (
     <div className="mdl-card__actions">
-      {props.children}
+      {children}
     </div>
   );
 };

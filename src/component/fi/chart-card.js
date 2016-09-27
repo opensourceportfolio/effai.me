@@ -6,18 +6,17 @@ import Supporting from 'component/mdl/card/supporting';
 import Title from 'component/mdl/card/title';
 import Chart from 'component/fi/chart';
 
-const ChartCard = (props) => {
-  const { title, supporting } = props;
+const ChartCard = ({ title, supporting, chart, children }) => {
 
   return (
     <Card>
       <Title text={title} />
       <Supporting text={supporting} />
       <Media>
-        <Chart {...props.chart} />
+        <Chart {...chart} />
       </Media>
       <Action>
-        {props.children}
+        {children}
       </Action>
     </Card>
   );

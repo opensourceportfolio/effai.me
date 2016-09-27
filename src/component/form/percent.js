@@ -10,8 +10,8 @@ export default class Percent extends React.Component {
     componentHandler.upgradeElement(node);
   }
 
-  handleChange(event) {
-    const value = parseFloat(event.target.value) || 0;
+  handleChange({ target }) {
+    const value = parseFloat(target.value) || 0;
 
     this.props.onChange(this.props.name, value);
   }

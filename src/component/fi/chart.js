@@ -1,9 +1,8 @@
 import React from 'lib/react';
 import { xrange, yrange, toModel } from 'service/chart';
 
-const FICard = (props) => {
+const FICard = ({ type, fn, formatter, text, value, rangeInfo }) => {
   const chartOptions = {};
-  const { type, fn, formatter, text, value, rangeInfo } = props;
 
   const { xlabel, ylabel } = text;
   const xval = xrange(value, rangeInfo);

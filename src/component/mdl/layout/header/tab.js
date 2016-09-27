@@ -1,15 +1,15 @@
 import React from 'lib/react';
 import { Link } from 'lib/react-router';
 
-const Tab = (props) => {
+const Tab = ({ url, isActive, text }) => {
   let className = 'mdl-layout__tab';
 
-  if (window.location.pathname.startsWith(`/${props.url}`) || props.isActive) {
+  if (window.location.pathname.startsWith(`/${url}`) || isActive) {
     className = `${className} is-active`;
   }
 
   return (
-    <Link className={className} to={props.url}>{props.text}</Link>
+    <Link className={className} to={url}>{text}</Link>
   );
 };
 

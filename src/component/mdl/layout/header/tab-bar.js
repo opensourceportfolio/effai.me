@@ -1,9 +1,8 @@
 import React from 'lib/react';
 import Tab from 'component/mdl/layout/header/tab';
 
-const TabBar = (props) => {
+const TabBar = ({ options }) => {
   let links = null;
-  const options = props.options;
 
   if (options && options) {
     links = options.map((tab, i) => {

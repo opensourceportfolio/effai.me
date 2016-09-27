@@ -1,9 +1,9 @@
 import React from 'lib/react';
 
-const Supporting = (props) => {
+const Supporting = ({ text }) => {
   return (
     <div className="mdl-card__supporting-text">
-      {props.text}
+      {text}
     </div>
   );
 };

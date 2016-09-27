@@ -1,10 +1,10 @@
 import React from 'lib/react';
 
-const Title = (props) => {
+const Title = ({ text }) => {
   return (
     <div className="mdl-card__title">
       <h4>
-        {props.text}
+        {text}
       </h4>
     </div>
   );

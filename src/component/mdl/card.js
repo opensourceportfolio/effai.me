@@ -1,9 +1,9 @@
 import React from 'lib/react';
 
-const Card = (props) => {
+const Card = ({ children }) => {
   return (
     <div className="mdl-card mdl-shadow mdl-shadow--2dp">
-      {props.children}
+      {children}
     </div>
   );
 };
