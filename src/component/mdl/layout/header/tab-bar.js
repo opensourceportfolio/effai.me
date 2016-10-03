@@ -4,7 +4,7 @@ import Tab from 'component/mdl/layout/header/tab';
 const TabBar = ({ options }) => {
   let links = null;
 
-  if (options && options) {
+  if (options) {
     links = options.map((tab, i) => {
       return (
         <Tab text={tab.text} url={tab.url} isActive={tab.isActive} key={`tab${i}`} />

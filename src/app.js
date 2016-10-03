@@ -1,9 +1,8 @@
 import React from 'lib/react';
-import { createStore } from 'lib/redux';
+import configureStore from 'store';
 import componentHandler from 'lib/mdl';
 import 'lib/mdl/dist/material.red-amber.min.css';
 import { Provider } from 'lib/react-redux';
-import { userInput } from 'reducer/fi';
 import { loadData } from 'action/fi';
 import { meta } from 'service/meta';
 import { i18n } from 'service/i18n';
@@ -11,7 +10,7 @@ import { get, set } from 'service/userSetting';
 import { years } from 'service/calculator';
 import Header from 'component/mdl/layout/header';
 
-const store = createStore(userInput);
+const store = configureStore();
 
 export default class App extends React.Component {
 
@@ -40,6 +39,7 @@ export default class App extends React.Component {
       {text: i18n.header.links.prediction, url: 'prediction'},
       {text: i18n.header.links.target, url: 'target'},
     ]};
+
 
     return (
       <Provider store={store}>

@@ -6,16 +6,12 @@ const webpack = require('webpack');
 
 module.exports = {
 
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000', // WebpackDevServer host and port
-    'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-    'react-hot-loader/patch',
-    './src/root.js'
-  ],
+  entry: ['./src/root.js'],
 
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist'),
+    publicPath: '/dist/',
   },
 
   module: {
@@ -47,16 +43,6 @@ module.exports = {
       'lib/react-router': 'react-router',
       'lib/redux': 'redux'
     },
-  },
-
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
-
-  devServer: {
-    hot: true,
-    contentBase: './',
-    stats: {colors: true},
   },
 
   postcss: function() {
