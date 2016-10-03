@@ -2,7 +2,6 @@
 const path = require('path');
 const cssnext = require('postcss-cssnext');
 const precss = require('precss');
-const webpack = require('webpack');
 
 module.exports = {
 
