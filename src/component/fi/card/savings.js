@@ -3,7 +3,7 @@ import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { formattedCurrency, longCurrency } from 'service/formatter';
 import { years, compound } from 'service/calculator';
-import { chartFn } from 'service/chart';
+import { xrange, yrange, chartFn } from 'service/chart';
 import ChartCard from 'component/fi/chart-card';
 import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
@@ -19,12 +19,14 @@ const Savings = ({status, onChange}) => {
     placeholder: i18n[name].placeholder(fiSavings),
   };
 
+  const fn = chartFn(name, status);
+  const rangeInfo = meta[name];
+  const x = xrange(value, rangeInfo);
+  const y = yrange(x, rangeInfo, fn);
   const chart = {
     type: BarChart,
-    fn: chartFn(name, status),
-    rangeInfo: meta[name],
+    plot: {x, y},
     text: i18n[name].chart,
-    value,
     formatter: { x: longCurrency },
   };
 

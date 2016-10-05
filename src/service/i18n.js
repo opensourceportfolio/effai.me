@@ -112,9 +112,10 @@ export const i18n = {
     title: 'House price',
     supporting: 'If you were to sell the house today, how much could you sell it for?',
     chart: {
+      legend: ['Debt', 'House value'],
       formatter: formattedCurrency,
       xlabel: 'Year',
-      ylabel: 'Debt',
+      ylabel: '$',
     },
     price: {
       placeholder: 'The price of your house',

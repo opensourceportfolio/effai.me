@@ -1,6 +1,7 @@
 import React from 'lib/react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
+import { xrange, yrange } from 'service/chart';
 import { compound, percentage, toFraction } from 'service/calculator';
 import { longCurrency } from 'service/formatter';
 import { pmt, remainder } from 'service/amortization';
@@ -25,19 +26,22 @@ const House = ({onChange, status}) => {
   const priceFn = (v) => {
     return compound(status.price, status.houseGrowth, v);
   };
-  const equity = (v) => {
+  const equityFn = (v) => {
     return priceFn(v) - remainingBalanceFn(v);
   };
 
   const min = 0;
   const max = status.term;
+  const step = (max - min) / 5;
+  const rangeInfo = { min, max, step };
+  const fn = [remainingBalanceFn, equityFn];
+  const x = xrange(0, rangeInfo);
+  const y = yrange(x, rangeInfo, fn);
   const chart = {
     type: LineChart,
-    fn: [remainingBalanceFn, equity],
+    plot: {x, y},
     formatter: { y: longCurrency },
     text: text.chart,
-    value: 0,
-    rangeInfo: { min, max, step: 5, points: max / 5 },
     chartOptions: { low: 0 }
   };
 
@@ -91,11 +95,23 @@ const House = ({onChange, status}) => {
 
   return (
     <ChartCard title={text.title} supporting={text.supporting} chart={chart}>
-      <Currency {...price} />
-      <Percent {...downpayment} />
-      <Percent {...rate} />
-      <PlainNumber {...term} />
-      <Percent {...houseGrowth} />
+      <div className="mdl-grid">
+        <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+          <Currency {...price} />
+        </div>
+        <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+          <Percent {...downpayment} />
+        </div>
+        <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+          <Percent {...rate} />
+        </div>
+        <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+          <PlainNumber {...term} />
+        </div>
+        <div className="mdl-cell">
+          <Percent {...houseGrowth} />
+        </div>
+      </div>
     </ ChartCard>
   );
 };

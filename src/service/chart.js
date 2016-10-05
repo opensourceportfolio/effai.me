@@ -19,11 +19,11 @@ export function toModel(labels, chartData, legend) {
 }
 
 export function xrange(value, rangeInfo) {
-  const { min, max, count = CHART_COUNT } = rangeInfo;
+  const { min, max } = rangeInfo;
   const step = Math.max(value * 0.1, rangeInfo.step);
   const minStep = Math.max(rangeInfo.step, Math.floor(step / rangeInfo.step) * rangeInfo.step);
-  const from = start(value, { min, max, step: minStep }, count);
-  const xval = generate(count, from, minStep);
+  const from = start(value, { min, max, step: minStep }, CHART_COUNT);
+  const xval = generate(CHART_COUNT, from, minStep);
 
   return xval;
 }

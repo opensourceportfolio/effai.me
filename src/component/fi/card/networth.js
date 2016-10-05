@@ -1,6 +1,7 @@
 import React from 'lib/react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
+import { xrange, yrange } from 'service/chart';
 import { years, networth, compound, monthlyYield } from 'service/calculator';
 import { formattedCurrency, longCurrency } from 'service/formatter';
 import ChartCard from 'component/fi/chart-card';
@@ -25,13 +26,15 @@ const Networth = ({status, onChange}) => {
     placeholder: i18n[name].placeholder(fiNetworth),
   };
 
+  const rangeInfo = { min, max, step };
+  const fn = [(v) => monthlyYield(status, parseFloat(v)), compoundFn];
+  const x = xrange(0, rangeInfo);
+  const y = yrange(x, rangeInfo, fn);
   const chart = {
     type: LineChart,
-    fn: [(v) => monthlyYield(status, parseFloat(v)), compoundFn],
+    plot: {x, y},
     formatter: {  y: longCurrency },
     text: i18n[name].chart,
-    value: 0,
-    rangeInfo: { min, max, step, legend: i18n[name].chart.legend },
   };
 
   const input = {

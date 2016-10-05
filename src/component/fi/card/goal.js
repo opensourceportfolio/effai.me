@@ -1,9 +1,9 @@
 import React from 'lib/react';
 import {i18n} from 'service/i18n';
 import {meta} from 'service/meta';
+import { xrange, yrange, chartFn } from 'service/chart';
 import {formattedCurrency, longCurrency} from 'service/formatter';
 import {years, compound} from 'service/calculator';
-import {chartFn} from 'service/chart';
 import ChartCard from 'component/fi/chart-card';
 import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
@@ -19,15 +19,15 @@ const Goal = ({onChange, status}) => {
     placeholder: i18n[name].placeholder(fiGoal),
   };
 
+  const fn = chartFn(name, status);
+  const rangeInfo = meta[name];
+  const x = xrange(value, rangeInfo);
+  const y = yrange(x, rangeInfo, fn);
   const chart = {
     type: BarChart,
-    fn: chartFn(name, status),
-    formatter: {
-      x: longCurrency,
-    },
+    plot: {x, y},
+    formatter: { x: longCurrency },
     text: i18n[name].chart,
-    value,
-    rangeInfo: meta[name],
   };
 
   const input = {

@@ -1,11 +1,11 @@
 import React from 'lib/react';
-import { xrange, yrange, toModel } from 'service/chart';
+import { toModel } from 'service/chart';
 
-const FICard = ({ type, fn, formatter, text, value, rangeInfo, chartOptions = {} }) => {
-  const { xlabel, ylabel } = text;
-  const xval = xrange(value, rangeInfo);
-  const yval = yrange(xval, rangeInfo, fn);
-  const data = toModel(xval, yval, rangeInfo.legend);
+const FICard = ({ type, plot, formatter, text, chartOptions = {} }) => {
+  const { xlabel, ylabel, legend } = text;
+  const xval = plot.x;
+  const yval = plot.y;
+  const data = toModel(xval, yval, legend);
 
   if (formatter) {
     const identity = (e) => e;
