@@ -1,9 +1,9 @@
 import React from 'lib/react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
-import { compound, percentage, toFraction, years } from 'service/calculator';
+import { compound, percentage, toFraction } from 'service/calculator';
 import { longCurrency } from 'service/formatter';
-import { pmt, ppmt } from 'service/amortization';
+import { pmt, remainder } from 'service/amortization';
 import ChartCard from 'component/fi/chart-card';
 import LineChart from 'component/chart/line';
 import Currency from 'component/form/currency';
@@ -13,42 +13,32 @@ import PlainNumber from 'component/form/plainNumber';
 const House = ({onChange, status}) => {
   const text = i18n.house;
   const downpaymentAmount = percentage(status.price, status.downpayment);
-  const chartFn = () => {
-    const values = new Map();
+  const remainingBalanceFn = (v) => {
+    const loan = status.price - downpaymentAmount;
+    const rate = toFraction(status.rate / 12);
+    const periods = status.term * 12;
+    const year = parseInt(v);
+    const period = year * 12;
 
-    return function debt (c) {
-      const year = parseInt(c);
-      const currentTerm = year * 12;
-
-      if (values.has(year)) {
-        return values.get(year);
-      } else if (year === 0) {
-        return status.price - downpaymentAmount;
-      } else {
-        const previousDebt = debt(c - 1);
-        const ppmtStart = ppmt(toFraction(status.rate / 12), currentTerm, status.term * 12, -previousDebt, 0);
-        const ppmtEnd = ppmt(toFraction(status.rate / 12), currentTerm + 12, status.term * 12, -previousDebt, 0);
-        const average = (ppmtStart + ppmtEnd) / 2;
-        const newDebt = previousDebt - (average * 12);
-
-        values.set(currentTerm, newDebt);
-
-        return newDebt;
-      }
-    };
+    return remainder(loan, periods, rate, period);
+  };
+  const priceFn = (v) => {
+    return compound(status.price, status.houseGrowth, v);
+  };
+  const equity = (v) => {
+    return priceFn(v) - remainingBalanceFn(v);
   };
 
-  const yrs = years(status);
   const min = 0;
-  const max = Math.min(7, meta.range);
-  const step = Math.min((yrs + 7) / 7, 7);
+  const max = status.term;
   const chart = {
     type: LineChart,
-    fn: chartFn(),
+    fn: [remainingBalanceFn, equity],
     formatter: { y: longCurrency },
     text: text.chart,
     value: 0,
-    rangeInfo: { min, max, step },
+    rangeInfo: { min, max, step: 5, points: max / 5 },
+    chartOptions: { low: 0 }
   };
 
   const price = {

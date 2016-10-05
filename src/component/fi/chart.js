@@ -1,9 +1,7 @@
 import React from 'lib/react';
 import { xrange, yrange, toModel } from 'service/chart';
 
-const FICard = ({ type, fn, formatter, text, value, rangeInfo }) => {
-  const chartOptions = {};
-
+const FICard = ({ type, fn, formatter, text, value, rangeInfo, chartOptions = {} }) => {
   const { xlabel, ylabel } = text;
   const xval = xrange(value, rangeInfo);
   const yval = yrange(xval, rangeInfo, fn);
