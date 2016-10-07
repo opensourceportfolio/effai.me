@@ -1,4 +1,4 @@
-import { formattedCurrency, percent } from 'service/formatter';
+import { formattedCurrency } from 'service/formatter';
 
 export const i18n = {
   fiStatus: {
@@ -11,28 +11,15 @@ export const i18n = {
 
   header: {
     links: {
-      home: 'home',
       known: 'Knowns',
       prediction: 'Predictions',
       target: 'Target',
+      chart: 'Chart',
     },
   },
 
-  title: {
-    current: 'Current state',
-    prediction: 'Prediction',
-    target: 'Target for the future',
-    housing: 'Housing',
-  },
-
-  link: {
-    investments: 'Investments',
-    prediction: 'Prediction',
-    housing: 'Housing',
-  },
-
   error: {
-    between: (min, max) => `You must enter a number between ${min} and ${max}`,
+    between: (min, max) => `You must enter a number between ${formattedCurrency(min)} and ${formattedCurrency(max)}`,
   },
 
   networth: {
@@ -40,7 +27,7 @@ export const i18n = {
     supporting: `The total value of your liquid assets that generate income including stocks, bonds and cash.
                Other assets can be included as well but remember to adjust your rate of return accordingly.`,
     chart: {
-      legend: ['Your passive income', 'Your goal'],
+      legend: ['Total passive income', 'Your goal', 'Potential income from house'],
       xlabel: 'Years',
       ylabel: 'Passive income',
     },
@@ -48,71 +35,49 @@ export const i18n = {
     placeholder: (v) => `your net worth (retire with ${v})`,
   },
 
-  savings: {
-    title: 'Savings rate',
-    supporting: 'How much money do you put aside into savings and investments each month?',
-    chart: {
-      formatter: formattedCurrency,
-      xlabel: 'Savings rate',
-      ylabel: 'Years to FI',
-    },
-    placeholder: (v) => `your savings (${v} adjusted to inflation)`,
-  },
-
-  goal: {
-    title: 'Your goal',
-    supporting: `How much money do you need per month to be financially independent. One way to estimate this
-               value is to look at your spendings today.`,
+  future: {
+    title: 'Future',
+    supporting: 'Your future goals',
     chart: {
       formatter: formattedCurrency,
       xlabel: 'Goal',
       ylabel: 'Years to FI',
     },
-    placeholder: (v) => `your goal (${v} adjusted to inflation)`,
+    goal: {
+      placeholder: (v) => `Your goal (${v} adjusted to inflation)`,
+    },
+    inflation: {
+      placeholder: 'Expected rate of inflation',
+    },
+    withdrawl: {
+      placeholder: 'Rate of withdrawl',
+    },
   },
 
-  inflation: {
-    title: 'Forecasted inflation',
-    supporting: `What do you think inflation will look like in the future. Long term inflation over the last
-              100 years or so averaged at around 3-4%`,
+  financial: {
+    title: 'Financials',
+    supporting: 'Information about your savings and investing habits',
     chart: {
-      formatter: percent,
-      xlabel: 'Inflation',
+      formatter: formattedCurrency,
+      xlabel: 'Savings rate',
       ylabel: 'Years to FI',
     },
-    placeholder: 'Future rate of inflation',
-  },
-
-  ror: {
-    title: 'Forecasted rate of return',
-    supporting: `What kind of return are you expecting on your savings? Are you investing in stocks or keeping
-               your money safe in a bank account?`,
-    chart: {
-      formatter: percent,
-      xlabel: 'Rate of return',
-      ylabel: 'Years to FI',
+    savings: {
+      placeholder: (v) => `your savings (${v} adjusted to inflation)`,
     },
-    placeholder: 'Rate of return',
-  },
-
-  withdrawl: {
-    title: 'Planned rate of withdrawl',
-    supporting: `At what rate will you be drawing down your money when you're financially independent?
-               Studies show that 4% rate is a safe rate to withdraw an all stock portfolio. Bond and
-               cash portfolios will probably require a lower rate.`,
-    chart: {
-      formatter: percent,
-      xlabel: 'Rate of withdrawl',
-      ylabel: 'Years to FI',
+    networth: {
+      placeholder: (v) => `your net worth (retire with ${v})`,
     },
-    placeholder: 'Rate of withdrawl',
+    ror: {
+      placeholder: 'Rate of return',
+    },
   },
 
   house: {
     title: 'House price',
     supporting: 'If you were to sell the house today, how much could you sell it for?',
     chart: {
-      legend: ['Debt', 'House value'],
+      legend: ['Debt', 'Equity'],
       formatter: formattedCurrency,
       xlabel: 'Year',
       ylabel: '$',

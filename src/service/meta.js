@@ -1,13 +1,13 @@
 export const meta = {
   networth: {
     min: 0,
-    max: 1000000,
+    max: 5000000,
     step: 100,
   },
 
   savings: {
     min: 0,
-    max: 15000,
+    max: 20000,
     step: 100,
   },
 

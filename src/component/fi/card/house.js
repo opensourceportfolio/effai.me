@@ -2,10 +2,9 @@ import React from 'lib/react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';
-import { compound, percentage, toFraction } from 'service/calculator';
+import { compound, percentage, toFraction, debt, equity, years } from 'service/calculator';
 import { longCurrency } from 'service/formatter';
 import { pmt } from 'service/amortization';
-import { debt, equity } from 'service/calculator';
 import ChartCard from 'component/fi/chart-card';
 import LineChart from 'component/chart/line';
 import Currency from 'component/form/currency';
@@ -15,13 +14,14 @@ import PlainNumber from 'component/form/plainNumber';
 const House = ({onChange, status}) => {
   const text = i18n.house;
   const downpaymentAmount = percentage(status.price, status.downpayment);
+  const yrs = years(status);
 
-  const debtFn = (yrs) => {
-    return debt(status, yrs);
+  const debtFn = (year) => {
+    return debt(status, year);
   };
 
-  const equityFn = (yrs) => {
-    return equity(status, yrs);
+  const equityFn = (year) => {
+    return equity(status, year);
   };
 
   const min = 0;
@@ -76,7 +76,7 @@ const House = ({onChange, status}) => {
     rangeInfo: meta.house.term,
   };
 
-  const futurePrice = compound(status.price, status.rate, status.term);
+  const futurePrice = compound(status.price, status.houseGrowth, yrs);
   const houseGrowth = {
     name: 'houseGrowth',
     onChange,

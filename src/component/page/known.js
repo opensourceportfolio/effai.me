@@ -1,9 +1,8 @@
 import React from 'lib/react';
 import { connect } from 'lib/react-redux';
 import { changeValue } from 'action/fi';
-import { i18n } from 'service/i18n';
-import Networth from 'component/fi/card/networth';
-import Savings from 'component/fi/card/savings';
+import Future from 'component/fi/card/future';
+import Financial from 'component/fi/card/financial';
 import House from 'component/fi/card/house';
 
 class Known extends React.Component {
@@ -18,14 +17,11 @@ class Known extends React.Component {
 
     return (
       <div>
-        <h3 className="mdl-title">{i18n.title.current}</h3>
-
-        <Networth status={status} onChange={handleChange} />
-
-        <Savings status={status} onChange={handleChange} />
+        <Financial status={status} onChange={handleChange} />
 
         <House status={status} onChange={handleChange} />
 
+        <Future status={status} onChange={handleChange} />
       </div>
     );
   }
