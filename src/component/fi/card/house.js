@@ -4,7 +4,8 @@ import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';
 import { compound, percentage, toFraction } from 'service/calculator';
 import { longCurrency } from 'service/formatter';
-import { pmt, remainder } from 'service/amortization';
+import { pmt } from 'service/amortization';
+import { debt, equity } from 'service/calculator';
 import ChartCard from 'component/fi/chart-card';
 import LineChart from 'component/chart/line';
 import Currency from 'component/form/currency';
@@ -14,27 +15,20 @@ import PlainNumber from 'component/form/plainNumber';
 const House = ({onChange, status}) => {
   const text = i18n.house;
   const downpaymentAmount = percentage(status.price, status.downpayment);
-  const remainingBalanceFn = (v) => {
-    const loan = status.price - downpaymentAmount;
-    const rate = toFraction(status.rate / 12);
-    const periods = status.term * 12;
-    const year = parseInt(v);
-    const period = year * 12;
 
-    return remainder(loan, periods, rate, period);
+  const debtFn = (yrs) => {
+    return debt(status, yrs);
   };
-  const priceFn = (v) => {
-    return compound(status.price, status.houseGrowth, v);
-  };
-  const equityFn = (v) => {
-    return priceFn(v) - remainingBalanceFn(v);
+
+  const equityFn = (yrs) => {
+    return equity(status, yrs);
   };
 
   const min = 0;
   const max = status.term;
   const step = (max - min) / 5;
   const rangeInfo = { min, max, step };
-  const fn = [remainingBalanceFn, equityFn];
+  const fn = [debtFn, equityFn];
   const x = xrange(0, rangeInfo);
   const y = yrange(x, rangeInfo, fn);
   const chart = {
