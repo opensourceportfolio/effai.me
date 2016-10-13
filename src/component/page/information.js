@@ -5,7 +5,7 @@ import Future from 'component/fi/card/future';
 import Financial from 'component/fi/card/financial';
 import House from 'component/fi/card/house';
 
-class Known extends React.Component {
+class Information extends React.Component {
 
   handleChange(name, value) {
     this.props.dispatch(changeValue(name, value));
@@ -27,4 +27,4 @@ class Known extends React.Component {
   }
 }
 
-export default connect((p) => p)(Known);
+export default connect((p) => p)(Information);

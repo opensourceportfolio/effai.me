@@ -2,7 +2,7 @@ import React from 'lib/react';
 import ReactDOM from 'lib/react-dom';
 import { Router, Route, Redirect, browserHistory } from 'lib/react-router';
 import App from 'app';
-import Known from 'component/page/known';
+import Information from 'component/page/information';
 import Chart from 'component/page/chart';
 import 'css/icon.css';
 import 'css/mdl.css';
@@ -15,11 +15,11 @@ const scrollTop = () => {
 
 const routes =
   <Router onUpdate={() => scrollTop()} history={browserHistory}>
-    <Redirect from="/" to="known"/>
+    <Redirect from="/" to="information"/>
     <Route path="/" component={App}>
-      <Route path="known" component={Known} />
+      <Route path="information" component={Information} />
       <Route path="chart" component={Chart} />
-      <Redirect from="*" to="known"/>
+      <Redirect from="*" to="information"/>
     </ Route>
   </ Router>
 ;

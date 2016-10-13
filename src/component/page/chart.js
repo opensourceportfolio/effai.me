@@ -37,7 +37,8 @@ const Chart = ({status}) => {
   };
 
   return (
-    <ChartComponent {...chart} />
+    //<ChartComponent {...chart} />
+    <h1>Under construction</h1>
   );
 };
 
