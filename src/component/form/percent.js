@@ -13,9 +13,14 @@ export default class Percent extends React.Component {
   }
 
   handleChange({ target }) {
-    const value = parseFloat(target.value) || 0;
+    if (target.validity.valid) {
+      let value = parseInt(target.value);
 
-    this.props.onChange(this.props.name, value);
+      value = R.is(Number, value) ? value : '';
+      this.props.onChange(this.props.name, value);
+    } else {
+      this.props.onChange(this.props.name, null);
+    }
   }
 
   render() {

@@ -42,7 +42,10 @@ const House = ({onChange, status}) => {
   const price = {
     name: 'price',
     onChange,
-    text: text.price,
+    text: {
+      error: i18n.error.between(meta.house.price.min, meta.house.price.max),
+      placeholder: text.price.placeholder,
+    },
     value: status.price,
     rangeInfo: meta.house.price,
   };
@@ -51,6 +54,7 @@ const House = ({onChange, status}) => {
     name: 'downpayment',
     onChange,
     text: {
+      error: i18n.error.between(meta.house.downpayment.min, meta.house.downpayment.max),
       placeholder: text.downpayment.placeholder(downpaymentAmount)
     },
     value: status.downpayment,
@@ -62,7 +66,8 @@ const House = ({onChange, status}) => {
     name: 'rate',
     onChange,
     text: {
-      placeholder: text.rate.placeholder(payment)
+      error: i18n.error.between(meta.house.rate.min, meta.house.rate.max),
+      placeholder: text.rate.placeholder(payment),
     },
     value: status.rate,
     rangeInfo: meta.house.rate,
@@ -71,7 +76,10 @@ const House = ({onChange, status}) => {
   const term = {
     name: 'term',
     onChange,
-    text: text.term,
+    text: {
+      error: i18n.error.between(meta.house.term.min, meta.house.term.max),
+      placeholder: text.term.placeholder,
+    },
     value: status.term,
     rangeInfo: meta.house.term,
   };
@@ -81,6 +89,7 @@ const House = ({onChange, status}) => {
     name: 'houseGrowth',
     onChange,
     text: {
+      error: i18n.error.between(meta.house.houseGrowth.min, meta.house.houseGrowth.max),
       placeholder: text.houseGrowth.placeholder(futurePrice),
     },
     value: status.houseGrowth,

@@ -39,7 +39,10 @@ const Financial = ({status, onChange}) => {
   const inflation = {
     name: 'inflation',
     onChange,
-    text: text.inflation,
+    text: {
+      error: i18n.error.between(meta.inflation.min, meta.inflation.max),
+      placeholder: text.inflation.placeholder
+    },
     value: status.inflation,
     rangeInfo: meta.inflation,
   };
@@ -47,7 +50,10 @@ const Financial = ({status, onChange}) => {
   const withdrawl = {
     name: 'withdrawl',
     onChange,
-    text: text.withdrawl,
+    text: {
+      error: i18n.error.between(meta.withdrawl.min, meta.withdrawl.max),
+      placeholder: text.withdrawl.placeholder
+    },
     value: status.withdrawl,
     rangeInfo: meta.withdrawl,
   };
