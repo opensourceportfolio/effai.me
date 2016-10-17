@@ -43,3 +43,14 @@ const Chart = ({status}) => {
 };
 
 export default Chart;
+
+
+
+/** WEBPACK FOOTER **
+ ** ./src/component/page/chart.js
+ **/
+
+
+/** WEBPACK FOOTER **
+ ** ./src/component/page/chart.js
+ **/

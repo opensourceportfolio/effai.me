@@ -12,12 +12,13 @@ export default class PlainNumber extends React.Component {
     componentHandler.upgradeElement(node);
   }
 
-  handleChange(event) {
-    if (event.target.validity.valid) {
-      let value = parseInt(event.target.value);
+  handleChange({ target }) {
+    if (target.validity.valid) {
+      const value = parseInt(target.value);
 
-      value = R.is(Number, value) ? value : '';
-      this.props.onChange(this.props.name, value);
+      if (R.is(Number, value)) {
+        this.props.onChange(this.props.name, value);
+      }
     } else {
       this.props.onChange(this.props.name, null);
     }

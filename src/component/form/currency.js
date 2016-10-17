@@ -14,9 +14,8 @@ export default class Currency extends React.Component {
 
   handleChange({ target }) {
     if (target.validity.valid) {
-      let value = parseInt(target.value);
+      const value = parseInt(target.value);
 
-      value = R.is(Number, value) ? value : '';
       this.props.onChange(this.props.name, value);
     } else {
       this.props.onChange(this.props.name, null);
@@ -48,3 +47,8 @@ export default class Currency extends React.Component {
     );
   }
 }
+
+
+/** WEBPACK FOOTER **
+ ** ./src/component/form/currency.js
+ **/

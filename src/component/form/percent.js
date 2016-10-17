@@ -1,8 +1,8 @@
 import React from 'lib/react';
 import R from 'lib/ramda';
 import componentHandler from 'lib/mdl';
-import { percent } from 'service/formatter';
 import 'lib/mdl/dist/material.red-amber.min.css';
+import { percent } from 'service/formatter';
 
 export default class Percent extends React.Component {
 
@@ -14,9 +14,8 @@ export default class Percent extends React.Component {
 
   handleChange({ target }) {
     if (target.validity.valid) {
-      let value = parseInt(target.value);
+      const value = parseInt(target.value);
 
-      value = R.is(Number, value) ? value : '';
       this.props.onChange(this.props.name, value);
     } else {
       this.props.onChange(this.props.name, null);
@@ -36,7 +35,7 @@ export default class Percent extends React.Component {
           required
           min={rangeInfo.min}
           max={rangeInfo.max}
-          type="phone" />
+          type="number" />
         <label className="mdl-textfield__mask">
           {value == null ? '' : percent(value)}
         </label>
