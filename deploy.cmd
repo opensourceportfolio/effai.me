@@ -110,7 +110,7 @@ IF /I "webpack.config.js" NEQ "" (
   echo Running webpack deployment: Starting %TIME%
   pushd "%DEPLOYMENT_TARGET%"
   echo "Building web site using webpack"
-  call :ExecuteCmd !NPM_CMD! run prod
+  call :ExecuteCmd !NPM_CMD! run dev
   if !ERRORLEVEL! NEQ 0 goto error
   popd
   echo Running webpack deployment: Finished %TIME%
