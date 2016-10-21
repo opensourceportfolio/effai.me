@@ -14,9 +14,7 @@ export default class Currency extends React.Component {
 
   handleChange({ target }) {
     if (target.validity.valid) {
-      const value = parseInt(target.value);
-
-      this.props.onChange(this.props.name, value);
+      this.props.onChange(this.props.name, target.value);
     } else {
       this.props.onChange(this.props.name, null);
     }
@@ -32,11 +30,11 @@ export default class Currency extends React.Component {
         <input className="mdl-textfield__input"
           defaultValue={value}
           onChange={this.handleChange.bind(this)}
-          pattern="\d*"
+          pattern="[\d\.]*"
           required
           min={rangeInfo.min}
           max={rangeInfo.max}
-          type="number" />
+          type="phone" />
         <label className="mdl-textfield__mask">
           {value == null ? '' : formattedNumber(value)}
         </label>
@@ -47,8 +45,3 @@ export default class Currency extends React.Component {
     );
   }
 }
-
-
-/** WEBPACK FOOTER **
- ** ./src/component/form/currency.js
- **/

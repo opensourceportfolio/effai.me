@@ -14,9 +14,7 @@ export default class Percent extends React.Component {
 
   handleChange({ target }) {
     if (target.validity.valid) {
-      const value = parseInt(target.value);
-
-      this.props.onChange(this.props.name, value);
+      this.props.onChange(this.props.name, target.value);
     } else {
       this.props.onChange(this.props.name, null);
     }
@@ -35,7 +33,7 @@ export default class Percent extends React.Component {
           required
           min={rangeInfo.min}
           max={rangeInfo.max}
-          type="number" />
+          type="phone" />
         <label className="mdl-textfield__mask">
           {value == null ? '' : percent(value)}
         </label>

@@ -1,8 +1,10 @@
 import R from 'lib/ramda';
 
 export function formattedNumber(number) {
-  if (R.is(Number, number)) {
-    const p = parseFloat(number).toFixed(2).split('.');
+  const value = parseFloat(number);
+
+  if (R.is(Number, value)) {
+    const p = value.toFixed(2).split('.');
     const val = p[0].split('').reverse().reduce((acc, num, i) => {
       return num + (i && !(i % 3) ? ',' : '') + acc;
     }, '');
@@ -42,8 +44,10 @@ export function longCurrency(number) {
 }
 
 export function percent(number) {
-  if (R.is(Number, number)) {
-    return `${number}%`;
+  const value = parseFloat(number);
+
+  if (R.is(Number, value)) {
+    return `${value}%`;
   } else {
     return '';
   }
