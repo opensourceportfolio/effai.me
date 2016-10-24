@@ -35,7 +35,7 @@ export default class App extends React.Component {
     const status = this.state;
     const yrs = years(status);
     const options = { row: [
-      {text: i18n.header.links.known, url: 'known', isActive: false},
+      {text: i18n.header.links.known, url: 'information'},
       {text: i18n.header.links.chart, url: 'chart'},
     ]};
 
