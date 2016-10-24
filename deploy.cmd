@@ -106,7 +106,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
 )
 
 :: 4. Restore webpack packages and run webpack tasks
-IF /I "webpack.config.js" NEQ "" (
+IF EXIST "%DEPLOYMENT_TARGET%\webpack.config.js" (
   echo Running webpack deployment: Starting %TIME%
   pushd "%DEPLOYMENT_TARGET%"
   echo "Building web site using webpack"
