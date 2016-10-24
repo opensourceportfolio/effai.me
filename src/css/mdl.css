@@ -90,8 +90,16 @@
     position: absolute;
     padding: 4px 0;
 
-    + .mdl-textfield__input, ~ .mdl-textfield__mask, ~ .mdl-textfield__label {
+    + .mdl-textfield__input, ~ .mdl-textfield__mask {
       padding-left: 12px;
+    }
+  }
+
+  &:not(.is-focused):not(.is-dirty) {
+    .mdl-textfield-icon {
+      ~ .mdl-textfield__label {
+        padding-left: 12px;
+      }
     }
   }
 

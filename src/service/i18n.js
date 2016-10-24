@@ -32,7 +32,7 @@ export const i18n = {
       ylabel: 'Passive income',
     },
     validation: '',
-    placeholder: (v) => `your net worth (retire with ${v})`,
+    placeholder: (v) => `Net worth (retire with ${v})`,
   },
 
   future: {
@@ -44,7 +44,7 @@ export const i18n = {
       ylabel: 'Years to FI',
     },
     goal: {
-      placeholder: (v) => `Your goal (${v} adjusted to inflation)`,
+      placeholder: (v) => `Goal (${v} adjusted to inflation)`,
     },
     inflation: {
       placeholder: 'Expected rate of inflation',
@@ -63,10 +63,10 @@ export const i18n = {
       ylabel: 'Years to FI',
     },
     savings: {
-      placeholder: (v) => `your savings (${v} adjusted to inflation)`,
+      placeholder: (v) => `Savings (${v} adjusted to inflation)`,
     },
     networth: {
-      placeholder: (v) => `your net worth (retire with ${v})`,
+      placeholder: (v) => `Net worth (retire with ${v})`,
     },
     ror: {
       placeholder: 'Rate of return',
@@ -83,7 +83,7 @@ export const i18n = {
       ylabel: '$',
     },
     price: {
-      placeholder: 'The price of your house',
+      placeholder: 'Price of your house',
     },
     rate: {
       placeholder: (v) => `Mortgage rate (${formattedCurrency(v)})`,
@@ -92,7 +92,7 @@ export const i18n = {
       placeholder: 'Mortgage term',
     },
     downpayment: {
-      placeholder: (v) => `Your downpayment (${formattedCurrency(v)})`,
+      placeholder: (v) => `Downpayment (${formattedCurrency(v)})`,
     },
     houseGrowth: {
       placeholder: (v) => `Growth (Your house will be worth ${formattedCurrency(v)})`,
