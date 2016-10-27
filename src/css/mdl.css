@@ -65,10 +65,24 @@
 .mdl-textfield {
   width: 100%;
 
-  &.is-invalid:not(.is-focused) .mdl-textfield__label{
-    top: 24px;
+  &.is-invalid {
+    &:not(.is-focused) .mdl-textfield__label{
+      top: 24px;
+    }
+
+    .mdl-textfield__additional {
+      color: #d50000;
+    }
   }
 
+}
+
+.mdl-textfield__additional {
+  color: rgb(124,77,255);
+  font-size: 12px;
+  float: right;
+  position: absolute;
+  right: 0;
 }
 
 .mdl-textfield__masked {
@@ -83,23 +97,6 @@
       opacity: 1;
       position: static;
       width: 100%;
-    }
-  }
-
-  .mdl-textfield-icon {
-    position: absolute;
-    padding: 4px 0;
-
-    + .mdl-textfield__input, ~ .mdl-textfield__mask {
-      padding-left: 12px;
-    }
-  }
-
-  &:not(.is-focused):not(.is-dirty) {
-    .mdl-textfield-icon {
-      ~ .mdl-textfield__label {
-        padding-left: 12px;
-      }
     }
   }
 

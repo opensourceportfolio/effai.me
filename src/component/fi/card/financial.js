@@ -1,7 +1,7 @@
 import React from 'lib/react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
-import { formattedCurrency, longCurrency } from 'service/formatter';
+import { formattedCurrency, longCurrency, percent } from 'service/formatter';
 import { years, compound, networth } from 'service/calculator';
 import { xrange, yrange, chartFn } from 'service/chart';
 import ChartCard from 'component/fi/chart-card';
@@ -29,7 +29,8 @@ const Financial = ({status, onChange}) => {
     name: 'networth',
     onChange,
     text: {
-      placeholder: text.networth.placeholder(fiNetworth),
+      placeholder: text.networth.placeholder,
+      additional: text.networth.additional(fiNetworth),
       error: i18n.error.between(meta.networth.min, meta.networth.max),
     },
     value: status.networth,
@@ -41,7 +42,8 @@ const Financial = ({status, onChange}) => {
     name: 'savings',
     onChange,
     text: {
-      placeholder: text.savings.placeholder(fiSavings),
+      placeholder: text.savings.placeholder,
+      additional: text.savings.additional(fiSavings),
       error: i18n.error.between(meta.savings.min, meta.savings.max),
     },
     value: status.savings,
@@ -51,7 +53,10 @@ const Financial = ({status, onChange}) => {
   const ror = {
     name: 'ror',
     onChange,
-    text: text.ror,
+    text: {
+      placeholder: text.ror.placeholder,
+      error: i18n.error.between(meta.ror.min, meta.ror.max),
+    },
     value: status.ror,
     rangeInfo: meta.ror,
   };
@@ -69,7 +74,7 @@ const Financial = ({status, onChange}) => {
           <Percent {...ror} />
         </div>
       </div>
-    </ ChartCard>
+      </ ChartCard>
   );
 };
 

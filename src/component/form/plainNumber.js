@@ -1,8 +1,6 @@
 import React from 'lib/react';
 import R from 'lib/ramda';
 import componentHandler from 'lib/mdl';
-import 'lib/mdl/dist/material.red-amber.min.css';
-import { formattedNumber } from 'service/formatter';
 
 export default class PlainNumber extends React.Component {
 
@@ -14,35 +12,41 @@ export default class PlainNumber extends React.Component {
 
   handleChange({ target }) {
     if (target.validity.valid) {
-      const value = parseInt(target.value);
-
-      if (R.is(Number, value)) {
-        this.props.onChange(this.props.name, value);
-      }
+      this.props.onChange(this.props.name, target.value);
     } else {
       this.props.onChange(this.props.name, null);
     }
   }
 
+  validate(rangeInfo, value) {
+    const val = parseFloat(value);
+
+    return val && val <= rangeInfo.max && val >= rangeInfo.min;
+  }
+
   render() {
-    const { name, text, rangeInfo, value = '' } = this.props;
-    const placeholder = R.is(Function, text.placeholder) ? text.placeholder(value) : text.placeholder;
+    const { name, text, rangeInfo, value = '', formatter, inputProps } = this.props;
+    const additional = R.is(Function, text.additional) ? text.additional(value) : text.additional;
+    const isValid = this.validate(rangeInfo, value);
 
     return (
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__masked" ref="plainNumber">
         <input className="mdl-textfield__input"
-          defaultValue={value}
           onChange={this.handleChange.bind(this)}
-          pattern="\d*"
           required
-          min={rangeInfo.min}
-          max={rangeInfo.max}
-          type="number" />
+          type="tel"
+          value={value || ''}
+          step="1"
+          {...inputProps}
+        />
         <label className="mdl-textfield__mask">
-          {value == null ? '' : formattedNumber(value)}
+          {isValid ? formatter(value) : ''}
         </label>
         <label className="mdl-textfield__label" htmlFor={name}>
-          {value == null ? text.error : placeholder}
+          {text.placeholder}
+        </label>
+        <label className="mdl-textfield__additional" htmlFor={name}>
+          {isValid ? additional : text.error}
         </label>
       </div>
     );

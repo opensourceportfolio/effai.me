@@ -1,7 +1,7 @@
 import React from 'lib/react';
 import configureStore from 'store';
 import componentHandler from 'lib/mdl';
-import 'lib/mdl/dist/material.red-amber.min.css';
+import 'lib/mdl/dist/material.blue-orange.min.css';
 import { Provider } from 'lib/react-redux';
 import { loadData } from 'action/fi';
 import { meta } from 'service/meta';

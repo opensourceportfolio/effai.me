@@ -1,4 +1,4 @@
-import { formattedCurrency } from 'service/formatter';
+import { longNumber, formattedCurrency } from 'service/formatter';
 
 export const i18n = {
   fiStatus: {
@@ -19,7 +19,7 @@ export const i18n = {
   },
 
   error: {
-    between: (min, max) => `You must enter a number between ${formattedCurrency(min)} and ${formattedCurrency(max)}`,
+    between: (min, max) => `You must enter a number between ${longNumber(min)} and ${longNumber(max)}`,
   },
 
   networth: {
@@ -44,13 +44,14 @@ export const i18n = {
       ylabel: 'Years to FI',
     },
     goal: {
-      placeholder: (v) => `Goal (${v} adjusted to inflation)`,
+      placeholder: 'Goal',
+      additional: (v) => `${v} adjusted to inflation`,
     },
     inflation: {
-      placeholder: 'Expected rate of inflation',
+      placeholder: 'Inflation rate',
     },
     withdrawl: {
-      placeholder: 'Rate of withdrawl',
+      placeholder: 'Withdrawl rate',
     },
   },
 
@@ -63,10 +64,12 @@ export const i18n = {
       ylabel: 'Years to FI',
     },
     savings: {
-      placeholder: (v) => `Savings (${v} adjusted to inflation)`,
+      placeholder: 'Savings',
+      additional: (v) => `${v} adjusted to inflation`,
     },
     networth: {
-      placeholder: (v) => `Net worth (retire with ${v})`,
+      placeholder: 'Net worth',
+      additional: (v) => `retire with ${v}`,
     },
     ror: {
       placeholder: 'Rate of return',
@@ -83,19 +86,22 @@ export const i18n = {
       ylabel: '$',
     },
     price: {
-      placeholder: 'Price of your house',
+      placeholder: 'House price',
     },
     rate: {
-      placeholder: (v) => `Mortgage rate (${formattedCurrency(v)})`,
+      placeholder: 'Mortgage rate',
+      additional: (v) => `${formattedCurrency(v)} per month`,
     },
     term: {
       placeholder: 'Mortgage term',
     },
     downpayment: {
-      placeholder: (v) => `Downpayment (${formattedCurrency(v)})`,
+      placeholder: 'Downpayment',
+      additional: (v) => `${formattedCurrency(v)}`,
     },
     houseGrowth: {
-      placeholder: (v) => `Growth (Your house will be worth ${formattedCurrency(v)})`,
+      placeholder: 'Growth',
+      additional: (v) => `Will be worth ${formattedCurrency(v)} at FI`,
     }
   },
 };

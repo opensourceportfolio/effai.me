@@ -29,8 +29,8 @@ const Financial = ({status, onChange}) => {
     name: 'goal',
     onChange,
     text: {
+      additional: text.goal.additional(fiGoal),
       error: i18n.error.between(meta.goal.min, meta.goal.max),
-      placeholder: text.goal.placeholder(fiGoal),
     },
     value: status.goal,
     rangeInfo: meta.goal,
@@ -40,8 +40,8 @@ const Financial = ({status, onChange}) => {
     name: 'inflation',
     onChange,
     text: {
+      placeholder: text.inflation.placeholder,
       error: i18n.error.between(meta.inflation.min, meta.inflation.max),
-      placeholder: text.inflation.placeholder
     },
     value: status.inflation,
     rangeInfo: meta.inflation,
@@ -51,8 +51,8 @@ const Financial = ({status, onChange}) => {
     name: 'withdrawl',
     onChange,
     text: {
+      placeholder: text.withdrawl.placeholder,
       error: i18n.error.between(meta.withdrawl.min, meta.withdrawl.max),
-      placeholder: text.withdrawl.placeholder
     },
     value: status.withdrawl,
     rangeInfo: meta.withdrawl,

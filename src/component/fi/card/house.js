@@ -3,7 +3,7 @@ import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';
 import { compound, percentage, toFraction, debt, equity, years } from 'service/calculator';
-import { longCurrency } from 'service/formatter';
+import { longCurrency, formattedNumber } from 'service/formatter';
 import { pmt } from 'service/amortization';
 import ChartCard from 'component/fi/chart-card';
 import LineChart from 'component/chart/line';
@@ -43,8 +43,8 @@ const House = ({onChange, status}) => {
     name: 'price',
     onChange,
     text: {
-      error: i18n.error.between(meta.house.price.min, meta.house.price.max),
       placeholder: text.price.placeholder,
+      error: i18n.error.between(meta.house.price.min, meta.house.price.max),
     },
     value: status.price,
     rangeInfo: meta.house.price,
@@ -54,8 +54,9 @@ const House = ({onChange, status}) => {
     name: 'downpayment',
     onChange,
     text: {
+      placeholder: text.downpayment.placeholder,
+      additional: text.downpayment.additional(downpaymentAmount),
       error: i18n.error.between(meta.house.downpayment.min, meta.house.downpayment.max),
-      placeholder: text.downpayment.placeholder(downpaymentAmount)
     },
     value: status.downpayment,
     rangeInfo: meta.house.downpayment,
@@ -66,8 +67,9 @@ const House = ({onChange, status}) => {
     name: 'rate',
     onChange,
     text: {
+      placeholder: text.rate.placeholder,
+      additional: text.rate.additional(payment),
       error: i18n.error.between(meta.house.rate.min, meta.house.rate.max),
-      placeholder: text.rate.placeholder(payment),
     },
     value: status.rate,
     rangeInfo: meta.house.rate,
@@ -77,11 +79,12 @@ const House = ({onChange, status}) => {
     name: 'term',
     onChange,
     text: {
-      error: i18n.error.between(meta.house.term.min, meta.house.term.max),
       placeholder: text.term.placeholder,
+      error: i18n.error.between(meta.house.term.min, meta.house.term.max),
     },
     value: status.term,
     rangeInfo: meta.house.term,
+    formatter: formattedNumber,
   };
 
   const futurePrice = compound(status.price, status.houseGrowth, yrs);
@@ -89,8 +92,9 @@ const House = ({onChange, status}) => {
     name: 'houseGrowth',
     onChange,
     text: {
+      placeholder: text.houseGrowth.placeholder,
+      additional: text.houseGrowth.additional(futurePrice),
       error: i18n.error.between(meta.house.houseGrowth.min, meta.house.houseGrowth.max),
-      placeholder: text.houseGrowth.placeholder(futurePrice),
     },
     value: status.houseGrowth,
     rangeInfo: meta.house.houseGrowth,
