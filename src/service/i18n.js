@@ -12,47 +12,12 @@ export const i18n = {
   header: {
     links: {
       known: 'Knowns',
-      prediction: 'Predictions',
-      target: 'Target',
       chart: 'Chart',
     },
   },
 
   error: {
     between: (min, max) => `You must enter a number between ${longNumber(min)} and ${longNumber(max)}`,
-  },
-
-  networth: {
-    title: 'Current net worth',
-    supporting: `The total value of your liquid assets that generate income including stocks, bonds and cash.
-               Other assets can be included as well but remember to adjust your rate of return accordingly.`,
-    chart: {
-      legend: ['Total passive income', 'Your goal', 'Potential income from house'],
-      xlabel: 'Years',
-      ylabel: 'Passive income',
-    },
-    validation: '',
-    placeholder: (v) => `Net worth (retire with ${v})`,
-  },
-
-  future: {
-    title: 'Future',
-    supporting: 'Your future goals',
-    chart: {
-      formatter: formattedCurrency,
-      xlabel: 'Goal',
-      ylabel: 'Years to FI',
-    },
-    goal: {
-      placeholder: 'Goal',
-      additional: (v) => `${v} adjusted to inflation`,
-    },
-    inflation: {
-      placeholder: 'Inflation rate',
-    },
-    withdrawl: {
-      placeholder: 'Withdrawl rate',
-    },
   },
 
   financial: {
@@ -80,7 +45,7 @@ export const i18n = {
     title: 'House price',
     supporting: 'If you were to sell the house today, how much could you sell it for?',
     chart: {
-      legend: ['Debt', 'Equity'],
+      legend: ['Debt', 'Equity', 'Price'],
       formatter: formattedCurrency,
       xlabel: 'Year',
       ylabel: '$',
@@ -101,7 +66,31 @@ export const i18n = {
     },
     houseGrowth: {
       placeholder: 'Growth',
-      additional: (v) => `Will be worth ${formattedCurrency(v)} at FI`,
+      additional: (v) => `Home will be worth ${formattedCurrency(v)} at FI`,
     }
+  },
+
+  future: {
+    title: 'Future',
+    supporting: 'Your future goals',
+    chart: {
+      formatter: formattedCurrency,
+      xlabel: 'Goal',
+      ylabel: 'Years to FI',
+    },
+    renter: {
+      placeholder: 'Goal as renter',
+      additional: (v) => `${v} adjusted to inflation`,
+    },
+    homeowner: {
+      placeholder: 'Goal as homeowner',
+      additional: (v) => `${v} adjusted to inflation`,
+    },
+    inflation: {
+      placeholder: 'Inflation rate',
+    },
+    withdrawl: {
+      placeholder: 'Withdrawl rate',
+    },
   },
 };

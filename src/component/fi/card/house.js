@@ -24,11 +24,15 @@ const House = ({onChange, status}) => {
     return equity(status, year);
   };
 
+  const valueFn = (year) => {
+    return compound(status.price, status.houseGrowth, year);
+  };
+
   const min = 0;
   const max = status.term;
   const step = (max - min) / 5;
   const rangeInfo = { min, max, step };
-  const fn = [debtFn, equityFn];
+  const fn = [debtFn, equityFn, valueFn];
   const x = xrange(0, rangeInfo);
   const y = yrange(x, rangeInfo, fn);
   const chart = {

@@ -2,7 +2,7 @@ import React from 'lib/react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';
-import { years, compound, monthlyYield, percentage, equity } from 'service/calculator';
+import { years, compound, totalYield, percentage, equity } from 'service/calculator';
 import { longCurrency } from 'service/formatter';
 import ChartComponent from 'component/fi/chart';
 import LineChart from 'component/chart/line';
@@ -22,7 +22,7 @@ const Chart = ({status}) => {
     return percentage(equity(status, year), status.withdrawl) / 12;
   };
 
-  const fn = [(v) => monthlyYield(status, parseFloat(v)), compoundFn, equityYieldFn];
+  const fn = [(v) => totalYield(status, parseFloat(v)), compoundFn, equityYieldFn];
   const x = xrange(0, rangeInfo);
   const y = yrange(x, rangeInfo, fn);
 
@@ -30,7 +30,7 @@ const Chart = ({status}) => {
     type: LineChart,
     plot: {x, y},
     formatter: {  y: longCurrency },
-    text: i18n.networth.chart,
+    text: '',
     chartOptions: {
       low: 0,
     }
@@ -43,14 +43,3 @@ const Chart = ({status}) => {
 };
 
 export default Chart;
-
-
-
-/** WEBPACK FOOTER **
- ** ./src/component/page/chart.js
- **/
-
-
-/** WEBPACK FOOTER **
- ** ./src/component/page/chart.js
- **/

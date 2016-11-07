@@ -3,6 +3,14 @@
   font-size: 12px;
 }
 
+.ct-bar {
+  stroke-width: 20px;
+
+  &:hover {
+    stroke: #3F51B5;
+  }
+}
+
 .ct-line {
   stroke-width: 5px;
 }
@@ -32,11 +40,12 @@
 }
 
 .ct-legend {
-  position: absolute;
+  display: flex;
+  position: relative;
   z-index: 10;
   list-style: none;
-  top: 20px;
-  left: 30px;
+  top: -20px;
+  justify-content: space-around;
 
   li {
     position: relative;

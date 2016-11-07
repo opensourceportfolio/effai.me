@@ -38,7 +38,7 @@ export function equity(state, yrs) {
   return value - remaining;
 }
 
-export function networth(state, yrs) {
+export function investment(state, yrs) {
   const currentNetworth = parseInt(state.networth) || 0;
   const ror = toAddedFraction(state.ror);
   const savings = state.savings * 12;
@@ -61,34 +61,69 @@ export function networth(state, yrs) {
 export function totalNetworth(state, yrs) {
   const houseValue = equity(state, yrs);
 
-  return networth(state, yrs) + houseValue;
+  return investment(state, yrs) + houseValue;
 }
 
-export function monthlyYield(state, yrs) {
+export function liquidNetworth(state, yrs) {
+  const currentDebt = debt(state, yrs);
+
+  return investment(state, yrs) - currentDebt;
+}
+
+export function totalYield(state, yrs) {
   const currentNetworth = totalNetworth(state, yrs);
 
   return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
 }
 
+export function liquidYield(state, yrs) {
+  const currentNetworth = liquidNetworth(state, yrs);
+
+  return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
+}
+
 export function years(state) {
-  function find(from = 0, to = 45) {
+  function find(compareFn, from = 0, to = 45) {
     const mid = Math.floor((from + to) / 2);
 
     if (from === to) {
       return mid;
     } else {
-      const midYield = monthlyYield(state, mid);
-      const goal = compound(state.goal, state.inflation, mid);
+      const cmp = compareFn(mid);
 
-      if (midYield < goal) {
-        return find(mid + 1, to);
-      } else if (midYield > goal) {
-        return find(from, mid);
+      if (cmp < 0) {
+        return find(compareFn, mid + 1, to);
+      } else if (cmp > 0) {
+        return find(compareFn, from, mid);
       } else {
         return mid;
       }
     }
   }
 
-  return find();
+  const compare = (v1, v2) => {
+    if (v1 < v2) {
+      return -1;
+    } else if (v1 > v2) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+
+  const renterYears = find((year) => {
+    const renterYield = totalYield(state, year);
+    const renterGoal = compound(state.renter, state.inflation, year);
+
+    return compare(renterYield, renterGoal);
+  });
+
+  const homeownerYears = find((year) => {
+    const homeownerYield = liquidYield(state, year);
+    const homeownerGoal = compound(state.homeowner, state.inflation, year);
+
+    return compare(homeownerYield, homeownerGoal);
+  });
+
+  return Math.min(renterYears, homeownerYears);
 }

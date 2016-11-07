@@ -4,7 +4,8 @@ export function get() {
   const defaults  = {
     networth: 50000,
     savings: 1000,
-    goal: 4500,
+    renter: 4500,
+    homeowner: 4500,
     ror: 8,
     inflation: 3,
     withdrawl: 4,

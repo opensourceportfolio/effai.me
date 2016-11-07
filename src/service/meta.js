@@ -11,7 +11,13 @@ export const meta = {
     step: 100,
   },
 
-  goal: {
+  renter: {
+    min: 0,
+    max: 15000,
+    step: 100,
+  },
+
+  homeowner: {
     min: 0,
     max: 15000,
     step: 100,

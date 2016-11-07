@@ -13,9 +13,9 @@ const Financial = ({status, onChange}) => {
   const text = i18n.future;
   const yrs = years(status);
 
-  const fn = chartFn('goal', status);
-  const rangeInfo = meta.goal;
-  const x = xrange(status.goal, rangeInfo);
+  const fn = chartFn('renter', status);
+  const rangeInfo = meta.renter;
+  const x = xrange(status.renter, rangeInfo);
   const y = yrange(x, rangeInfo, fn);
   const chart = {
     type: BarChart,
@@ -24,16 +24,30 @@ const Financial = ({status, onChange}) => {
     text: text.chart,
   };
 
-  const fiGoal = formattedCurrency(compound(status.goal, status.inflation, yrs));
-  const goal = {
-    name: 'goal',
+  const renterGoal = formattedCurrency(compound(status.renter, status.inflation, yrs));
+  const renter = {
+    name: 'renter',
     onChange,
     text: {
-      additional: text.goal.additional(fiGoal),
-      error: i18n.error.between(meta.goal.min, meta.goal.max),
+      placeholder: text.renter.placeholder,
+      additional: text.renter.additional(renterGoal),
+      error: i18n.error.between(meta.renter.min, meta.renter.max),
     },
-    value: status.goal,
-    rangeInfo: meta.goal,
+    value: status.renter,
+    rangeInfo: meta.renter,
+  };
+
+  const homeownerGoal = formattedCurrency(compound(status.homeowner, status.inflation, yrs));
+  const homeowner = {
+    name: 'homeowner',
+    onChange,
+    text: {
+      placeholder: text.homeowner.placeholder,
+      additional: text.homeowner.additional(homeownerGoal),
+      error: i18n.error.between(meta.homeowner.min, meta.homeowner.max),
+    },
+    value: status.homeowner,
+    rangeInfo: meta.homeowner,
   };
 
   const inflation = {
@@ -58,12 +72,14 @@ const Financial = ({status, onChange}) => {
     rangeInfo: meta.withdrawl,
   };
 
-
   return (
     <ChartCard title={text.title} supporting={text.supporting} chart={chart}>
       <div className="mdl-grid">
         <div className="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-          <Currency {...goal} />
+          <Currency {...renter} />
+        </div>
+        <div className="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <Currency {...homeowner} />
         </div>
         <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
           <Percent {...inflation} />
@@ -72,7 +88,7 @@ const Financial = ({status, onChange}) => {
           <Percent {...withdrawl} />
         </div>
       </div>
-    </ ChartCard>
+      </ ChartCard>
   );
 };
 
