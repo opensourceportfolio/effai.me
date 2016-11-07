@@ -15,6 +15,12 @@
   stroke-width: 5px;
 }
 
+.ct-title {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
 .ct-series-a {
   .ct-line {
     stroke: #009688;
@@ -46,6 +52,7 @@
   list-style: none;
   top: -20px;
   justify-content: space-around;
+  padding-top: 5px;
 
   li {
     position: relative;

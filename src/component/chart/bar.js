@@ -1,6 +1,6 @@
 import React from 'lib/react';
 import Chartist from 'lib/chartist';
-import 'lib/chartist-axistitle';
+//import 'lib/chartist-axistitle';
 import ChartBase from 'component/chart';
 
 export default class Bar extends React.Component {
@@ -21,13 +21,6 @@ export default class Bar extends React.Component {
   render() {
     const data = this.props.data;
     const options = ChartBase.options(this.props.options);
-
-    const axis = ChartBase.axis;
-
-    axis.axisX.axisTitle = this.props.xlabel;
-    axis.axisY.axisTitle = this.props.ylabel;
-
-    options.plugins.push(Chartist.plugins.ctAxisTitle(axis));
 
     return (
       <ChartBase type={Chartist.Bar} data={data} options={options} ondraw={this.animate} />

@@ -24,6 +24,7 @@ export const i18n = {
     title: 'Financials',
     supporting: 'Information about your savings and investing habits',
     chart: {
+      title: 'Years to FI vs. Savings rate',
       formatter: formattedCurrency,
       xlabel: 'Savings rate',
       ylabel: 'Years to FI',
@@ -45,6 +46,7 @@ export const i18n = {
     title: 'House price',
     supporting: 'If you were to sell the house today, how much could you sell it for?',
     chart: {
+      title: 'Home price vs. Years',
       legend: ['Debt', 'Equity', 'Price'],
       formatter: formattedCurrency,
       xlabel: 'Year',
@@ -74,6 +76,7 @@ export const i18n = {
     title: 'Future',
     supporting: 'Your future goals',
     chart: {
+      title: 'Years vs Goal',
       formatter: formattedCurrency,
       xlabel: 'Goal',
       ylabel: 'Years to FI',

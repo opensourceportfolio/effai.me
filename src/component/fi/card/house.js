@@ -119,7 +119,7 @@ const House = ({onChange, status}) => {
         <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
           <PlainNumber {...term} />
         </div>
-        <div className="mdl-cell">
+        <div className="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
           <Percent {...houseGrowth} />
         </div>
       </div>
