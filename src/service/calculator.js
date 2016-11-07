@@ -82,9 +82,12 @@ export function liquidYield(state, yrs) {
   return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
 }
 
+// Change to epsilon
+
 export function years(state) {
   function find(compareFn, from = 0, to = 45) {
-    const mid = Math.floor((from + to) / 2);
+    const delta = 0.1;
+    const mid = (from + to) / 2;
 
     if (from === to) {
       return mid;
@@ -92,7 +95,7 @@ export function years(state) {
       const cmp = compareFn(mid);
 
       if (cmp < 0) {
-        return find(compareFn, mid + 1, to);
+        return find(compareFn, mid + delta, to);
       } else if (cmp > 0) {
         return find(compareFn, from, mid);
       } else {
@@ -102,9 +105,11 @@ export function years(state) {
   }
 
   const compare = (v1, v2) => {
+    const epsilon = 1000;
+
     if (v1 < v2) {
       return -1;
-    } else if (v1 > v2) {
+    } else if (v1 - v2 > epsilon) {
       return 1;
     } else {
       return 0;

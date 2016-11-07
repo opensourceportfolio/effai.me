@@ -5,7 +5,7 @@ export const i18n = {
     done: 'Done',
     never: 'Never',
     formatter(val) {
-      return `${val} years`;
+      return `${parseFloat(val).toFixed(2)} years`;
     },
   },
 
