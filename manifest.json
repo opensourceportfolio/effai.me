@@ -1,0 +1,13 @@
+{
+  "name": "Effai.me",
+  "short_name": "Effai",
+  "icons": [{
+    "src": "img/icon/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+  }],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "rgb(33,150,243)",
+  "theme_color": "#000000"
+}
