@@ -53,6 +53,7 @@
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server  --output-public-path=/dist/ -d --history-api-fallback --progress --inline",
     "dev": "./node_modules/.bin/webpack --progress --colors",
-    "prod": "./node_modules/.bin/webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors"
+    "prod": "./node_modules/.bin/webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
+    "deploy": "npm run prod && firebase deploy"
   }
 }

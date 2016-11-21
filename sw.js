@@ -1,5 +1,7 @@
 const assets = [
   '/',
+  '/information',
+  '/chart',
   '/dist/bundle.js',
   '/manifest.json',
   '/favicon.ico',
