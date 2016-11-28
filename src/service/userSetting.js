@@ -12,7 +12,7 @@ export function get() {
     price: 300000,
     rate: 4,
     term: 30,
-    downpayment: 60000,
+    downpayment: 20,
     houseGrowth: 3,
   };
 

@@ -19,15 +19,13 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== ficache) {
-          return caches.delete(key);
-        }
-
-        return Promise.resolve();
+    caches.keys().then((keys) => {
+      return Promise.all(keys.filter((key) => {
+        return key !== ficache;
+      }).map((keys) => {
+        return caches.delete();
       }));
-    })
+    });
   );
 
   return self.clients.claim();
