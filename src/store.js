@@ -1,9 +1,11 @@
-import {createStore} from 'lib/redux';
-import { userInput } from 'reducer/fi';
+import { createStore, combineReducers } from 'lib/redux';
+import { input } from 'reducer/fi';
+import { navigation } from 'reducer/navigation';
 
 
 export default function configureStore(initialState) {
-  const store = createStore(userInput, initialState);
+  const reducers = combineReducers({input, navigation});
+  const store = createStore(reducers, initialState);
 
   return store;
 }

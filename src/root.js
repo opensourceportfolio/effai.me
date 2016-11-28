@@ -9,21 +9,21 @@ import 'css/mdl.css';
 import 'css/chartist.css';
 import 'css/index.css';
 
-const scrollTop = () => {
-  document.getElementsByTagName('main')[0].scrollTop = 0;
-};
+// const scrollTop = () => {
+//   document.getElementsByTagName('main')[0].scrollTop = 0;
+// };
+//
+// const routes =
+// <Router onUpdate={() => scrollTop()} history={browserHistory}>
+//   <Redirect from="/" to="information"/>
+//   <Route path="/" component={App}>
+//     <Route path="information" component={Information}/>
+//     <Route path="chart" component={Chart}/>
+//     <Redirect from="*" to="information"/>
+//   </ Route>
+// </ Router>;
 
-const routes =
-<Router onUpdate={() => scrollTop()} history={browserHistory}>
-  <Redirect from="/" to="information"/>
-  <Route path="/" component={App}>
-    <Route path="information" component={Information}/>
-    <Route path="chart" component={Chart}/>
-    <Redirect from="*" to="information"/>
-  </ Route>
-</ Router>;
-
-ReactDOM.render(routes, document.getElementById('app-ficalculator'));
+ReactDOM.render(<App />, document.getElementById('app-ficalculator'));
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');

@@ -1,23 +1,29 @@
 import React from 'lib/react';
+import componentHandler from 'lib/mdl';
 import TabBar from 'component/mdl/layout/header/tab-bar';
 
-const Header = ({ options, title }) => {
-  let row = null;
+export default class Header extends React.Component {
+  componentDidMount() {
+    const node = this.refs.header;
 
-  if (options && options.row) {
-    row = <TabBar options={options.row}/>;
+    componentHandler.upgradeElement(node);
   }
 
-  return (
-    <header className="mdl-layout__header mdl-layout--fixed-tabs">
-      <div className="mdl-layout__header-row">
-        <span className="mdl-layout-title">
-          {title}
-        </span>
-      </div>
-      {row}
-    </header>
-  );
-};
+  render() {
+    const { options, title } = this.props;
+    const row = options && options.row ?
+      <TabBar index={options.tabIndex} options={options.row}/> :
+      null;
 
-export default Header;
+    return (
+      <header className="mdl-layout__header mdl-layout--fixed-tabs" ref="header">
+        <div className="mdl-layout__header-row">
+          <span className="mdl-layout-title">
+            {title}
+          </span>
+        </div>
+        {row}
+      </header>
+    );
+  }
+}

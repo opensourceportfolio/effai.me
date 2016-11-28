@@ -12,7 +12,7 @@ self.addEventListener('install', (event) => {
   // pre cache a load of stuff:
   event.waitUntil(
     caches.open(ficache).then((cache) => {
-      return cache.addAll(assets);
+      //return cache.addAll(assets);
     })
   );
 });
@@ -22,10 +22,10 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) => {
       return Promise.all(keys.filter((key) => {
         return key !== ficache;
-      }).map((keys) => {
-        return caches.delete();
+      }).map((key) => {
+        return caches.delete(key);
       }));
-    });
+    })
   );
 
   return self.clients.claim();

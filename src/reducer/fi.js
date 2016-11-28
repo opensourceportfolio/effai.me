@@ -3,7 +3,7 @@ import { get } from 'service/userSetting';
 
 const previousState = get();
 
-export function userInput(state = previousState, action) {
+export function input(state = previousState.input, action) {
   let copy;
 
   switch (action.type) {

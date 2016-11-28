@@ -46,7 +46,8 @@ module.exports = {
       'lib/react-dom': 'react-dom',
       'lib/react-redux': 'react-redux',
       'lib/react-router': 'react-router',
-      'lib/redux': 'redux'
+      'lib/redux': 'redux',
+      'lib/react-swipeable-views': 'react-swipeable-views'
     }
   },
 

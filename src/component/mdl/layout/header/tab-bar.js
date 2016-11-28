@@ -1,13 +1,18 @@
 import React from 'lib/react';
 import Tab from 'component/mdl/layout/header/tab';
 
-const TabBar = ({ options }) => {
+const TabBar = ({ options, index }) => {
   let links = null;
 
   if (options) {
     links = options.map((tab, i) => {
       return (
-        <Tab text={tab.text} url={tab.url} isActive={tab.isActive} key={`tab${i}`} />
+        <Tab
+          onclick={() => tab.onNavigation(i)}
+          text={tab.text}
+          isActive={i === index}
+          key={`tab${i}`}
+        />
       );
     });
   }
