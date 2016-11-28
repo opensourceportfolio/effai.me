@@ -25,7 +25,7 @@ export default class App extends React.Component {
       const state = store.getState();
 
       this.setState(state);
-      set(state);
+      set(state.input);
     });
 
     store.dispatch(loadData(data));
@@ -46,8 +46,8 @@ export default class App extends React.Component {
     const options = {
       tabIndex: navigation.tabIndex,
       row: [
-        {text: i18n.header.links.known, onNavigation},
-        {text: i18n.header.links.chart, onNavigation},
+        {text: i18n.header.links.known, url: '#information', onNavigation},
+        {text: i18n.header.links.chart, url: '#chart', onNavigation},
       ]
     };
 
@@ -57,13 +57,14 @@ export default class App extends React.Component {
           <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header is-upgraded">
             <Header title={App.fiAge(yrs)} options={options} />
             <main className="mdl-layout__content" ref="content">
-              <SwipeableViews onChangeIndex={(i) => this.navigate(i)}>
-                <div>
-                  <Information status={status} />
-                </div>
-                <div>
-                  <Chart status={status} />
-                </div>
+              <SwipeableViews
+                onChangeIndex={(i) => this.navigate(i)}
+                index={navigation.tabIndex}
+                resistance={true}
+                containerStyle={{height: '100%'}}
+              >
+                  <Information status={input} />
+                  <Chart status={input} />
               </ SwipeableViews>
               <a className="fi-opensource" href="https://github.com/opensourceportfolio/ficalculator3/">open source on github</a>
             </main>

@@ -1,6 +1,6 @@
 import React from 'lib/react';
 
-const Tab = ({ isActive, text }) => {
+const Tab = ({ isActive, text, url, onClick }) => {
   let className = 'mdl-layout__tab';
 
   if (isActive) {
@@ -8,7 +8,7 @@ const Tab = ({ isActive, text }) => {
   }
 
   return (
-    <a href="#" className={className}>{text}</a>
+    <a href={url} className={className} onClick={onClick}>{text}</a>
   );
 };
 

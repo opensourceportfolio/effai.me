@@ -8,7 +8,8 @@ const TabBar = ({ options, index }) => {
     links = options.map((tab, i) => {
       return (
         <Tab
-          onclick={() => tab.onNavigation(i)}
+          onClick={() => tab.onNavigation(i)}
+          url={tab.url}
           text={tab.text}
           isActive={i === index}
           key={`tab${i}`}

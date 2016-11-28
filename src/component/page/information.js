@@ -16,7 +16,7 @@ class Information extends React.Component {
     const status = this.props.status;
 
     return (
-      <div>
+      <div id="information">
         <Financial status={status} onChange={handleChange} />
 
         <House status={status} onChange={handleChange} />
