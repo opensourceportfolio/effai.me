@@ -8,27 +8,34 @@ import { loadData } from 'action/fi';
 import { changeTab } from 'action/navigation';
 import { meta } from 'service/meta';
 import { i18n } from 'service/i18n';
-import { get, set } from 'service/userSetting';
+import { get, set, originalState } from 'service/userSetting';
 import { years } from 'service/calculator';
 import Header from 'component/mdl/layout/header';
 import Information from 'component/page/information';
 import Chart from 'component/page/chart';
 
-const store = configureStore();
+const store = configureStore(originalState);
 
 export default class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = originalState;
+  }
+
   componentWillMount() {
-    const data = get();
+    const key = 'settings';
 
     store.subscribe(() => {
       const state = store.getState();
 
       this.setState(state);
-      set(state.input);
+      set(key, state);
     });
 
-    store.dispatch(loadData(data));
+    get(key).then((settings) => {
+      store.dispatch(loadData(settings));
+    });
   }
 
   componentDidMount() {

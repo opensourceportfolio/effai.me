@@ -11,7 +11,7 @@ module.exports = {
   entry: ['./src/root.js'],
 
   output: {
-    filename: 'bundle.[hash].js',
+    filename: 'bundle.[chunkhash].js',
     path: path.join(__dirname, 'dist'),
     publicPath: '/'
   },
@@ -59,6 +59,7 @@ module.exports = {
     ],
     alias: {
       'lib/chartist': 'chartist',
+      'lib/idb': 'idb',
       'lib/chartist-axistitle': 'chartist-plugin-axistitle',
       'lib/chartist-legend': 'chartist-plugin-legend',
       'lib/mdl': 'material-design-lite',
@@ -66,8 +67,8 @@ module.exports = {
       'lib/react': 'react',
       'lib/react-dom': 'react-dom',
       'lib/react-redux': 'react-redux',
-      'lib/react-router': 'react-router',
       'lib/redux': 'redux',
+      'lib/redux-thunk': 'redux-thunk',
       'lib/react-swipeable-views': 'react-swipeable-views'
     }
   },

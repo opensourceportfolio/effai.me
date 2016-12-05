@@ -1,30 +1,52 @@
-export function get() {
-  const str = window.localStorage.getItem('ficalculator');
-  const settings = str ? JSON.parse(str) : {};
-  const defaults  = {
-    input: {
-      networth: 50000,
-      savings: 1000,
-      renter: 4500,
-      homeowner: 4500,
-      ror: 8,
-      inflation: 3,
-      withdrawl: 4,
-      price: 300000,
-      rate: 4,
-      term: 30,
-      downpayment: 20,
-      houseGrowth: 3,
-      tabIndex: 0,
-    },
-    navigation: {
-      tabIndex: 0,
-    }
-  };
+import idb from 'lib/idb';
 
-  return Object.assign(defaults, settings);
+const OBJECT_STORE = 'user-settings';
+const dbPromise = idb.open('ficalculator-db', 1, (upgradeDB) => {
+  upgradeDB.createObjectStore(OBJECT_STORE);
+});
+
+export const originalState  = {
+  input: {
+    networth: 50000,
+    savings: 1000,
+    renter: 4500,
+    homeowner: 4500,
+    ror: 8,
+    inflation: 3,
+    withdrawl: 4,
+    price: 300000,
+    rate: 4,
+    term: 30,
+    downpayment: 20,
+    houseGrowth: 3,
+    tabIndex: 0,
+  },
+  navigation: {
+    tabIndex: 0,
+  }
+};
+
+export function get(key) {
+  return dbPromise.then((db) => {
+    const transaction = db.transaction(OBJECT_STORE);
+    const store = transaction.objectStore(OBJECT_STORE);
+
+
+    return store.get(key).then((settings) => {
+      return Object.assign(originalState, settings);
+    }).catch(() => {
+      return originalState;
+    });
+  });
 }
 
-export function set(value) {
-  window.localStorage.setItem('ficalculator', JSON.stringify(value));
+export function set(key, value) {
+  return dbPromise.then((db) => {
+    const transaction = db.transaction(OBJECT_STORE, 'readwrite');
+    const store = transaction.objectStore(OBJECT_STORE);
+
+    store.put(value, key);
+
+    return transaction.complete;
+  });
 }

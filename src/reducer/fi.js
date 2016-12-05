@@ -1,9 +1,6 @@
 import { LOAD_DATA, CHANGE_VALUE } from 'action/fi';
-import { get } from 'service/userSetting';
 
-const previousState = get();
-
-export function input(state = previousState.input, action) {
+export function input(state = {}, action) {
   let copy;
 
   switch (action.type) {
