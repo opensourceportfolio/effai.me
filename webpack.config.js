@@ -2,15 +2,18 @@
 const path = require('path');
 const cssnext = require('postcss-cssnext');
 const precss = require('precss');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 
   entry: ['./src/root.js'],
 
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle.[hash].js',
     path: path.join(__dirname, 'dist'),
-    publicPath: '/dist/'
+    publicPath: '/'
   },
 
   module: {
@@ -27,6 +30,24 @@ module.exports = {
       }
     ]
   },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html'
+    }),
+    new CopyWebpackPlugin([
+      {from: 'manifest.json'},
+      {from: 'favicon.ico'},
+    ]),
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'osp.ficalculator',
+      filename: 'sw.js',
+      runtimeCaching: [{
+        handler: 'cacheFirst',
+        urlPattern: /[.]mp3$/,
+      }],
+    }),
+  ],
 
   resolve: {
     modulesDirectories: [
