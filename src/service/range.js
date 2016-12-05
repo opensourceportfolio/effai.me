@@ -4,8 +4,9 @@ export function generate(count, from = 0, step = 1) {
   });
 }
 
-export function start(current, rangeInfo, count) {
+export function start(curr, rangeInfo, count) {
   const {min, max} = rangeInfo;
+  const current = Math.max(curr, max);
   const step = rangeInfo.step;
   const steps = parseInt(count / 2);
   const stepsFromMin = (current - min) / step;

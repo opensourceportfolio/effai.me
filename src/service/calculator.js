@@ -89,7 +89,7 @@ export function years(state) {
     const delta = 0.1;
     const mid = (from + to) / 2;
 
-    if (from === to) {
+    if (Math.abs(from - to) <= 2 * delta) {
       return mid;
     } else {
       const cmp = compareFn(mid);
@@ -105,7 +105,7 @@ export function years(state) {
   }
 
   const compare = (v1, v2) => {
-    const epsilon = 1000;
+    const epsilon = 100;
 
     if (v1 < v2) {
       return -1;
