@@ -25,6 +25,11 @@ export const i18n = {
     supporting: 'Information about your savings and investing habits',
     chart: {
       title: 'Years to FI vs. Savings rate',
+      tooltips: {
+        title: (tooltip) => `Saving ${longNumber(tooltip[0].xLabel)} a month`,
+        label: (tooltip) => `Expected to be be FI in ${longNumber(tooltip.yLabel)} years`,
+      },
+      legend: ['Years to FI'],
       formatter: formattedCurrency,
       xlabel: 'Savings rate',
       ylabel: 'Years to FI',
@@ -48,6 +53,18 @@ export const i18n = {
     chart: {
       title: 'Home price vs. Years',
       legend: ['Debt', 'Equity', 'Price'],
+      tooltips: {
+        title: (tooltip) => `Year ${longNumber(tooltip[0].xLabel)} of your mortgage`,
+        label: (tooltip) => {
+          if (tooltip.datasetIndex === 0) {
+            return `${longNumber(tooltip.yLabel)} of debt is still left`;
+          } else if (tooltip.datasetIndex === 1) {
+            return `${longNumber(tooltip.yLabel)} of equity has been built up`;
+          } else {
+            return `The price of your house is ${longNumber(tooltip.yLabel)}`;
+          }
+        },
+      },
       formatter: formattedCurrency,
       xlabel: 'Year',
       ylabel: '$',
@@ -77,6 +94,11 @@ export const i18n = {
     supporting: 'Your future goals',
     chart: {
       title: 'Years vs Goal',
+      tooltips: {
+        title: (tooltip) => `Looking for ${longNumber(tooltip[0].xLabel)} a month`,
+        label: (tooltip) => `Expected to be FI in ${longNumber(tooltip.yLabel)} years`,
+      },
+      legend: ['Years to FI'],
       formatter: formattedCurrency,
       xlabel: 'Goal',
       ylabel: 'Years to FI',

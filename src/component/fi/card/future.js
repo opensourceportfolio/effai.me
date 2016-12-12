@@ -1,7 +1,8 @@
 import React from 'lib/react';
+import R from 'lib/ramda';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
-import { formattedCurrency, longCurrency } from 'service/formatter';
+import { formattedCurrency, longCurrency, formattedShortFloat } from 'service/formatter';
 import { years, compound } from 'service/calculator';
 import { xrange, yrange, chartFn } from 'service/chart';
 import ChartCard from 'component/fi/chart-card';
@@ -17,10 +18,11 @@ const Financial = ({status, onChange}) => {
   const rangeInfo = meta.renter;
   const x = xrange(status.renter, rangeInfo);
   const y = yrange(x, rangeInfo, fn);
+  const formatted2DecimalPoints = R.curry(formattedShortFloat)(2);
   const chart = {
     type: BarChart,
     plot: {x, y},
-    formatter: { x: longCurrency },
+    formatter: { x: longCurrency, y: formatted2DecimalPoints},
     text: text.chart,
   };
 

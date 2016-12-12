@@ -17,10 +17,7 @@ export default class PlainNumber extends React.Component {
   }
 
   componentDidUpdate() {
-    const plainNumber = this.refs.plainNumber;
-
     this.validate();
-    //plainNumber.classList.add('is-focused');
   }
 
   isValid(rangeInfo, value) {

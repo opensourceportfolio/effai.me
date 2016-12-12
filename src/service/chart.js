@@ -4,15 +4,15 @@ import { years } from 'service/calculator';
 
 export const CHART_COUNT = 7;
 
-export function toModel(labels, chartData, legend) {
+export function toModel(labels, datasets, legend) {
   const chartLegend = legend || [];
 
   return {
     labels,
-    series: chartData.map((series, i) => {
+    datasets: datasets.map((dataset, i) => {
       return {
-        name: chartLegend[i],
-        data: series,
+        label: chartLegend[i],
+        data: dataset,
       };
     }),
   };

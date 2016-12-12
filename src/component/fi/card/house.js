@@ -40,7 +40,7 @@ const House = ({onChange, status}) => {
     plot: {x, y},
     formatter: { y: longCurrency },
     text: text.chart,
-    chartOptions: { low: 0 }
+    options: { low: 0 }
   };
 
   const price = {

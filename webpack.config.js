@@ -58,7 +58,8 @@ module.exports = {
       '', '.js'
     ],
     alias: {
-      'lib/chartist': 'chartist',
+      'lib/chartjs': 'chart.js',
+      'lib/debounce': 'debounce',
       'lib/idb': 'idb',
       'lib/chartist-axistitle': 'chartist-plugin-axistitle',
       'lib/chartist-legend': 'chartist-plugin-legend',

@@ -1,3 +1,5 @@
+import {} from 'service/formatter';
+
 export function pmt(rate, nperiod, presentValue, futureValue = 0, type = 0) {
   if (rate === 0) {
     return -(presentValue + futureValue) / nperiod;
@@ -34,5 +36,5 @@ export function remainder(loan, nperiod, rate, period) {
   const payment = -pmt(rate, nperiod, loan);
   const annualRate = rate * 12;
 
-  return  (12 * payment / annualRate) - (((12 * payment / annualRate) - loan) * ((1 + rate) ** period));
+  return  ((12 * payment / annualRate) - (((12 * payment / annualRate) - loan) * ((1 + rate) ** period))).toFixed(2);
 }

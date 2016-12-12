@@ -1,6 +1,6 @@
 import R from 'lib/ramda';
 
-export function formattedNumber(number) {
+export function formattedFloat(digits, number) {
   const value = parseFloat(number);
 
   if (R.is(Number, value)) {
@@ -8,11 +8,27 @@ export function formattedNumber(number) {
     const val = p[0].split('').reverse().reduce((acc, num, i) => {
       return num + (i && !(i % 3) ? ',' : '') + acc;
     }, '');
+    const remainder = p[1].slice(0, digits);
 
-    return `${val}`;
+    if (digits === 0) {
+      return `${val}`;
+    } else {
+
+      return `${val}.${remainder}`;
+    }
   } else {
     return '';
   }
+}
+
+export function formattedShortFloat(digits, number) {
+  const float = formattedFloat(digits, number);
+
+  return parseFloat(float);
+}
+
+export function formattedNumber(number) {
+  return formattedFloat(0, number);
 }
 
 export function longNumber(value) {
