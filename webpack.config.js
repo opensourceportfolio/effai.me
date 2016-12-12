@@ -59,6 +59,7 @@ module.exports = {
     ],
     alias: {
       'lib/chartjs': 'chart.js',
+      'lib/chartjs-deferred': 'chartjs-plugin-deferred',
       'lib/debounce': 'debounce',
       'lib/idb': 'idb',
       'lib/chartist-axistitle': 'chartist-plugin-axistitle',

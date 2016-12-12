@@ -1,5 +1,6 @@
 import React from 'lib/react';
 import ChartJS from 'lib/chartjs';
+import ChartDeferred from 'lib/chartjs-deferred';
 import debounce from 'lib/debounce';
 
 export default class Chart extends React.Component {
@@ -17,6 +18,7 @@ export default class Chart extends React.Component {
     const $chart = this.refs.chart;
     const { data, type, options } = this.props;
 
+    ChartJS.plugins.register(ChartDeferred);
     this.chart = new ChartJS($chart, {
       type,
       data,
@@ -38,7 +40,10 @@ export default class Chart extends React.Component {
     return Object.assign({
       title: {
         display: true,
-      }
+      },
+      deferred: {
+        enabled: true
+      },
     }, {
     }, override);
   }
