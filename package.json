@@ -28,7 +28,8 @@
     "react-redux": "^4.4.5",
     "react-swipeable-views": "^0.8.0",
     "redux": "^3.5.2",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "scroll-into-view": "^1.7.1"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",

@@ -1,6 +1,7 @@
 import React from 'lib/react';
 import R from 'lib/ramda';
 import componentHandler from 'lib/mdl';
+import scrollIntoView from 'lib/scroll-into-view';
 
 export default class PlainNumber extends React.Component {
 
@@ -35,6 +36,18 @@ export default class PlainNumber extends React.Component {
     plainNumber.classList.toggle('is-invalid', !isValid);
   }
 
+  scrollIntoViewOnFocus() {
+    const plainNumber = this.refs.plainNumber;
+
+    scrollIntoView(plainNumber, {
+      time: 500,
+      align: {
+        top: 0.5,
+        left: 1,
+      },
+    });
+  }
+
   render() {
     const { name, text, rangeInfo, value = '', formatter, inputProps } = this.props;
     const additional = R.is(Function, text.additional) ? text.additional(value) : text.additional;
@@ -45,6 +58,7 @@ export default class PlainNumber extends React.Component {
         <input className="mdl-textfield__input"
           ref="input"
           onChange={this.handleChange.bind(this)}
+          onFocus={this.scrollIntoViewOnFocus.bind(this)}
           required
           type="tel"
           value={value || ''}

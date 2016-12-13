@@ -30,6 +30,9 @@ const Financial = ({status, onChange}) => {
   const networthInput = {
     name: 'networth',
     onChange,
+    inputProps: {
+      autoFocus: true,
+    },
     text: {
       placeholder: text.networth.placeholder,
       additional: text.networth.additional(fiNetworth),

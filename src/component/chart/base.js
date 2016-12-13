@@ -10,6 +10,7 @@ export default class Chart extends React.Component {
       this.chart.data.datasets.forEach((dataset, i) => {
         dataset.data = this.props.data.datasets[i].data;
       });
+      this.chart.data.labels = this.props.data.labels;
       this.chart.update();
     }, 350);
   }
