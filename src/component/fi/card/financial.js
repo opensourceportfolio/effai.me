@@ -16,11 +16,9 @@ const mapStateToProps = (state) => ({
   status: state.input
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onChange: (name, value) => {
-    dispatch(changeValue(name, value));
-  }
-});
+const mapDispatchToProps = {
+  onChange: changeValue
+};
 
 const Financial = ({status, onChange}) => {
   const text = i18n.financial;
