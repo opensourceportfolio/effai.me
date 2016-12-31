@@ -1,7 +1,7 @@
 import { remainder } from 'service/amortization';
 
 export function toFraction(num) {
-  return num / 100;
+  return parseFloat(num) / 100;
 }
 
 export function toAddedFraction(num) {
@@ -9,11 +9,11 @@ export function toAddedFraction(num) {
 }
 
 export function percentage(amount, rate) {
-  return amount * toFraction(rate);
+  return parseFloat(amount) * toFraction(rate);
 }
 
 export function compound(amount, rate, yrs) {
-  return amount * Math.pow(toAddedFraction(rate), yrs);
+  return parseFloat(amount) * Math.pow(toAddedFraction(rate), parseFloat(yrs));
 }
 
 export function debt(state, yrs) {

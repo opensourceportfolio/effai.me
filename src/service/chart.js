@@ -18,7 +18,8 @@ export function toModel(labels, datasets, legend) {
   };
 }
 
-export function xrange(value, rangeInfo) {
+export function xrange(val, rangeInfo) {
+  const value = parseFloat(val);
   const { min, max } = rangeInfo;
   const step = Math.max(value * 0.1, rangeInfo.step);
   const minStep = Math.max(rangeInfo.step, Math.floor(step / rangeInfo.step) * rangeInfo.step);

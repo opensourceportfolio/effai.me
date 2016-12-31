@@ -3,7 +3,7 @@ import R from 'lib/ramda';
 export function formattedFloat(digits, number) {
   const value = parseFloat(number);
 
-  if (R.is(Number, value)) {
+  if (R.is(Number, value) && !isNaN(value)) {
     const p = value.toFixed(2).split('.');
     const val = p[0].split('').reverse().reduce((acc, num, i) => {
       return num + (i && !(i % 3) ? ',' : '') + acc;
