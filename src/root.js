@@ -12,7 +12,6 @@ import { get } from 'service/userSetting';
 
 const key = 'settings';
 
-
 get(key).then((settings) => {
   const store = configureStore(settings);
 
