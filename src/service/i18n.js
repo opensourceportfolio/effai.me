@@ -118,4 +118,16 @@ export const i18n = {
       placeholder: 'Withdrawl rate',
     },
   },
+
+  chart: {
+    title: 'Time vs Passive income',
+    tooltips: {
+      title: (tooltip) => `Saving for ${longNumber(tooltip[0].xLabel)} years`,
+      label: (tooltip) => `Expected to earn ${longNumber(tooltip.yLabel)} passively`,
+    },
+    legend: ['Passive income'],
+    formatter: formattedCurrency,
+    xlabel: 'Years',
+    ylabel: 'Passive income',
+  }
 };

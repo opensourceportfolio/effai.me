@@ -45,7 +45,7 @@ export default class Chart extends React.Component {
 
   render() {
     return (
-      <canvas width="400" height="400" ref="chart"></canvas>
+      <canvas width="400" height="300" ref="chart"></canvas>
     );
   }
 }

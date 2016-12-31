@@ -14,15 +14,18 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = { onNavigation: changeTab };
 
 const FiSwipeableView = ({ tabIndex, onNavigation }) =>
-  <SwipeableViews
-    onChangeIndex={(i) => onNavigation(i)}
-    index={tabIndex}
-    resistance={true}
-    style={{'display': 'flex', 'flexDirection': 'column'}}
-  >
-    <Information />
-    <Chart />
-  </ SwipeableViews>;
+  <main className="mdl-layout__content">
+
+    <SwipeableViews
+      onChangeIndex={(i) => onNavigation(i)}
+      index={tabIndex}
+      resistance={true}
+      style={{'display': 'flex', 'flexDirection': 'column'}}
+    >
+      <Information />
+      <Chart />
+    </ SwipeableViews>
+  </main>;
 
 const container = connect(mapStateToProps, mapDispatchToProps);
 

@@ -29,7 +29,7 @@ const Chart = ({status}) => {
     return percentage(equity(status, year), status.withdrawl) / 12;
   };
 
-  const fn = [(v) => totalYield(status, parseFloat(v)), compoundFn, equityYieldFn];
+  const fn = [(v) => totalYield(status, parseFloat(v))];
   const x = xrange(0, rangeInfo);
   const y = yrange(x, rangeInfo, fn);
 
@@ -37,15 +37,16 @@ const Chart = ({status}) => {
     type: LineChart,
     plot: {x, y},
     formatter: {  y: longCurrency },
-    text: '',
+    text: i18n.chart,
     chartOptions: {
       low: 0,
     }
   };
 
   return (
-    //<ChartComponent {...chart} />
-    <h1 id="chart">Under construction</h1>
+    <div id="chart">
+      <ChartComponent {...chart} />
+    </div>
   );
 };
 

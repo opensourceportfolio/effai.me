@@ -1,4 +1,4 @@
-import { LOAD_DATA, CHANGE_VALUE } from 'action/fi';
+import { CHANGE_VALUE } from 'action/fi';
 
 export function input(state = {}, action) {
   let copy;
@@ -10,7 +10,6 @@ export function input(state = {}, action) {
     copy[action.field] = action.value;
 
     return copy;
-  case LOAD_DATA:
   default:
     return state;
   }
