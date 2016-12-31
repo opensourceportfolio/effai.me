@@ -38,7 +38,7 @@ export default class App extends React.Component {
           <FiHeader />
           <main className="mdl-layout__content" ref="content">
             <FiSwipeableViews />
-            <a className="fi-opensource" href="https://github.com/opensourceportfolio/ficalculator3/">open source on github</a>
+            {/* <a className="fi-opensource" href="https://github.com/opensourceportfolio/ficalculator3/">open source on github</a> */}
           </main>
         </div>
       </Provider>

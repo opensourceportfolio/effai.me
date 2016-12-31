@@ -18,7 +18,7 @@ const FiSwipeableView = ({ tabIndex, onNavigation }) =>
     onChangeIndex={(i) => onNavigation(i)}
     index={tabIndex}
     resistance={true}
-    containerStyle={{height: '100%'}}
+    style={{'display': 'flex', 'flexDirection': 'column'}}
   >
     <Information />
     <Chart />

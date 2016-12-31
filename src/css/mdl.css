@@ -1,5 +1,5 @@
 .mdl-layout__content {
-  padding: 0 0 100px;
+  display: flex;
 }
 
 .mdl-header__menu {
