@@ -1,15 +1,7 @@
 import React from 'lib/react';
 import Base from 'component/chart/base';
 
-export default class Bar extends React.Component {
+const Bar = ({data, options}) =>
+  <Base type="bar" data={data} options={options} />;
 
-  render() {
-    const data = this.props.data;
-    const options = Base.options(this.props.options);
-
-    return (
-      <Base type="bar" data={data} options={options} />
-    );
-  }
-
-}
+export default Bar;

@@ -18,12 +18,13 @@ export default class Chart extends React.Component {
   componentDidMount() {
     const $chart = this.refs.chart;
     const { data, type, options } = this.props;
+    const overridden = this.override(options);
 
     ChartJS.plugins.register(ChartDeferred);
     this.chart = new ChartJS($chart, {
       type,
       data,
-      options,
+      options: overridden,
     });
   }
 
@@ -31,13 +32,7 @@ export default class Chart extends React.Component {
     this.update();
   }
 
-  render() {
-    return (
-      <canvas width="400" height="400" ref="chart"></canvas>
-    );
-  }
-
-  static options(override) {
+  override(options) {
     return Object.assign({
       title: {
         display: true,
@@ -45,7 +40,12 @@ export default class Chart extends React.Component {
       deferred: {
         enabled: true
       },
-    }, {
-    }, override);
+    }, {}, options);
+  }
+
+  render() {
+    return (
+      <canvas width="400" height="400" ref="chart"></canvas>
+    );
   }
 }

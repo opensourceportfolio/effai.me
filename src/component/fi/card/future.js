@@ -1,5 +1,7 @@
 import React from 'lib/react';
+import { connect } from 'lib/react-redux';
 import R from 'lib/ramda';
+import { changeValue } from 'action/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { formattedCurrency, longCurrency, formattedShortFloat } from 'service/formatter';
@@ -9,6 +11,16 @@ import ChartCard from 'component/fi/chart-card';
 import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
+
+const mapStateToProps = (state) => ({
+  status: state.input
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChange: (name, value) => {
+    dispatch(changeValue(name, value));
+  }
+});
 
 const Financial = ({status, onChange}) => {
   const text = i18n.future;
@@ -94,4 +106,6 @@ const Financial = ({status, onChange}) => {
   );
 };
 
-export default Financial;
+const container = connect(mapStateToProps, mapDispatchToProps);
+
+export default container(Financial);
