@@ -60,27 +60,24 @@ export default class App extends React.Component {
 
     return (
       <Provider store={store}>
-        <div className="mdl-layout__container">
-          <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header is-upgraded">
-            <Header title={App.fiAge(yrs)} options={options} />
-            <main className="mdl-layout__content" ref="content">
-              <SwipeableViews
-                onChangeIndex={(i) => this.navigate(i)}
-                index={navigation.tabIndex}
-                resistance={true}
-                containerStyle={{height: '100%'}}
-              >
-                  <Information status={input} />
-                  <Chart status={input} />
-              </ SwipeableViews>
-              <a className="fi-opensource" href="https://github.com/opensourceportfolio/ficalculator3/">open source on github</a>
-            </main>
-          </div>
+        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header is-upgraded">
+          <Header title={App.fiAge(yrs)} options={options} />
+          <main className="mdl-layout__content" ref="content">
+            <SwipeableViews
+              onChangeIndex={(i) => this.navigate(i)}
+              index={navigation.tabIndex}
+              resistance={true}
+              containerStyle={{height: '100%'}}
+            >
+              <Information />
+              <Chart />
+            </ SwipeableViews>
+            <a className="fi-opensource" href="https://github.com/opensourceportfolio/ficalculator3/">open source on github</a>
+          </main>
         </div>
       </Provider>
     );
   }
-
 
   static fiAge(yrs) {
     let age = 0;
@@ -93,6 +90,6 @@ export default class App extends React.Component {
       age = i18n.fiStatus.formatter(yrs);
     }
 
-    return `FI in: ${age}`;
+    return age;
   }
 }

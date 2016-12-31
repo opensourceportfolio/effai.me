@@ -9,5 +9,5 @@ import 'css/index.css';
 ReactDOM.render(<App />, document.getElementById('app-ficalculator'));
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
+  navigator.serviceWorker.register('./sw.js');
 }

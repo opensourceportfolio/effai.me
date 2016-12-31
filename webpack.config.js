@@ -13,7 +13,7 @@ module.exports = {
   output: {
     filename: 'bundle.[chunkhash].js',
     path: path.join(__dirname, 'dist'),
-    publicPath: '/'
+    publicPath: '/',
   },
 
   module: {
@@ -40,12 +40,8 @@ module.exports = {
       {from: 'favicon.ico'},
     ]),
     new SWPrecacheWebpackPlugin({
-      cacheId: 'osp.ficalculator',
-      filename: 'sw.js',
-      runtimeCaching: [{
-        handler: 'cacheFirst',
-        urlPattern: /[.]mp3$/,
-      }],
+      cacheId: 'osp.effai',
+      filepath: path.join(__dirname, 'dist/sw.js'),
     }),
   ],
 

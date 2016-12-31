@@ -5,7 +5,7 @@ export const i18n = {
     done: 'Done',
     never: 'Never',
     formatter(val) {
-      return `${parseFloat(val).toFixed(2)} years`;
+      return `${parseFloat(val).toFixed(2)} years to effai`;
     },
   },
 
@@ -24,22 +24,22 @@ export const i18n = {
     title: 'Financials',
     supporting: 'Information about your savings and investing habits',
     chart: {
-      title: 'Years to FI vs. Savings rate',
+      title: 'Years to effai vs. Savings rate',
       tooltips: {
         title: (tooltip) => `Saving ${longNumber(tooltip[0].xLabel)} a month`,
-        label: (tooltip) => `Expected to be be FI in ${longNumber(tooltip.yLabel)} years`,
+        label: (tooltip) => `Expected to be be effai in ${longNumber(tooltip.yLabel)} years`,
       },
-      legend: ['Years to FI'],
+      legend: ['Years to effai'],
       formatter: formattedCurrency,
       xlabel: 'Savings rate',
-      ylabel: 'Years to FI',
+      ylabel: 'Years to effai',
     },
     savings: {
-      placeholder: 'Savings',
+      placeholder: 'Savings per month',
       additional: (v) => `${v} adjusted to inflation`,
     },
     networth: {
-      placeholder: 'Net worth',
+      placeholder: 'Total liquid assets',
       additional: (v) => `retire with ${v}`,
     },
     ror: {
@@ -49,7 +49,7 @@ export const i18n = {
 
   house: {
     title: 'House price',
-    supporting: 'If you were to sell the house today, how much could you sell it for?',
+    supporting: 'Your housing information',
     chart: {
       title: 'Home price vs. Years',
       legend: ['Debt', 'Equity', 'Price'],
@@ -85,7 +85,7 @@ export const i18n = {
     },
     houseGrowth: {
       placeholder: 'Growth',
-      additional: (v) => `Home will be worth ${formattedCurrency(v)} at FI`,
+      additional: (v) => `Home will be worth ${formattedCurrency(v)} at effai`,
     }
   },
 
@@ -96,19 +96,19 @@ export const i18n = {
       title: 'Years vs Goal',
       tooltips: {
         title: (tooltip) => `Looking for ${longNumber(tooltip[0].xLabel)} a month`,
-        label: (tooltip) => `Expected to be FI in ${longNumber(tooltip.yLabel)} years`,
+        label: (tooltip) => `Expected to be effai in ${longNumber(tooltip.yLabel)} years`,
       },
-      legend: ['Years to FI'],
+      legend: ['Years to effai'],
       formatter: formattedCurrency,
       xlabel: 'Goal',
-      ylabel: 'Years to FI',
+      ylabel: 'Years to effai',
     },
     renter: {
       placeholder: 'Goal as renter',
       additional: (v) => `${v} adjusted to inflation`,
     },
     homeowner: {
-      placeholder: 'Goal as homeowner',
+      placeholder: 'Goal as mortgage free homeowner',
       additional: (v) => `${v} adjusted to inflation`,
     },
     inflation: {

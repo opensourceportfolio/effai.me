@@ -5,26 +5,32 @@ import Future from 'component/fi/card/future';
 import Financial from 'component/fi/card/financial';
 import House from 'component/fi/card/house';
 
-class Information extends React.Component {
+const mapStateToProps = (state) => {
+  return {
+    status: state.input
+  };
+};
 
-  handleChange(name, value) {
-    this.props.dispatch(changeValue(name, value));
-  }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onChange: (name, value) => {
+      dispatch(changeValue(name, value));
+    }
+  };
+};
 
-  render() {
-    const handleChange = this.handleChange.bind(this);
-    const status = this.props.status;
+const Information = ({status, onChange}) => {
+  return (
+    <div id="information">
+      <Financial status={status} onChange={onChange} />
 
-    return (
-      <div id="information">
-        <Financial status={status} onChange={handleChange} />
+      <House status={status} onChange={onChange} />
 
-        <House status={status} onChange={handleChange} />
+      <Future status={status} onChange={onChange} />
+    </div>
+  );
+};
 
-        <Future status={status} onChange={handleChange} />
-      </div>
-    );
-  }
-}
+const container = connect(mapStateToProps, mapDispatchToProps);
 
-export default connect((p) => p)(Information);
+export default container(Information);

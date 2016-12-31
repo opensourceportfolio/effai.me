@@ -1,4 +1,5 @@
 import React from 'lib/react';
+import { connect } from 'lib/react-redux';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';
@@ -6,6 +7,12 @@ import { years, compound, totalYield, percentage, equity } from 'service/calcula
 import { longCurrency } from 'service/formatter';
 import ChartComponent from 'component/fi/chart';
 import LineChart from 'component/chart/line';
+
+const mapStateToProps = (state) => {
+  return {
+    status: state.input
+  };
+};
 
 const Chart = ({status}) => {
   const yrs = years(status);
@@ -42,4 +49,4 @@ const Chart = ({status}) => {
   );
 };
 
-export default Chart;
+export default connect(mapStateToProps)(Chart);
