@@ -5,7 +5,14 @@ const dbPromise = idb.open('ficalculator-db', 1, (upgradeDB) => {
   upgradeDB.createObjectStore(OBJECT_STORE);
 });
 
-export const originalState  = {
+export const emptyState = {
+  input: {},
+  navigation: {
+    tabIndex: 0,
+  },
+};
+
+export const originalState  = Object.assign({}, emptyState, {
   input: {
     networth: 50000,
     savings: 1000,
@@ -21,10 +28,7 @@ export const originalState  = {
     houseGrowth: 3,
     tabIndex: 0,
   },
-  navigation: {
-    tabIndex: 0,
-  }
-};
+});
 
 export function get(key) {
   return dbPromise.then((db) => {

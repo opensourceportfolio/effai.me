@@ -8,20 +8,22 @@ import 'css/mdl.css';
 import 'css/chartist.css';
 import 'css/index.css';
 import configureStore from 'store';
-import { get } from 'service/userSetting';
+import { get, emptyState } from 'service/userSetting';
+import { loadData } from 'action/fi';
 
 const key = 'settings';
+const store = configureStore(emptyState);
 
 get(key).then((settings) => {
-  const store = configureStore(settings);
-
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('app-ficalculator')
-  );
+  store.dispatch(loadData(settings));
 });
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app-ficalculator')
+);
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js');

@@ -7,3 +7,12 @@ export function changeValue(field, value) {
     value,
   };
 }
+
+export const LOAD_DATA = 'LOAD_DATA';
+
+export function loadData(field, value) {
+  return {
+    type: LOAD_DATA,
+    value,
+  };
+}

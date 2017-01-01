@@ -3,7 +3,7 @@ import { connect } from 'lib/react-redux';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';
-import { years, compound, totalYield, percentage, equity } from 'service/calculator';
+import { years, compound, totalYield } from 'service/calculator';
 import { longCurrency } from 'service/formatter';
 import ChartComponent from 'component/fi/chart';
 import LineChart from 'component/chart/line';
@@ -22,14 +22,10 @@ const Chart = ({status}) => {
   const rangeInfo = { min, max, step };
 
   const compoundFn = (year) => {
-    return compound(status.goal, status.inflation, parseFloat(year));
+    return compound(status.renter, status.inflation, parseFloat(year));
   };
 
-  const equityYieldFn = (year) => {
-    return percentage(equity(status, year), status.withdrawl) / 12;
-  };
-
-  const fn = [(v) => totalYield(status, parseFloat(v))];
+  const fn = [compoundFn, (v) => totalYield(status, parseFloat(v))];
   const x = xrange(0, rangeInfo);
   const y = yrange(x, rangeInfo, fn);
 
@@ -39,12 +35,12 @@ const Chart = ({status}) => {
     formatter: {  y: longCurrency },
     text: i18n.chart,
     chartOptions: {
-      low: 0,
+      fill: false,
     }
   };
 
   return (
-    <div id="chart">
+    <div id="chart" style={{display: 'flex', flexDirection: 'column', height: '80%'}}>
       <ChartComponent {...chart} />
     </div>
   );

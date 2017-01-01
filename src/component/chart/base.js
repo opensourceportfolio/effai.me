@@ -3,7 +3,7 @@ import ChartJS from 'lib/chartjs';
 import ChartDeferred from 'lib/chartjs-deferred';
 import debounce from 'lib/debounce';
 
-export default class Chart extends React.Component {
+export default class Base extends React.Component {
   constructor() {
     super();
     this.update = debounce(() => {
@@ -34,6 +34,7 @@ export default class Chart extends React.Component {
 
   override(options) {
     return Object.assign({
+      maintainAspectRatio: false,
       title: {
         display: true,
       },
@@ -45,7 +46,7 @@ export default class Chart extends React.Component {
 
   render() {
     return (
-      <canvas width="400" height="300" ref="chart"></canvas>
+      <canvas width="300" height="300" style={{minWidth: '100%', minHeight: '100%'}} ref="chart"></canvas>
     );
   }
 }

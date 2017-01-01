@@ -1,22 +1,22 @@
 import React from 'lib/react';
 import { toModel } from 'service/chart';
 
-const FICard = ({ type, plot, text, formatter = {}, opts = {} }) => {
+const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
   const { xlabel, ylabel, legend, title, tooltips } = text;
   const xval = plot.x;
   const yval = plot.y;
   const data = toModel(xval, yval, legend);
   const identity = (e) => e;
   const chartColors = [
-    'rgb(255, 99, 132)',
-    'rgb(255, 159, 64)',
-    'rgb(255, 205, 86)',
-    'rgb(75, 192, 192)',
-    'rgb(54, 162, 235)',
-    'rgb(153, 102, 255)',
-    'rgb(231,233,237)'
+    'rgba(255, 99, 132, 0.8)',
+    'rgba(255, 159, 64, 0.8)',
+    'rgba(255, 205, 86, 0.5)',
+    'rgba(75, 192, 192, 0.5)',
+    'rgba(54, 162, 235, 0.5)',
+    'rgba(153, 102, 255, 0.5)',
+    'rgba(231,233,237, 0.5)'
   ];
-  const options = Object.assign({}, opts, {
+  const options = Object.assign({}, chartOptions, {
     title: {
       display: true,
       text: title,
@@ -41,10 +41,8 @@ const FICard = ({ type, plot, text, formatter = {}, opts = {} }) => {
   });
 
   return (
-    <div>
-      {React.createElement(type, { data, xlabel, ylabel, options })}
-    </div>
+    React.createElement(type, { data, xlabel, ylabel, options })
   );
 };
 
-export default FICard;
+export default Chart;

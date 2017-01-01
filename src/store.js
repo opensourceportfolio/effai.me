@@ -2,15 +2,7 @@ import { createStore, combineReducers } from 'lib/redux';
 import { input } from 'reducer/fi';
 import { navigation } from 'reducer/navigation';
 import { set } from 'service/userSetting';
-
-function debounce(fn, delay) {
-  let timeout = null;
-
-  return () => {
-    clearTimeout(timeout);
-    timeout = setTimeout(fn, delay);
-  };
-}
+import debounce from 'lib/debounce';
 
 export default function configureStore(originalState) {
   const key = 'settings';

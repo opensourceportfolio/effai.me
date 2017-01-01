@@ -123,9 +123,17 @@ export const i18n = {
     title: 'Time vs Passive income',
     tooltips: {
       title: (tooltip) => `Saving for ${longNumber(tooltip[0].xLabel)} years`,
-      label: (tooltip) => `Expected to earn ${longNumber(tooltip.yLabel)} passively`,
+      label: (tooltip) => {
+        if (tooltip.datasetIndex === 0) {
+          return `Expected to require ${longNumber(tooltip.yLabel)}`;
+        } else if (tooltip.datasetIndex === 1) {
+          return `Expected to earn ${longNumber(tooltip.yLabel)} passively`;
+        } else {
+          return `The price of your house is ${longNumber(tooltip.yLabel)}`;
+        }
+      },
     },
-    legend: ['Passive income'],
+    legend: ['Required income', 'Passive income'],
     formatter: formattedCurrency,
     xlabel: 'Years',
     ylabel: 'Passive income',
