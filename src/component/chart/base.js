@@ -45,8 +45,11 @@ export default class Base extends React.Component {
   }
 
   render() {
+    const defaultSize = { width: '500', height: '300' };
+    const { size = defaultSize } = this.props.options;
+
     return (
-      <canvas width="300" height="300" ref="chart"></canvas>
+      <canvas {...size} style={{height: '100%'}} ref="chart"></canvas>
     );
   }
 }

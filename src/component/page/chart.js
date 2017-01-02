@@ -5,9 +5,7 @@ import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';
 import { years, compound, totalYield } from 'service/calculator';
 import { longCurrency } from 'service/formatter';
-import ChartComponent from 'component/fi/chart';
-import Card from 'component/mdl/card';
-import Media from 'component/mdl/card/media';
+import FiChart from 'component/fi/chart';
 import LineChart from 'component/chart/line';
 
 const mapStateToProps = (state) => {
@@ -37,17 +35,17 @@ const Chart = ({status}) => {
     formatter: {  y: longCurrency },
     text: i18n.chart,
     chartOptions: {
-      fill: false,
+      width: '500px',
+      height: '1000px',
     }
   };
 
   return (
-    <div id="chart" style={{display: 'flex', flexDirection: 'column', height: '80%'}}>
-      <Card>
-        <Media>
-          <ChartComponent {...chart}/>
-        </Media>
-      </Card>
+    <div id="chart"
+      style={{display: 'flex', flexDirection: 'column', height: '100%', alignItems: 'center'}}>
+        <div style={{maxWidth: '100%', flex: '1'}}>
+          <FiChart {...chart}/>
+        </div>
     </div>
   );
 };

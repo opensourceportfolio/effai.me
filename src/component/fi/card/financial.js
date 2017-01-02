@@ -89,7 +89,7 @@ const Financial = ({status, onChange}) => {
           <Percent {...ror} />
         </div>
       </div>
-    </ ChartCard>
+    </ChartCard>
   );
 };
 

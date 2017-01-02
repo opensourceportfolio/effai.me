@@ -21,7 +21,7 @@ const FiSwipeableView = ({ isLoaded, tabIndex, onNavigation }) =>
     <SwipeableViews
       onChangeIndex={(i) => onNavigation(i)}
       index={tabIndex} resistance={true}
-      style={{'display': 'flex', 'flexDirection': 'column'}}>
+      style={{'display': 'flex', 'flexDirection': 'column', width: '100%'}}>
 
         {
           isLoaded ? <Information /> : null
