@@ -6,6 +6,8 @@ import { xrange, yrange } from 'service/chart';
 import { years, compound, totalYield } from 'service/calculator';
 import { longCurrency } from 'service/formatter';
 import ChartComponent from 'component/fi/chart';
+import Card from 'component/mdl/card';
+import Media from 'component/mdl/card/media';
 import LineChart from 'component/chart/line';
 
 const mapStateToProps = (state) => {
@@ -41,7 +43,11 @@ const Chart = ({status}) => {
 
   return (
     <div id="chart" style={{display: 'flex', flexDirection: 'column', height: '80%'}}>
-      <ChartComponent {...chart} />
+      <Card>
+        <Media>
+          <ChartComponent {...chart}/>
+        </Media>
+      </Card>
     </div>
   );
 };

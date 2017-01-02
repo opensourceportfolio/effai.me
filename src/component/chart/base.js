@@ -46,7 +46,7 @@ export default class Base extends React.Component {
 
   render() {
     return (
-      <canvas width="300" height="300" style={{minWidth: '100%', minHeight: '100%'}} ref="chart"></canvas>
+      <canvas width="300" height="300" ref="chart"></canvas>
     );
   }
 }
