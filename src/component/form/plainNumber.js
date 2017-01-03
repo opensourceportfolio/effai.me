@@ -1,34 +1,18 @@
 import React from 'lib/react';
 import R from 'lib/ramda';
 import scrollIntoView from 'lib/scroll-into-view';
+import TextField from 'material-ui/TextField';
 
 export default class PlainNumber extends React.Component {
 
-  componentDidMount() {
-    this.validate();
-  }
-
   handleChange({ target }) {
     this.props.onChange(this.props.name, target.value);
-  }
-
-  componentDidUpdate() {
-    this.validate();
   }
 
   isValid(rangeInfo, value) {
     const val = parseFloat(value);
 
     return val && !isNaN(val) && val <= rangeInfo.max && val >= rangeInfo.min;
-  }
-
-  validate() {
-    const plainNumber = this.refs.plainNumber;
-    const { rangeInfo, value } = this.props;
-    const isValid = this.isValid(rangeInfo, value);
-
-    plainNumber.classList.add('is-dirty');
-    plainNumber.classList.toggle('is-invalid', !isValid);
   }
 
   scrollIntoViewOnFocus() {
@@ -43,33 +27,37 @@ export default class PlainNumber extends React.Component {
     });
   }
 
+  toggleMask(isFocus) {
+    this.refs.input.classList.toggle('mui-text-field__masked-text--focus', isFocus);
+  }
+
   render() {
-    const { name, text, rangeInfo, value = '', formatter, inputProps } = this.props;
+    const { name, text, rangeInfo, value = '', formatter } = this.props;
     const additional = R.is(Function, text.additional) ? text.additional(value) : text.additional;
     const isValid = this.isValid(rangeInfo, value);
 
     return (
-      <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__masked" ref="plainNumber">
-        <input className="mdl-textfield__input"
-          ref="input"
-          onChange={this.handleChange.bind(this)}
-          onFocus={this.scrollIntoViewOnFocus.bind(this)}
-          required
+      <div className="mui-text-field__masked-text" ref="input">
+        <TextField
+          className="mui-text-field__input-text"
+          name={name}
           type="tel"
-          value={value || ''}
-          step="1"
-          {...inputProps}
-        />
-        <label className="mdl-textfield__mask">
-          {isValid ? formatter(value) : ''}
-        </label>
-        <label className="mdl-textfield__label" htmlFor={name}>
-          {text.placeholder}
-        </label>
-        <label className="mdl-textfield__additional" htmlFor={name}>
-          {isValid ? additional : text.error}
-        </label>
+          value={value}
+          fullWidth={true}
+          floatingLabelText={text.placeholder}
+          errorText={isValid ? null : text.error}
+          onChange={this.handleChange.bind(this)}
+          onFocus={() => this.toggleMask(true)}
+          onBlur={() => this.toggleMask(false)}>
+        </TextField>
+        {
+          isValid ? <label className="mui-text-field__additional-text">{additional}</label> : null
+        }
+        <div className="mui-text-field__mask-text">
+          {isValid ? formatter(value) : value}
+        </div>
       </div>
+
     );
   }
 }

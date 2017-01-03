@@ -41,11 +41,10 @@ const Chart = ({status}) => {
   };
 
   return (
-    <div id="chart"
-      style={{display: 'flex', flexDirection: 'column', height: '100%', alignItems: 'center'}}>
-        <div style={{maxWidth: '100%', flex: '1'}}>
-          <FiChart {...chart}/>
-        </div>
+    <div style={{display: 'flex', flexDirection: 'column', height: '100%', alignItems: 'center'}}>
+      <div style={{maxWidth: '100%', flex: '1'}}>
+        <FiChart {...chart}/>
+      </div>
     </div>
   );
 };

@@ -15,3 +15,44 @@ html {
 [data-reactroot] {
   padding-top: 112px;
 }
+
+.page__information {
+  padding-bottom: 150px
+}
+
+.mui-text-field__additional-text {
+  font-size: 12px;
+  position: relative;
+  bottom: 5px;
+  width: 100%;
+}
+
+.mui-text-field__masked-text {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  position: relative;
+}
+
+.mui-text-field__mask-text {
+  position: absolute;
+  top: 40px;
+  left: 0;
+}
+
+.mui-text-field__input-text {
+  input {
+    color: transparent !important;
+  }
+}
+
+.mui-text-field__masked-text--focus {
+  .mui-text-field__mask-text {
+    display: none;
+  }
+
+  .mui-text-field__input-text {
+    input {
+      color: black !important;
+    }
+  }
+}

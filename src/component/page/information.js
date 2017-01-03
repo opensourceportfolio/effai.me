@@ -4,7 +4,7 @@ import Financial from 'component/fi/card/financial';
 import House from 'component/fi/card/house';
 
 const Information = () =>
-  <div id="information">
+  <div className="page__information">
     <Financial />
     <House />
     <Future />

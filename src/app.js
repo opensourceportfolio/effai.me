@@ -8,7 +8,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header is-upgraded">
+      <div>
         <FiHeader />
         <FiTab />
         <FiSwipeableViews />
