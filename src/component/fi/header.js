@@ -1,6 +1,6 @@
 import React from 'lib/react';
 import { connect } from 'lib/react-redux';
-import Header from 'component/mdl/layout/header';
+import AppBar from 'material-ui/AppBar';
 import { years } from 'service/calculator';
 import { meta } from 'service/meta';
 import { i18n } from 'service/i18n';
@@ -10,6 +10,11 @@ const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = {
   onNavigation: changeTab
+};
+
+const style = {
+  position: 'fixed',
+  top: 0,
 };
 
 const fiAge = (yrs) => {
@@ -22,21 +27,14 @@ const fiAge = (yrs) => {
   }
 };
 
-const FiHeader = ({input, navigation, onNavigation}) => {
+const Header = ({input}) => {
   const yrs = years(input);
-  const options = {
-    tabIndex: navigation.tabIndex,
-    row: [
-      {text: i18n.header.links.known, url: '#information', onNavigation},
-      {text: i18n.header.links.chart, url: '#chart', onNavigation},
-    ]
-  };
 
   return (
-    <Header title={fiAge(yrs)} options={options} />
+    <AppBar showMenuIconButton={false} title={fiAge(yrs)} style={style} />
   );
 };
 
 const container = connect(mapStateToProps, mapDispatchToProps);
 
-export default container(FiHeader);
+export default container(Header);

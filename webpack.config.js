@@ -58,8 +58,6 @@ module.exports = {
       'lib/chartjs-deferred': 'chartjs-plugin-deferred',
       'lib/debounce': 'debounce',
       'lib/idb': 'idb',
-      'lib/chartist-axistitle': 'chartist-plugin-axistitle',
-      'lib/chartist-legend': 'chartist-plugin-legend',
       'lib/mdl': 'material-design-lite',
       'lib/ramda': 'ramda',
       'lib/react': 'react',

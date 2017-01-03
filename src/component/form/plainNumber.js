@@ -1,15 +1,10 @@
 import React from 'lib/react';
 import R from 'lib/ramda';
-import componentHandler from 'lib/mdl';
 import scrollIntoView from 'lib/scroll-into-view';
 
 export default class PlainNumber extends React.Component {
 
   componentDidMount() {
-    const node = this.refs.plainNumber;
-
-    componentHandler.upgradeElement(node);
-
     this.validate();
   }
 

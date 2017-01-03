@@ -1,9 +1,17 @@
-.fi-opensource {
-  display: block;
-  margin: 0 auto;
-  width: 150px;
-  position: relative;
-  top: 80px;
-  text-decoration: none;
-  color: rgb(82, 166, 255);
+html, body, #app-effai, [data-reactroot] {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+[data-reactroot] {
+  padding-top: 112px;
 }
