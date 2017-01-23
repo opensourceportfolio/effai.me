@@ -4,17 +4,11 @@ import FiHeader from 'component/fi/header';
 import FiTab from 'component/fi/tab';
 import FiSwipeableViews from 'component/fi/swipeable-view';
 
-class App extends React.Component {
-
-  render() {
-    return (
-      <div>
-        <FiHeader />
-        <FiTab />
-        <FiSwipeableViews />
-      </div>
-    );
-  }
-}
+const App = () =>
+  <div>
+    <FiHeader />
+    <FiTab />
+    <FiSwipeableViews />
+  </div>;
 
 export default connect()(App);

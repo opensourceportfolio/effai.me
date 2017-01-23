@@ -20,7 +20,7 @@ const mapDispatchToProps = {
   onChange: changeValue
 };
 
-const Financial = ({status, onChange}) => {
+const Future = ({status, onChange}) => {
   const text = i18n.future;
   const yrs = years(status);
 
@@ -106,4 +106,4 @@ const Financial = ({status, onChange}) => {
 
 const container = connect(mapStateToProps, mapDispatchToProps);
 
-export default container(Financial);
+export default container(Future);
