@@ -1,10 +1,13 @@
 import React from 'lib/react';
 import { connect } from 'lib/react-redux';
-import R from 'lib/ramda';
 import { changeValue } from 'action/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
-import { formattedCurrency, longCurrency, formattedShortFloat } from 'service/formatter';
+import {
+  formattedCurrency,
+  longCurrency,
+  formattedShortFloat,
+} from 'service/formatter';
 import { years, compound } from 'service/calculator';
 import { xrange, yrange, chartFn } from 'service/chart';
 import ChartCard from 'component/fi/chart-card';
@@ -12,15 +15,15 @@ import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
 
-const mapStateToProps = (state) => ({
-  status: state.input
+const mapStateToProps = state => ({
+  status: state.input,
 });
 
 const mapDispatchToProps = {
-  onChange: changeValue
+  onChange: changeValue,
 };
 
-const Future = ({status, onChange}) => {
+const Future = ({ status, onChange }) => {
   const text = i18n.future;
   const yrs = years(status);
 
@@ -28,15 +31,17 @@ const Future = ({status, onChange}) => {
   const rangeInfo = meta.renter;
   const x = xrange(status.renter, rangeInfo);
   const y = yrange(x, rangeInfo, fn);
-  const formatted2DecimalPoints = R.curry(formattedShortFloat)(2);
+  const formatted2DecimalPoints = val => formattedShortFloat(2, val);
   const chart = {
     type: BarChart,
-    plot: {x, y},
-    formatter: { x: longCurrency, y: formatted2DecimalPoints},
+    plot: { x, y },
+    formatter: { x: longCurrency, y: formatted2DecimalPoints },
     text: text.chart,
   };
 
-  const renterGoal = formattedCurrency(compound(status.renter, status.inflation, yrs));
+  const renterGoal = formattedCurrency(
+    compound(status.renter, status.inflation, yrs),
+  );
   const renter = {
     name: 'renter',
     onChange,
@@ -49,7 +54,9 @@ const Future = ({status, onChange}) => {
     rangeInfo: meta.renter,
   };
 
-  const homeownerGoal = formattedCurrency(compound(status.homeowner, status.inflation, yrs));
+  const homeownerGoal = formattedCurrency(
+    compound(status.homeowner, status.inflation, yrs),
+  );
   const homeowner = {
     name: 'homeowner',
     onChange,
@@ -86,21 +93,11 @@ const Future = ({status, onChange}) => {
 
   return (
     <ChartCard title={text.title} supporting={text.supporting} chart={chart}>
-      <div className="mdl-grid">
-        <div className="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-          <Currency {...renter} />
-        </div>
-        <div className="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-          <Currency {...homeowner} />
-        </div>
-        <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-          <Percent {...inflation} />
-        </div>
-        <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-          <Percent {...withdrawl} />
-        </div>
-      </div>
-      </ ChartCard>
+      <Currency {...renter} />
+      <Currency {...homeowner} />
+      <Percent {...inflation} />
+      <Percent {...withdrawl} />
+    </ChartCard>
   );
 };
 

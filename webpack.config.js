@@ -1,65 +1,43 @@
 /* eslint object-shorthand: [0] */
 const path = require('path');
-const cssnext = require('postcss-cssnext');
-const precss = require('precss');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-
-  entry: ['./src/root.js'],
-
+  entry: './src/root.js',
   output: {
     filename: 'bundle.[chunkhash].js',
-    path: path.join(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
-
   module: {
-    loaders: [
+    rules: [
       {
-        include: require.resolve('material-design-lite'),
-        loader: 'exports?window.componentHandler'
-      }, {
         test: /(\.js)$/,
-        loaders: ['babel']
-      }, {
+        loaders: ['babel-loader'],
+      },
+      {
         test: /\.css$/,
-        loader: 'style!css!postcss'
-      }
-    ]
+        use: ['style-loader', 'css-loader?importLoaders=1', 'postcss-loader'],
+      },
+    ],
   },
-
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './index.html'
-    }),
-    new CopyWebpackPlugin([
-      {from: 'manifest.json'},
-      {from: 'favicon.ico'},
-    ]),
+    new HtmlWebpackPlugin({ template: './index.html' }),
+    new CopyWebpackPlugin([{ from: 'manifest.json' }, { from: 'favicon.ico' }]),
     new SWPrecacheWebpackPlugin({
       cacheId: 'osp.effai',
-      filepath: path.join(__dirname, 'dist/sw.js'),
+      filename: 'sw.js',
     }),
   ],
-
   resolve: {
-    modulesDirectories: [
-      'src', 'node_modules'
-    ],
-    root: path.resolve('./src'),
-    extensions: [
-      '', '.js'
-    ],
+    modules: ['src', 'node_modules'],
     alias: {
       'lib/chartjs': 'chart.js',
       'lib/chartjs-deferred': 'chartjs-plugin-deferred',
       'lib/debounce': 'debounce',
       'lib/idb': 'idb',
-      'lib/mdl': 'material-design-lite',
-      'lib/ramda': 'ramda',
       'lib/react': 'react',
       'lib/react-dom': 'react-dom',
       'lib/react-redux': 'react-redux',
@@ -67,10 +45,6 @@ module.exports = {
       'lib/redux-thunk': 'redux-thunk',
       'lib/react-swipeable-views': 'react-swipeable-views',
       'lib/scroll-into-view': 'scroll-into-view',
-    }
+    },
   },
-
-  postcss: function() {
-    return [cssnext, precss];
-  }
 };

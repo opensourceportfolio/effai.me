@@ -30,27 +30,26 @@ export const originalState  = Object.assign({}, emptyState, {
   },
 });
 
-export function get(key) {
-  return dbPromise.then((db) => {
-    const transaction = db.transaction(OBJECT_STORE);
-    const store = transaction.objectStore(OBJECT_STORE);
+export async function get(key) {
+  const db = await dbPromise;
+  const transaction = db.transaction(OBJECT_STORE);
+  const store = transaction.objectStore(OBJECT_STORE);
 
+  try {
+    const settings = await store.get(key)
 
-    return store.get(key).then((settings) => {
-      return Object.assign(originalState, settings);
-    }).catch(() => {
-      return originalState;
-    });
-  });
+    return Object.assign(originalState, settings);
+  } catch (err) {
+    return originalState;
+  }
 }
 
-export function set(key, value) {
-  return dbPromise.then((db) => {
-    const transaction = db.transaction(OBJECT_STORE, 'readwrite');
-    const store = transaction.objectStore(OBJECT_STORE);
+export async function set(key, value) {
+  const db = await dbPromise
+  const transaction = db.transaction(OBJECT_STORE, 'readwrite');
+  const store = transaction.objectStore(OBJECT_STORE);
 
-    store.put(value, key);
+  store.put(value, key);
 
-    return transaction.complete;
-  });
+  return transaction.complete;
 }

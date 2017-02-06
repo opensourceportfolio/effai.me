@@ -1,4 +1,3 @@
-import R from 'lib/ramda';
 import { start, generate } from 'service/range';
 import { years } from 'service/calculator';
 
@@ -31,7 +30,7 @@ export function xrange(val, rangeInfo) {
 
 export function yrange(xval, rangeInfo, fn) {
 
-  const fns = R.isArrayLike(fn) ? fn : [fn];
+  const fns = Array.isArray(fn) ? fn : [fn];
   const yval = fns.map((rangeFn) => {
     return xval.map(rangeFn);
   });

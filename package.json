@@ -20,9 +20,7 @@
     "chartjs-plugin-deferred": "^0.2.0",
     "debounce": "^1.0.0",
     "idb": "^2.0.0",
-    "material-design-lite": "^1.1.3",
     "material-ui": "^0.16.6",
-    "ramda": "^0.23.0",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-motion": "^0.4.5",
@@ -55,14 +53,14 @@
     "precss": "^1.4.0",
     "redux-devtools": "^3.3.1",
     "style-loader": "^0.13.1",
-    "sw-precache-webpack-plugin": "^0.7.0",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
+    "sw-precache-webpack-plugin": "^0.8.0",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.3.0"
   },
   "scripts": {
     "clean": "rm -rf ./dist",
     "start": "./node_modules/.bin/webpack-dev-server --content-base=/dist/ -d --progress --inline --colors",
-    "dev": "./node_modules/.bin/webpack -d --progress --inline --colors",
+    "dev": "./node_modules/.bin/webpack -d --progress",
     "prod": "./node_modules/.bin/webpack -p --define process.env.NODE_ENV='\"production\"'",
     "deploy": "npm run clean && npm run prod && firebase deploy"
   }

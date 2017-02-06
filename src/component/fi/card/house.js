@@ -4,7 +4,14 @@ import { changeValue } from 'action/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';
-import { compound, percentage, toFraction, debt, equity, years } from 'service/calculator';
+import {
+  compound,
+  percentage,
+  toFraction,
+  debt,
+  equity,
+  years,
+} from 'service/calculator';
 import { longCurrency, formattedNumber } from 'service/formatter';
 import { pmt } from 'service/amortization';
 import ChartCard from 'component/fi/chart-card';
@@ -13,28 +20,28 @@ import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
 import PlainNumber from 'component/form/plainNumber';
 
-const mapStateToProps = (state) => ({
-  status: state.input
+const mapStateToProps = state => ({
+  status: state.input,
 });
 
 const mapDispatchToProps = {
-  onChange: changeValue
+  onChange: changeValue,
 };
 
-const House = ({onChange, status}) => {
+const House = ({ onChange, status }) => {
   const text = i18n.house;
   const downpaymentAmount = percentage(status.price, status.downpayment);
   const yrs = years(status);
 
-  const debtFn = (year) => {
+  const debtFn = year => {
     return debt(status, year);
   };
 
-  const equityFn = (year) => {
+  const equityFn = year => {
     return equity(status, year);
   };
 
-  const valueFn = (year) => {
+  const valueFn = year => {
     return compound(status.price, status.houseGrowth, year);
   };
 
@@ -47,10 +54,10 @@ const House = ({onChange, status}) => {
   const y = yrange(x, rangeInfo, fn);
   const chart = {
     type: LineChart,
-    plot: {x, y},
+    plot: { x, y },
     formatter: { y: longCurrency },
     text: text.chart,
-    options: { low: 0 }
+    options: { low: 0 },
   };
 
   const price = {
@@ -70,13 +77,21 @@ const House = ({onChange, status}) => {
     text: {
       placeholder: text.downpayment.placeholder,
       additional: text.downpayment.additional(downpaymentAmount),
-      error: i18n.error.between(meta.house.downpayment.min, meta.house.downpayment.max),
+      error: i18n.error.between(
+        meta.house.downpayment.min,
+        meta.house.downpayment.max,
+      ),
     },
     value: status.downpayment,
     rangeInfo: meta.house.downpayment,
   };
 
-  const payment = pmt(toFraction(status.rate / 12), status.term * 12, -status.price + downpaymentAmount, 0);
+  const payment = pmt(
+    toFraction(status.rate / 12),
+    status.term * 12,
+    -status.price + downpaymentAmount,
+    0,
+  );
   const rate = {
     name: 'rate',
     onChange,
@@ -108,7 +123,10 @@ const House = ({onChange, status}) => {
     text: {
       placeholder: text.houseGrowth.placeholder,
       additional: text.houseGrowth.additional(futurePrice),
-      error: i18n.error.between(meta.house.houseGrowth.min, meta.house.houseGrowth.max),
+      error: i18n.error.between(
+        meta.house.houseGrowth.min,
+        meta.house.houseGrowth.max,
+      ),
     },
     value: status.houseGrowth,
     rangeInfo: meta.house.houseGrowth,
@@ -116,24 +134,12 @@ const House = ({onChange, status}) => {
 
   return (
     <ChartCard title={text.title} supporting={text.supporting} chart={chart}>
-      <div className="mdl-grid">
-        <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-          <Currency {...price} />
-        </div>
-        <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-          <Percent {...downpayment} />
-        </div>
-        <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-          <Percent {...rate} />
-        </div>
-        <div className="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-          <PlainNumber {...term} />
-        </div>
-        <div className="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-          <Percent {...houseGrowth} />
-        </div>
-      </div>
-    </ ChartCard>
+      <Currency {...price} />
+      <Percent {...downpayment} />
+      <Percent {...rate} />
+      <PlainNumber {...term} />
+      <Percent {...houseGrowth} />
+    </ChartCard>
   );
 };
 

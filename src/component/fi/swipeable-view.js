@@ -1,14 +1,15 @@
 import React from 'lib/react';
 import { connect } from 'lib/react-redux';
 import SwipeableViews from 'lib/react-swipeable-views';
-import R from 'lib/ramda';
 import { changeTab } from 'action/navigation';
 import Information from 'component/page/information';
 import Chart from 'component/page/chart';
 
+const isEmpty = (o) => Object.keys(o).length == 0;
+
 const mapStateToProps = (state) => {
   return {
-    isLoaded: !R.isEmpty(state.input),
+    isLoaded: !isEmpty(state.input),
     tabIndex: parseInt(state.navigation.tabIndex),
   };
 };

@@ -1,19 +1,23 @@
-import R from 'lib/ramda';
+export function isNumber(num) {
+  return Number(parseFloat(num)) == num;
+}
 
 export function formattedFloat(digits, number) {
   const value = parseFloat(number);
 
-  if (R.is(Number, value) && !isNaN(value) && isFinite(value)) {
+  if (isNumber(value)) {
     const p = value.toFixed(2).split('.');
-    const val = p[0].split('').reverse().reduce((acc, num, i) => {
-      return num + (i && !(i % 3) ? ',' : '') + acc;
-    }, '');
+    const val = p[0].split('').reverse().reduce(
+      (acc, num, i) => {
+        return num + (i && !(i % 3) ? ',' : '') + acc;
+      },
+      '',
+    );
     const remainder = p[1].slice(0, digits);
 
     if (digits === 0) {
       return `${val}`;
     } else {
-
       return `${val}.${remainder}`;
     }
   } else {
@@ -62,7 +66,7 @@ export function longCurrency(number) {
 export function percent(number) {
   const value = parseFloat(number);
 
-  if (R.is(Number, value)) {
+  if (isNumber(value)) {
     return `${value}%`;
   } else {
     return '';

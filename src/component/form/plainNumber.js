@@ -1,5 +1,4 @@
 import React from 'lib/react';
-import R from 'lib/ramda';
 import scrollIntoView from 'lib/scroll-into-view';
 import TextField from 'material-ui/TextField';
 
@@ -33,7 +32,7 @@ export default class PlainNumber extends React.Component {
 
   render() {
     const { name, text, rangeInfo, value = '', formatter } = this.props;
-    const additional = R.is(Function, text.additional) ? text.additional(value) : text.additional;
+    const additional = typeof text.additional === 'function' ? text.additional(value) : text.additional;
     const isValid = this.isValid(rangeInfo, value);
 
     return (

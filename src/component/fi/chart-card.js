@@ -2,8 +2,8 @@ import React from 'lib/react';
 import { Card, CardHeader, CardMedia, CardActions } from 'material-ui/Card';
 import Chart from 'component/fi/chart';
 
-const ChartCard = ({ title, supporting, chart, children }) =>
-  <Card>
+const ChartCard = ({ title, supporting, chart, children }) => (
+  <Card containerStyle={{ margin: '20px 0' }}>
     <CardHeader title={title} subtitle={supporting} />
     <CardMedia>
       <Chart {...chart} />
@@ -11,6 +11,7 @@ const ChartCard = ({ title, supporting, chart, children }) =>
     <CardActions>
       {children}
     </CardActions>
-  </Card>;
+  </Card>
+);
 
 export default ChartCard;
