@@ -86,7 +86,7 @@ export const i18n = {
     houseGrowth: {
       placeholder: 'Growth',
       additional: (v) => `Home will be worth ${formattedCurrency(v)} at effai`,
-    }
+    },
   },
 
   future: {
@@ -137,5 +137,5 @@ export const i18n = {
     formatter: formattedCurrency,
     xlabel: 'Years',
     ylabel: 'Passive income',
-  }
+  },
 };

@@ -5,7 +5,7 @@ import Chart from 'component/fi/chart';
 const ChartCard = ({ title, supporting, chart, children }) => (
   <Card containerStyle={{ margin: '20px 0' }}>
     <CardHeader title={title} subtitle={supporting} />
-    <CardMedia>
+    <CardMedia style={{padding: '5px'}}>
       <Chart {...chart} />
     </CardMedia>
     <CardActions>

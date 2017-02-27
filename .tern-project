@@ -24,6 +24,7 @@
       "load": "",
       "modules": ""
     },
-    "es_modules": {}
+    "es_modules": {},
+    "jsx": {}
   }
 }

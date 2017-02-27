@@ -14,7 +14,7 @@ const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
     'rgba(75, 192, 192, 0.5)',
     'rgba(54, 162, 235, 0.5)',
     'rgba(153, 102, 255, 0.5)',
-    'rgba(231,233,237, 0.5)'
+    'rgba(231,233,237, 0.5)',
   ];
   const options = Object.assign({}, chartOptions, {
     title: {
@@ -22,7 +22,7 @@ const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
       text: title,
     },
     tooltips: {
-      callbacks: tooltips
+      callbacks: tooltips,
     },
     scales: {
       yAxes: [{
@@ -33,7 +33,7 @@ const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
       xAxes: [{
         ticks: { callback: formatter.x || identity },
       }],
-    }
+    },
   });
 
   data.datasets.forEach((dataset, i) => {

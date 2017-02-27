@@ -39,7 +39,7 @@ export default class Base extends React.Component {
         display: true,
       },
       deferred: {
-        enabled: true
+        enabled: true,
       },
     }, {}, options);
   }

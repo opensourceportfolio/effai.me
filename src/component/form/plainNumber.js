@@ -3,7 +3,6 @@ import scrollIntoView from 'lib/scroll-into-view';
 import TextField from 'material-ui/TextField';
 
 export default class PlainNumber extends React.Component {
-
   handleChange({ target }) {
     this.props.onChange(this.props.name, target.value);
   }
@@ -27,12 +26,17 @@ export default class PlainNumber extends React.Component {
   }
 
   toggleMask(isFocus) {
-    this.refs.input.classList.toggle('mui-text-field__masked-text--focus', isFocus);
+    this.refs.input.classList.toggle(
+      'mui-text-field__masked-text--focus',
+      isFocus,
+    );
   }
 
   render() {
     const { name, text, rangeInfo, value = '', formatter } = this.props;
-    const additional = typeof text.additional === 'function' ? text.additional(value) : text.additional;
+    const additional = typeof text.additional === 'function'
+      ? text.additional(value)
+      : text.additional;
     const isValid = this.isValid(rangeInfo, value);
 
     return (
@@ -47,16 +51,17 @@ export default class PlainNumber extends React.Component {
           errorText={isValid ? null : text.error}
           onChange={this.handleChange.bind(this)}
           onFocus={() => this.toggleMask(true)}
-          onBlur={() => this.toggleMask(false)}>
-        </TextField>
-        {
-          isValid ? <label className="mui-text-field__additional-text">{additional}</label> : null
-        }
+          onBlur={() => this.toggleMask(false)}
+        />
+        {isValid
+          ? <label className="mui-text-field__additional-text">
+              {additional}
+            </label>
+          : null}
         <div className="mui-text-field__mask-text">
           {isValid ? formatter(value) : value}
         </div>
       </div>
-
     );
   }
 }

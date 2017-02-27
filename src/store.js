@@ -9,7 +9,7 @@ export default function configureStore(originalState) {
   const reducers = combineReducers({input, navigation});
   const store = createStore(
     reducers,
-    originalState
+    originalState,
   );
 
   store.subscribe(debounce(() => {

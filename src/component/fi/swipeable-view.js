@@ -5,9 +5,9 @@ import { changeTab } from 'action/navigation';
 import Information from 'component/page/information';
 import Chart from 'component/page/chart';
 
-const isEmpty = (o) => Object.keys(o).length == 0;
+const isEmpty = o => Object.keys(o).length == 0;
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     isLoaded: !isEmpty(state.input),
     tabIndex: parseInt(state.navigation.tabIndex),
@@ -24,18 +24,22 @@ const style = {
   padding: '5px',
 };
 
-const SwipeableView = ({ isLoaded, tabIndex, onNavigation }) =>
+const slideStyle = {
+  padding: '5px',
+};
+
+const SwipeableView = ({ isLoaded, tabIndex, onNavigation }) => (
   <SwipeableViews
-    onChangeIndex={(i) => onNavigation(i)}
-    index={tabIndex} resistance={true}
-    style={style}>
-      {
-        isLoaded ? <Information /> : null
-      }
-      {
-        isLoaded ? <Chart /> : null
-      }
-  </SwipeableViews>;
+    onChangeIndex={i => onNavigation(i)}
+    index={tabIndex}
+    resistance={true}
+    style={style}
+    slideStyle={slideStyle}
+  >
+    {isLoaded ? <Information /> : null}
+    {isLoaded ? <Chart /> : null}
+  </SwipeableViews>
+);
 
 const container = connect(mapStateToProps, mapDispatchToProps);
 

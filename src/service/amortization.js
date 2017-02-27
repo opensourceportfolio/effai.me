@@ -1,5 +1,3 @@
-import {} from 'service/formatter';
-
 export function pmt(rate, nperiod, presentValue, futureValue = 0, type = 0) {
   if (rate === 0) {
     return -(presentValue + futureValue) / nperiod;

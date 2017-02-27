@@ -10,7 +10,7 @@ import LineChart from 'component/chart/line';
 
 const mapStateToProps = (state) => {
   return {
-    status: state.input
+    status: state.input,
   };
 };
 
@@ -37,7 +37,7 @@ const Chart = ({status}) => {
     chartOptions: {
       width: '500px',
       height: '1000px',
-    }
+    },
   };
 
   return (

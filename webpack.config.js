@@ -1,4 +1,3 @@
-/* eslint object-shorthand: [0] */
 const path = require('path');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -42,7 +41,6 @@ module.exports = {
       'lib/react-dom': 'react-dom',
       'lib/react-redux': 'react-redux',
       'lib/redux': 'redux',
-      'lib/redux-thunk': 'redux-thunk',
       'lib/react-swipeable-views': 'react-swipeable-views',
       'lib/scroll-into-view': 'scroll-into-view',
     },
