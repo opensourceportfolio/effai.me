@@ -3,10 +3,6 @@ import scrollIntoView from 'lib/scroll-into-view';
 import TextField from 'material-ui/TextField';
 
 export default class PlainNumber extends React.Component {
-  handleChange({ target }) {
-    this.props.onChange(this.props.name, target.value);
-  }
-
   isValid(rangeInfo, value) {
     const val = parseFloat(value);
 
@@ -34,6 +30,7 @@ export default class PlainNumber extends React.Component {
 
   render() {
     const { name, text, rangeInfo, value = '', formatter } = this.props;
+    const { onChange } = this.props;
     const additional = typeof text.additional === 'function'
       ? text.additional(value)
       : text.additional;
@@ -49,7 +46,7 @@ export default class PlainNumber extends React.Component {
           fullWidth={true}
           floatingLabelText={text.placeholder}
           errorText={isValid ? null : text.error}
-          onChange={this.handleChange.bind(this)}
+          onChange={({ target }) => onChange(name, target.value)}
           onFocus={() => this.toggleMask(true)}
           onBlur={() => this.toggleMask(false)}
         />

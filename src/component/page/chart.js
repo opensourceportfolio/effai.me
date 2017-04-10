@@ -8,11 +8,9 @@ import { longCurrency } from 'service/formatter';
 import FiChart from 'component/fi/chart';
 import LineChart from 'component/chart/line';
 
-const mapStateToProps = (state) => {
-  return {
-    status: state.input,
-  };
-};
+const mapStateToProps = (state) => ({
+  status: state.input,
+});
 
 const Chart = ({status}) => {
   const yrs = years(status);

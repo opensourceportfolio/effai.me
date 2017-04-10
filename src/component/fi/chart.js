@@ -6,7 +6,7 @@ const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
   const xval = plot.x;
   const yval = plot.y;
   const data = toModel(xval, yval, legend);
-  const identity = (e) => e;
+  const identity = e => e;
   const chartColors = [
     'rgba(255, 99, 132, 0.8)',
     'rgba(255, 159, 64, 0.8)',
@@ -25,14 +25,18 @@ const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
       callbacks: tooltips,
     },
     scales: {
-      yAxes: [{
-        ticks: {
-          callback: formatter.y,
+      yAxes: [
+        {
+          ticks: {
+            callback: formatter.y,
+          },
         },
-      }],
-      xAxes: [{
-        ticks: { callback: formatter.x || identity },
-      }],
+      ],
+      xAxes: [
+        {
+          ticks: { callback: formatter.x || identity },
+        },
+      ],
     },
   });
 
@@ -40,9 +44,7 @@ const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
     dataset.backgroundColor = chartColors[i];
   });
 
-  return (
-    React.createElement(type, { data, xlabel, ylabel, options })
-  );
+  return React.createElement(type, { data, xlabel, ylabel, options });
 };
 
 export default Chart;

@@ -1,12 +1,30 @@
+const webpack = require('webpack');
 const path = require('path');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const alias = {
+  'lib/chartjs': 'chart.js',
+  'lib/chartjs-deferred': 'chartjs-plugin-deferred',
+  'lib/debounce': 'debounce',
+  'lib/idb': 'idb',
+  'lib/react': 'react',
+  'lib/react-dom': 'react-dom',
+  'lib/react-redux': 'react-redux',
+  'lib/redux': 'redux',
+  'lib/react-swipeable-views': 'react-swipeable-views',
+  'lib/scroll-into-view': 'scroll-into-view',
+  'lib/material-ui': 'material-ui',
+};
+
 module.exports = {
-  entry: './src/root.js',
+  entry: {
+    main: './src/root.js',
+    vendor: Object.keys(alias),
+  },
   output: {
-    filename: 'bundle.[chunkhash].js',
+    filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
@@ -29,20 +47,12 @@ module.exports = {
       cacheId: 'osp.effai',
       filename: 'sw.js',
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+    }),
   ],
   resolve: {
-    modules: ['src', 'node_modules'],
-    alias: {
-      'lib/chartjs': 'chart.js',
-      'lib/chartjs-deferred': 'chartjs-plugin-deferred',
-      'lib/debounce': 'debounce',
-      'lib/idb': 'idb',
-      'lib/react': 'react',
-      'lib/react-dom': 'react-dom',
-      'lib/react-redux': 'react-redux',
-      'lib/redux': 'redux',
-      'lib/react-swipeable-views': 'react-swipeable-views',
-      'lib/scroll-into-view': 'scroll-into-view',
-    },
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    alias,
   },
 };

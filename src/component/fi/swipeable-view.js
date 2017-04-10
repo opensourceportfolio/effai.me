@@ -7,12 +7,10 @@ import Chart from 'component/page/chart';
 
 const isEmpty = o => Object.keys(o).length == 0;
 
-const mapStateToProps = state => {
-  return {
-    isLoaded: !isEmpty(state.input),
-    tabIndex: parseInt(state.navigation.tabIndex),
-  };
-};
+const mapStateToProps = state => ({
+  isLoaded: !isEmpty(state.input),
+  tabIndex: parseInt(state.navigation.tabIndex),
+});
 
 const mapDispatchToProps = { onNavigation: changeTab };
 
@@ -34,10 +32,9 @@ const SwipeableView = ({ isLoaded, tabIndex, onNavigation }) => (
     index={tabIndex}
     resistance={true}
     style={style}
-    slideStyle={slideStyle}
-  >
-    {isLoaded ? <Information /> : null}
-    {isLoaded ? <Chart /> : null}
+    slideStyle={slideStyle}>
+      {isLoaded ? <Information /> : null}
+      {isLoaded ? <Chart /> : null}
   </SwipeableViews>
 );
 

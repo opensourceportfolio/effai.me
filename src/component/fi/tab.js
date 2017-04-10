@@ -1,13 +1,11 @@
 import React from 'lib/react';
 import { connect } from 'lib/react-redux';
-import {Tabs, Tab} from 'material-ui/Tabs';
+import { Tabs, Tab } from 'material-ui/Tabs';
 import { changeTab } from 'action/navigation';
 
-const mapStateToProps = (state) => {
-  return {
-    tabIndex: parseInt(state.navigation.tabIndex),
-  };
-};
+const mapStateToProps = state => ({
+  tabIndex: parseInt(state.navigation.tabIndex),
+});
 
 const mapDispatchToProps = { onNavigation: changeTab };
 
@@ -18,9 +16,9 @@ const style = {
   zIndex: '1',
 };
 
-const FiTab = ({tabIndex, onNavigation}) => {
+const FiTab = ({ tabIndex, onNavigation }) => {
   return (
-    <Tabs value={tabIndex} onChange={(i) => onNavigation(i)} style={style}>
+    <Tabs value={tabIndex} onChange={i => onNavigation(i)} style={style}>
       <Tab label="Knowns" value={0} />
       <Tab label="Chart" value={1} />
     </Tabs>

@@ -2,11 +2,9 @@ import { CHANGE_VALUE, LOAD_DATA } from 'action/fi';
 import { originalState } from 'service/userSetting';
 
 export function input(state = {}, action) {
-  let copy;
-
   switch (action.type) {
   case CHANGE_VALUE:
-    copy = Object.assign({}, state);
+    const copy = { ...state };
 
     copy[action.field] = action.value;
 
