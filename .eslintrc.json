@@ -19,14 +19,17 @@
 
   "plugins": [
     "react",
-    "import"
+    "import",
+    "prettier"
   ],
 
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "prettier",
+    "prettier/react"
   ],
 
   "rules": {
@@ -68,7 +71,17 @@
 
     //Import
 
-    "import/no-unresolved": ["error", {"amd": true}]
+    "import/no-unresolved": ["error", {"amd": true}],
+
+    //Prettier
+
+    "prettier/prettier": ["error",
+      {
+        "trailingComma": "all",
+        "singleQuote": true,
+        "jsxBracketSameLine": true
+      }
+    ]
   },
 
   "settings": {

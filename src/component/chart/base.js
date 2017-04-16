@@ -14,7 +14,7 @@ export default class Base extends React.Component {
         this.chart.data.labels = this.props.data.labels;
         this.chart.update();
       },
-      350
+      350,
     );
   }
 
@@ -36,19 +36,15 @@ export default class Base extends React.Component {
   }
 
   override(options) {
-    return Object.assign(
-      {
-        maintainAspectRatio: false,
-        title: {
-          display: true,
-        },
-        deferred: {
-          enabled: true,
-        },
+    return Object.assign({
+      maintainAspectRatio: false,
+      title: {
+        display: true,
       },
-      {},
-      options
-    );
+      deferred: {
+        enabled: true,
+      },
+    }, {}, options);
   }
 
   render() {
