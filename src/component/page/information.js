@@ -3,11 +3,12 @@ import Future from 'component/fi/card/future';
 import Financial from 'component/fi/card/financial';
 import House from 'component/fi/card/house';
 
-const Information = () =>
+const Information = () => (
   <div className="page__information">
     <Financial />
     <House />
     <Future />
-  </div>;
+  </div>
+);
 
 export default Information;
