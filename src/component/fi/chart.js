@@ -1,4 +1,4 @@
-import React from 'lib/react';
+import React from 'react';
 import { toModel } from 'service/chart';
 
 const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {

@@ -1,6 +1,6 @@
-import React from 'lib/react';
-import { connect } from 'lib/react-redux';
-import SwipeableViews from 'lib/react-swipeable-views';
+import React from 'react';
+import { connect } from 'react-redux';
+import SwipeableViews from 'react-swipeable-views';
 import { changeTab } from 'action/navigation';
 import Information from 'component/page/information';
 import Chart from 'component/page/chart';

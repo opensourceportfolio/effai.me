@@ -4,24 +4,24 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const alias = {
-  'lib/chartjs': 'chart.js',
-  'lib/chartjs-deferred': 'chartjs-plugin-deferred',
-  'lib/debounce': 'debounce',
-  'lib/idb': 'idb',
-  'lib/react': 'react',
-  'lib/react-dom': 'react-dom',
-  'lib/react-redux': 'react-redux',
-  'lib/redux': 'redux',
-  'lib/react-swipeable-views': 'react-swipeable-views',
-  'lib/scroll-into-view': 'scroll-into-view',
-  'lib/material-ui': 'material-ui',
-};
+const vendor = [
+  'chart.js',
+  'chartjs-plugin-deferred',
+  'debounce',
+  'idb',
+  'react',
+  'react-dom',
+  'react-redux',
+  'redux',
+  'react-swipeable-views',
+  'scroll-into-view',
+  'material-ui',
+];
 
 module.exports = {
   entry: {
     main: './src/root.js',
-    vendor: Object.keys(alias),
+    vendor,
   },
   output: {
     filename: '[name].[chunkhash].js',
@@ -53,6 +53,5 @@ module.exports = {
   ],
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-    alias,
   },
 };

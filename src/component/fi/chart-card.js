@@ -1,5 +1,5 @@
-import React from 'lib/react';
-import { Card, CardHeader, CardMedia, CardActions } from 'lib/material-ui/Card';
+import React from 'react';
+import { Card, CardHeader, CardMedia, CardActions } from 'material-ui/Card';
 import Chart from 'component/fi/chart';
 
 const ChartCard = ({ title, supporting, chart, children }) => (

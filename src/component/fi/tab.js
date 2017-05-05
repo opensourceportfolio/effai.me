@@ -1,5 +1,5 @@
-import React from 'lib/react';
-import { connect } from 'lib/react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import { changeTab } from 'action/navigation';
 

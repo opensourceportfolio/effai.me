@@ -1,4 +1,4 @@
-import React from 'lib/react';
+import React from 'react';
 import Base from 'component/chart/base';
 
 const Bar = ({ data, options }) =>

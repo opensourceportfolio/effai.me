@@ -1,5 +1,5 @@
-import React from 'lib/react';
-import { connect } from 'lib/react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import AccountBox from 'material-ui/svg-icons/action/account-box';

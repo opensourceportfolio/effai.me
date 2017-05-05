@@ -1,7 +1,7 @@
 import 'babel-polyfill';
-import React from 'lib/react';
-import ReactDOM from 'lib/react-dom';
-import { Provider } from 'lib/react-redux';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from 'app';
 import 'css/icon.css';
 import 'css/index.css';

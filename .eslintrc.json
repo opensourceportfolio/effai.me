@@ -5,9 +5,7 @@
     "es6": true,
     "node": true
   },
-
   "parser": "babel-eslint",
-
   "parserOptions": {
     "ecmaVersion": 2017,
     "sourceType": "module",
@@ -16,13 +14,10 @@
       "experimentalObjectRestSpread": true
     }
   },
-
   "plugins": [
     "react",
-    "import",
-    "prettier"
+    "import"
   ],
-
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -31,59 +26,80 @@
     "prettier",
     "prettier/react"
   ],
-
   "rules": {
-
     //Best Practices
-
-    "eqeqeq": [0],
-
+    "eqeqeq": [
+      0
+    ],
     //Stylistic Issues
-
-    "comma-dangle": ["error", {
+    "comma-dangle": [
+      "error",
+      {
         "arrays": "always-multiline",
         "objects": "always-multiline",
         "imports": "always-multiline",
         "exports": "always-multiline",
         "functions": "always-multiline"
-    }],
-    "indent": ["error", 2],
-    "newline-after-var": ["error"],
-    "no-trailing-spaces": ["error"],
-    "quotes": ["error", "single"],
-    "quote-props": ["error", "consistent-as-needed"],
-
+      }
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "newline-after-var": [
+      "error"
+    ],
+    "no-trailing-spaces": [
+      "error"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "quote-props": [
+      "error",
+      "consistent-as-needed"
+    ],
     //ECMAScript 6
-
-    "no-duplicate-imports": ["error"],
-    "no-useless-computed-key": ["error"],
-    "no-var": ["error"],
-    "object-shorthand": ["error"],
-    "prefer-arrow-callback": ["error"],
-    "prefer-const": ["error"],
-    "prefer-rest-params": ["error"],
-    "prefer-spread": ["error"],
-    "prefer-template": ["error"],
-
+    "no-duplicate-imports": [
+      "error"
+    ],
+    "no-useless-computed-key": [
+      "error"
+    ],
+    "no-var": [
+      "error"
+    ],
+    "object-shorthand": [
+      "error"
+    ],
+    "prefer-arrow-callback": [
+      "error"
+    ],
+    "prefer-const": [
+      "error"
+    ],
+    "prefer-rest-params": [
+      "error"
+    ],
+    "prefer-spread": [
+      "error"
+    ],
+    "prefer-template": [
+      "error"
+    ],
     //Reat
-
-    "react/prop-types": [0],
-
+    "react/prop-types": [
+      0
+    ],
     //Import
-
-    "import/no-unresolved": ["error", {"amd": true}],
-
-    //Prettier
-
-    "prettier/prettier": ["error",
+    "import/no-unresolved": [
+      "error",
       {
-        "trailingComma": "all",
-        "singleQuote": true,
-        "jsxBracketSameLine": true
+        "amd": true
       }
     ]
   },
-
   "settings": {
     "import/resolver": "webpack"
   }

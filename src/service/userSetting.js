@@ -1,4 +1,4 @@
-import idb from 'lib/idb';
+import idb from 'idb';
 
 const OBJECT_STORE = 'user-settings';
 const dbPromise = idb.open('ficalculator-db', 1, (upgradeDB) => {

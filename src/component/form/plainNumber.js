@@ -1,5 +1,5 @@
-import React from 'lib/react';
-import scrollIntoView from 'lib/scroll-into-view';
+import React from 'react';
+import scrollIntoView from 'scroll-into-view';
 import TextField from 'material-ui/TextField';
 
 export default class PlainNumber extends React.Component {

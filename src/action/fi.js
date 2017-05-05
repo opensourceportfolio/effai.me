@@ -1,4 +1,4 @@
-export const CHANGE_VALUE = 'CHANGE_VALUE';
+export const CHANGE_VALUE = 'fi/change-value';
 
 export function changeValue(field, value) {
   return {
@@ -8,7 +8,7 @@ export function changeValue(field, value) {
   };
 }
 
-export const LOAD_DATA = 'LOAD_DATA';
+export const LOAD_DATA = 'fi/load-data';
 
 export function loadData(field, value) {
   return {

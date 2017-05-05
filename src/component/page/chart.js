@@ -1,5 +1,5 @@
-import React from 'lib/react';
-import { connect } from 'lib/react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';

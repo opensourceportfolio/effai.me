@@ -1,4 +1,4 @@
-import React from 'lib/react';
+import React from 'react';
 import Future from 'component/fi/card/future';
 import Financial from 'component/fi/card/financial';
 import House from 'component/fi/card/house';
