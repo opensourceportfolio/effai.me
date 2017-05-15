@@ -9,13 +9,17 @@ const vendor = [
   'chartjs-plugin-deferred',
   'debounce',
   'idb',
+  'material-ui',
   'react',
   'react-dom',
+  'react-motion',
   'react-redux',
-  'redux',
   'react-swipeable-views',
+  'react-tap-event-plugin',
+  'redux',
+  'redux-logger',
+  'redux-thunk',
   'scroll-into-view',
-  'material-ui',
 ];
 
 module.exports = {
@@ -28,6 +32,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
+  devtool: 'cheap-source-map',
   module: {
     rules: [
       {

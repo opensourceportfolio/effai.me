@@ -1,5 +1,4 @@
-import { CHANGE_VALUE, LOAD_DATA } from 'action/fi';
-import { originalState } from 'service/user-setting';
+import { CHANGE_VALUE, LOADED_USER_DATA } from 'action/fi';
 
 export function input(state = {}, action) {
   switch (action.type) {
@@ -10,8 +9,8 @@ export function input(state = {}, action) {
 
     return copy;
   }
-  case LOAD_DATA: {
-    return action.value || getInputs(originalState);
+  case LOADED_USER_DATA: {
+    return getInputs(action.userData);
   }
   default:
     return state;

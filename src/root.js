@@ -9,17 +9,11 @@ import App from 'app';
 import configureStore from 'store';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { get, emptyState } from 'service/user-setting';
-import { loadData } from 'action/fi';
+import { emptyState } from 'service/user-setting';
 
-const key = 'settings';
 const store = configureStore(emptyState);
 
 injectTapEventPlugin();
-
-get(key).then(settings => {
-  store.dispatch(loadData(settings));
-});
 
 ReactDOM.render(
   <Provider store={store}>
