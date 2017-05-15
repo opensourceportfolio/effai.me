@@ -4,16 +4,10 @@ import { changeValue } from 'action/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';
-import {
-  compound,
-  percentage,
-  toFraction,
-  debt,
-  equity,
-  years,
-} from 'service/calculator';
+import { compound, percentage, toFraction, debt, equity, years } from 'service/calculator';
 import { longCurrency, formattedNumber } from 'service/formatter';
 import { pmt } from 'service/amortization';
+import { Row, Column } from 'component/grid';
 import ChartCard from 'component/fi/chart-card';
 import LineChart from 'component/chart/line';
 import Currency from 'component/form/currency';
@@ -77,10 +71,7 @@ const House = ({ onChange, status }) => {
     text: {
       placeholder: text.downpayment.placeholder,
       additional: text.downpayment.additional(downpaymentAmount),
-      error: i18n.error.between(
-        meta.house.downpayment.min,
-        meta.house.downpayment.max,
-      ),
+      error: i18n.error.between(meta.house.downpayment.min, meta.house.downpayment.max),
     },
     value: status.downpayment,
     rangeInfo: meta.house.downpayment,
@@ -123,10 +114,7 @@ const House = ({ onChange, status }) => {
     text: {
       placeholder: text.houseGrowth.placeholder,
       additional: text.houseGrowth.additional(futurePrice),
-      error: i18n.error.between(
-        meta.house.houseGrowth.min,
-        meta.house.houseGrowth.max,
-      ),
+      error: i18n.error.between(meta.house.houseGrowth.min, meta.house.houseGrowth.max),
     },
     value: status.houseGrowth,
     rangeInfo: meta.house.houseGrowth,
@@ -134,8 +122,14 @@ const House = ({ onChange, status }) => {
 
   return (
     <ChartCard title={text.title} supporting={text.supporting} chart={chart}>
-      <Currency {...price} />
-      <Percent {...downpayment} />
+      <Row>
+        <Column>
+          <Currency {...price} />
+        </Column>
+        <Column>
+          <Percent {...downpayment} />
+        </Column>
+      </Row>
       <Percent {...rate} />
       <PlainNumber {...term} />
       <Percent {...houseGrowth} />
@@ -143,6 +137,4 @@ const House = ({ onChange, status }) => {
   );
 };
 
-const container = connect(mapStateToProps, mapDispatchToProps);
-
-export default container(House);
+export default connect(mapStateToProps, mapDispatchToProps)(House);

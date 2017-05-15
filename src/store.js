@@ -3,7 +3,7 @@ import { createLogger } from 'redux-logger';
 import debounce from 'debounce';
 import { input } from 'reducer/fi';
 import { navigation } from 'reducer/navigation';
-import { set } from 'service/userSetting';
+import { set } from 'service/user-setting';
 
 export default function configureStore(originalState) {
   const key = 'settings';

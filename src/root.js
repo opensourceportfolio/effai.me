@@ -1,14 +1,15 @@
+import 'css/icon.css';
+import 'css/index.css';
+import 'css/grid.css';
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from 'app';
-import 'css/icon.css';
-import 'css/index.css';
 import configureStore from 'store';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { get, emptyState } from 'service/userSetting';
+import { get, emptyState } from 'service/user-setting';
 import { loadData } from 'action/fi';
 
 const key = 'settings';

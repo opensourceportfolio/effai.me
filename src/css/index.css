@@ -56,3 +56,7 @@ html {
     }
   }
 }
+
+.react-swipeable-view-container {
+  height: 100%;
+}

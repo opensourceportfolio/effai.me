@@ -22,10 +22,7 @@ export default class PlainNumber extends React.Component {
   }
 
   toggleMask(isFocus) {
-    this.refs.input.classList.toggle(
-      'mui-text-field__masked-text--focus',
-      isFocus,
-    );
+    this.refs.input.classList.toggle('mui-text-field__masked-text--focus', isFocus);
   }
 
   render() {

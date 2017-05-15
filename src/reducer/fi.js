@@ -1,5 +1,5 @@
 import { CHANGE_VALUE, LOAD_DATA } from 'action/fi';
-import { originalState } from 'service/userSetting';
+import { originalState } from 'service/user-setting';
 
 export function input(state = {}, action) {
   switch (action.type) {

@@ -1,10 +1,10 @@
 import React from 'react';
-import Future from 'component/fi/card/future';
-import Financial from 'component/fi/card/financial';
-import House from 'component/fi/card/house';
+import Future from 'component/card/future';
+import Financial from 'component/card/financial';
+import House from 'component/card/house';
 
 const Information = () => (
-  <div className="page__information">
+  <div>
     <Financial />
     <House />
     <Future />

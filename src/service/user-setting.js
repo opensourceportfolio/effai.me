@@ -1,7 +1,7 @@
 import idb from 'idb';
 
 const OBJECT_STORE = 'user-settings';
-const dbPromise = idb.open('ficalculator-db', 1, (upgradeDB) => {
+const dbPromise = idb.open('ficalculator-db', 1, upgradeDB => {
   upgradeDB.createObjectStore(OBJECT_STORE);
 });
 
@@ -12,7 +12,7 @@ export const emptyState = {
   },
 };
 
-export const originalState  = Object.assign({}, emptyState, {
+export const originalState = Object.assign({}, emptyState, {
   input: {
     networth: 50000,
     savings: 1000,
@@ -36,7 +36,7 @@ export async function get(key) {
   const store = transaction.objectStore(OBJECT_STORE);
 
   try {
-    const settings = await store.get(key)
+    const settings = await store.get(key);
 
     return Object.assign(originalState, settings);
   } catch (err) {
@@ -45,7 +45,7 @@ export async function get(key) {
 }
 
 export async function set(key, value) {
-  const db = await dbPromise
+  const db = await dbPromise;
   const transaction = db.transaction(OBJECT_STORE, 'readwrite');
   const store = transaction.objectStore(OBJECT_STORE);
 

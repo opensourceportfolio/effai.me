@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import { changeValue } from 'action/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
-import {
-  formattedCurrency,
-  longCurrency,
-  formattedShortFloat,
-} from 'service/formatter';
+import { formattedCurrency, longCurrency, formattedShortFloat } from 'service/formatter';
 import { years, compound } from 'service/calculator';
 import { xrange, yrange, chartFn } from 'service/chart';
+import { Row, Column } from 'component/grid';
 import ChartCard from 'component/fi/chart-card';
 import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
@@ -39,9 +36,7 @@ const Future = ({ status, onChange }) => {
     text: text.chart,
   };
 
-  const renterGoal = formattedCurrency(
-    compound(status.renter, status.inflation, yrs),
-  );
+  const renterGoal = formattedCurrency(compound(status.renter, status.inflation, yrs));
   const renter = {
     name: 'renter',
     onChange,
@@ -54,9 +49,7 @@ const Future = ({ status, onChange }) => {
     rangeInfo: meta.renter,
   };
 
-  const homeownerGoal = formattedCurrency(
-    compound(status.homeowner, status.inflation, yrs),
-  );
+  const homeownerGoal = formattedCurrency(compound(status.homeowner, status.inflation, yrs));
   const homeowner = {
     name: 'homeowner',
     onChange,
@@ -93,14 +86,18 @@ const Future = ({ status, onChange }) => {
 
   return (
     <ChartCard title={text.title} supporting={text.supporting} chart={chart}>
-      <Currency {...renter} />
-      <Currency {...homeowner} />
+      <Row>
+        <Column>
+          <Currency {...renter} />
+        </Column>
+        <Column>
+          <Currency {...homeowner} />
+        </Column>
+      </Row>
       <Percent {...inflation} />
       <Percent {...withdrawl} />
     </ChartCard>
   );
 };
 
-const container = connect(mapStateToProps, mapDispatchToProps);
-
-export default container(Future);
+export default connect(mapStateToProps, mapDispatchToProps)(Future);

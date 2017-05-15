@@ -35,6 +35,4 @@ const SwipeableView = ({ tabIndex, onNavigation }) => (
   </SwipeableViews>
 );
 
-const container = connect(mapStateToProps, mapDispatchToProps);
-
-export default container(SwipeableView);
+export default connect(mapStateToProps, mapDispatchToProps)(SwipeableView);

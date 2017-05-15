@@ -32,11 +32,16 @@ module.exports = {
     rules: [
       {
         test: /(\.js)$/,
+        exclude: /node_modules/,
         loaders: ['babel-loader'],
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader?importLoaders=1', 'postcss-loader'],
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'postcss-loader',
+        ],
       },
     ],
   },

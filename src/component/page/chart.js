@@ -32,25 +32,9 @@ const Chart = ({ status }) => {
     plot: { x, y },
     formatter: { y: longCurrency },
     text: i18n.chart,
-    chartOptions: {
-      width: '500px',
-      height: '1000px',
-    },
   };
 
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        alignItems: 'center',
-      }}>
-      <div style={{ maxWidth: '100%', flex: '1' }}>
-        <FiChart {...chart} />
-      </div>
-    </div>
-  );
+  return <FiChart {...chart} />;
 };
 
 export default connect(mapStateToProps)(Chart);

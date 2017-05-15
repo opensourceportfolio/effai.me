@@ -6,13 +6,8 @@ import AccountBox from 'material-ui/svg-icons/action/account-box';
 import { years } from 'service/calculator';
 import { meta } from 'service/meta';
 import { i18n } from 'service/i18n';
-import { changeTab } from 'action/navigation';
 
 const mapStateToProps = state => state;
-
-const mapDispatchToProps = {
-  onNavigation: changeTab,
-};
 
 const style = {
   position: 'fixed',
@@ -42,6 +37,4 @@ const Header = ({ input }) => {
   );
 };
 
-const container = connect(mapStateToProps, mapDispatchToProps);
-
-export default container(Header);
+export default connect(mapStateToProps)(Header);

@@ -1,0 +1,19 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.col {
+  padding: 0 5px;
+}
+
+.col-2 {
+  width: 100%;
+}
+
+@media only screen and (min-width: 360px) {
+  .col-2 {
+    width: 50%;
+  }
+}

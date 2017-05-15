@@ -17,7 +17,8 @@ export const i18n = {
   },
 
   error: {
-    between: (min, max) => `You must enter a number between ${longNumber(min)} and ${longNumber(max)}`,
+    between: (min, max) =>
+      `You must enter a number between ${longNumber(min)} and ${longNumber(max)}`,
   },
 
   financial: {
@@ -26,8 +27,8 @@ export const i18n = {
     chart: {
       title: 'Years to effai vs. Savings rate',
       tooltips: {
-        title: (tooltip) => `Saving ${longNumber(tooltip[0].xLabel)} a month`,
-        label: (tooltip) => `Expected to be be effai in ${longNumber(tooltip.yLabel)} years`,
+        title: tooltip => `Saving ${longNumber(tooltip[0].xLabel)} a month`,
+        label: tooltip => `Expected to be be effai in ${longNumber(tooltip.yLabel)} years`,
       },
       legend: ['Years to effai'],
       formatter: formattedCurrency,
@@ -36,11 +37,11 @@ export const i18n = {
     },
     savings: {
       placeholder: 'Savings per month',
-      additional: (v) => `${v} adjusted to inflation`,
+      additional: v => `${v} adjusted to inflation`,
     },
     networth: {
       placeholder: 'Total liquid assets',
-      additional: (v) => `retire with ${v}`,
+      additional: v => `retire with ${v}`,
     },
     ror: {
       placeholder: 'Rate of return',
@@ -54,8 +55,8 @@ export const i18n = {
       title: 'Home price vs. Years',
       legend: ['Debt', 'Equity', 'Price'],
       tooltips: {
-        title: (tooltip) => `Year ${longNumber(tooltip[0].xLabel)} of your mortgage`,
-        label: (tooltip) => {
+        title: tooltip => `Year ${longNumber(tooltip[0].xLabel)} of your mortgage`,
+        label: tooltip => {
           if (tooltip.datasetIndex === 0) {
             return `${longNumber(tooltip.yLabel)} of debt is still left`;
           } else if (tooltip.datasetIndex === 1) {
@@ -74,18 +75,18 @@ export const i18n = {
     },
     rate: {
       placeholder: 'Mortgage rate',
-      additional: (v) => `${formattedCurrency(v)} per month`,
+      additional: v => `${formattedCurrency(v)} per month`,
     },
     term: {
       placeholder: 'Mortgage term',
     },
     downpayment: {
       placeholder: 'Downpayment',
-      additional: (v) => `${formattedCurrency(v)}`,
+      additional: v => `${formattedCurrency(v)}`,
     },
     houseGrowth: {
       placeholder: 'Growth',
-      additional: (v) => `Home will be worth ${formattedCurrency(v)} at effai`,
+      additional: v => `Home will be worth ${formattedCurrency(v)} at effai`,
     },
   },
 
@@ -95,8 +96,8 @@ export const i18n = {
     chart: {
       title: 'Years vs Goal',
       tooltips: {
-        title: (tooltip) => `Looking for ${longNumber(tooltip[0].xLabel)} a month`,
-        label: (tooltip) => `Expected to be effai in ${longNumber(tooltip.yLabel)} years`,
+        title: tooltip => `Looking for ${longNumber(tooltip[0].xLabel)} a month`,
+        label: tooltip => `Expected to be effai in ${longNumber(tooltip.yLabel)} years`,
       },
       legend: ['Years to effai'],
       formatter: formattedCurrency,
@@ -105,11 +106,11 @@ export const i18n = {
     },
     renter: {
       placeholder: 'Goal as renter',
-      additional: (v) => `${v} adjusted to inflation`,
+      additional: v => `${v} adjusted to inflation`,
     },
     homeowner: {
-      placeholder: 'Goal as mortgage free homeowner',
-      additional: (v) => `${v} adjusted to inflation`,
+      placeholder: 'Owner w/o mortgage',
+      additional: v => `${v} adjusted to inflation`,
     },
     inflation: {
       placeholder: 'Inflation rate',
@@ -122,8 +123,8 @@ export const i18n = {
   chart: {
     title: 'Time vs Passive income',
     tooltips: {
-      title: (tooltip) => `Saving for ${longNumber(tooltip[0].xLabel)} years`,
-      label: (tooltip) => {
+      title: tooltip => `Saving for ${longNumber(tooltip[0].xLabel)} years`,
+      label: tooltip => {
         if (tooltip.datasetIndex === 0) {
           return `Expected to require ${longNumber(tooltip.yLabel)}`;
         } else if (tooltip.datasetIndex === 1) {
