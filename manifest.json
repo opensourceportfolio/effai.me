@@ -6,15 +6,15 @@
   "description": "A simple calculator to figure out when you can be financially independent",
   "icons": [{
     "src": "img/icon/icon-256x256.png",
-      "sizes": "256x256",
-      "type": "image/png"
+    "sizes": "256x256",
+    "type": "image/png"
   },{
     "src": "img/icon/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+    "sizes": "512x512",
+    "type": "image/png"
   }],
   "background_color": "rgb(33,150,243)",
   "theme_color": "#000000",
   "lang": "en-US",
-  ​​"orientation": "portrait"
+  "orientation": "portrait"
 }
