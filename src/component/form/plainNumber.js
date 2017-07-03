@@ -10,7 +10,7 @@ export default class PlainNumber extends React.Component {
   }
 
   scrollIntoViewOnFocus() {
-    const plainNumber = this.refs.plainNumber;
+    const plainNumber = this.plainNumber;
 
     scrollIntoView(plainNumber, {
       time: 500,
@@ -22,7 +22,7 @@ export default class PlainNumber extends React.Component {
   }
 
   toggleMask(isFocus) {
-    this.refs.input.classList.toggle('mui-text-field__masked-text--focus', isFocus);
+    this.plainNumber.classList.toggle('mui-text-field__masked-text--focus', isFocus);
   }
 
   render() {
@@ -34,7 +34,7 @@ export default class PlainNumber extends React.Component {
     const isValid = this.isValid(rangeInfo, value);
 
     return (
-      <div className="mui-text-field__masked-text" ref="input">
+      <div className="mui-text-field__masked-text" ref={(e) => this.plainNumber = e}>
         <TextField
           className="mui-text-field__input-text"
           name={name}
@@ -49,8 +49,8 @@ export default class PlainNumber extends React.Component {
         />
         {isValid
           ? <label className="mui-text-field__additional-text">
-              {additional}
-            </label>
+            {additional}
+          </label>
           : null}
         <div className="mui-text-field__mask-text">
           {isValid ? formatter(value) : value}

@@ -16,7 +16,7 @@ export default class Base extends React.Component {
   }
 
   componentDidMount() {
-    const $chart = this.refs.chart;
+    const $chart = this.chartEl;
     const { data, type, options } = this.props;
     const overridden = this.override(options);
 
@@ -52,6 +52,6 @@ export default class Base extends React.Component {
     const defaultSize = { width: '500', height: '300' };
     const { size = defaultSize } = this.props.options;
 
-    return <canvas {...size} style={{ height: '100%' }} ref="chart" />;
+    return <canvas {...size} style={{ height: '100%' }} ref={e => this.chartEl = e} />;
   }
 }

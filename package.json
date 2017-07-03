@@ -68,6 +68,7 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
+    "lint": "eslint ./src",
     "start": "webpack-dev-server --content-base=/dist/ -d --progress",
     "dev": "npm run clean && webpack -d --progress",
     "prod": "npm run clean && webpack -p --progress",
