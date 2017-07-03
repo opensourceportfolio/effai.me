@@ -16,6 +16,7 @@
     "src"
   ],
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "chart.js": "^2.4.0",
     "chartjs-plugin-deferred": "^0.3.0",
     "debounce": "^1.0.0",
@@ -40,13 +41,12 @@
     "babel-jest": "^20.0.3",
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-polyfill": "^6.22.0",
     "babel-preset-env": "^1.2.1",
     "babel-preset-react": "^6.23.0",
     "babel-runtime": "^6.11.6",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.1",
-    "eslint": "^3.2.0",
+    "eslint": "^4.1.x",
     "eslint-import-resolver-webpack": "^0.8.0",
     "eslint-plugin-import": "^2.0.0",
     "eslint-plugin-react": "^7.0.0",
@@ -58,11 +58,12 @@
     "postcss-cssnext": "^2.10.0",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.0",
-    "precss": "^1.4.0",
+    "precss": "^2.0.x",
     "redux-devtools": "^3.3.1",
     "style-loader": "^0.18.0",
     "sw-precache-webpack-plugin": "^0.11.0",
-    "webpack": "^2.2.0",
+    "webpack": "^3.0.0",
+    "webpack-bundle-analyzer": "^2.8.2",
     "webpack-dev-server": "^2.3.0"
   },
   "scripts": {

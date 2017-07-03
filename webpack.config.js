@@ -4,35 +4,15 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const vendor = [
-  'chart.js',
-  'chartjs-plugin-deferred',
-  'debounce',
-  'idb',
-  'material-ui',
-  'react',
-  'react-dom',
-  'react-motion',
-  'react-redux',
-  'react-swipeable-views',
-  'react-tap-event-plugin',
-  'redux',
-  'redux-logger',
-  'redux-thunk',
-  'scroll-into-view',
-];
-
 module.exports = {
   entry: {
     main: './src/root.js',
-    vendor,
   },
   output: {
     filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
-  devtool: 'cheap-source-map',
   module: {
     rules: [
       {
@@ -58,7 +38,7 @@ module.exports = {
       filename: 'sw.js',
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'],
+      names: ['manifest'],
     }),
   ],
   resolve: {
