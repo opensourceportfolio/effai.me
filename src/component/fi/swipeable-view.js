@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import SwipeableViews from 'react-swipeable-views';
 import { changeTab } from 'action/navigation';
-import Information from 'component/page/information';
-import Chart from 'component/page/chart';
+import Future from 'component/card/future';
+import Financial from 'component/card/financial';
+import House from 'component/card/house';
 
 const mapStateToProps = state => ({
   tabIndex: parseInt(state.navigation.tabIndex),
@@ -29,9 +30,11 @@ const SwipeableView = ({ tabIndex, onNavigation }) => (
     index={tabIndex}
     resistance={true}
     style={style}
-    slideStyle={slideStyle}>
-    <Information />
-    <Chart />
+    slideStyle={slideStyle}
+  >
+    <Financial />
+    <House />
+    <Future />
   </SwipeableViews>
 );
 
