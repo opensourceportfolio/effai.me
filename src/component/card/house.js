@@ -4,7 +4,15 @@ import { changeValue } from 'action/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';
-import { compound, percentage, toFraction, debt, equity, years } from 'service/calculator';
+import {
+  compound,
+  percentage,
+  toFraction,
+  debt,
+  equity,
+  years,
+  monthsToNow,
+} from 'service/calculator';
 import { longCurrency, formattedNumber } from 'service/formatter';
 import { pmt } from 'service/amortization';
 import { Row, Column } from 'component/grid';
@@ -12,35 +20,36 @@ import ChartCard from 'component/fi/chart-card';
 import LineChart from 'component/chart/line';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
+import Date from 'component/form/date';
 import PlainNumber from 'component/form/plainNumber';
 
 const mapStateToProps = state => ({
-  status: state.input,
+  state: state.input,
 });
 
 const mapDispatchToProps = {
   onChange: changeValue,
 };
 
-const House = ({ onChange, status }) => {
+const House = ({ onChange, state }) => {
   const text = i18n.house;
-  const downpaymentAmount = percentage(status.price, status.downpayment);
-  const yrs = years(status);
+  const downpaymentAmount = percentage(state.price, state.downpayment);
+  const yrs = years(state) + monthsToNow(state.purchaseDate) / 12;
 
   const debtFn = year => {
-    return debt(status, year);
+    return debt(state, year);
   };
 
   const equityFn = year => {
-    return equity(status, year);
+    return equity(state, year);
   };
 
   const valueFn = year => {
-    return compound(status.price, status.houseGrowth, year);
+    return compound(state.price, state.houseGrowth, year);
   };
 
   const min = 0;
-  const max = status.term;
+  const max = state.term;
   const step = (max - min) / 5;
   const rangeInfo = { min, max, step };
   const fn = [debtFn, equityFn, valueFn];
@@ -61,7 +70,7 @@ const House = ({ onChange, status }) => {
       placeholder: text.price.placeholder,
       error: i18n.error.between(meta.house.price.min, meta.house.price.max),
     },
-    value: status.price,
+    value: state.price,
     rangeInfo: meta.house.price,
   };
 
@@ -73,14 +82,14 @@ const House = ({ onChange, status }) => {
       additional: text.downpayment.additional(downpaymentAmount),
       error: i18n.error.between(meta.house.downpayment.min, meta.house.downpayment.max),
     },
-    value: status.downpayment,
+    value: state.downpayment,
     rangeInfo: meta.house.downpayment,
   };
 
   const payment = pmt(
-    toFraction(status.rate / 12),
-    status.term * 12,
-    -status.price + downpaymentAmount,
+    toFraction(state.rate / 12),
+    state.term * 12,
+    -state.price + downpaymentAmount,
     0,
   );
   const rate = {
@@ -91,7 +100,7 @@ const House = ({ onChange, status }) => {
       additional: text.rate.additional(payment),
       error: i18n.error.between(meta.house.rate.min, meta.house.rate.max),
     },
-    value: status.rate,
+    value: state.rate,
     rangeInfo: meta.house.rate,
   };
 
@@ -102,12 +111,12 @@ const House = ({ onChange, status }) => {
       placeholder: text.term.placeholder,
       error: i18n.error.between(meta.house.term.min, meta.house.term.max),
     },
-    value: status.term,
+    value: state.term,
     rangeInfo: meta.house.term,
     formatter: formattedNumber,
   };
 
-  const futurePrice = compound(status.price, status.houseGrowth, yrs);
+  const futurePrice = compound(state.price, state.houseGrowth, yrs);
   const houseGrowth = {
     name: 'houseGrowth',
     onChange,
@@ -116,8 +125,18 @@ const House = ({ onChange, status }) => {
       additional: text.houseGrowth.additional(futurePrice),
       error: i18n.error.between(meta.house.houseGrowth.min, meta.house.houseGrowth.max),
     },
-    value: status.houseGrowth,
+    value: state.houseGrowth,
     rangeInfo: meta.house.houseGrowth,
+  };
+
+  const purchaseDate = {
+    name: 'purchaseDate',
+    onChange,
+    text: {
+      placeholder: text.purchaseDate.placeholder,
+    },
+    value: state.purchaseDate,
+    rangeInfo: meta.house.purchaseDate,
   };
 
   return (
@@ -130,9 +149,16 @@ const House = ({ onChange, status }) => {
           <Percent {...downpayment} />
         </Column>
       </Row>
-      <Percent {...rate} />
-      <PlainNumber {...term} />
+      <Row>
+        <Column>
+          <Percent {...rate} />
+        </Column>
+        <Column>
+          <PlainNumber {...term} />
+        </Column>
+      </Row>
       <Percent {...houseGrowth} />
+      <Date {...purchaseDate} />
     </ChartCard>
   );
 };

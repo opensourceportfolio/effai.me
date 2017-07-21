@@ -67,6 +67,9 @@ export const meta = {
       max: 20,
       step: 0.5,
     },
+    purchaseDate: {
+      max: Date.now,
+    },
   },
 
   range: 42,

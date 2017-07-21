@@ -1,4 +1,5 @@
 import { remainder } from 'service/amortization';
+import * as dateUtils from 'material-ui/DatePicker/dateUtils';
 
 export function toFraction(num) {
   return parseFloat(num) / 100;
@@ -16,7 +17,13 @@ export function compound(amount, rate, yrs) {
   return parseFloat(amount) * Math.pow(toAddedFraction(rate), parseFloat(yrs));
 }
 
+export function monthsToNow(date) {
+  return dateUtils.monthDiff(new Date(), date || new Date())
+}
+
 export function debt(state, yrs) {
+  const passedPeriods = monthsToNow(state.purchaseDate);
+
   if (yrs > state.term) {
     return NaN;
   }
@@ -26,9 +33,9 @@ export function debt(state, yrs) {
   const rate = toFraction(state.rate / 12);
   const periods = state.term * 12;
   const year = parseInt(yrs);
-  const period = year * 12;
+  const period = year * 12 + passedPeriods;
 
-  return remainder(loan, periods, rate, period);
+  return Math.max(0, remainder(loan, periods, rate, period));
 }
 
 export function equity(state, yrs) {
@@ -50,11 +57,10 @@ export function investment(state, yrs) {
   const f1 = 1 - Math.pow(factor, yrs + 1);
   const f2 = 1 - factor;
 
-
   if (inflation === ror) {
-    return Math.floor((futureSavings / inflation * yrs) + futureNetworth);
+    return Math.floor(futureSavings / inflation * yrs + futureNetworth);
   } else {
-    return Math.floor((futureSavings * (f1 / f2)) + futureNetworth) + 1;
+    return Math.floor(futureSavings * (f1 / f2) + futureNetworth) + 1;
   }
 }
 
@@ -116,14 +122,14 @@ export function years(state) {
     }
   };
 
-  const renterYears = find((year) => {
+  const renterYears = find(year => {
     const renterYield = totalYield(state, year);
     const renterGoal = compound(state.renter, state.inflation, year);
 
     return compare(renterYield, renterGoal);
   });
 
-  const homeownerYears = find((year) => {
+  const homeownerYears = find(year => {
     const homeownerYield = liquidYield(state, year);
     const homeownerGoal = compound(state.homeowner, state.inflation, year);
 
