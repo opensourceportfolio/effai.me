@@ -1,17 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import AccountBox from 'material-ui/svg-icons/action/account-box';
-import { years } from 'service/calculator';
-import { meta } from 'service/meta';
-import { i18n } from 'service/i18n';
+import React from "react";
+import { connect } from "react-redux";
+import AppBar from "material-ui/AppBar";
+import IconButton from "material-ui/IconButton";
+import AccountBox from "material-ui/svg-icons/action/account-box";
+import { years } from "service/calculator";
+import { meta } from "service/meta";
+import { i18n } from "service/i18n";
 
 const mapStateToProps = state => state;
 
 const style = {
-  position: 'fixed',
-  top: 0,
+  position: "fixed",
+  top: 0
 };
 
 const fiAge = yrs => {
@@ -32,7 +32,11 @@ const Header = ({ input }) => {
       showMenuIconButton={false}
       title={fiAge(yrs)}
       style={style}
-      iconElementRight={<IconButton><AccountBox /></IconButton>}
+      iconElementRight={
+        <IconButton>
+          <AccountBox />
+        </IconButton>
+      }
     />
   );
 };

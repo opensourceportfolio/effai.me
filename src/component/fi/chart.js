@@ -1,5 +1,5 @@
-import React from 'react';
-import { toModel } from 'service/chart';
+import React from "react";
+import { toModel } from "service/chart";
 
 const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
   const { xlabel, ylabel, legend, title, tooltips } = text;
@@ -8,36 +8,36 @@ const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
   const data = toModel(xval, yval, legend);
   const identity = e => e;
   const chartColors = [
-    'rgba(255, 99, 132, 0.8)',
-    'rgba(255, 159, 64, 0.8)',
-    'rgba(255, 205, 86, 0.5)',
-    'rgba(75, 192, 192, 0.5)',
-    'rgba(54, 162, 235, 0.5)',
-    'rgba(153, 102, 255, 0.5)',
-    'rgba(231,233,237, 0.5)',
+    "rgba(255, 99, 132, 0.8)",
+    "rgba(255, 159, 64, 0.8)",
+    "rgba(255, 205, 86, 0.5)",
+    "rgba(75, 192, 192, 0.5)",
+    "rgba(54, 162, 235, 0.5)",
+    "rgba(153, 102, 255, 0.5)",
+    "rgba(231,233,237, 0.5)"
   ];
   const options = Object.assign({}, chartOptions, {
     title: {
       display: true,
-      text: title,
+      text: title
     },
     tooltips: {
-      callbacks: tooltips,
+      callbacks: tooltips
     },
     scales: {
       yAxes: [
         {
           ticks: {
-            callback: formatter.y,
-          },
-        },
+            callback: formatter.y
+          }
+        }
       ],
       xAxes: [
         {
-          ticks: { callback: formatter.x || identity },
-        },
-      ],
-    },
+          ticks: { callback: formatter.x || identity }
+        }
+      ]
+    }
   });
 
   data.datasets.forEach((dataset, i) => {

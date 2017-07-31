@@ -1,5 +1,5 @@
-import { remainder } from 'service/amortization';
-import * as dateUtils from 'material-ui/DatePicker/dateUtils';
+import { remainder } from "service/amortization";
+import * as dateUtils from "material-ui/DatePicker/dateUtils";
 
 export function toFraction(num) {
   return parseFloat(num) / 100;
@@ -18,7 +18,7 @@ export function compound(amount, rate, yrs) {
 }
 
 export function monthsToNow(date) {
-  return dateUtils.monthDiff(new Date(), date || new Date())
+  return dateUtils.monthDiff(new Date(), date || new Date());
 }
 
 export function debt(state, yrs) {

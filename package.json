@@ -47,18 +47,25 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.1",
     "eslint": "^4.1.x",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-config-react-app": "^1.0.5",
     "eslint-import-resolver-webpack": "^0.8.0",
     "eslint-plugin-import": "^2.0.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-prettier": "^2.1.2",
     "eslint-plugin-react": "^7.0.0",
     "exports-loader": "^0.6.3",
     "firebase-tools": "^3.6.1",
-    "html-webpack-plugin": "^2.25.0",
+    "html-webpack-plugin": "^2.30.0",
+    "husky": "^0.14.3",
     "jest": "^20.0.4",
+    "lint-staged": "^4.0.2",
     "postcss": "^6.0.1",
-    "postcss-cssnext": "^2.10.0",
+    "postcss-cssnext": "^3.0.0",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.0",
     "precss": "^2.0.x",
+    "prettier": "^1.5.3",
     "redux-devtools": "^3.3.1",
     "style-loader": "^0.18.0",
     "sw-precache-webpack-plugin": "^0.11.0",
@@ -68,10 +75,17 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
-    "lint": "eslint ./src",
+    "lint": "eslint ./src --fix",
     "start": "webpack-dev-server --content-base=/dist/ -d --progress",
     "dev": "npm run clean && webpack -d --progress",
+    "precommit": "lint-staged",
     "prod": "npm run clean && webpack -p --progress",
     "deploy": "npm run prod && firebase deploy"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

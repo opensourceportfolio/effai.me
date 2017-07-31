@@ -16,13 +16,18 @@
   },
   "plugins": [
     "react",
-    "import"
+    "import",
+    "prettier",
+    "jsx-a11y"
   ],
   "extends": [
     "eslint:recommended",
+    "prettier",
+    "prettier/react",
     "plugin:react/recommended",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "plugin:jsx-a11y/recommended"
   ],
   "rules": {
     //Best Practices
@@ -39,10 +44,6 @@
         "exports": "always-multiline",
         "functions": "always-multiline"
       }
-    ],
-    "indent": [
-      "error",
-      2
     ],
     "newline-after-var": [
       "error"
@@ -95,6 +96,17 @@
       "error",
       {
         "amd": true
+      }
+    ],
+    //Prettier
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "bracketSpacing": false,
+        "jsxBracketSameLine": true,
+        "parser": "flow"
       }
     ]
   },
