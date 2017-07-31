@@ -60,22 +60,3 @@ html {
 .react-swipeable-view-container {
   height: 100%;
 }
-
-@media (orientation: landscape) {
-  .card__content {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .card__header {
-    width: 100%;
-  }
-  .card__media {
-    width: 50%;
-  }
-
-  .card__action {
-    width: 50%;
-  }
-}
