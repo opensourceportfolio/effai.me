@@ -29,6 +29,7 @@ export default class PlainNumber extends React.Component {
   }
 
   render() {
+    const test = 1;
     const { name, text, rangeInfo, value = "", formatter } = this.props;
     const { onChange } = this.props;
     const additional =
