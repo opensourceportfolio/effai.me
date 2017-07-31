@@ -1,4 +1,4 @@
-import { CHANGE_TAB } from "action/navigation";
+import { CHANGE_TAB } from 'action/navigation';
 
 export function navigation(state = {}, action) {
   switch (action.type) {

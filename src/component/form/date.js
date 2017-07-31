@@ -1,5 +1,5 @@
-import React from "react";
-import DatePicker from "material-ui/DatePicker";
+import React from 'react';
+import DatePicker from 'material-ui/DatePicker';
 
 const Date = props => {
   const { name, value, onChange, text, rangeInfo } = props;

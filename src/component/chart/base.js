@@ -1,7 +1,7 @@
-import React from "react";
-import Chartjs from "chart.js";
-import ChartDeferred from "chartjs-plugin-deferred";
-import debounce from "debounce";
+import React from 'react';
+import Chartjs from 'chart.js';
+import ChartDeferred from 'chartjs-plugin-deferred';
+import debounce from 'debounce';
 
 export default class Base extends React.Component {
   constructor() {
@@ -24,7 +24,7 @@ export default class Base extends React.Component {
     this.chart = new Chartjs($chart, {
       type,
       data,
-      options: overridden
+      options: overridden,
     });
   }
 
@@ -37,11 +37,11 @@ export default class Base extends React.Component {
       {
         maintainAspectRatio: false,
         title: {
-          display: true
+          display: true,
         },
         deferred: {
-          enabled: true
-        }
+          enabled: true,
+        },
       },
       {},
       options
@@ -49,13 +49,13 @@ export default class Base extends React.Component {
   }
 
   render() {
-    const defaultSize = { width: "500", height: "300" };
+    const defaultSize = { width: '500', height: '300' };
     const { size = defaultSize } = this.props.options;
 
     return (
       <canvas
         {...size}
-        style={{ height: "100%" }}
+        style={{ height: '100%' }}
         ref={e => (this.chartEl = e)}
       />
     );

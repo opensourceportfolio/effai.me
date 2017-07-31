@@ -1,6 +1,6 @@
-import React from "react";
-import scrollIntoView from "scroll-into-view";
-import TextField from "material-ui/TextField";
+import React from 'react';
+import scrollIntoView from 'scroll-into-view';
+import TextField from 'material-ui/TextField';
 
 export default class PlainNumber extends React.Component {
   isValid(rangeInfo, value) {
@@ -16,23 +16,23 @@ export default class PlainNumber extends React.Component {
       time: 500,
       align: {
         top: 0.5,
-        left: 1
-      }
+        left: 1,
+      },
     });
   }
 
   toggleMask(isFocus) {
     this.plainNumber.classList.toggle(
-      "mui-text-field__masked-text--focus",
+      'mui-text-field__masked-text--focus',
       isFocus
     );
   }
 
   render() {
-    const { name, text, rangeInfo, value = "", formatter } = this.props;
+    const { name, text, rangeInfo, value = '', formatter } = this.props;
     const { onChange } = this.props;
     const additional =
-      typeof text.additional === "function"
+      typeof text.additional === 'function'
         ? text.additional(value)
         : text.additional;
     const isValid = this.isValid(rangeInfo, value);

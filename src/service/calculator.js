@@ -1,5 +1,5 @@
-import { remainder } from "service/amortization";
-import * as dateUtils from "material-ui/DatePicker/dateUtils";
+import { remainder } from 'service/amortization';
+import * as dateUtils from 'material-ui/DatePicker/dateUtils';
 
 export function toFraction(num) {
   return parseFloat(num) / 100;

@@ -74,7 +74,7 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
-    "lint": "eslint ./src",
+    "lint": "eslint ./src --fix",
     "start": "webpack-dev-server --content-base=/dist/ -d --progress",
     "dev": "npm run clean && webpack -d --progress",
     "precommit": "lint-staged",
@@ -83,7 +83,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier --write",
+      "prettier --single-quote --trailing-comma --write",
       "git add"
     ]
   }

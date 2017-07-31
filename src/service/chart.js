@@ -1,5 +1,5 @@
-import { start, generate } from "service/range";
-import { years } from "service/calculator";
+import { start, generate } from 'service/range';
+import { years } from 'service/calculator';
 
 export const CHART_COUNT = 7;
 
@@ -11,9 +11,9 @@ export function toModel(labels, datasets, legend) {
     datasets: datasets.map((dataset, i) => {
       return {
         label: chartLegend[i],
-        data: dataset
+        data: dataset,
       };
-    })
+    }),
   };
 }
 

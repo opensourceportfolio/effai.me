@@ -6,10 +6,10 @@ export function formattedFloat(digits, number) {
   const value = parseFloat(number);
 
   if (isNumber(value)) {
-    const p = value.toFixed(2).split(".");
-    const val = p[0].split("").reverse().reduce((acc, num, i) => {
-      return num + (i && !(i % 3) ? "," : "") + acc;
-    }, "");
+    const p = value.toFixed(2).split('.');
+    const val = p[0].split('').reverse().reduce((acc, num, i) => {
+      return num + (i && !(i % 3) ? ',' : '') + acc;
+    }, '');
     const remainder = p[1].slice(0, digits);
 
     if (digits === 0) {
@@ -18,7 +18,7 @@ export function formattedFloat(digits, number) {
       return `${val}.${remainder}`;
     }
   } else {
-    return "";
+    return '';
   }
 }
 
@@ -35,7 +35,7 @@ export function formattedNumber(number) {
 export function longNumber(value) {
   if (value > 0) {
     const e = parseInt(Math.log(value) / Math.log(1000)),
-      extension = ["", "k", "M", "B", "T"],
+      extension = ['', 'k', 'M', 'B', 'T'],
       fix = e === 0 ? 0 : 1;
 
     return parseFloat((value / Math.pow(1000, e)).toFixed(fix)) + extension[e];
@@ -66,6 +66,6 @@ export function percent(number) {
   if (isNumber(value)) {
     return `${value}%`;
   } else {
-    return "";
+    return '';
   }
 }

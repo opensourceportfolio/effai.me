@@ -1,11 +1,11 @@
-import { CHANGE_VALUE, LOADED_USER_DATA } from "action/fi";
+import { CHANGE_VALUE, LOADED_USER_DATA } from 'action/fi';
 
 export function input(state = {}, action) {
   switch (action.type) {
     case CHANGE_VALUE: {
       return {
         ...state,
-        [action.field]: action.value
+        [action.field]: action.value,
       };
     }
     case LOADED_USER_DATA: {

@@ -1,12 +1,12 @@
-import React from "react";
-import { connect } from "react-redux";
-import FiHeader from "component/fi/header";
-import FiTab from "component/fi/tab";
-import FiSwipeableViews from "component/fi/swipeable-view";
-import { loadUserData } from "action/fi";
+import React from 'react';
+import { connect } from 'react-redux';
+import FiHeader from 'component/fi/header';
+import FiTab from 'component/fi/tab';
+import FiSwipeableViews from 'component/fi/swipeable-view';
+import { loadUserData } from 'action/fi';
 
 const mapDispatchToProps = {
-  onLoad: loadUserData
+  onLoad: loadUserData,
 };
 
 class App extends React.Component {
