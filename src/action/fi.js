@@ -28,7 +28,7 @@ export function loadUserData() {
     dispatch({ type: LOAD_USER_DATA });
 
     return get(key).then(userData =>
-      dispatch({ type: LOADED_USER_DATA, userData })
+      dispatch({ type: LOADED_USER_DATA, userData }),
     );
   };
 }

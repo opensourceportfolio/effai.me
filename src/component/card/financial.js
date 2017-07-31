@@ -57,7 +57,7 @@ const Financial = ({ status, onChange }) => {
   };
 
   const fiSavings = formattedCurrency(
-    compound(status.savings, status.inflation, yrs)
+    compound(status.savings, status.inflation, yrs),
   );
   const savings = {
     name: 'savings',

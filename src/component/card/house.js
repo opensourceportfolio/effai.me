@@ -82,7 +82,7 @@ const House = ({ onChange, state }) => {
       additional: text.downpayment.additional(downpaymentAmount),
       error: i18n.error.between(
         meta.house.downpayment.min,
-        meta.house.downpayment.max
+        meta.house.downpayment.max,
       ),
     },
     value: state.downpayment,
@@ -93,7 +93,7 @@ const House = ({ onChange, state }) => {
     toFraction(state.rate / 12),
     state.term * 12,
     -state.price + downpaymentAmount,
-    0
+    0,
   );
   const rate = {
     name: 'rate',
@@ -128,7 +128,7 @@ const House = ({ onChange, state }) => {
       additional: text.houseGrowth.additional(futurePrice),
       error: i18n.error.between(
         meta.house.houseGrowth.min,
-        meta.house.houseGrowth.max
+        meta.house.houseGrowth.max,
       ),
     },
     value: state.houseGrowth,

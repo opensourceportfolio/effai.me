@@ -41,7 +41,7 @@ const Future = ({ status, onChange }) => {
   };
 
   const renterGoal = formattedCurrency(
-    compound(status.renter, status.inflation, yrs)
+    compound(status.renter, status.inflation, yrs),
   );
   const renter = {
     name: 'renter',
@@ -56,7 +56,7 @@ const Future = ({ status, onChange }) => {
   };
 
   const homeownerGoal = formattedCurrency(
-    compound(status.homeowner, status.inflation, yrs)
+    compound(status.homeowner, status.inflation, yrs),
   );
   const homeowner = {
     name: 'homeowner',

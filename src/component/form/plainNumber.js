@@ -24,7 +24,7 @@ export default class PlainNumber extends React.Component {
   toggleMask(isFocus) {
     this.plainNumber.classList.toggle(
       'mui-text-field__masked-text--focus',
-      isFocus
+      isFocus,
     );
   }
 

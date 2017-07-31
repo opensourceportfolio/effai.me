@@ -44,7 +44,7 @@ export default class Base extends React.Component {
         },
       },
       {},
-      options
+      options,
     );
   }
 

@@ -21,7 +21,7 @@ ReactDOM.render(
       <App />
     </MuiThemeProvider>
   </Provider>,
-  document.getElementById('app-effai')
+  document.getElementById('app-effai'),
 );
 
 if ('serviceWorker' in navigator) {

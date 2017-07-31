@@ -19,7 +19,7 @@ export const i18n = {
   error: {
     between: (min, max) =>
       `You must enter a number between ${longNumber(min)} and ${longNumber(
-        max
+        max,
       )}`,
   },
 

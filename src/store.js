@@ -19,7 +19,7 @@ export default function configureStore(originalState) {
   const store = createStore(
     reducers,
     originalState,
-    applyMiddleware(...middleware)
+    applyMiddleware(...middleware),
   );
 
   return store;
