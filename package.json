@@ -51,7 +51,6 @@
     "eslint-config-react-app": "^1.0.5",
     "eslint-import-resolver-webpack": "^0.8.0",
     "eslint-plugin-import": "^2.0.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-prettier": "^2.1.2",
     "eslint-plugin-react": "^7.0.0",
     "exports-loader": "^0.6.3",
@@ -75,7 +74,7 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
-    "lint": "eslint ./src --fix",
+    "lint": "eslint ./src",
     "start": "webpack-dev-server --content-base=/dist/ -d --progress",
     "dev": "npm run clean && webpack -d --progress",
     "precommit": "lint-staged",

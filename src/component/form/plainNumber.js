@@ -29,7 +29,6 @@ export default class PlainNumber extends React.Component {
   }
 
   render() {
-    const test = 1;
     const { name, text, rangeInfo, value = "", formatter } = this.props;
     const { onChange } = this.props;
     const additional =
@@ -56,7 +55,7 @@ export default class PlainNumber extends React.Component {
           onBlur={() => this.toggleMask(false)}
         />
         {isValid
-          ? <label className="mui-text-field__additional-text">
+          ? <label htmlFor={name} className="mui-text-field__additional-text">
               {additional}
             </label>
           : null}
