@@ -17,7 +17,8 @@
   "plugins": [
     "react",
     "import",
-    "prettier"
+    "prettier",
+    "promise"
   ],
   "extends": [
     "eslint:recommended",
@@ -25,13 +26,12 @@
     "prettier/react",
     "plugin:react/recommended",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "plugin:promise/recommended"
   ],
   "rules": {
-    //Best Practices
-    "eqeqeq": [
-      0
-    ],
+    "no-shadow": "error",
+    "no-param-reassign": "error",
     //Stylistic Issues
     "comma-dangle": [
       "error",
@@ -39,15 +39,34 @@
         "arrays": "always-multiline",
         "objects": "always-multiline",
         "imports": "always-multiline",
-        "exports": "always-multiline",
-        "functions": "always-multiline"
+        "exports": "always-multiline"
       }
     ],
-    "newline-after-var": [
-      "error"
-    ],
-    "no-trailing-spaces": [
-      "error"
+    "no-trailing-spaces": "error",
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": [
+          "const",
+          "let",
+          "var"
+        ],
+        "next": "*"
+      },
+      {
+        "blankLine": "any",
+        "prev": [
+          "const",
+          "let",
+          "var"
+        ],
+        "next": [
+          "const",
+          "let",
+          "var"
+        ]
+      }
     ],
     "quotes": [
       "error",
@@ -58,37 +77,17 @@
       "consistent-as-needed"
     ],
     //ECMAScript 6
-    "no-duplicate-imports": [
-      "error"
-    ],
-    "no-useless-computed-key": [
-      "error"
-    ],
-    "no-var": [
-      "error"
-    ],
-    "object-shorthand": [
-      "error"
-    ],
-    "prefer-arrow-callback": [
-      "error"
-    ],
-    "prefer-const": [
-      "error"
-    ],
-    "prefer-rest-params": [
-      "error"
-    ],
-    "prefer-spread": [
-      "error"
-    ],
-    "prefer-template": [
-      "error"
-    ],
+    "no-duplicate-imports": "error",
+    "no-useless-computed-key": "error",
+    "no-var": "error",
+    "object-shorthand": "error",
+    "prefer-arrow-callback": "error",
+    "prefer-const": "error",
+    "prefer-rest-params": "error",
+    "prefer-spread": "error",
+    "prefer-template": "error",
     //Reat
-    "react/prop-types": [
-      0
-    ],
+    "react/prop-types": "off",
     //Import
     "import/no-unresolved": [
       "error",
