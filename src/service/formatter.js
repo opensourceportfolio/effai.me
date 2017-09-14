@@ -7,9 +7,12 @@ export function formattedFloat(digits, number) {
 
   if (isNumber(value)) {
     const p = value.toFixed(2).split('.');
-    const val = p[0].split('').reverse().reduce((acc, num, i) => {
-      return num + (i && !(i % 3) ? ',' : '') + acc;
-    }, '');
+    const val = p[0]
+      .split('')
+      .reverse()
+      .reduce((acc, num, i) => {
+        return num + (i && !(i % 3) ? ',' : '') + acc;
+      }, '');
     const remainder = p[1].slice(0, digits);
 
     if (digits === 0) {

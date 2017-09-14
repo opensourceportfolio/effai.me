@@ -13,7 +13,8 @@ html {
 }
 
 [data-reactroot] {
-  padding-top: 112px;
+  display: flex;
+  flex-direction: column;
 }
 
 .page__information {

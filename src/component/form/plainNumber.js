@@ -45,7 +45,7 @@ export default class PlainNumber extends React.Component {
         <TextField
           className="mui-text-field__input-text"
           name={name}
-          type="tel"
+          type="number"
           value={value}
           fullWidth={true}
           floatingLabelText={text.placeholder}
@@ -54,11 +54,11 @@ export default class PlainNumber extends React.Component {
           onFocus={() => this.toggleMask(true)}
           onBlur={() => this.toggleMask(false)}
         />
-        {isValid
-          ? <label htmlFor={name} className="mui-text-field__additional-text">
-              {additional}
-            </label>
-          : null}
+        {isValid ? (
+          <label htmlFor={name} className="mui-text-field__additional-text">
+            {additional}
+          </label>
+        ) : null}
         <div className="mui-text-field__mask-text">
           {isValid ? formatter(value) : value}
         </div>

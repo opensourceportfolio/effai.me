@@ -13,18 +13,14 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = { onNavigation: changeTab };
 
 const style = {
-  display: 'flex',
-  flexDirection: 'column',
-  width: '100%',
   height: '100%',
-  padding: '5px',
 };
 
 const slideStyle = {
-  padding: '5px',
+  height: '100%',
 };
 
-const SwipeableView = ({ tabIndex, onNavigation }) =>
+const SwipeableView = ({ tabIndex, onNavigation }) => (
   <SwipeableViews
     onChangeIndex={i => onNavigation(i)}
     index={tabIndex}
@@ -35,6 +31,7 @@ const SwipeableView = ({ tabIndex, onNavigation }) =>
     <Financial />
     <House />
     <Future />
-  </SwipeableViews>;
+  </SwipeableViews>
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SwipeableView);

@@ -2,22 +2,15 @@ import debounce from 'debounce';
 import { key } from 'store';
 import { get, set } from 'service/user-setting';
 
+const write = debounce(state => {
+  set(key, state);
+}, 1000);
+
 export const CHANGE_VALUE = 'fi/change-value';
 export function changeValue(field, value) {
-  return function(dispatch) {
-    dispatch({ type: CHANGE_VALUE, field, value });
-    return dispatch(writeUserData());
-  };
-}
-
-export const WRITE_USER_DATA = 'fi/write-user-data';
-export function writeUserData() {
-  const writer = debounce(state => {
-    set(key, state);
-  }, 1000);
-
   return function(dispatch, getState) {
-    writer(getState());
+    dispatch({ type: CHANGE_VALUE, field, value });
+    return write(getState());
   };
 }
 

@@ -39,7 +39,7 @@ export async function get(key) {
   try {
     const settings = await store.get(key);
 
-    return Object.assign(originalState, settings);
+    return { ...originalState, ...settings };
   } catch (err) {
     return originalState;
   }

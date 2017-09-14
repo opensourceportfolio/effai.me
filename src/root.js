@@ -9,9 +9,9 @@ import App from 'app';
 import configureStore from 'store';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { emptyState } from 'service/user-setting';
+import { originalState } from 'service/user-setting';
 
-const store = configureStore(emptyState);
+const store = configureStore(originalState);
 
 injectTapEventPlugin();
 

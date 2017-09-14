@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { changeValue } from 'action/fi';
+import { getInputs } from 'reducer/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { xrange, yrange } from 'service/chart';
@@ -15,16 +16,16 @@ import {
 } from 'service/calculator';
 import { longCurrency, formattedNumber } from 'service/formatter';
 import { pmt } from 'service/amortization';
-import { Row, Column } from 'component/grid';
-import ChartCard from 'component/fi/chart-card';
+import { Row, Column, Column2 } from 'component/grid';
+import Page from 'component/fi/page';
 import LineChart from 'component/chart/line';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
-import Date from 'component/form/date';
+import DateComponent from 'component/form/date';
 import PlainNumber from 'component/form/plainNumber';
 
 const mapStateToProps = state => ({
-  state: state.input,
+  state: getInputs(state),
 });
 
 const mapDispatchToProps = {
@@ -141,31 +142,39 @@ const House = ({ onChange, state }) => {
     text: {
       placeholder: text.purchaseDate.placeholder,
     },
-    value: state.purchaseDate,
+    value: new Date(state.purchaseDate),
     rangeInfo: meta.house.purchaseDate,
   };
 
   return (
-    <ChartCard title={text.title} supporting={text.supporting} chart={chart}>
+    <Page title={text.title} supporting={text.supporting} chart={chart}>
       <Row>
-        <Column>
+        <Column2>
           <Currency {...price} />
-        </Column>
-        <Column>
+        </Column2>
+        <Column2>
           <Percent {...downpayment} />
+        </Column2>
+      </Row>
+      <Row>
+        <Column2>
+          <PlainNumber {...term} />
+        </Column2>
+        <Column2>
+          <Percent {...rate} />
+        </Column2>
+      </Row>
+      <Row>
+        <Column>
+          <DateComponent {...purchaseDate} />
         </Column>
       </Row>
       <Row>
         <Column>
-          <Percent {...rate} />
-        </Column>
-        <Column>
-          <PlainNumber {...term} />
+          <Percent {...houseGrowth} />
         </Column>
       </Row>
-      <Percent {...houseGrowth} />
-      <Date {...purchaseDate} />
-    </ChartCard>
+    </Page>
   );
 };
 

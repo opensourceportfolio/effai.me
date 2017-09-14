@@ -18,7 +18,7 @@ export function compound(amount, rate, yrs) {
 }
 
 export function monthsToNow(date) {
-  return dateUtils.monthDiff(new Date(), date || new Date());
+  return dateUtils.monthDiff(new Date(), new Date(date));
 }
 
 export function debt(state, yrs) {

@@ -89,12 +89,7 @@
     //Reat
     "react/prop-types": "off",
     //Import
-    "import/no-unresolved": [
-      "error",
-      {
-        "amd": true
-      }
-    ],
+    "import/no-unresolved": "error",
     //Prettier
     "prettier/prettier": [
       "error",

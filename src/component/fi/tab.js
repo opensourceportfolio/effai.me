@@ -12,16 +12,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { onNavigation: changeTab };
 
-const style = {
-  position: 'fixed',
-  top: '64px',
-  width: '100%',
-  zIndex: '1',
-};
-
 const FiTab = ({ tabIndex, onNavigation }) => {
   return (
-    <Tabs value={tabIndex} onChange={i => onNavigation(i)} style={style}>
+    <Tabs value={tabIndex} onChange={i => onNavigation(i)}>
       <Tab label="Financial" value={0} icon={<AttachMoney />} />
       <Tab label="House" value={1} icon={<Home />} />
       <Tab label="Future" value={2} icon={<WatchLater />} />

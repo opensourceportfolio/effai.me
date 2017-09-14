@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { changeValue } from 'action/fi';
+import { getInputs } from 'reducer/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import {
@@ -10,14 +11,14 @@ import {
 } from 'service/formatter';
 import { years, compound } from 'service/calculator';
 import { xrange, yrange, chartFn } from 'service/chart';
-import { Row, Column } from 'component/grid';
-import ChartCard from 'component/fi/chart-card';
+import { Row, Column2 } from 'component/grid';
+import Page from 'component/fi/page';
 import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
 
 const mapStateToProps = state => ({
-  status: state.input,
+  status: getInputs(state),
 });
 
 const mapDispatchToProps = {
@@ -93,18 +94,24 @@ const Future = ({ status, onChange }) => {
   };
 
   return (
-    <ChartCard title={text.title} supporting={text.supporting} chart={chart}>
+    <Page title={text.title} supporting={text.supporting} chart={chart}>
       <Row>
-        <Column>
+        <Column2>
           <Currency {...renter} />
-        </Column>
-        <Column>
+        </Column2>
+        <Column2>
           <Currency {...homeowner} />
-        </Column>
+        </Column2>
       </Row>
-      <Percent {...inflation} />
-      <Percent {...withdrawl} />
-    </ChartCard>
+      <Row>
+        <Column2>
+          <Percent {...inflation} />
+        </Column2>
+        <Column2>
+          <Percent {...withdrawl} />
+        </Column2>
+      </Row>
+    </Page>
   );
 };
 

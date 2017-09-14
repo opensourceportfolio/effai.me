@@ -9,11 +9,6 @@ import { i18n } from 'service/i18n';
 
 const mapStateToProps = state => state;
 
-const style = {
-  position: 'fixed',
-  top: 0,
-};
-
 const fiAge = yrs => {
   if (isNaN(yrs) || yrs > meta.range) {
     return i18n.fiStatus.never;
@@ -31,7 +26,6 @@ const Header = ({ input }) => {
     <AppBar
       showMenuIconButton={false}
       title={fiAge(yrs)}
-      style={style}
       iconElementRight={
         <IconButton>
           <AccountBox />
