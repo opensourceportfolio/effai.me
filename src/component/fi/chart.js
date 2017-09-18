@@ -18,7 +18,7 @@ const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
   ];
   const options = Object.assign({}, chartOptions, {
     title: {
-      display: true,
+      display: false,
       text: title,
     },
     tooltips: {

@@ -52,11 +52,6 @@ export const meta = {
       max: 8,
       step: 0.125,
     },
-    term: {
-      min: 0,
-      max: 30,
-      step: 1,
-    },
     downpayment: {
       min: 0,
       max: 100,

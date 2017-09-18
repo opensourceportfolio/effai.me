@@ -1,0 +1,14 @@
+.page__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.page__input {
+  margin-bottom: 20px;
+}
+
+.page__media {
+  height: '100%';
+  padding: '0 10px';
+}

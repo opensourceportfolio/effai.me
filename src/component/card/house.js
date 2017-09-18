@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import { changeValue } from 'action/fi';
 import { getInputs } from 'reducer/fi';
 import { i18n } from 'service/i18n';
@@ -14,15 +16,16 @@ import {
   years,
   monthsToNow,
 } from 'service/calculator';
-import { longCurrency, formattedNumber } from 'service/formatter';
+import { longCurrency } from 'service/formatter';
 import { pmt } from 'service/amortization';
-import { Row, Column, Column2 } from 'component/grid';
+import { Row, Column2 } from 'component/grid';
 import Page from 'component/fi/page';
 import LineChart from 'component/chart/line';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
 import DateComponent from 'component/form/date';
-import PlainNumber from 'component/form/plainNumber';
+
+const terms = ['30', '25', '15'];
 
 const mapStateToProps = state => ({
   state: getInputs(state),
@@ -32,7 +35,7 @@ const mapDispatchToProps = {
   onChange: changeValue,
 };
 
-const House = ({ onChange, state }) => {
+const House = ({ onChange, onChangeSelect, state }) => {
   const text = i18n.house;
   const downpaymentAmount = percentage(state.price, state.downpayment);
   const yrs = years(state) + monthsToNow(state.purchaseDate) / 12;
@@ -110,14 +113,10 @@ const House = ({ onChange, state }) => {
 
   const term = {
     name: 'term',
-    onChange,
-    text: {
-      placeholder: text.term.placeholder,
-      error: i18n.error.between(meta.house.term.min, meta.house.term.max),
-    },
+    onChange: (e, i, val) => onChange('term', val),
+    floatingLabelText: text.term.placeholder,
     value: state.term,
-    rangeInfo: meta.house.term,
-    formatter: formattedNumber,
+    fullWidth: true,
   };
 
   const futurePrice = compound(state.price, state.houseGrowth, yrs);
@@ -153,26 +152,28 @@ const House = ({ onChange, state }) => {
           <Currency {...price} />
         </Column2>
         <Column2>
-          <Percent {...downpayment} />
+          <Percent {...houseGrowth} />
         </Column2>
       </Row>
       <Row>
         <Column2>
-          <PlainNumber {...term} />
+          <SelectField {...term}>
+            {terms.map((year, i) => (
+              <MenuItem key={i} value={year} primaryText={`${year} years`} />
+            ))}
+          </SelectField>
         </Column2>
         <Column2>
           <Percent {...rate} />
         </Column2>
       </Row>
       <Row>
-        <Column>
+        <Column2>
           <DateComponent {...purchaseDate} />
-        </Column>
-      </Row>
-      <Row>
-        <Column>
-          <Percent {...houseGrowth} />
-        </Column>
+        </Column2>
+        <Column2>
+          <Percent {...downpayment} />
+        </Column2>
       </Row>
     </Page>
   );

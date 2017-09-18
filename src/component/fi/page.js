@@ -1,12 +1,16 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
 import Chart from 'component/fi/chart';
+import 'css/page.css';
 
 const Page = ({ chart, children }) => (
-  <div className="card__content">
-    <div className="card__action">{children}</div>
-    <div className="card__media">
+  <div className="page__content">
+    <Paper className="page__input" zDepth={1}>
+      {children}
+    </Paper>
+    <Paper className="page_media" zDepth={1}>
       <Chart {...chart} />
-    </div>
+    </Paper>
   </div>
 );
 

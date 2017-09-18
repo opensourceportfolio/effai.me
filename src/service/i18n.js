@@ -90,7 +90,7 @@ export const i18n = {
     },
     houseGrowth: {
       placeholder: 'Growth',
-      additional: v => `Home will be worth ${formattedCurrency(v)} at effai`,
+      additional: v => `${formattedCurrency(v)} at effai`,
     },
     purchaseDate: {
       placeholder: 'Purchase date',
