@@ -1,9 +1,11 @@
 import { CHANGE_TAB } from 'action/navigation';
 
 export function navigation(state = {}, action) {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case CHANGE_TAB:
-      return { ...state, tabIndex: action.tab };
+      return { ...state, tabIndex: payload.tab };
     default:
       return state;
   }

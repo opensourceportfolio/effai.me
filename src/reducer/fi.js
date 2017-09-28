@@ -1,15 +1,17 @@
 import { CHANGE_VALUE, LOADED_USER_DATA } from 'action/fi';
 
 export function input(state = {}, action) {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case CHANGE_VALUE: {
       return {
         ...state,
-        [action.field]: action.value,
+        [payload.field]: payload.value,
       };
     }
     case LOADED_USER_DATA: {
-      return getInputs(action.userData);
+      return getInputs(payload.userData);
     }
     default:
       return state;

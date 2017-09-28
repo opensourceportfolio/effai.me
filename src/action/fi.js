@@ -9,7 +9,7 @@ const write = debounce(state => {
 export const CHANGE_VALUE = 'fi/change-value';
 export function changeValue(field, value) {
   return function(dispatch, getState) {
-    dispatch({ type: CHANGE_VALUE, field, value });
+    dispatch({ type: CHANGE_VALUE, payload: { field, value } });
     return write(getState());
   };
 }
@@ -21,7 +21,7 @@ export function loadUserData() {
     dispatch({ type: LOAD_USER_DATA });
 
     return get(key).then(userData =>
-      dispatch({ type: LOADED_USER_DATA, userData }),
+      dispatch({ type: LOADED_USER_DATA, payload: { userData } }),
     );
   };
 }
