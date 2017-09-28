@@ -1,27 +1,28 @@
+import { memoize } from 'ramda';
 import { remainder } from 'service/amortization';
 import * as dateUtils from 'material-ui/DatePicker/dateUtils';
 
-export function toFraction(num) {
+export const toFraction = num => {
   return parseFloat(num) / 100;
-}
+};
 
-export function toAddedFraction(num) {
+export const toAddedFraction = num => {
   return 1 + toFraction(num);
-}
+};
 
-export function percentage(amount, rate) {
+export const percentage = (amount, rate) => {
   return parseFloat(amount) * toFraction(rate);
-}
+};
 
-export function compound(amount, rate, yrs) {
+export const compound = (amount, rate, yrs) => {
   return parseFloat(amount) * Math.pow(toAddedFraction(rate), parseFloat(yrs));
-}
+};
 
-export function monthsToNow(date) {
+export const monthsToNow = date => {
   return dateUtils.monthDiff(new Date(), new Date(date));
-}
+};
 
-export function debt(state, yrs) {
+export const debt = (state, yrs) => {
   const passedPeriods = monthsToNow(state.purchaseDate);
 
   if (yrs > state.term) {
@@ -36,16 +37,16 @@ export function debt(state, yrs) {
   const period = year * 12 + passedPeriods;
 
   return Math.max(0, remainder(loan, periods, rate, period));
-}
+};
 
-export function equity(state, yrs) {
+export const equity = (state, yrs) => {
   const value = compound(state.price, state.houseGrowth, yrs);
   const remaining = debt(state, yrs) || 0;
 
   return value - remaining;
-}
+};
 
-export function investment(state, yrs) {
+export const investment = (state, yrs) => {
   const currentNetworth = parseInt(state.networth) || 0;
   const ror = toAddedFraction(state.ror);
   const savings = state.savings * 12;
@@ -62,36 +63,34 @@ export function investment(state, yrs) {
   } else {
     return Math.floor(futureSavings * (f1 / f2) + futureNetworth) + 1;
   }
-}
+};
 
-export function totalNetworth(state, yrs) {
+export const totalNetworth = (state, yrs) => {
   const houseValue = equity(state, yrs);
 
   return investment(state, yrs) + houseValue;
-}
+};
 
-export function liquidNetworth(state, yrs) {
+export const liquidNetworth = (state, yrs) => {
   const currentDebt = debt(state, yrs);
 
   return investment(state, yrs) - currentDebt;
-}
+};
 
-export function totalYield(state, yrs) {
+export const totalYield = (state, yrs) => {
   const currentNetworth = totalNetworth(state, yrs);
 
   return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
-}
+};
 
-export function liquidYield(state, yrs) {
+export const liquidYield = (state, yrs) => {
   const currentNetworth = liquidNetworth(state, yrs);
 
   return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
-}
+};
 
-// Change to epsilon
-
-export function years(state) {
-  function find(compareFn, from = 0, to = 45) {
+export const years = memoize(state => {
+  const find = (compareFn, from = 0, to = 45) => {
     const delta = 0.1;
     const mid = (from + to) / 2;
 
@@ -108,14 +107,14 @@ export function years(state) {
         return mid;
       }
     }
-  }
+  };
 
   const compare = (v1, v2) => {
-    const epsilon = 100;
+    const delta = 100;
 
     if (v1 < v2) {
       return -1;
-    } else if (v1 - v2 > epsilon) {
+    } else if (v1 - v2 > delta) {
       return 1;
     } else {
       return 0;
@@ -137,4 +136,4 @@ export function years(state) {
   });
 
   return Math.min(renterYears, homeownerYears);
-}
+});

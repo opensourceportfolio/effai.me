@@ -12,3 +12,14 @@
   height: '100%';
   padding: '0 10px';
 }
+
+@media only screen and (min-width: 600px) {
+  .page__content{
+    flex-direction: row;
+  }
+
+  .page__input, .page__media {
+    width: 50%;
+    margin-bottom: 0;
+  }
+}

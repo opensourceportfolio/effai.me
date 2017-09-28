@@ -18,9 +18,7 @@ export const i18n = {
 
   error: {
     between: (min, max) =>
-      `You must enter a number between ${longNumber(min)} and ${longNumber(
-        max,
-      )}`,
+      `Enter a number between ${longNumber(min)} and ${longNumber(max)}`,
   },
 
   financial: {
@@ -40,7 +38,7 @@ export const i18n = {
     },
     savings: {
       placeholder: 'Savings per month',
-      additional: v => `${v} adjusted to inflation`,
+      additional: v => `${v} after inflation`,
     },
     networth: {
       placeholder: 'Total liquid assets',
@@ -115,11 +113,11 @@ export const i18n = {
     },
     renter: {
       placeholder: 'Goal as renter',
-      additional: v => `${v} adjusted to inflation`,
+      additional: v => `${v} after inflation`,
     },
     homeowner: {
       placeholder: 'Owner w/o mortgage',
-      additional: v => `${v} adjusted to inflation`,
+      additional: v => `${v} after inflation`,
     },
     inflation: {
       placeholder: 'Inflation rate',

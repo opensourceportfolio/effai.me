@@ -1,4 +1,5 @@
 import React from 'react';
+import { always, cond, lt, gte, or, T } from 'ramda';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
@@ -9,15 +10,11 @@ import { i18n } from 'service/i18n';
 
 const mapStateToProps = state => state;
 
-const fiAge = yrs => {
-  if (isNaN(yrs) || yrs > meta.range) {
-    return i18n.fiStatus.never;
-  } else if (yrs <= 0) {
-    return i18n.fiStatus.done;
-  } else {
-    return i18n.fiStatus.formatter(yrs);
-  }
-};
+const fiAge = cond([
+  [or(isNaN, lt(meta.range)), always(i18n.fiStatus.never)],
+  [gte(0), always(i18n.fiStatus.done)],
+  [T, i18n.fiStatus.formatter],
+]);
 
 const Header = ({ input }) => {
   const yrs = years(input);

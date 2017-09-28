@@ -6,7 +6,7 @@ export default class PlainNumber extends React.Component {
   isValid(rangeInfo, value) {
     const val = parseFloat(value);
 
-    return val && !isNaN(val) && val <= rangeInfo.max && val >= rangeInfo.min;
+    return val != null && val <= rangeInfo.max && val >= rangeInfo.min;
   }
 
   scrollIntoViewOnFocus() {

@@ -1,6 +1,16 @@
 import { start, generate } from 'service/range';
 import { years } from 'service/calculator';
 
+const chartColors = [
+  'rgba(255, 99, 132, 0.8)',
+  'rgba(255, 159, 64, 0.8)',
+  'rgba(255, 205, 86, 0.5)',
+  'rgba(75, 192, 192, 0.5)',
+  'rgba(54, 162, 235, 0.5)',
+  'rgba(153, 102, 255, 0.5)',
+  'rgba(231,233,237, 0.5)',
+];
+
 export const CHART_COUNT = 7;
 
 export function toModel(labels, datasets, legend) {
@@ -12,6 +22,7 @@ export function toModel(labels, datasets, legend) {
       return {
         label: chartLegend[i],
         data: dataset,
+        backgroundColor: chartColors[i],
       };
     }),
   };

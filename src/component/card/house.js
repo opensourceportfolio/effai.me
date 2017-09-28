@@ -28,32 +28,32 @@ import DateComponent from 'component/form/date';
 const terms = ['30', '25', '15'];
 
 const mapStateToProps = state => ({
-  state: getInputs(state),
+  inputs: getInputs(state),
 });
 
 const mapDispatchToProps = {
   onChange: changeValue,
 };
 
-const House = ({ onChange, onChangeSelect, state }) => {
+const House = ({ onChange, inputs }) => {
   const text = i18n.house;
-  const downpaymentAmount = percentage(state.price, state.downpayment);
-  const yrs = years(state) + monthsToNow(state.purchaseDate) / 12;
+  const downpaymentAmount = percentage(inputs.price, inputs.downpayment);
+  const yrs = years(inputs) + monthsToNow(inputs.purchaseDate) / 12;
 
   const debtFn = year => {
-    return debt(state, year);
+    return debt(inputs, year);
   };
 
   const equityFn = year => {
-    return equity(state, year);
+    return equity(inputs, year);
   };
 
   const valueFn = year => {
-    return compound(state.price, state.houseGrowth, year);
+    return compound(inputs.price, inputs.houseGrowth, year);
   };
 
   const min = 0;
-  const max = state.term;
+  const max = inputs.term;
   const step = (max - min) / 5;
   const rangeInfo = { min, max, step };
   const fn = [debtFn, equityFn, valueFn];
@@ -74,7 +74,7 @@ const House = ({ onChange, onChangeSelect, state }) => {
       placeholder: text.price.placeholder,
       error: i18n.error.between(meta.house.price.min, meta.house.price.max),
     },
-    value: state.price,
+    value: inputs.price,
     rangeInfo: meta.house.price,
   };
 
@@ -89,14 +89,14 @@ const House = ({ onChange, onChangeSelect, state }) => {
         meta.house.downpayment.max,
       ),
     },
-    value: state.downpayment,
+    value: inputs.downpayment,
     rangeInfo: meta.house.downpayment,
   };
 
   const payment = pmt(
-    toFraction(state.rate / 12),
-    state.term * 12,
-    -state.price + downpaymentAmount,
+    toFraction(inputs.rate / 12),
+    inputs.term * 12,
+    -inputs.price + downpaymentAmount,
     0,
   );
   const rate = {
@@ -107,7 +107,7 @@ const House = ({ onChange, onChangeSelect, state }) => {
       additional: text.rate.additional(payment),
       error: i18n.error.between(meta.house.rate.min, meta.house.rate.max),
     },
-    value: state.rate,
+    value: inputs.rate,
     rangeInfo: meta.house.rate,
   };
 
@@ -115,11 +115,11 @@ const House = ({ onChange, onChangeSelect, state }) => {
     name: 'term',
     onChange: (e, i, val) => onChange('term', val),
     floatingLabelText: text.term.placeholder,
-    value: state.term,
+    value: inputs.term,
     fullWidth: true,
   };
 
-  const futurePrice = compound(state.price, state.houseGrowth, yrs);
+  const futurePrice = compound(inputs.price, inputs.houseGrowth, yrs);
   const houseGrowth = {
     name: 'houseGrowth',
     onChange,
@@ -131,7 +131,7 @@ const House = ({ onChange, onChangeSelect, state }) => {
         meta.house.houseGrowth.max,
       ),
     },
-    value: state.houseGrowth,
+    value: inputs.houseGrowth,
     rangeInfo: meta.house.houseGrowth,
   };
 
@@ -141,7 +141,7 @@ const House = ({ onChange, onChangeSelect, state }) => {
     text: {
       placeholder: text.purchaseDate.placeholder,
     },
-    value: new Date(state.purchaseDate),
+    value: new Date(inputs.purchaseDate),
     rangeInfo: meta.house.purchaseDate,
   };
 

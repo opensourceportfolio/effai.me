@@ -1,4 +1,4 @@
-html, body, #app-effai, [data-reactroot] {
+html, body, #app-effai, #app-effai > [data-reactroot] {
   height: 100%;
   padding: 0;
   margin: 0;
@@ -36,7 +36,7 @@ html {
 
 .mui-text-field__mask-text {
   position: absolute;
-  top: 40px;
+  top: 42px;
   left: 0;
 }
 

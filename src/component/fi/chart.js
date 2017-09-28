@@ -1,4 +1,5 @@
 import React from 'react';
+import { identity } from 'ramda';
 import { toModel } from 'service/chart';
 
 const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
@@ -6,17 +7,9 @@ const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
   const xval = plot.x;
   const yval = plot.y;
   const data = toModel(xval, yval, legend);
-  const identity = e => e;
-  const chartColors = [
-    'rgba(255, 99, 132, 0.8)',
-    'rgba(255, 159, 64, 0.8)',
-    'rgba(255, 205, 86, 0.5)',
-    'rgba(75, 192, 192, 0.5)',
-    'rgba(54, 162, 235, 0.5)',
-    'rgba(153, 102, 255, 0.5)',
-    'rgba(231,233,237, 0.5)',
-  ];
-  const options = Object.assign({}, chartOptions, {
+
+  const options = {
+    ...chartOptions,
     title: {
       display: false,
       text: title,
@@ -38,11 +31,7 @@ const Chart = ({ type, plot, text, formatter = {}, chartOptions = {} }) => {
         },
       ],
     },
-  });
-
-  data.datasets.forEach((dataset, i) => {
-    dataset.backgroundColor = chartColors[i];
-  });
+  };
 
   return React.createElement(type, { data, xlabel, ylabel, options });
 };

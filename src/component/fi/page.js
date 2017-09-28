@@ -8,7 +8,7 @@ const Page = ({ chart, children }) => (
     <Paper className="page__input" zDepth={1}>
       {children}
     </Paper>
-    <Paper className="page_media" zDepth={1}>
+    <Paper className="page__media" zDepth={1}>
       <Chart {...chart} />
     </Paper>
   </div>
