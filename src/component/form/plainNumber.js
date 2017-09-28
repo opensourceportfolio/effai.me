@@ -1,6 +1,7 @@
 import React from 'react';
 import scrollIntoView from 'scroll-into-view';
 import TextField from 'material-ui/TextField';
+import { cyanA700 } from 'material-ui/styles/colors';
 
 export default class PlainNumber extends React.Component {
   isValid(rangeInfo, value) {
@@ -55,7 +56,11 @@ export default class PlainNumber extends React.Component {
           onBlur={() => this.toggleMask(false)}
         />
         {isValid ? (
-          <label htmlFor={name} className="mui-text-field__additional-text">
+          <label
+            htmlFor={name}
+            className="mui-text-field__additional-text"
+            style={{ color: cyanA700 }}
+          >
             {additional}
           </label>
         ) : null}
