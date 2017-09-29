@@ -1,8 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -18,7 +19,7 @@ module.exports = {
       {
         test: /(\.js)$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader'],
+        use: ['babel-loader'],
       },
       {
         test: /\.css$/,
@@ -31,6 +32,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({ template: './index.html' }),
     new CopyWebpackPlugin([{ from: 'manifest.json' }, { from: 'favicon.ico' }]),
     new SWPrecacheWebpackPlugin({

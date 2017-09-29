@@ -38,16 +38,18 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.11.4",
-    "babel-eslint": "^8.0.0",
+    "babel-eslint": "^8.0.1",
     "babel-jest": "^21.0.0",
     "babel-loader": "^7.0.0",
+    "babel-minify-webpack-plugin": "^0.2.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.2.1",
     "babel-preset-react": "^6.23.0",
     "babel-runtime": "^6.11.6",
+    "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.1",
-    "eslint": "^4.3.0",
+    "eslint": "^4.7.2",
     "eslint-config-prettier": "^2.3.0",
     "eslint-import-resolver-webpack": "^0.8.0",
     "eslint-plugin-immutable": "^1.0.0",
@@ -72,16 +74,16 @@
     "sw-precache-webpack-plugin": "^0.11.0",
     "webpack": "^3.0.0",
     "webpack-bundle-analyzer": "^2.8.2",
-    "webpack-dev-server": "^2.3.0"
+    "webpack-dev-server": "^2.3.0",
+    "webpack-merge": "^4.1.0"
   },
   "scripts": {
-    "clean": "rm -rf ./dist",
+    "build": "webpack --progress --config webpack.prod.js",
+    "deploy": "npm run prod && firebase deploy",
+    "dev": "webpack -d --progress",
     "lint": "eslint ./src --fix",
-    "start": "webpack-dev-server --content-base=/dist/ -d --progress",
-    "dev": "npm run clean && webpack -d --progress",
     "precommit": "lint-staged",
-    "prod": "npm run clean && webpack -p --progress",
-    "deploy": "npm run prod && firebase deploy"
+    "start": "webpack-dev-server --open --config webpack.dev.js"
   },
   "lint-staged": {
     "*.js": [
