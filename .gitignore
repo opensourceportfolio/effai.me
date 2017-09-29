@@ -4,5 +4,5 @@ bower_components
 .DS_STORE
 /dist
 *.map
-npm-debug.log
+npm-debug.log*
 .vscode

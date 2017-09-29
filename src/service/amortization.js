@@ -39,5 +39,6 @@ export function remainder(loan, nperiod, rate, period) {
   const annualRate = rate * 12;
 
   return (12 * payment / annualRate -
-    (12 * payment / annualRate - loan) * (1 + rate) ** period).toFixed(2);
+    (12 * payment / annualRate - loan) * (1 + rate) ** period
+  ).toFixed(2);
 }

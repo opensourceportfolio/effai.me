@@ -78,12 +78,12 @@
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
-    "build": "webpack --progress --config webpack.prod.js",
-    "deploy": "npm run prod && firebase deploy",
-    "dev": "webpack -d --progress",
+    "build": "webpack --config script/webpack.prod.js --progress",
+    "deploy": "npm run build && firebase deploy",
+    "dev": "webpack --config script/webpack.dev.js --progress --profile",
     "lint": "eslint ./src --fix",
     "precommit": "lint-staged",
-    "start": "webpack-dev-server --open --config webpack.dev.js"
+    "start": "webpack-dev-server --open --config script/webpack.dev.js --progress --profile"
   },
   "lint-staged": {
     "*.js": [
