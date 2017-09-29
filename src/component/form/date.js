@@ -2,16 +2,14 @@ import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
 
 const Date = props => {
-  const { name, value, onChange, text, rangeInfo } = props;
+  const { onChange, text } = props;
 
   return (
     <DatePicker
-      name={name}
-      value={value}
-      onChange={(e, newDate) => onChange(name, newDate)}
-      fullWidth={true}
-      max={rangeInfo.max}
+      {...props}
       floatingLabelText={text.placeholder}
+      fullWidth={true}
+      onChange={(e, newDate) => onChange(name, newDate)}
     />
   );
 };

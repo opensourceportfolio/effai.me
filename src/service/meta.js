@@ -63,7 +63,7 @@ export const meta = {
       step: 0.5,
     },
     purchaseDate: {
-      max: Date.now,
+      max: Date.now(),
     },
   },
 

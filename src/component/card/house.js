@@ -142,7 +142,9 @@ const House = ({ onChange, inputs }) => {
       placeholder: text.purchaseDate.placeholder,
     },
     value: new Date(inputs.purchaseDate),
-    rangeInfo: meta.house.purchaseDate,
+    openToYearSelection: true,
+    autoOk: true,
+    maxDate: new Date(),
   };
 
   return (
