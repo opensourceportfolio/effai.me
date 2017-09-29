@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import Toggle from 'material-ui/Toggle';
 import { changeValue } from 'action/fi';
 import { getInputs } from 'reducer/fi';
 import { i18n } from 'service/i18n';
@@ -18,7 +19,8 @@ import {
 } from 'service/calculator';
 import { longCurrency } from 'service/formatter';
 import { pmt } from 'service/amortization';
-import { Row, Column2 } from 'component/grid';
+import { cs } from 'service/class';
+import { Row, Column2, Column } from 'component/grid';
 import Page from 'component/fi/page';
 import LineChart from 'component/chart/line';
 import Currency from 'component/form/currency';
@@ -65,6 +67,13 @@ const House = ({ onChange, inputs }) => {
     formatter: { y: longCurrency },
     text: text.chart,
     options: { low: 0 },
+  };
+
+  const isHomeOwner = {
+    name: 'isHomeOwner',
+    onToggle: ({ target }, value) => onChange(target.name, value),
+    label: <span>I am a home owner</span>,
+    toggled: inputs.isHomeOwner,
   };
 
   const price = {
@@ -149,6 +158,11 @@ const House = ({ onChange, inputs }) => {
 
   return (
     <Page title={text.title} supporting={text.supporting} chart={chart}>
+      <Row className="mui-input-row">
+        <Column>
+          <Toggle {...isHomeOwner} />
+        </Column>
+      </Row>
       <Row>
         <Column2>
           <Currency {...price} />

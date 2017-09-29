@@ -28,6 +28,7 @@ export const originalState = Object.assign({}, emptyState, {
     houseGrowth: 3,
     tabIndex: 0,
     purchaseDate: Date.now(),
+    isHomeOwner: true,
   },
 });
 

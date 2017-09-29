@@ -12,12 +12,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { onNavigation: changeTab };
 
+const tabLabel = text => <span className="mui-tab__label">{text}</span>;
+
 const FiTab = ({ tabIndex, onNavigation }) => {
   return (
     <Tabs value={tabIndex} onChange={i => onNavigation(i)}>
-      <Tab label="Financial" value={0} icon={<AttachMoney />} />
-      <Tab label="House" value={1} icon={<Home />} />
-      <Tab label="Future" value={2} icon={<WatchLater />} />
+      <Tab label={tabLabel('Financial')} value={0} icon={<AttachMoney />} />
+      <Tab label={tabLabel('House')} value={1} icon={<Home />} />
+      <Tab label={tabLabel('Future')} value={2} icon={<WatchLater />} />
     </Tabs>
   );
 };
