@@ -5,6 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
+const paths = {
+  src: path.resolve(__dirname, '../src'),
+};
+
 module.exports = {
   entry: {
     main: './src/root.js',
@@ -18,11 +22,12 @@ module.exports = {
     rules: [
       {
         test: /(\.js)$/,
-        exclude: /node_modules/,
+        include: paths.src,
         use: ['babel-loader'],
       },
       {
         test: /\.css$/,
+        include: path.resolve(__dirname, '../src/css'),
         use: [
           'style-loader',
           { loader: 'css-loader', options: { importLoaders: 1 } },
@@ -44,6 +49,6 @@ module.exports = {
     }),
   ],
   resolve: {
-    modules: [path.resolve(__dirname, '../src'), 'node_modules'],
+    modules: [paths.src, 'node_modules'],
   },
 };
