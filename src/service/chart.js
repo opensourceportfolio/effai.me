@@ -53,7 +53,7 @@ export function yrange(xval, rangeInfo, fn) {
 
 // TODO: refactor this
 export function chartFn(name, state) {
-  const stateCopy = Object.assign({}, state);
+  const stateCopy = { ...state };
 
   return e => {
     stateCopy[name] = e;

@@ -102,7 +102,7 @@
   "settings": {
     "import/resolver": {
       "webpack": {
-        "config": "webpack.common.js"
+        "config": "script/webpack.common.js"
       }
     }
   }

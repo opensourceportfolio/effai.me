@@ -22,7 +22,7 @@ export const monthsToNow = date => {
   return dateUtils.monthDiff(new Date(), new Date(date));
 };
 
-export const debt = (state, yrs) => {
+export const mortgageDebt = (state, yrs) => {
   const passedPeriods = monthsToNow(state.purchaseDate);
 
   if (yrs > state.term) {
@@ -39,9 +39,9 @@ export const debt = (state, yrs) => {
   return Math.max(0, remainder(loan, periods, rate, period));
 };
 
-export const equity = (state, yrs) => {
+export const homeEquity = (state, yrs) => {
   const value = compound(state.price, state.houseGrowth, yrs);
-  const remaining = debt(state, yrs) || 0;
+  const remaining = mortgageDebt(state, yrs) || 0;
 
   return value - remaining;
 };
@@ -66,13 +66,13 @@ export const investment = (state, yrs) => {
 };
 
 export const totalNetworth = (state, yrs) => {
-  const houseValue = equity(state, yrs);
+  const houseValue = homeEquity(state, yrs);
 
   return investment(state, yrs) + houseValue;
 };
 
 export const liquidNetworth = (state, yrs) => {
-  const currentDebt = debt(state, yrs);
+  const currentDebt = mortgageDebt(state, yrs);
 
   return investment(state, yrs) - currentDebt;
 };
@@ -122,18 +122,25 @@ export const years = memoize(state => {
   };
 
   const renterYears = find(year => {
+    const expenses = parseInt(state.livingExpenses) + parseInt(state.rental);
     const renterYield = totalYield(state, year);
-    const renterGoal = compound(state.renter, state.inflation, year);
+    const renterGoal = compound(expenses, state.inflation, year);
 
     return compare(renterYield, renterGoal);
   });
 
-  const homeownerYears = find(year => {
-    const homeownerYield = liquidYield(state, year);
-    const homeownerGoal = compound(state.homeowner, state.inflation, year);
+  const homeownerYears = state.isHomeowner
+    ? find(year => {
+        const expenses =
+          parseInt(state.livingExpenses) +
+          percentage(state.price, state.maintenance) +
+          percentage(state.price, state.propertyTax);
+        const homeownerYield = liquidYield(state, year);
+        const homeownerGoal = compound(expenses, state.inflation, year);
 
-    return compare(homeownerYield, homeownerGoal);
-  });
+        return compare(homeownerYield, homeownerGoal);
+      })
+    : Number.MAX_SAFE_INTEGER;
 
   return Math.min(renterYears, homeownerYears);
 });

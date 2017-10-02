@@ -11,7 +11,7 @@ import {
 } from 'service/formatter';
 import { years, compound } from 'service/calculator';
 import { xrange, yrange, chartFn } from 'service/chart';
-import { Row, Column2 } from 'component/grid';
+import { Row, Column, Column2 } from 'component/grid';
 import Page from 'component/fi/page';
 import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
@@ -29,9 +29,9 @@ const Future = ({ status, onChange }) => {
   const text = i18n.future;
   const yrs = years(status);
 
-  const fn = chartFn('renter', status);
-  const rangeInfo = meta.renter;
-  const x = xrange(status.renter, rangeInfo);
+  const fn = chartFn('livingExpenses', status);
+  const rangeInfo = meta.livingExpenses;
+  const x = xrange(status.livingExpenses, rangeInfo);
   const y = yrange(x, rangeInfo, fn);
   const formatted2DecimalPoints = val => formattedShortFloat(2, val);
   const chart = {
@@ -41,34 +41,22 @@ const Future = ({ status, onChange }) => {
     text: text.chart,
   };
 
-  const renterGoal = formattedCurrency(
-    compound(status.renter, status.inflation, yrs),
+  const futureLivingExpenses = formattedCurrency(
+    compound(status.livingExpenses, status.inflation, yrs),
   );
-  const renter = {
-    name: 'renter',
+  const livingExpenses = {
+    name: 'livingExpenses',
     onChange,
     text: {
-      placeholder: text.renter.placeholder,
-      additional: text.renter.additional(renterGoal),
-      error: i18n.error.between(meta.renter.min, meta.renter.max),
+      placeholder: text.livingExpenses.placeholder,
+      additional: text.livingExpenses.additional(futureLivingExpenses),
+      error: i18n.error.between(
+        meta.livingExpenses.min,
+        meta.livingExpenses.max,
+      ),
     },
-    value: status.renter,
-    rangeInfo: meta.renter,
-  };
-
-  const homeownerGoal = formattedCurrency(
-    compound(status.homeowner, status.inflation, yrs),
-  );
-  const homeowner = {
-    name: 'homeowner',
-    onChange,
-    text: {
-      placeholder: text.homeowner.placeholder,
-      additional: text.homeowner.additional(homeownerGoal),
-      error: i18n.error.between(meta.homeowner.min, meta.homeowner.max),
-    },
-    value: status.homeowner,
-    rangeInfo: meta.homeowner,
+    value: status.livingExpenses,
+    rangeInfo: meta.livingExpenses,
   };
 
   const inflation = {
@@ -96,12 +84,9 @@ const Future = ({ status, onChange }) => {
   return (
     <Page title={text.title} supporting={text.supporting} chart={chart}>
       <Row>
-        <Column2>
-          <Currency {...renter} />
-        </Column2>
-        <Column2>
-          <Currency {...homeowner} />
-        </Column2>
+        <Column>
+          <Currency {...livingExpenses} />
+        </Column>
       </Row>
       <Row>
         <Column2>

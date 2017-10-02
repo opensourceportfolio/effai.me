@@ -93,6 +93,18 @@ export const i18n = {
     purchaseDate: {
       placeholder: 'Purchase date',
     },
+    maintenance: {
+      placeholder: 'Annual maintenance',
+      additional: v => `${formattedCurrency(v)} per year`,
+    },
+    propertyTax: {
+      placeholder: 'Annual property tax',
+      additional: v => `${formattedCurrency(v)} per year`,
+    },
+    rental: {
+      placeholder: 'Monthly rent cost',
+      additional: v => `${formattedCurrency(v)} after inflation`,
+    },
   },
 
   future: {
@@ -111,12 +123,8 @@ export const i18n = {
       xlabel: 'Goal',
       ylabel: 'Years to effai',
     },
-    renter: {
-      placeholder: 'Goal as renter',
-      additional: v => `${v} after inflation`,
-    },
-    homeowner: {
-      placeholder: 'Owner w/o mortgage',
+    livingExpenses: {
+      placeholder: 'Living expenses',
       additional: v => `${v} after inflation`,
     },
     inflation: {

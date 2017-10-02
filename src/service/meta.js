@@ -41,6 +41,12 @@ export const meta = {
     step: 0.5,
   },
 
+  livingExpenses: {
+    min: 0,
+    max: 20000,
+    step: 1,
+  },
+
   house: {
     price: {
       min: 0,
@@ -64,6 +70,21 @@ export const meta = {
     },
     purchaseDate: {
       max: Date.now(),
+    },
+    maintenance: {
+      min: 0,
+      max: 100,
+      step: 0.1,
+    },
+    propertyTax: {
+      min: 0,
+      max: 100,
+      step: 0.1,
+    },
+    rental: {
+      min: 0,
+      max: 10000,
+      step: 1,
     },
   },
 

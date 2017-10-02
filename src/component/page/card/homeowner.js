@@ -3,26 +3,21 @@ import { connect } from 'react-redux';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Toggle from 'material-ui/Toggle';
+import Divider from 'material-ui/Divider';
 import { changeValue } from 'action/fi';
 import { getInputs } from 'reducer/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
-import { xrange, yrange } from 'service/chart';
 import {
   compound,
   percentage,
   toFraction,
-  debt,
-  equity,
   years,
   monthsToNow,
 } from 'service/calculator';
-import { longCurrency } from 'service/formatter';
 import { pmt } from 'service/amortization';
-import { cs } from 'service/class';
 import { Row, Column2, Column } from 'component/grid';
 import Page from 'component/fi/page';
-import LineChart from 'component/chart/line';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
 import DateComponent from 'component/form/date';
@@ -37,37 +32,10 @@ const mapDispatchToProps = {
   onChange: changeValue,
 };
 
-const House = ({ onChange, inputs }) => {
+const Homeowner = ({ onChange, inputs }) => {
   const text = i18n.house;
   const downpaymentAmount = percentage(inputs.price, inputs.downpayment);
   const yrs = years(inputs) + monthsToNow(inputs.purchaseDate) / 12;
-
-  const debtFn = year => {
-    return debt(inputs, year);
-  };
-
-  const equityFn = year => {
-    return equity(inputs, year);
-  };
-
-  const valueFn = year => {
-    return compound(inputs.price, inputs.houseGrowth, year);
-  };
-
-  const min = 0;
-  const max = inputs.term;
-  const step = (max - min) / 5;
-  const rangeInfo = { min, max, step };
-  const fn = [debtFn, equityFn, valueFn];
-  const x = xrange(0, rangeInfo);
-  const y = yrange(x, rangeInfo, fn);
-  const chart = {
-    type: LineChart,
-    plot: { x, y },
-    formatter: { y: longCurrency },
-    text: text.chart,
-    options: { low: 0 },
-  };
 
   const isHomeOwner = {
     name: 'isHomeOwner',
@@ -156,43 +124,92 @@ const House = ({ onChange, inputs }) => {
     maxDate: new Date(),
   };
 
+  const futureMaintenance = percentage(inputs.price, inputs.maintenance);
+  const maintenance = {
+    name: 'maintenance',
+    onChange,
+    text: {
+      placeholder: text.maintenance.placeholder,
+      additional: text.maintenance.additional(futureMaintenance),
+      error: i18n.error.between(
+        meta.house.maintenance.min,
+        meta.house.maintenance.max,
+      ),
+    },
+    value: inputs.maintenance,
+    rangeInfo: meta.house.maintenance,
+  };
+
+  const futurePropertyTax = percentage(inputs.price, inputs.propertyTax);
+  const propertyTax = {
+    name: 'propertyTax',
+    onChange,
+    text: {
+      placeholder: text.propertyTax.placeholder,
+      additional: text.propertyTax.additional(futurePropertyTax),
+      error: i18n.error.between(
+        meta.house.propertyTax.min,
+        meta.house.propertyTax.max,
+      ),
+    },
+    value: inputs.propertyTax,
+    rangeInfo: meta.house.propertyTax,
+  };
+
   return (
-    <Page title={text.title} supporting={text.supporting} chart={chart}>
+    <Page key="homeowner" title={text.title} supporting={text.supporting}>
       <Row className="mui-input-row">
         <Column>
           <Toggle {...isHomeOwner} />
         </Column>
       </Row>
-      <Row>
-        <Column2>
-          <Currency {...price} />
-        </Column2>
-        <Column2>
-          <Percent {...houseGrowth} />
-        </Column2>
-      </Row>
-      <Row>
-        <Column2>
-          <SelectField {...term}>
-            {terms.map((year, i) => (
-              <MenuItem key={i} value={year} primaryText={`${year} years`} />
-            ))}
-          </SelectField>
-        </Column2>
-        <Column2>
-          <Percent {...rate} />
-        </Column2>
-      </Row>
-      <Row>
-        <Column2>
-          <DateComponent {...purchaseDate} />
-        </Column2>
-        <Column2>
-          <Percent {...downpayment} />
-        </Column2>
-      </Row>
+      <Divider />
+      {inputs.isHomeOwner ? (
+        <div>
+          <Row>
+            <Column2>
+              <Currency {...price} />
+            </Column2>
+            <Column2>
+              <Percent {...houseGrowth} />
+            </Column2>
+          </Row>
+          <Row>
+            <Column2>
+              <SelectField {...term}>
+                {terms.map((year, i) => (
+                  <MenuItem
+                    key={i}
+                    value={year}
+                    primaryText={`${year} years`}
+                  />
+                ))}
+              </SelectField>
+            </Column2>
+            <Column2>
+              <Percent {...rate} />
+            </Column2>
+          </Row>
+          <Row>
+            <Column2>
+              <DateComponent {...purchaseDate} />
+            </Column2>
+            <Column2>
+              <Percent {...downpayment} />
+            </Column2>
+          </Row>
+          <Row>
+            <Column2>
+              <Percent {...maintenance} />
+            </Column2>
+            <Column2>
+              <Percent {...propertyTax} />
+            </Column2>
+          </Row>
+        </div>
+      ) : null}
     </Page>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(House);
+export default connect(mapStateToProps, mapDispatchToProps)(Homeowner);
