@@ -1,3 +1,4 @@
+import { __, subtract } from 'ramda';
 import { start, generate } from 'service/range';
 import { years } from 'service/calculator';
 
@@ -12,6 +13,13 @@ const chartColors = [
 ];
 
 export const CHART_COUNT = 7;
+
+const normalizeToMiddle = vals => {
+  const min = vals[Math.floor(CHART_COUNT / 2)];
+  const subtractMin = subtract(__, min);
+
+  return vals.map(subtractMin);
+};
 
 export function toModel(labels, datasets, legend) {
   const chartLegend = legend || [];
@@ -45,7 +53,7 @@ export function xrange(val, rangeInfo) {
 export function yrange(xval, rangeInfo, fn) {
   const fns = Array.isArray(fn) ? fn : [fn];
   const yval = fns.map(rangeFn => {
-    return xval.map(rangeFn);
+    return normalizeToMiddle(xval.map(rangeFn));
   });
 
   return yval;

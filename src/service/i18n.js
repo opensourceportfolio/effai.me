@@ -1,11 +1,15 @@
-import { longNumber, formattedCurrency } from 'service/formatter';
+import {
+  longNumber,
+  formattedCurrency,
+  formattedFloat,
+} from 'service/formatter';
 
 export const i18n = {
   fiStatus: {
     done: 'Done',
     never: 'Never',
     formatter(val) {
-      return `${parseFloat(val).toFixed(2)} years to effai`;
+      return `${parseFloat(val).toFixed(2)} years to Effai`;
     },
   },
 
@@ -25,16 +29,19 @@ export const i18n = {
     title: 'Financials',
     supporting: 'Information about your savings and investing habits',
     chart: {
-      title: 'Years to effai vs. Savings rate',
+      title: 'Years to Effai vs. Savings rate',
       tooltips: {
         title: tooltip => `Saving ${longNumber(tooltip[0].xLabel)} a month`,
         label: tooltip =>
-          `Expected to be be effai in ${longNumber(tooltip.yLabel)} years`,
+          `Effai date will be different by ${formattedFloat(
+            1,
+            tooltip.yLabel,
+          )} years`,
       },
-      legend: ['Years to effai'],
+      legend: ['Years to Effai'],
       formatter: formattedCurrency,
       xlabel: 'Savings rate',
-      ylabel: 'Years to effai',
+      ylabel: 'Years to Effai',
     },
     savings: {
       placeholder: 'Savings per month',
@@ -88,7 +95,7 @@ export const i18n = {
     },
     houseGrowth: {
       placeholder: 'Growth',
-      additional: v => `${formattedCurrency(v)} at effai`,
+      additional: v => `${formattedCurrency(v)} at Effai`,
     },
     purchaseDate: {
       placeholder: 'Purchase date',
@@ -116,12 +123,15 @@ export const i18n = {
         title: tooltip =>
           `Looking for ${longNumber(tooltip[0].xLabel)} a month`,
         label: tooltip =>
-          `Expected to be effai in ${longNumber(tooltip.yLabel)} years`,
+          `Effai date will be different by ${formattedFloat(
+            1,
+            tooltip.yLabel,
+          )} years`,
       },
-      legend: ['Years to effai'],
+      legend: ['Years to Effai'],
       formatter: formattedCurrency,
       xlabel: 'Goal',
-      ylabel: 'Years to effai',
+      ylabel: 'Years to Effai',
     },
     livingExpenses: {
       placeholder: 'Living expenses',
