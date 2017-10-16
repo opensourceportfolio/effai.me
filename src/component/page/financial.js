@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Paper from 'material-ui/Paper';
 import { changeValue } from 'action/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
@@ -11,6 +12,7 @@ import {
 import { years, compound, investment } from 'service/calculator';
 import { xrange, yrange, chartFn } from 'service/chart';
 import { getInputs } from 'reducer/fi';
+import Chart from 'component/fi/chart';
 import { Row, Column, Column2 } from 'component/grid';
 import Page from 'component/fi/page';
 import BarChart from 'component/chart/bar';
@@ -84,20 +86,25 @@ const Financial = ({ inputs, onChange }) => {
   };
 
   return (
-    <Page title={text.title} supporting={text.supporting} chart={chart}>
-      <Row>
-        <Column2>
-          <Currency {...savings} />
-        </Column2>
-        <Column2>
-          <Percent {...ror} />
-        </Column2>
-      </Row>
-      <Row>
-        <Column>
-          <Currency {...networthInput} />
-        </Column>
-      </Row>
+    <Page>
+      <Paper className="page__input" zDepth={1}>
+        <Row>
+          <Column2>
+            <Currency {...savings} />
+          </Column2>
+          <Column2>
+            <Percent {...ror} />
+          </Column2>
+        </Row>
+        <Row>
+          <Column>
+            <Currency {...networthInput} />
+          </Column>
+        </Row>
+      </Paper>
+      <Paper className="page__media" zDepth={1}>
+        <Chart {...chart} />
+      </Paper>
     </Page>
   );
 };

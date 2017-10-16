@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Page from 'component/fi/page';
+import Paper from 'material-ui/Paper';
 import { Row, Column } from 'component/grid';
 import Currency from 'component/form/currency';
 import { changeValue } from 'action/fi';
@@ -35,13 +35,13 @@ const Renter = ({ inputs, onChange }) => {
   };
 
   return (
-    <Page>
+    <Paper className="page__input" zDepth={1}>
       <Row>
         <Column>
           <Currency {...rental} />
         </Column>
       </Row>
-    </Page>
+    </Paper>
   );
 };
 

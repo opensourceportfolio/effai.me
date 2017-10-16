@@ -9,7 +9,7 @@ const Date = props => {
       {...props}
       floatingLabelText={text.placeholder}
       fullWidth={true}
-      onChange={(e, newDate) => onChange(name, newDate)}
+      onChange={(e, newDate) => onChange(props.name, newDate)}
     />
   );
 };

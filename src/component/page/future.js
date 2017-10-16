@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Paper from 'material-ui/Paper';
 import { changeValue } from 'action/fi';
 import { getInputs } from 'reducer/fi';
 import { i18n } from 'service/i18n';
@@ -12,10 +13,11 @@ import {
 import { years, compound } from 'service/calculator';
 import { xrange, yrange, chartFn } from 'service/chart';
 import { Row, Column, Column2 } from 'component/grid';
-import Page from 'component/fi/page';
 import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
+import Chart from 'component/fi/chart';
+import Page from 'component/fi/page';
 
 const mapStateToProps = state => ({
   status: getInputs(state),
@@ -82,20 +84,25 @@ const Future = ({ status, onChange }) => {
   };
 
   return (
-    <Page title={text.title} supporting={text.supporting} chart={chart}>
-      <Row>
-        <Column>
-          <Currency {...livingExpenses} />
-        </Column>
-      </Row>
-      <Row>
-        <Column2>
-          <Percent {...inflation} />
-        </Column2>
-        <Column2>
-          <Percent {...withdrawl} />
-        </Column2>
-      </Row>
+    <Page>
+      <Paper className="page__input" zDepth={1}>
+        <Row>
+          <Column>
+            <Currency {...livingExpenses} />
+          </Column>
+        </Row>
+        <Row>
+          <Column2>
+            <Percent {...inflation} />
+          </Column2>
+          <Column2>
+            <Percent {...withdrawl} />
+          </Column2>
+        </Row>
+      </Paper>
+      <Paper className="page__media" zDepth={1}>
+        <Chart {...chart} />
+      </Paper>
     </Page>
   );
 };

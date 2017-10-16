@@ -4,6 +4,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Toggle from 'material-ui/Toggle';
 import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
 import { changeValue } from 'action/fi';
 import { getInputs } from 'reducer/fi';
 import { i18n } from 'service/i18n';
@@ -17,7 +18,6 @@ import {
 } from 'service/calculator';
 import { pmt } from 'service/amortization';
 import { Row, Column2, Column } from 'component/grid';
-import Page from 'component/fi/page';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
 import DateComponent from 'component/form/date';
@@ -157,7 +157,7 @@ const Homeowner = ({ onChange, inputs }) => {
   };
 
   return (
-    <Page key="homeowner" title={text.title} supporting={text.supporting}>
+    <Paper className="page__input" zDepth={1}>
       <Row className="mui-input-row">
         <Column>
           <Toggle {...isHomeOwner} />
@@ -208,7 +208,7 @@ const Homeowner = ({ onChange, inputs }) => {
           </Row>
         </div>
       ) : null}
-    </Page>
+    </Paper>
   );
 };
 

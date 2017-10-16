@@ -102,7 +102,7 @@ export const i18n = {
       additional: v => `${formattedCurrency(v)} per year`,
     },
     rental: {
-      placeholder: 'Monthly rent cost',
+      placeholder: 'Estimated rental cost',
       additional: v => `${formattedCurrency(v)} after inflation`,
     },
   },
