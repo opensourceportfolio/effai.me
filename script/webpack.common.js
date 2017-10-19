@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const paths = {
@@ -28,11 +29,13 @@ module.exports = {
       {
         test: /\.css$/,
         include: path.resolve(__dirname, '../src/css'),
-        use: [
-          'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          'postcss-loader',
-        ],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader', options: { importLoaders: 1 } },
+            'postcss-loader',
+          ],
+        }),
       },
     ],
   },
@@ -47,6 +50,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['manifest'],
     }),
+    new ExtractTextPlugin('styles.css'),
   ],
   resolve: {
     modules: [paths.src, 'node_modules'],
