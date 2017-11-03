@@ -47,6 +47,8 @@ module.exports = {
       cacheId: 'osp.effai',
       filename: 'sw.js',
     }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['manifest'],
     }),
