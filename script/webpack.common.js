@@ -40,9 +40,15 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, '../'),
+    }),
     new HtmlWebpackPlugin({ template: './index.html' }),
-    new CopyWebpackPlugin([{ from: 'manifest.json' }, { from: 'favicon.ico' }]),
+    new CopyWebpackPlugin([
+      { from: 'manifest.json' },
+      { from: 'favicon.ico' },
+      { from: 'img/**/*' },
+    ]),
     new SWPrecacheWebpackPlugin({
       cacheId: 'osp.effai',
       filename: 'sw.js',
