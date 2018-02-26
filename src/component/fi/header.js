@@ -16,6 +16,10 @@ const fiAge = cond([
   [T, i18n.fiStatus.formatter],
 ]);
 
+const navigateToBlog = () => {
+  window.location.replace('https://www.medium.com/effai-me');
+};
+
 const Header = ({ input }) => {
   const yrs = years(input);
 
@@ -24,7 +28,7 @@ const Header = ({ input }) => {
       showMenuIconButton={false}
       title={fiAge(yrs)}
       iconElementRight={
-        <IconButton>
+        <IconButton onClick={navigateToBlog}>
           <AccountBox />
         </IconButton>
       }
