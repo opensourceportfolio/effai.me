@@ -1,14 +1,16 @@
+// @flow
 import {
   longNumber,
   formattedCurrency,
   formattedFloat,
 } from 'service/formatter';
+import { type TooltipItem, type TooltipItems } from 'model/chart';
 
 export const i18n = {
   fiStatus: {
     done: 'Done',
     never: 'Never',
-    formatter(val) {
+    formatter(val: number) {
       return `${parseFloat(val).toFixed(2)} years to Effai`;
     },
   },
@@ -21,7 +23,7 @@ export const i18n = {
   },
 
   error: {
-    between: (min, max) =>
+    between: (min: number, max: number) =>
       `Enter a number between ${longNumber(min)} and ${longNumber(max)}`,
   },
 
@@ -31,12 +33,15 @@ export const i18n = {
     chart: {
       title: 'Years to Effai vs. Savings rate',
       tooltips: {
-        title: tooltip => `Saving ${longNumber(tooltip[0].xLabel)} a month`,
-        label: tooltip =>
-          `Effai date will be different by ${formattedFloat(
+        title: (tooltip: TooltipItems) => {
+          return `Saving ${longNumber(tooltip[0].xLabel)} a month`;
+        },
+        label: (tooltip: TooltipItem) => {
+          return `Effai date will be different by ${formattedFloat(
             1,
             tooltip.yLabel,
-          )} years`,
+          )} years`;
+        },
       },
       legend: ['Years to Effai'],
       formatter: formattedCurrency,
@@ -45,11 +50,11 @@ export const i18n = {
     },
     savings: {
       placeholder: 'Savings per month',
-      additional: v => `${v} after inflation`,
+      additional: (v: number) => `${v} after inflation`,
     },
     networth: {
       placeholder: 'Total liquid assets',
-      additional: v => `retire with ${v}`,
+      additional: (v: number) => `retire with ${v}`,
     },
     ror: {
       placeholder: 'Rate of return',
@@ -63,9 +68,9 @@ export const i18n = {
       title: 'Home price vs. Years',
       legend: ['Debt', 'Equity', 'Price'],
       tooltips: {
-        title: tooltip =>
+        title: (tooltip: TooltipItems) =>
           `Year ${longNumber(tooltip[0].xLabel)} of your mortgage`,
-        label: tooltip => {
+        label: (tooltip: TooltipItem) => {
           if (tooltip.datasetIndex === 0) {
             return `${longNumber(tooltip.yLabel)} of debt is still left`;
           } else if (tooltip.datasetIndex === 1) {
@@ -84,33 +89,33 @@ export const i18n = {
     },
     rate: {
       placeholder: 'Mortgage rate',
-      additional: v => `${formattedCurrency(v)} per month`,
+      additional: (v: number) => `${formattedCurrency(v)} per month`,
     },
     term: {
       placeholder: 'Mortgage term',
     },
     downpayment: {
       placeholder: 'Downpayment',
-      additional: v => `${formattedCurrency(v)}`,
+      additional: (v: number) => `${formattedCurrency(v)}`,
     },
     houseGrowth: {
       placeholder: 'Growth',
-      additional: v => `${formattedCurrency(v)} at Effai`,
+      additional: (v: number) => `${formattedCurrency(v)} at Effai`,
     },
     purchaseDate: {
       placeholder: 'Purchase date',
     },
     maintenance: {
       placeholder: 'Annual maintenance',
-      additional: v => `${formattedCurrency(v)} per year`,
+      additional: (v: number) => `${formattedCurrency(v)} per year`,
     },
     propertyTax: {
       placeholder: 'Annual property tax',
-      additional: v => `${formattedCurrency(v)} per year`,
+      additional: (v: number) => `${formattedCurrency(v)} per year`,
     },
     rental: {
       placeholder: 'Estimated rental cost',
-      additional: v => `${formattedCurrency(v)} after inflation`,
+      additional: (v: number) => `${formattedCurrency(v)} after inflation`,
     },
   },
 
@@ -120,9 +125,9 @@ export const i18n = {
     chart: {
       title: 'Years vs Goal',
       tooltips: {
-        title: tooltip =>
+        title: (tooltip: TooltipItems) =>
           `Looking for ${longNumber(tooltip[0].xLabel)} a month`,
-        label: tooltip =>
+        label: (tooltip: TooltipItem) =>
           `Effai date will be different by ${formattedFloat(
             1,
             tooltip.yLabel,
@@ -135,7 +140,7 @@ export const i18n = {
     },
     livingExpenses: {
       placeholder: 'Living expenses',
-      additional: v => `${v} after inflation`,
+      additional: (v: number) => `${v} after inflation`,
     },
     inflation: {
       placeholder: 'Inflation rate',
@@ -148,8 +153,9 @@ export const i18n = {
   chart: {
     title: 'Time vs Passive income',
     tooltips: {
-      title: tooltip => `Saving for ${longNumber(tooltip[0].xLabel)} years`,
-      label: tooltip => {
+      title: (tooltip: TooltipItems) =>
+        `Saving for ${longNumber(tooltip[0].xLabel)} years`,
+      label: (tooltip: TooltipItem) => {
         if (tooltip.datasetIndex === 0) {
           return `Expected to require ${longNumber(tooltip.yLabel)}`;
         } else if (tooltip.datasetIndex === 1) {

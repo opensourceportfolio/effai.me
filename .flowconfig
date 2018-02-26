@@ -1,0 +1,32 @@
+[ignore]
+.*/node_modules/protobufjs/src/bower.json
+
+[include]
+
+[libs]
+
+[lints]
+all=error
+sketchy-null-bool=off
+sketchy-null-string=off
+sketchy-null-number=off
+sketchy-null-mixed=off
+# Clean up when everything is typed
+untyped-import=off
+unclear-type=off
+
+
+[options]
+include_warnings=true
+
+# Forces the modules to all be in strict mode
+module.use_strict=true
+
+# Consider `_` prefixed class properties as private
+munge_underscores=true
+
+# consider function arguments as const
+experimental.const_params=true
+
+module.name_mapper='^model' ->'<PROJECT_ROOT>/src/model'
+module.name_mapper='^service' ->'<PROJECT_ROOT>/src/service'

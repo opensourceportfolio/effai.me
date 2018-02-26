@@ -1,10 +1,30 @@
+// @flow
+
 import React from 'react';
 import scrollIntoView from 'scroll-into-view';
 import TextField from 'material-ui/TextField';
 import { cyanA700 } from 'material-ui/styles/colors';
+import { type RangeInfo } from 'model/rangeInfo';
 
-export default class PlainNumber extends React.Component {
-  isValid(rangeInfo, value) {
+type PlainNumberTextSettings = {
+  additional: string => string | string,
+  placeholder: string,
+  error: string,
+};
+
+type Props = {
+  name: string,
+  text: PlainNumberTextSettings,
+  rangeInfo: RangeInfo,
+  value: string,
+  formatter: string => string,
+  onChange: (string, string) => void,
+};
+
+export default class PlainNumber extends React.Component<Props> {
+  plainNumber: ?HTMLDivElement;
+
+  isValid(rangeInfo: RangeInfo, value: string) {
     const val = parseFloat(value);
 
     return val != null && val <= rangeInfo.max && val >= rangeInfo.min;
@@ -22,11 +42,12 @@ export default class PlainNumber extends React.Component {
     });
   }
 
-  toggleMask(isFocus) {
-    this.plainNumber.classList.toggle(
-      'mui-text-field__masked-text--focus',
-      isFocus,
-    );
+  toggleMask(isFocus: boolean) {
+    this.plainNumber &&
+      this.plainNumber.classList.toggle(
+        'mui-text-field__masked-text--focus',
+        isFocus,
+      );
   }
 
   render() {

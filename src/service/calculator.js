@@ -1,95 +1,100 @@
+// @flow
 import { memoize } from 'ramda';
 import { remainder } from 'service/amortization';
 import * as dateUtils from 'material-ui/DatePicker/dateUtils';
+import { type FormInputs } from 'model/state';
+import { type NumberLike } from 'model/number-like';
 
-export const toFraction = num => {
+export const toFraction = (num: NumberLike): number => {
   return parseFloat(num) / 100;
 };
 
-export const toAddedFraction = num => {
+export const toAddedFraction = (num: NumberLike): number => {
   return 1 + toFraction(num);
 };
 
-export const percentage = (amount, rate) => {
+export const percentage = (amount: NumberLike, rate: NumberLike): number => {
   return parseFloat(amount) * toFraction(rate);
 };
 
-export const compound = (amount, rate, yrs) => {
+export const compound = (
+  amount: NumberLike,
+  rate: NumberLike,
+  yrs: NumberLike,
+): number => {
   return parseFloat(amount) * Math.pow(toAddedFraction(rate), parseFloat(yrs));
 };
 
-export const monthsToNow = date => {
+export const monthsToNow = (date: Date | NumberLike): number => {
   return dateUtils.monthDiff(new Date(), new Date(date));
 };
 
-export const mortgageDebt = (state, yrs) => {
-  const passedPeriods = monthsToNow(state.purchaseDate);
-
-  if (yrs > state.term) {
-    return NaN;
-  }
-
-  const downpaymentAmount = percentage(state.price, state.downpayment);
-  const loan = state.price - downpaymentAmount;
-  const rate = toFraction(state.rate / 12);
-  const periods = state.term * 12;
+export const mortgageDebt = (state: FormInputs, yrs: NumberLike): number => {
+  const { price, downpayment, rate, purchaseDate, term } = state;
+  const passedPeriods = monthsToNow(purchaseDate);
+  const downpaymentAmount = percentage(price, downpayment);
+  const loan = parseFloat(price) - downpaymentAmount;
+  const rateFraction = toFraction(parseFloat(rate) / 12);
+  const periods = parseFloat(term) * 12;
   const year = parseInt(yrs);
   const period = year * 12 + passedPeriods;
 
-  return Math.max(0, remainder(loan, periods, rate, period));
+  return Math.max(0, remainder(loan, periods, rateFraction, period));
 };
 
-export const homeEquity = (state, yrs) => {
-  const value = compound(state.price, state.houseGrowth, yrs);
+export const homeEquity = (state: FormInputs, yrs: NumberLike): number => {
+  const { price, houseGrowth } = state;
+  const value = compound(parseFloat(price), parseFloat(houseGrowth), yrs);
   const remaining = mortgageDebt(state, yrs) || 0;
 
   return value - remaining;
 };
 
-export const investment = (state, yrs) => {
+export const investment = (state: FormInputs, yrs: number): number => {
+  const { ror, savings, inflation } = state;
   const currentNetworth = parseInt(state.networth) || 0;
-  const ror = toAddedFraction(state.ror);
-  const savings = state.savings * 12;
-  const inflation = toAddedFraction(state.inflation);
-  const factor = ror / inflation;
-  const futureSavings = savings * Math.pow(inflation, yrs);
-  const futureNetworth = currentNetworth * Math.pow(ror, yrs);
+  const rorFraction = toAddedFraction(ror);
+  const annualSavings = parseFloat(savings) * 12;
+  const inflationFraction = toAddedFraction(inflation);
+  const factor = rorFraction / inflationFraction;
+  const futureSavings = annualSavings * Math.pow(inflationFraction, yrs);
+  const futureNetworth = currentNetworth * Math.pow(rorFraction, yrs);
 
   const f1 = 1 - Math.pow(factor, yrs + 1);
   const f2 = 1 - factor;
 
-  if (inflation === ror) {
-    return Math.floor(futureSavings / inflation * yrs + futureNetworth);
+  if (inflationFraction === rorFraction) {
+    return Math.floor(futureSavings / inflationFraction * yrs + futureNetworth);
   } else {
     return Math.floor(futureSavings * (f1 / f2) + futureNetworth) + 1;
   }
 };
 
-export const totalNetworth = (state, yrs) => {
+export const totalNetworth = (state: FormInputs, yrs: number): number => {
   const houseValue = homeEquity(state, yrs);
 
   return investment(state, yrs) + houseValue;
 };
 
-export const liquidNetworth = (state, yrs) => {
+export const liquidNetworth = (state: FormInputs, yrs: number): number => {
   const currentDebt = mortgageDebt(state, yrs);
 
   return investment(state, yrs) - currentDebt;
 };
 
-export const totalYield = (state, yrs) => {
+export const totalYield = (state: FormInputs, yrs: number): number => {
   const currentNetworth = totalNetworth(state, yrs);
 
   return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
 };
 
-export const liquidYield = (state, yrs) => {
+export const liquidYield = (state: FormInputs, yrs: number): number => {
   const currentNetworth = liquidNetworth(state, yrs);
 
   return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
 };
 
-export const years = memoize(state => {
+export const years = memoize((state: FormInputs): number => {
   const find = (compareFn, from = 0, to = 45) => {
     const delta = 0.1;
     const mid = (from + to) / 2;
@@ -109,7 +114,7 @@ export const years = memoize(state => {
     }
   };
 
-  const compare = (v1, v2) => {
+  const compare = (v1: number, v2: number): number => {
     const delta = 100;
 
     if (v1 < v2) {
@@ -121,7 +126,7 @@ export const years = memoize(state => {
     }
   };
 
-  const renterYears = find(year => {
+  const renterYears = find((year: number): number => {
     const expenses = parseInt(state.livingExpenses) + parseInt(state.rental);
     const renterYield = totalYield(state, year);
     const renterGoal = compound(expenses, state.inflation, year);

@@ -1,18 +1,13 @@
+// @flow
 import idb from 'idb';
+import { type State } from 'model/state';
 
 const OBJECT_STORE = 'user-settings';
 const dbPromise = idb.open('ficalculator-db', 1, upgradeDB => {
   upgradeDB.createObjectStore(OBJECT_STORE);
 });
 
-export const emptyState = {
-  input: {},
-  navigation: {
-    tabIndex: 0,
-  },
-};
-
-export const originalState = Object.assign({}, emptyState, {
+export const originalState: State = {
   input: {
     networth: '50000',
     savings: '1000',
@@ -34,9 +29,12 @@ export const originalState = Object.assign({}, emptyState, {
     purchaseDate: Date.now(),
     isHomeOwner: true,
   },
-});
+  navigation: {
+    tabIndex: 0,
+  },
+};
 
-export async function get(key) {
+export async function get(key: string) {
   const db = await dbPromise;
   const transaction = db.transaction(OBJECT_STORE);
   const store = transaction.objectStore(OBJECT_STORE);
@@ -50,7 +48,7 @@ export async function get(key) {
   }
 }
 
-export async function set(key, value) {
+export async function set(key: string, value: string) {
   const db = await dbPromise;
   const transaction = db.transaction(OBJECT_STORE, 'readwrite');
   const store = transaction.objectStore(OBJECT_STORE);

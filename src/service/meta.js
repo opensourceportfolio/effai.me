@@ -1,3 +1,5 @@
+// @flow
+
 export const meta = {
   networth: {
     min: 0,

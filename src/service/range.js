@@ -1,10 +1,21 @@
-export function generate(count, from = 0, step = 1) {
+// @flow
+import { type RangeInfo } from 'model/rangeInfo';
+
+export function generate(
+  count: number,
+  from: number = 0,
+  step: number = 1,
+): number[] {
   return [...Array(count)].map((e, i) => {
     return parseFloat((from + i * step).toFixed(1));
   });
 }
 
-export function start(curr, rangeInfo, count) {
+export function start(
+  curr: number,
+  rangeInfo: RangeInfo,
+  count: number,
+): number {
   const { min, max } = rangeInfo;
   const current = Math.min(curr, max);
   const step = rangeInfo.step;

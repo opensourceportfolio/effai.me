@@ -2,7 +2,7 @@
   "name": "Effai.me",
   "short_name": "Effai",
   "start_url": "/index.html",
-  "display": "standalone",
+  "display": "fullscreen",
   "description": "A simple calculator to figure out when you can be financially independent",
   "icons": [
     {

@@ -13,7 +13,8 @@
         }
       }
     ],
-    "react"
+    "react",
+    "flow"
   ],
   "plugins": [
     [
