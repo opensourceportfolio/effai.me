@@ -1,4 +1,5 @@
 import { CHANGE_VALUE, LOADED_USER_DATA } from 'action/fi';
+import { type State, type FormInputs } from 'model/state';
 
 export function input(state = {}, action) {
   const { type, payload } = action;
@@ -18,6 +19,6 @@ export function input(state = {}, action) {
   }
 }
 
-export function getInputs(state) {
+export function getInputs(state: State): FormInputs {
   return state.input;
 }

@@ -1,6 +1,11 @@
-import { __, subtract } from 'ramda';
+// @flow
+
+import { subtract } from 'ramda';
 import { start, generate } from 'service/range';
 import { years } from 'service/calculator';
+import { type RangeInfo } from 'model/rangeInfo';
+import { type FormInputs } from 'model/state';
+import { type Data } from 'model/chart';
 
 const chartColors = [
   'rgba(255, 99, 132, 0.8)',
@@ -14,29 +19,31 @@ const chartColors = [
 
 export const CHART_COUNT = 7;
 
-const normalizeToMiddle = vals => {
+const normalizeToMiddle = (vals: number[]): number[] => {
   const min = vals[Math.floor(CHART_COUNT / 2)];
-  const subtractMin = subtract(__, min);
+  const subtractMin = (num: number) => subtract(num, min);
 
   return vals.map(subtractMin);
 };
 
-export function toModel(labels, datasets, legend) {
+export function toModel(
+  labels: string[],
+  datasets: number[][],
+  legend: string[],
+): Data {
   const chartLegend = legend || [];
 
   return {
     labels,
-    datasets: datasets.map((dataset, i) => {
-      return {
-        label: chartLegend[i],
-        data: dataset,
-        backgroundColor: chartColors[i],
-      };
-    }),
+    datasets: datasets.map((dataset, i) => ({
+      label: chartLegend[i],
+      data: dataset,
+      backgroundColor: chartColors[i],
+    })),
   };
 }
 
-export function xrange(val, rangeInfo) {
+export function xrange(val: number, rangeInfo: RangeInfo): number[] {
   const value = parseFloat(val);
   const { min, max } = rangeInfo;
   const step = Math.max(value * 0.1, rangeInfo.step);
@@ -50,17 +57,20 @@ export function xrange(val, rangeInfo) {
   return xval;
 }
 
-export function yrange(xval, rangeInfo, fn) {
-  const fns = Array.isArray(fn) ? fn : [fn];
-  const yval = fns.map(rangeFn => {
-    return normalizeToMiddle(xval.map(rangeFn));
-  });
+type Fn = number => number;
 
-  return yval;
+export function yrange(
+  xval: number[],
+  rangeInfo: RangeInfo,
+  fn: Fn | Fn[],
+): number[][] {
+  const fns = Array.isArray(fn) ? fn : [fn];
+
+  return fns.map(rangeFn => normalizeToMiddle(xval.map(rangeFn)));
 }
 
 // TODO: refactor this
-export function chartFn(name, state) {
+export function chartFn(name: string, state: FormInputs) {
   const stateCopy = { ...state };
 
   return e => {

@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
@@ -18,22 +20,33 @@ import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
 import Chart from 'component/fi/chart';
 import Page from 'component/fi/page';
+import type { State, FormInputs } from 'model/state';
 
-const mapStateToProps = state => ({
-  status: getInputs(state),
+type StateProps = {|
+  inputs: FormInputs,
+|};
+
+type DispatchProps = {|
+  onChange: (string, string) => void,
+|};
+
+type Props = StateProps & DispatchProps;
+
+const mapStateToProps = (state: State): StateProps => ({
+  inputs: getInputs(state),
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps: DispatchProps = {
   onChange: changeValue,
 };
 
-const Future = ({ status, onChange }) => {
+const Future = ({ inputs, onChange }: Props) => {
   const text = i18n.future;
-  const yrs = years(status);
+  const yrs = years(inputs);
 
-  const fn = chartFn('livingExpenses', status);
+  const fn = chartFn('livingExpenses', inputs);
   const rangeInfo = meta.livingExpenses;
-  const x = xrange(status.livingExpenses, rangeInfo);
+  const x = xrange(parseFloat(inputs.livingExpenses), rangeInfo);
   const y = yrange(x, rangeInfo, fn);
   const formatted2DecimalPoints = val => formattedShortFloat(2, val);
   const chart = {
@@ -44,7 +57,7 @@ const Future = ({ status, onChange }) => {
   };
 
   const futureLivingExpenses = formattedCurrency(
-    compound(status.livingExpenses, status.inflation, yrs),
+    compound(inputs.livingExpenses, inputs.inflation, yrs),
   );
   const livingExpenses = {
     name: 'livingExpenses',
@@ -57,7 +70,7 @@ const Future = ({ status, onChange }) => {
         meta.livingExpenses.max,
       ),
     },
-    value: status.livingExpenses,
+    value: inputs.livingExpenses,
     rangeInfo: meta.livingExpenses,
   };
 
@@ -68,7 +81,7 @@ const Future = ({ status, onChange }) => {
       placeholder: text.inflation.placeholder,
       error: i18n.error.between(meta.inflation.min, meta.inflation.max),
     },
-    value: status.inflation,
+    value: inputs.inflation,
     rangeInfo: meta.inflation,
   };
 
@@ -79,7 +92,7 @@ const Future = ({ status, onChange }) => {
       placeholder: text.withdrawl.placeholder,
       error: i18n.error.between(meta.withdrawl.min, meta.withdrawl.max),
     },
-    value: status.withdrawl,
+    value: inputs.withdrawl,
     rangeInfo: meta.withdrawl,
   };
 

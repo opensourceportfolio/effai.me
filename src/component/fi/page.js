@@ -1,6 +1,12 @@
-import React from 'react';
+// @flow
+
+import * as React from 'react';
 import 'css/page.css';
 
-const Page = ({ children }) => <div className="page">{children}</div>;
+type Props = {
+  children: React.Node,
+};
+
+const Page = ({ children }: Props) => <div className="page">{children}</div>;
 
 export default Page;

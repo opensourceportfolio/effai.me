@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
@@ -18,22 +20,33 @@ import Page from 'component/fi/page';
 import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
+import type { State, FormInputs } from 'model/state';
 
-const mapStateToProps = state => ({
+type StateProps = {|
+  inputs: FormInputs,
+|};
+
+type DispatchProps = {|
+  onChange: (string, string) => void,
+|};
+
+type Props = StateProps & DispatchProps;
+
+const mapStateToProps = (state: State): StateProps => ({
   inputs: getInputs(state),
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps: DispatchProps = {
   onChange: changeValue,
 };
 
-const Financial = ({ inputs, onChange }) => {
+const Financial = ({ inputs, onChange }: Props) => {
   const text = i18n.financial;
   const yrs = years(inputs);
 
   const fn = chartFn('savings', inputs);
   const rangeInfo = meta.savings;
-  const x = xrange(inputs.savings, rangeInfo);
+  const x = xrange(parseFloat(inputs.savings), rangeInfo);
   const y = yrange(x, rangeInfo, fn);
   const formatted2DecimalPoints = val => formattedShortFloat(2, val);
   const chart = {

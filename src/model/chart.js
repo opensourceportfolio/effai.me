@@ -1,4 +1,18 @@
 // @flow
+export type ChartSize = {
+  width: number,
+  height: number,
+};
+
+export type Dataset = {
+  label: string,
+  data: number[],
+};
+
+export type Data = {
+  labels: string[],
+  datasets: Dataset[],
+};
 
 export type TooltipItem = {
   // X Value of the tooltip as a string

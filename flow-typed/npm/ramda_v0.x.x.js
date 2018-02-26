@@ -2,7 +2,6 @@
 // flow-typed version: 03a0733eae/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
-
 type Transformer<A, B> = {
   '@@transducer/step': <I, R>(r: A, a: *) => R,
   '@@transducer/init': () => A,

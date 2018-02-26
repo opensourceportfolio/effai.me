@@ -50,11 +50,11 @@ export const i18n = {
     },
     savings: {
       placeholder: 'Savings per month',
-      additional: (v: number) => `${v} after inflation`,
+      additional: (v: string) => `${v} after inflation`,
     },
     networth: {
       placeholder: 'Total liquid assets',
-      additional: (v: number) => `retire with ${v}`,
+      additional: (v: string) => `retire with ${v}`,
     },
     ror: {
       placeholder: 'Rate of return',
@@ -140,7 +140,7 @@ export const i18n = {
     },
     livingExpenses: {
       placeholder: 'Living expenses',
-      additional: (v: number) => `${v} after inflation`,
+      additional: (v: string) => `${v} after inflation`,
     },
     inflation: {
       placeholder: 'Inflation rate',

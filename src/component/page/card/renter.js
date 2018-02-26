@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
@@ -8,16 +9,27 @@ import { getInputs } from 'reducer/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { compound, years, monthsToNow } from 'service/calculator';
+import { type FormInputs, type State } from 'model/state';
 
-const mapStateToProps = state => ({
+type StateProps = {|
+  inputs: FormInputs,
+|};
+
+type DispatchProps = {|
+  onChange: (string, string) => void,
+|};
+
+type Props = StateProps & DispatchProps;
+
+const mapStateToProps = (state: State): StateProps => ({
   inputs: getInputs(state),
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps: DispatchProps = {
   onChange: changeValue,
 };
 
-const Renter = ({ inputs, onChange }) => {
+const Renter = ({ inputs, onChange }: Props) => {
   const text = i18n.house;
 
   const yrs = years(inputs) + monthsToNow(inputs.purchaseDate) / 12;

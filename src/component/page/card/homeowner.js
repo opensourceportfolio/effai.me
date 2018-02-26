@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { connect } from 'react-redux';
 import SelectField from 'material-ui/SelectField';
@@ -21,18 +23,29 @@ import { Row, Column2, Column } from 'component/grid';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
 import DateComponent from 'component/form/date';
+import { type FormInputs, type State } from 'model/state';
+
+type StateProps = {|
+  inputs: FormInputs,
+|};
+
+type DispatchProps = {|
+  onChange: (string, string) => void,
+|};
+
+type Props = StateProps & DispatchProps;
 
 const terms = ['30', '25', '15'];
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State): StateProps => ({
   inputs: getInputs(state),
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps: DispatchProps = {
   onChange: changeValue,
 };
 
-const Homeowner = ({ onChange, inputs }) => {
+const Homeowner = ({ onChange, inputs }: Props) => {
   const text = i18n.house;
   const downpaymentAmount = percentage(inputs.price, inputs.downpayment);
   const yrs = years(inputs) + monthsToNow(inputs.purchaseDate) / 12;
@@ -71,9 +84,9 @@ const Homeowner = ({ onChange, inputs }) => {
   };
 
   const payment = pmt(
-    toFraction(inputs.rate / 12),
-    inputs.term * 12,
-    -inputs.price + downpaymentAmount,
+    toFraction(parseFloat(inputs.rate) / 12),
+    parseFloat(inputs.term) * 12,
+    -parseFloat(inputs.price) + downpaymentAmount,
     0,
   );
   const rate = {

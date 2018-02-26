@@ -1,5 +1,7 @@
+// @flow
+
 import React from 'react';
-import { always, cond, lt, gte, or, T } from 'ramda';
+import { always, cond, lt, gte, either, T } from 'ramda';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
@@ -10,8 +12,8 @@ import { i18n } from 'service/i18n';
 
 const mapStateToProps = state => state;
 
-const fiAge = cond([
-  [or(isNaN, lt(meta.range)), always(i18n.fiStatus.never)],
+const fiAge: number => string = cond([
+  [either(lt(meta.range), isNaN), always(i18n.fiStatus.never)],
   [gte(0), always(i18n.fiStatus.done)],
   [T, i18n.fiStatus.formatter],
 ]);

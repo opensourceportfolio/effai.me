@@ -1,8 +1,22 @@
-import React from 'react';
+// @flow
+
+import * as React from 'react';
 import Chartjs from 'chart.js';
 import debounce from 'debounce';
+import { type Data, type ChartSize } from 'model/chart';
+import Bar from 'component/chart/bar';
+import Line from 'component/chart/line';
 
-export default class Base extends React.Component {
+type ChartOptions = {
+  size: ChartSize,
+};
+
+export type Props = {
+  data: Data,
+  type: Bar | Line,
+  options: ChartOptions,
+};
+export default class Base extends React.Component<Props> {
   constructor() {
     super();
     this.update = debounce(() => {
@@ -13,6 +27,12 @@ export default class Base extends React.Component {
       this.chart.update();
     }, 350);
   }
+
+  update: () => void;
+
+  chart: Chartjs;
+
+  chartEl: ?HTMLCanvasElement;
 
   componentDidMount() {
     const $chart = this.chartEl;
@@ -30,20 +50,17 @@ export default class Base extends React.Component {
     this.update();
   }
 
-  override(options) {
-    return Object.assign(
-      {
-        maintainAspectRatio: false,
-        title: {
-          display: true,
-        },
-        deferred: {
-          enabled: true,
-        },
+  override(options: ChartOptions) {
+    return {
+      maintainAspectRatio: false,
+      title: {
+        display: true,
       },
-      {},
-      options,
-    );
+      deferred: {
+        enabled: true,
+      },
+      ...options,
+    };
   }
 
   render() {

@@ -1,7 +1,7 @@
 import React from 'react';
-import Base from 'component/chart/base';
+import Base, { type Props as BaseProps } from 'component/chart/base';
 
-const Line = ({ data, options }) => (
+const Line = ({ data, options }: BaseProps) => (
   <Base type="line" data={data} options={options} />
 );
 

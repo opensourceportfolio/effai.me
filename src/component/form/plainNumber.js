@@ -7,17 +7,17 @@ import { cyanA700 } from 'material-ui/styles/colors';
 import { type RangeInfo } from 'model/rangeInfo';
 
 type PlainNumberTextSettings = {
-  additional: string => string | string,
-  placeholder: string,
-  error: string,
+  additional?: (mixed => string) | string,
+  placeholder?: string,
+  error?: string,
 };
 
-type Props = {
+export type Props = {
   name: string,
   text: PlainNumberTextSettings,
   rangeInfo: RangeInfo,
   value: string,
-  formatter: string => string,
+  formatter?: number => string,
   onChange: (string, string) => void,
 };
 
@@ -86,7 +86,7 @@ export default class PlainNumber extends React.Component<Props> {
           </label>
         ) : null}
         <div className="mui-text-field__mask-text">
-          {isValid ? formatter(value) : value}
+          {isValid && formatter ? formatter(parseFloat(value)) : value}
         </div>
       </div>
     );
