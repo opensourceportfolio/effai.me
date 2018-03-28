@@ -90,6 +90,7 @@
   },
   "lint-staged": {
     "*.js": [
+      "npm run lint",
       "prettier --single-quote --trailing-comma all --write",
       "git add"
     ]
