@@ -15,13 +15,14 @@
         "source": "/blog",
         "destination": "https://medium.com/effai-me",
         "type": 301
-      },
-      "ignore": [
-        "firebase.json",
-        "calculations.xlsx",
-        "**/.*",
-        "**/node_modules/**",
-        "**/src/**"
-      ]
-    }
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "calculations.xlsx",
+      "**/.*",
+      "**/node_modules/**",
+      "**/src/**"
+    ]
   }
+}
