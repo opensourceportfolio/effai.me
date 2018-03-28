@@ -70,11 +70,14 @@ export function yrange(
 }
 
 // TODO: refactor this
-export function chartFn(name: string, state: FormInputs) {
+export function chartFn<V>(
+  setter: (obj: FormInputs, value: V) => void,
+  state: FormInputs,
+) {
   const stateCopy = { ...state };
 
-  return e => {
-    stateCopy[name] = e;
+  return (e: V) => {
+    setter(stateCopy, e);
 
     return years(stateCopy);
   };

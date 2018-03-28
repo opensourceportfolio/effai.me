@@ -44,7 +44,10 @@ const Future = ({ inputs, onChange }: Props) => {
   const text = i18n.future;
   const yrs = years(inputs);
 
-  const fn = chartFn('livingExpenses', inputs);
+  const fn = chartFn(
+    (formInputs, val) => (formInputs.livingExpenses = val),
+    inputs,
+  );
   const rangeInfo = meta.livingExpenses;
   const x = xrange(parseFloat(inputs.livingExpenses), rangeInfo);
   const y = yrange(x, rangeInfo, fn);

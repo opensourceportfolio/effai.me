@@ -44,7 +44,10 @@ const Financial = ({ inputs, onChange }: Props) => {
   const text = i18n.financial;
   const yrs = years(inputs);
 
-  const fn = chartFn('savings', inputs);
+  const fn = chartFn(
+    (formInputs, value) => (formInputs.savings = value),
+    inputs,
+  );
   const rangeInfo = meta.savings;
   const x = xrange(parseFloat(inputs.savings), rangeInfo);
   const y = yrange(x, rangeInfo, fn);

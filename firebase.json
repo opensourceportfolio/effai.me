@@ -10,12 +10,18 @@
         "destination": "/index.html"
       }
     ],
-    "ignore": [
-      "firebase.json",
-      "calculations.xlsx",
-      "**/.*",
-      "**/node_modules/**",
-      "**/src/**"
-    ]
+    "redirects": [
+      {
+        "source": "/blog",
+        "destination": "https://medium.com/effai-me",
+        "type": 301
+      },
+      "ignore": [
+        "firebase.json",
+        "calculations.xlsx",
+        "**/.*",
+        "**/node_modules/**",
+        "**/src/**"
+      ]
+    }
   }
-}
