@@ -1,6 +1,7 @@
 // @flow
 import idb from 'idb';
-import { type State } from 'model/state';
+import { type State, type FormInputs } from 'model/state';
+import { isEmpty } from 'ramda';
 
 const OBJECT_STORE = 'user-settings';
 const dbPromise = idb.open('ficalculator-db', 1, upgradeDB => {
@@ -35,21 +36,39 @@ export const originalState: State = {
   },
 };
 
-export async function get(key: string) {
+function getFromUrl(): $Shape<State> {
+  try {
+    const params = new URLSearchParams(location.search.slice(1));
+    const preconfiguredStr = params.get('values');
+
+    return isEmpty(preconfiguredStr) ? {} : JSON.parse(preconfiguredStr);
+  } catch (err) {
+    return {};
+  }
+}
+
+export async function get(key: string): Promise<FormInputs> {
   const db = await dbPromise;
   const transaction = db.transaction(OBJECT_STORE);
   const store = transaction.objectStore(OBJECT_STORE);
 
   try {
-    const settings = await store.get(key);
+    const urlSettings = getFromUrl();
+    const localSettings = await store.get(key);
 
-    return { ...originalState, ...settings };
+    const currentSettings = {
+      ...originalState.input,
+      ...localSettings,
+      ...urlSettings,
+    };
+
+    return currentSettings;
   } catch (err) {
-    return originalState;
+    return originalState.input;
   }
 }
 
-export async function set(key: string, value: string) {
+export async function set(key: string, value: FormInputs) {
   const db = await dbPromise;
   const transaction = db.transaction(OBJECT_STORE, 'readwrite');
   const store = transaction.objectStore(OBJECT_STORE);

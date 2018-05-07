@@ -20,7 +20,7 @@ export function input(
     case LOADED_USER_DATA: {
       const { payload } = action;
 
-      return getInputs(payload);
+      return payload;
     }
     default:
       return state;
