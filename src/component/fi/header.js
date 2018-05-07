@@ -60,8 +60,8 @@ const Header = ({ input, onToggleShare }: Props) => {
           targetOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
         >
-          <MenuItem primaryText="Share" onClick={onToggleShare} />
-          <MenuItem primaryText="Blog" onClick={navigateToBlog} />
+          <MenuItem primaryText="Share Results" onClick={onToggleShare} />
+          <MenuItem primaryText="My Blog" onClick={navigateToBlog} />
         </IconMenu>
       }
     />
