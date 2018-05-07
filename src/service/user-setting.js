@@ -31,6 +31,7 @@ export const originalState: State = {
   },
   navigation: {
     tabIndex: 0,
+    isShareMenuShowing: false,
   },
 };
 

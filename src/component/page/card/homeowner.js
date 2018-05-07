@@ -24,13 +24,14 @@ import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
 import DateComponent from 'component/form/date';
 import { type FormInputs, type State } from 'model/state';
+import { type Dispatch } from 'model/redux';
 
 type StateProps = {|
   inputs: FormInputs,
 |};
 
 type DispatchProps = {|
-  onChange: (string, string) => void,
+  onChange: (payload: $Shape<FormInputs>) => void,
 |};
 
 type Props = StateProps & DispatchProps;
@@ -41,9 +42,9 @@ const mapStateToProps = (state: State): StateProps => ({
   inputs: getInputs(state),
 });
 
-const mapDispatchToProps: DispatchProps = {
-  onChange: changeValue,
-};
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  onChange: (payload: $Shape<FormInputs>) => dispatch(changeValue(payload)),
+});
 
 const Homeowner = ({ onChange, inputs }: Props) => {
   const text = i18n.house;
@@ -52,14 +53,14 @@ const Homeowner = ({ onChange, inputs }: Props) => {
 
   const isHomeOwner = {
     name: 'isHomeOwner',
-    onToggle: ({ target }, value) => onChange(target.name, value),
+    onToggle: (_, value) => onChange({ isHomeOwner: value }),
     label: <span>I am a home owner</span>,
     toggled: inputs.isHomeOwner,
   };
 
   const price = {
     name: 'price',
-    onChange,
+    onChange: (_, value) => onChange({ price: value }),
     text: {
       placeholder: text.price.placeholder,
       error: i18n.error.between(meta.house.price.min, meta.house.price.max),
@@ -70,7 +71,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
 
   const downpayment = {
     name: 'downpayment',
-    onChange,
+    onChange: (_, value) => onChange({ downpayment: value }),
     text: {
       placeholder: text.downpayment.placeholder,
       additional: text.downpayment.additional(downpaymentAmount),
@@ -91,7 +92,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
   );
   const rate = {
     name: 'rate',
-    onChange,
+    onChange: (_, value) => onChange({ rate: value }),
     text: {
       placeholder: text.rate.placeholder,
       additional: text.rate.additional(payment),
@@ -103,7 +104,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
 
   const term = {
     name: 'term',
-    onChange: (e, i, val) => onChange('term', val),
+    onChange: (e, i, val) => onChange({ term: val }),
     floatingLabelText: text.term.placeholder,
     value: inputs.term,
     fullWidth: true,
@@ -112,7 +113,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
   const futurePrice = compound(inputs.price, inputs.houseGrowth, yrs);
   const houseGrowth = {
     name: 'houseGrowth',
-    onChange,
+    onChange: (_, value) => onChange({ houseGrowth: value }),
     text: {
       placeholder: text.houseGrowth.placeholder,
       additional: text.houseGrowth.additional(futurePrice),
@@ -127,7 +128,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
 
   const purchaseDate = {
     name: 'purchaseDate',
-    onChange,
+    onChange: (_, value) => onChange({ purchaseDate: Number.parseInt(value) }),
     text: {
       placeholder: text.purchaseDate.placeholder,
     },
@@ -140,7 +141,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
   const futureMaintenance = percentage(inputs.price, inputs.maintenance);
   const maintenance = {
     name: 'maintenance',
-    onChange,
+    onChange: (_, value) => onChange({ maintenance: value }),
     text: {
       placeholder: text.maintenance.placeholder,
       additional: text.maintenance.additional(futureMaintenance),
@@ -156,7 +157,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
   const futurePropertyTax = percentage(inputs.price, inputs.propertyTax);
   const propertyTax = {
     name: 'propertyTax',
-    onChange,
+    onChange: (_, value) => onChange({ propertyTax: value }),
     text: {
       placeholder: text.propertyTax.placeholder,
       additional: text.propertyTax.additional(futurePropertyTax),

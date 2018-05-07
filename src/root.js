@@ -5,13 +5,27 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { isEmpty } from 'ramda';
 import App from 'app';
-import configureStore from 'store';
+import configureStore from 'redux-store';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { originalState } from 'service/user-setting';
 
-const store = configureStore(originalState);
+const params = new URLSearchParams(location.search.slice(1));
+const preconfiguredStr = params.get('values');
+const preconfigured = isEmpty(preconfiguredStr)
+  ? {}
+  : JSON.parse(preconfiguredStr);
+const originalInput = originalState.input;
+const overriddenState = {
+  ...originalState,
+  input: {
+    ...originalInput,
+    ...preconfigured,
+  },
+};
+const store = configureStore(overriddenState);
 
 injectTapEventPlugin();
 

@@ -1,5 +1,6 @@
 // @flow
-export type FormInputs = {
+
+export type FormInputs = {|
   networth: string,
   savings: string,
   renter: string,
@@ -19,10 +20,11 @@ export type FormInputs = {
   tabIndex: string,
   purchaseDate: number,
   isHomeOwner: boolean,
-};
+|};
 
 export type Navigation = {|
   tabIndex: number,
+  isShareMenuShowing: boolean,
 |};
 
 export type State = {|

@@ -10,13 +10,14 @@ import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 import { compound, years, monthsToNow } from 'service/calculator';
 import { type FormInputs, type State } from 'model/state';
+import type { Dispatch } from 'model/redux';
 
 type StateProps = {|
   inputs: FormInputs,
 |};
 
 type DispatchProps = {|
-  onChange: (string, string) => void,
+  onChange: (payload: $Shape<FormInputs>) => void,
 |};
 
 type Props = StateProps & DispatchProps;
@@ -25,9 +26,9 @@ const mapStateToProps = (state: State): StateProps => ({
   inputs: getInputs(state),
 });
 
-const mapDispatchToProps: DispatchProps = {
-  onChange: changeValue,
-};
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  onChange: (payload: $Shape<FormInputs>) => dispatch(changeValue(payload)),
+});
 
 const Renter = ({ inputs, onChange }: Props) => {
   const text = i18n.house;
@@ -36,7 +37,7 @@ const Renter = ({ inputs, onChange }: Props) => {
   const futurecost = compound(inputs.rental, inputs.inflation, yrs);
   const rental = {
     name: 'rental',
-    onChange,
+    onChange: (_, value) => onChange({ rental: value }),
     text: {
       placeholder: text.rental.placeholder,
       additional: text.rental.additional(futurecost),

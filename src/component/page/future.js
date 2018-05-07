@@ -21,13 +21,14 @@ import Percent from 'component/form/percent';
 import Chart from 'component/fi/chart';
 import Page from 'component/fi/page';
 import type { State, FormInputs } from 'model/state';
+import type { Dispatch } from 'model/redux';
 
 type StateProps = {|
   inputs: FormInputs,
 |};
 
 type DispatchProps = {|
-  onChange: (string, string) => void,
+  onChange: (payload: $Shape<FormInputs>) => void,
 |};
 
 type Props = StateProps & DispatchProps;
@@ -36,9 +37,9 @@ const mapStateToProps = (state: State): StateProps => ({
   inputs: getInputs(state),
 });
 
-const mapDispatchToProps: DispatchProps = {
-  onChange: changeValue,
-};
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  onChange: (payload: $Shape<FormInputs>) => dispatch(changeValue(payload)),
+});
 
 const Future = ({ inputs, onChange }: Props) => {
   const text = i18n.future;
@@ -64,7 +65,7 @@ const Future = ({ inputs, onChange }: Props) => {
   );
   const livingExpenses = {
     name: 'livingExpenses',
-    onChange,
+    onChange: (_, value) => onChange({ livingExpenses: value }),
     text: {
       placeholder: text.livingExpenses.placeholder,
       additional: text.livingExpenses.additional(futureLivingExpenses),
@@ -79,7 +80,7 @@ const Future = ({ inputs, onChange }: Props) => {
 
   const inflation = {
     name: 'inflation',
-    onChange,
+    onChange: (_, value) => onChange({ inflation: value }),
     text: {
       placeholder: text.inflation.placeholder,
       error: i18n.error.between(meta.inflation.min, meta.inflation.max),
@@ -90,7 +91,7 @@ const Future = ({ inputs, onChange }: Props) => {
 
   const withdrawl = {
     name: 'withdrawl',
-    onChange,
+    onChange: (_, value) => onChange({ withdrawl: value }),
     text: {
       placeholder: text.withdrawl.placeholder,
       error: i18n.error.between(meta.withdrawl.min, meta.withdrawl.max),

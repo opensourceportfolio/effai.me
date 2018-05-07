@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import type { Dispatch } from 'model/redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import { changeTab } from 'action/navigation';
 import Home from 'material-ui/svg-icons/action/home';
@@ -23,7 +24,9 @@ const mapStateToProps = (state: State): StateProps => ({
   tabIndex: parseInt(state.navigation.tabIndex),
 });
 
-const mapDispatchToProps: DispatchProps = { onNavigation: changeTab };
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  onNavigation: tabIndex => dispatch(changeTab(tabIndex)),
+});
 
 const tabLabel = (text: string) => (
   <span className="mui-tab__label">{text}</span>

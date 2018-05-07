@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import type { Dispatch } from 'model/redux';
 import { connect } from 'react-redux';
 import SwipeableViews from 'react-swipeable-views';
 import { changeTab } from 'action/navigation';
@@ -23,7 +24,9 @@ const mapStateToProps = (state: State): StateProps => ({
   tabIndex: parseInt(state.navigation.tabIndex),
 });
 
-const mapDispatchToProps: DispatchProps = { onNavigation: changeTab };
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  onNavigation: tabIndex => dispatch(changeTab(tabIndex)),
+});
 
 const style = {
   height: '100%',

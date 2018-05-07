@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import Base, { type Props as BaseProps } from 'component/chart/base';
 

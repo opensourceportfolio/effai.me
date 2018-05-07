@@ -28,9 +28,4 @@ munge_underscores=true
 # consider function arguments as const
 experimental.const_params=true
 
-module.name_mapper='^action' ->'<PROJECT_ROOT>/src/action'
-module.name_mapper='^css' ->'<PROJECT_ROOT>/src/css'
-module.name_mapper='^component' ->'<PROJECT_ROOT>/src/component'
-module.name_mapper='^model' ->'<PROJECT_ROOT>/src/model'
-module.name_mapper='^reducer' ->'<PROJECT_ROOT>/src/reducer'
-module.name_mapper='^service' ->'<PROJECT_ROOT>/src/service'
+module.name_mapper='^\(.*\)$' -> '<PROJECT_ROOT>/src/\1'

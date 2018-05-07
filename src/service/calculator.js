@@ -134,7 +134,7 @@ export const years = memoize((state: FormInputs): number => {
     return compare(renterYield, renterGoal);
   });
 
-  const homeownerYears = state.isHomeowner
+  const homeownerYears = state.isHomeOwner
     ? find(year => {
         const expenses =
           parseInt(state.livingExpenses) +

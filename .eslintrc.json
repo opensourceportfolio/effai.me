@@ -18,7 +18,8 @@
     "react",
     "import",
     "prettier",
-    "promise"
+    "promise",
+    "flowtype"
   ],
   "extends": [
     "eslint:recommended",
@@ -27,7 +28,8 @@
     "plugin:react/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:promise/recommended"
+    "plugin:promise/recommended",
+    "plugin:flowtype/recommended"
   ],
   "rules": {
     "no-shadow": "error",
@@ -102,7 +104,7 @@
   "settings": {
     "import/resolver": {
       "webpack": {
-        "config": "script/webpack.common.js"
+        "config": "./script/webpack.common.js"
       }
     }
   }

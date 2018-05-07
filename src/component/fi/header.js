@@ -5,12 +5,33 @@ import { always, cond, lt, gte, either, T } from 'ramda';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import AccountBox from 'material-ui/svg-icons/action/account-box';
+import MenuItem from 'material-ui/MenuItem';
+import IconMenu from 'material-ui/IconMenu';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { years } from 'service/calculator';
 import { meta } from 'service/meta';
 import { i18n } from 'service/i18n';
+import type { State, FormInputs } from 'model/state';
+import { toggleShare } from 'action/navigation';
+import type { Dispatch } from 'model/redux';
 
-const mapStateToProps = state => state;
+type StateProps = {
+  input: FormInputs,
+};
+
+type DispatchProps = {
+  onToggleShare: () => void,
+};
+
+type Props = StateProps & DispatchProps;
+
+const mapStateToProps = (state: State): StateProps => ({
+  input: state.input,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  onToggleShare: () => dispatch(toggleShare()),
+});
 
 const fiAge: number => string = cond([
   [either(lt(meta.range), isNaN), always(i18n.fiStatus.never)],
@@ -19,10 +40,10 @@ const fiAge: number => string = cond([
 ]);
 
 const navigateToBlog = () => {
-  window.location.replace('https://www.medium.com/effai-me');
+  window.location.href = 'https://www.medium.com/effai-me';
 };
 
-const Header = ({ input }) => {
+const Header = ({ input, onToggleShare }: Props) => {
   const yrs = years(input);
 
   return (
@@ -30,12 +51,21 @@ const Header = ({ input }) => {
       showMenuIconButton={false}
       title={fiAge(yrs)}
       iconElementRight={
-        <IconButton onClick={navigateToBlog}>
-          <AccountBox />
-        </IconButton>
+        <IconMenu
+          iconButtonElement={
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          }
+          targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+        >
+          <MenuItem primaryText="Share" onClick={onToggleShare} />
+          <MenuItem primaryText="Blog" onClick={navigateToBlog} />
+        </IconMenu>
       }
     />
   );
 };
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

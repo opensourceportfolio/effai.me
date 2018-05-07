@@ -1,18 +1,26 @@
+// @flow
+import { originalState } from 'service/user-setting';
 import { CHANGE_VALUE, LOADED_USER_DATA } from 'action/fi';
 import { type State, type FormInputs } from 'model/state';
+import type { Action } from 'model/redux';
 
-export function input(state = {}, action) {
-  const { type, payload } = action;
-
-  switch (type) {
+export function input(
+  state: $ReadOnly<FormInputs> = originalState.input,
+  action: Action,
+) {
+  switch (action.type) {
     case CHANGE_VALUE: {
+      const { payload } = action;
+
       return {
         ...state,
-        [payload.field]: payload.value,
+        ...payload,
       };
     }
     case LOADED_USER_DATA: {
-      return getInputs(payload.userData);
+      const { payload } = action;
+
+      return getInputs(payload);
     }
     default:
       return state;

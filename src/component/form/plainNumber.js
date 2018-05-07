@@ -12,14 +12,14 @@ type PlainNumberTextSettings = {
   error?: string,
 };
 
-export type Props = {
+export type Props = {|
   name: string,
   text: PlainNumberTextSettings,
   rangeInfo: RangeInfo,
   value: string,
   formatter?: number => string,
   onChange: (string, string) => void,
-};
+|};
 
 export default class PlainNumber extends React.Component<Props> {
   plainNumber: ?HTMLDivElement;

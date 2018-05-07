@@ -4,16 +4,14 @@ import * as React from 'react';
 import Chartjs from 'chart.js';
 import debounce from 'debounce';
 import { type Data, type ChartSize } from 'model/chart';
-import Bar from 'component/chart/bar';
-import Line from 'component/chart/line';
 
-type ChartOptions = {
+type ChartOptions = {|
   size: ChartSize,
-};
+|};
 
 export type Props = {
   data: Data,
-  type: Bar | Line,
+  type: 'bar' | 'line',
   options: ChartOptions,
 };
 export default class Base extends React.Component<Props> {

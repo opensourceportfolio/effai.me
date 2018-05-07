@@ -21,13 +21,14 @@ import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
 import type { State, FormInputs } from 'model/state';
+import type { Dispatch } from 'model/redux';
 
 type StateProps = {|
   inputs: FormInputs,
 |};
 
 type DispatchProps = {|
-  onChange: (string, string) => void,
+  onChange: (payload: $Shape<FormInputs>) => void,
 |};
 
 type Props = StateProps & DispatchProps;
@@ -36,9 +37,9 @@ const mapStateToProps = (state: State): StateProps => ({
   inputs: getInputs(state),
 });
 
-const mapDispatchToProps: DispatchProps = {
-  onChange: changeValue,
-};
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  onChange: (payload: $Shape<FormInputs>) => dispatch(changeValue(payload)),
+});
 
 const Financial = ({ inputs, onChange }: Props) => {
   const text = i18n.financial;
@@ -64,7 +65,7 @@ const Financial = ({ inputs, onChange }: Props) => {
   );
   const savings = {
     name: 'savings',
-    onChange,
+    onChange: (_, value) => onChange({ savings: value }),
     text: {
       placeholder: text.savings.placeholder,
       additional: text.savings.additional(fiSavings),
@@ -76,7 +77,7 @@ const Financial = ({ inputs, onChange }: Props) => {
 
   const ror = {
     name: 'ror',
-    onChange,
+    onChange: (_, value) => onChange({ ror: value }),
     text: {
       placeholder: text.ror.placeholder,
       error: i18n.error.between(meta.ror.min, meta.ror.max),
@@ -88,10 +89,7 @@ const Financial = ({ inputs, onChange }: Props) => {
   const fiNetworth = formattedCurrency(investment(inputs, yrs));
   const networthInput = {
     name: 'networth',
-    onChange,
-    inputProps: {
-      autoFocus: true,
-    },
+    onChange: (_, value) => onChange({ networth: value }),
     text: {
       placeholder: text.networth.placeholder,
       additional: text.networth.additional(fiNetworth),
