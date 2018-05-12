@@ -128,7 +128,8 @@ const Homeowner = ({ onChange, inputs }: Props) => {
 
   const purchaseDate = {
     name: 'purchaseDate',
-    onChange: (_, value) => onChange({ purchaseDate: Number.parseInt(value) }),
+    onChange: (_: string, value: Date) =>
+      onChange({ purchaseDate: value.getTime() }),
     text: {
       placeholder: text.purchaseDate.placeholder,
     },
@@ -206,6 +207,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
           </Row>
           <Row>
             <Column2>
+              {/* $FlowFixMe */}
               <DateComponent {...purchaseDate} />
             </Column2>
             <Column2>

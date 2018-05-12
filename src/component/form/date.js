@@ -9,7 +9,7 @@ export type DateText = {
 
 export type Props = {
   name: string,
-  onChange: (string, string) => void,
+  onChange: (string, Date) => void,
   text: DateText,
   value: Date,
   openToYearSelection: boolean,
@@ -18,14 +18,14 @@ export type Props = {
 };
 
 const Date = (props: Props) => {
-  const { onChange, text } = props;
+  const { onChange, text, name } = props;
 
   return (
     <DatePicker
       {...props}
       floatingLabelText={text.placeholder}
       fullWidth={true}
-      onChange={(e, newDate) => onChange(props.name, newDate)}
+      onChange={(_, newDate: Date) => onChange(name, newDate)}
     />
   );
 };
