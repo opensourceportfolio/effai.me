@@ -3,11 +3,9 @@
 import * as React from 'react';
 import Chartjs from 'chart.js';
 import debounce from 'debounce';
-import { type Data, type ChartSize } from 'model/chart';
+import { type Data } from 'model/chart';
 
-type ChartOptions = {|
-  size: ChartSize,
-|};
+type ChartOptions = {||};
 
 export type Props = {
   data: Data,
@@ -62,15 +60,6 @@ export default class Base extends React.Component<Props> {
   }
 
   render() {
-    const defaultSize = { width: '500', height: '300' };
-    const { size = defaultSize } = this.props.options;
-
-    return (
-      <canvas
-        {...size}
-        style={{ height: '100%' }}
-        ref={e => (this.chartEl = e)}
-      />
-    );
+    return <canvas style={{ height: '100%' }} ref={e => (this.chartEl = e)} />;
   }
 }
