@@ -124,4 +124,7 @@ const Future = ({ inputs, onChange }: Props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Future);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Future);

@@ -64,7 +64,9 @@ export const investment = (state: FormInputs, yrs: number): number => {
   const f2 = 1 - factor;
 
   if (inflationFraction === rorFraction) {
-    return Math.floor(futureSavings / inflationFraction * yrs + futureNetworth);
+    return Math.floor(
+      (futureSavings / inflationFraction) * yrs + futureNetworth,
+    );
   } else {
     return Math.floor(futureSavings * (f1 / f2) + futureNetworth) + 1;
   }
@@ -94,58 +96,63 @@ export const liquidYield = (state: FormInputs, yrs: number): number => {
   return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
 };
 
-export const years = memoize((state: FormInputs): number => {
-  const find = (compareFn, from = 0, to = 45) => {
-    const delta = 0.1;
-    const mid = (from + to) / 2;
+export const years = memoize(
+  (state: FormInputs): number => {
+    const find = (compareFn, from = 0, to = 45) => {
+      const delta = 0.1;
+      const mid = (from + to) / 2;
 
-    if (Math.abs(from - to) <= 2 * delta) {
-      return mid;
-    } else {
-      const cmp = compareFn(mid);
-
-      if (cmp < 0) {
-        return find(compareFn, mid + delta, to);
-      } else if (cmp > 0) {
-        return find(compareFn, from, mid);
-      } else {
+      if (Math.abs(from - to) <= 2 * delta) {
         return mid;
+      } else {
+        const cmp = compareFn(mid);
+
+        if (cmp < 0) {
+          return find(compareFn, mid + delta, to);
+        } else if (cmp > 0) {
+          return find(compareFn, from, mid);
+        } else {
+          return mid;
+        }
       }
-    }
-  };
+    };
 
-  const compare = (v1: number, v2: number): number => {
-    const delta = 100;
+    const compare = (v1: number, v2: number): number => {
+      const delta = 100;
 
-    if (v1 < v2) {
-      return -1;
-    } else if (v1 - v2 > delta) {
-      return 1;
-    } else {
-      return 0;
-    }
-  };
+      if (v1 < v2) {
+        return -1;
+      } else if (v1 - v2 > delta) {
+        return 1;
+      } else {
+        return 0;
+      }
+    };
 
-  const renterYears = find((year: number): number => {
-    const expenses = parseInt(state.livingExpenses) + parseInt(state.rental);
-    const renterYield = totalYield(state, year);
-    const renterGoal = compound(expenses, state.inflation, year);
-
-    return compare(renterYield, renterGoal);
-  });
-
-  const homeownerYears = state.isHomeOwner
-    ? find(year => {
+    const renterYears = find(
+      (year: number): number => {
         const expenses =
-          parseInt(state.livingExpenses) +
-          percentage(state.price, state.maintenance) +
-          percentage(state.price, state.propertyTax);
-        const homeownerYield = liquidYield(state, year);
-        const homeownerGoal = compound(expenses, state.inflation, year);
+          parseInt(state.livingExpenses) + parseInt(state.rental);
+        const renterYield = totalYield(state, year);
+        const renterGoal = compound(expenses, state.inflation, year);
 
-        return compare(homeownerYield, homeownerGoal);
-      })
-    : Number.MAX_SAFE_INTEGER;
+        return compare(renterYield, renterGoal);
+      },
+    );
 
-  return Math.min(renterYears, homeownerYears);
-});
+    const homeownerYears = state.isHomeOwner
+      ? find(year => {
+          const expenses =
+            parseInt(state.livingExpenses) +
+            percentage(state.price, state.maintenance) +
+            percentage(state.price, state.propertyTax);
+          const homeownerYield = liquidYield(state, year);
+          const homeownerGoal = compound(expenses, state.inflation, year);
+
+          return compare(homeownerYield, homeownerGoal);
+        })
+      : Number.MAX_SAFE_INTEGER;
+
+    return Math.min(renterYears, homeownerYears);
+  },
+);

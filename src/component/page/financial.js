@@ -123,4 +123,7 @@ const Financial = ({ inputs, onChange }: Props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Financial);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Financial);

@@ -12,8 +12,7 @@ export function pmt(
 
   const interestFactor = Math.pow(1 + rate, nperiod);
   const pmtval =
-    -rate /
-    (interestFactor - 1) *
+    (-rate / (interestFactor - 1)) *
     presentValue *
     (interestFactor + futureValue);
 
@@ -63,7 +62,7 @@ export function remainder(
   const annualRate = rate * 12;
 
   return (
-    12 * payment / annualRate -
-    (12 * payment / annualRate - loan) * (1 + rate) ** period
+    (12 * payment) / annualRate -
+    ((12 * payment) / annualRate - loan) * (1 + rate) ** period
   );
 }

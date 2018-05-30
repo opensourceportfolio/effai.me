@@ -68,4 +68,7 @@ const Header = ({ input, onToggleShare }: Props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Header);

@@ -50,4 +50,7 @@ const SwipeableView = ({ tabIndex, onNavigation }: Props) => (
   </SwipeableViews>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(SwipeableView);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SwipeableView);

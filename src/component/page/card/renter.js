@@ -58,4 +58,7 @@ const Renter = ({ inputs, onChange }: Props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Renter);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Renter);

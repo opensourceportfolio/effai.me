@@ -79,4 +79,7 @@ class ShareDialog extends React.Component<Props> {
   }
 }
 
-export default connect(mapState, mapDispatch)(ShareDialog);
+export default connect(
+  mapState,
+  mapDispatch,
+)(ShareDialog);
