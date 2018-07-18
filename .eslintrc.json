@@ -102,6 +102,10 @@
     ]
   },
   "settings": {
+    "import/ignore": [
+      "node_modules",
+      "\\.(scss|less|css)$"
+    ],
     "import/resolver": {
       "webpack": {
         "config": "./script/webpack.common.js"

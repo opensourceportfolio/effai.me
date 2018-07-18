@@ -24,6 +24,8 @@ export type Props = {|
 export default class PlainNumber extends React.Component<Props> {
   plainNumber: ?HTMLDivElement;
 
+  plainNumberInput: ?HTMLInputElement;
+
   isValid(rangeInfo: RangeInfo, value: string) {
     const val = parseFloat(value);
 
@@ -43,11 +45,14 @@ export default class PlainNumber extends React.Component<Props> {
   }
 
   toggleMask(isFocus: boolean) {
-    this.plainNumber &&
+    if (this.plainNumber && this.plainNumberInput) {
+      isFocus && this.plainNumberInput.focus();
+
       this.plainNumber.classList.toggle(
         'mui-text-field__masked-text--focus',
         isFocus,
       );
+    }
   }
 
   render() {
@@ -65,6 +70,7 @@ export default class PlainNumber extends React.Component<Props> {
         ref={e => (this.plainNumber = e)}
       >
         <TextField
+          ref={e => (this.plainNumberInput = e)}
           className="mui-text-field__input-text"
           name={name}
           type="number"
@@ -85,7 +91,10 @@ export default class PlainNumber extends React.Component<Props> {
             {additional}
           </label>
         ) : null}
-        <div className="mui-text-field__mask-text">
+        <div
+          className="mui-text-field__mask-text"
+          onClick={() => this.toggleMask(true)}
+        >
           {isValid && formatter ? formatter(parseFloat(value)) : value}
         </div>
       </div>

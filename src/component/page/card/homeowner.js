@@ -228,4 +228,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Homeowner);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Homeowner);
