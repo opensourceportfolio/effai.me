@@ -34,7 +34,7 @@ export const i18n = {
       title: 'Years to Effai vs. Savings rate',
       tooltips: {
         title: (tooltip: TooltipItems) => {
-          return `Saving ${longNumber(tooltip[0].xLabel)} a month`;
+          return `Saving ${tooltip[0].xLabel} a month`;
         },
         label: (tooltip: TooltipItem) => {
           return `Effai date will be different by ${formattedFloat(
@@ -126,7 +126,7 @@ export const i18n = {
       title: 'Years vs Goal',
       tooltips: {
         title: (tooltip: TooltipItems) =>
-          `Looking for ${longNumber(tooltip[0].xLabel)} a month`,
+          `Looking for ${tooltip[0].xLabel} a month`,
         label: (tooltip: TooltipItem) =>
           `Effai date will be different by ${formattedFloat(
             1,
