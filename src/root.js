@@ -1,6 +1,7 @@
 import 'css/icon.css';
 import 'css/index.css';
 import 'css/grid.css';
+import 'css/card.css';
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';

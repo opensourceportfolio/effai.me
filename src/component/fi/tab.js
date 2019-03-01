@@ -8,6 +8,7 @@ import { changeTab } from 'action/navigation';
 import Home from 'material-ui/svg-icons/action/home';
 import AttachMoney from 'material-ui/svg-icons/editor/attach-money';
 import WatchLater from 'material-ui/svg-icons/action/watch-later';
+import ViewAgenda from 'material-ui/svg-icons/action/view-agenda';
 import { type State } from 'model/state';
 
 type StateProps = {|
@@ -38,6 +39,7 @@ const FiTab = ({ tabIndex, onNavigation }: Props) => {
       <Tab label={tabLabel('Financial')} value={0} icon={<AttachMoney />} />
       <Tab label={tabLabel('House')} value={1} icon={<Home />} />
       <Tab label={tabLabel('Future')} value={2} icon={<WatchLater />} />
+      <Tab label={tabLabel('Summary')} value={3} icon={<ViewAgenda />} />
     </Tabs>
   );
 };

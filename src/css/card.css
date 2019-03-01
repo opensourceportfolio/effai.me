@@ -1,0 +1,11 @@
+.summary-row {
+  padding: 10px;
+}
+
+.summary-row__year {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-flow: column;
+  text-align: center;
+}

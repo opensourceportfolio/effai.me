@@ -9,10 +9,6 @@ export const toFraction = (num: NumberLike): number => {
   return parseFloat(num) / 100;
 };
 
-export const toAddedFraction = (num: NumberLike): number => {
-  return 1 + toFraction(num);
-};
-
 export const percentage = (amount: NumberLike, rate: NumberLike): number => {
   return parseFloat(amount) * toFraction(rate);
 };
@@ -22,14 +18,14 @@ export const compound = (
   rate: NumberLike,
   yrs: NumberLike,
 ): number => {
-  return parseFloat(amount) * Math.pow(toAddedFraction(rate), parseFloat(yrs));
+  return parseFloat(amount) * Math.pow(1 + toFraction(rate), parseFloat(yrs));
 };
 
 export const monthsToNow = (date: Date | NumberLike): number => {
   return dateUtils.monthDiff(new Date(), new Date(date));
 };
 
-export const mortgageDebt = (state: FormInputs, yrs: NumberLike): number => {
+const mortgageDebt = (state: FormInputs, yrs: NumberLike): number => {
   const { price, downpayment, rate, purchaseDate, term } = state;
   const passedPeriods = monthsToNow(purchaseDate);
   const downpaymentAmount = percentage(price, downpayment);
@@ -42,20 +38,27 @@ export const mortgageDebt = (state: FormInputs, yrs: NumberLike): number => {
   return Math.max(0, remainder(loan, periods, rateFraction, period));
 };
 
-export const homeEquity = (state: FormInputs, yrs: NumberLike): number => {
+const homeEquity = (state: FormInputs, yrs: NumberLike): number => {
   const { price, houseGrowth } = state;
   const value = compound(parseFloat(price), parseFloat(houseGrowth), yrs);
   const remaining = mortgageDebt(state, yrs) || 0;
 
-  return value - remaining;
+  return state.isHomeOwner ? value - remaining : 0;
+};
+
+const monthlyHomeCosts = (state: FormInputs): number => {
+  return (
+    percentage(state.price, state.maintenance) / 12 +
+    percentage(state.price, state.propertyTax) / 12
+  );
 };
 
 export const investment = (state: FormInputs, yrs: number): number => {
-  const { ror, savings, inflation } = state;
-  const currentNetworth = parseInt(state.networth) || 0;
-  const rorFraction = toAddedFraction(ror);
+  const { ror, savings, inflation, networth } = state;
+  const currentNetworth = parseInt(networth) || 0;
+  const rorFraction = 1 + toFraction(ror);
   const annualSavings = parseFloat(savings) * 12;
-  const inflationFraction = toAddedFraction(inflation);
+  const inflationFraction = 1 + toFraction(inflation);
   const factor = rorFraction / inflationFraction;
   const futureSavings = annualSavings * Math.pow(inflationFraction, yrs);
   const futureNetworth = currentNetworth * Math.pow(rorFraction, yrs);
@@ -73,86 +76,98 @@ export const investment = (state: FormInputs, yrs: number): number => {
 };
 
 export const totalNetworth = (state: FormInputs, yrs: number): number => {
-  const houseValue = homeEquity(state, yrs);
-
-  return investment(state, yrs) + houseValue;
+  return investment(state, yrs) + homeEquity(state, yrs);
 };
 
-export const liquidNetworth = (state: FormInputs, yrs: number): number => {
-  const currentDebt = mortgageDebt(state, yrs);
-
-  return investment(state, yrs) - currentDebt;
+const liquidNetworth = (state: FormInputs, yrs: number): number => {
+  return investment(state, yrs) - mortgageDebt(state, yrs);
 };
 
-export const totalYield = (state: FormInputs, yrs: number): number => {
+const monthlyYield = (state: FormInputs, yrs: number): number => {
   const currentNetworth = totalNetworth(state, yrs);
 
   return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
 };
 
-export const liquidYield = (state: FormInputs, yrs: number): number => {
+const monthlyLiquidYield = (state: FormInputs, yrs: number): number => {
   const currentNetworth = liquidNetworth(state, yrs);
 
   return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
 };
 
+type EffaiStrategyResult = {
+  year: number,
+  networth: number,
+};
+
+export const effai = (formInputs: FormInputs) => {
+  const increment = 0.25;
+
+  function renter(state: FormInputs, year: number): EffaiStrategyResult {
+    const livingExpenses = parseFloat(state.livingExpenses);
+    const rent = parseFloat(state.rental);
+    const renterYield = monthlyYield(state, year);
+    const renterGoal = compound(livingExpenses + rent, state.inflation, year);
+
+    return renterYield > renterGoal + 100 || year === 45
+      ? { year, networth: totalNetworth(state, year) }
+      : renter(state, year + increment);
+  }
+
+  function homeOwner(state: FormInputs, year: number): EffaiStrategyResult {
+    const expenses = parseFloat(state.livingExpenses) + monthlyHomeCosts(state);
+    const homeownerYield = monthlyLiquidYield(state, year);
+    const homeownerGoal = compound(expenses, state.inflation, year);
+
+    return homeownerYield > homeownerGoal + 100 || year === 45
+      ? { year, networth: totalNetworth(state, year) }
+      : homeOwner(state, year + increment);
+  }
+
+  function earlyPayoff(state: FormInputs, year: number): EffaiStrategyResult {
+    const debt = mortgageDebt(state, year);
+    const investments = investment(state, year);
+
+    if (investments > debt) {
+      const remaining = renter(
+        {
+          ...state,
+          rental: compound(
+            monthlyHomeCosts(state),
+            state.inflation,
+            year,
+          ).toString(),
+        },
+        0,
+      ).year;
+      const effaiYear = year + remaining;
+
+      return { year: effaiYear, networth: totalNetworth(state, year) };
+    } else {
+      const expenses =
+        parseFloat(state.livingExpenses) +
+        percentage(state.price, state.maintenance) +
+        percentage(state.price, state.propertyTax);
+      const homeownerYield = monthlyLiquidYield(state, year);
+      const homeownerGoal = compound(expenses, state.inflation, year);
+
+      return homeownerYield > homeownerGoal + 100 || year === 45
+        ? { year, networth: totalNetworth(state, year) }
+        : earlyPayoff(state, year + increment);
+    }
+  }
+
+  return {
+    renter: renter(formInputs, 0),
+    homeOwner: homeOwner(formInputs, 0),
+    earlyPayoff: earlyPayoff(formInputs, 0),
+  };
+};
+
 export const years = memoize(
   (state: FormInputs): number => {
-    const find = (compareFn, from = 0, to = 45) => {
-      const delta = 0.1;
-      const mid = (from + to) / 2;
+    const { renter, homeOwner, earlyPayoff } = effai(state);
 
-      if (Math.abs(from - to) <= 2 * delta) {
-        return mid;
-      } else {
-        const cmp = compareFn(mid);
-
-        if (cmp < 0) {
-          return find(compareFn, mid + delta, to);
-        } else if (cmp > 0) {
-          return find(compareFn, from, mid);
-        } else {
-          return mid;
-        }
-      }
-    };
-
-    const compare = (v1: number, v2: number): number => {
-      const delta = 100;
-
-      if (v1 < v2) {
-        return -1;
-      } else if (v1 - v2 > delta) {
-        return 1;
-      } else {
-        return 0;
-      }
-    };
-
-    const renterYears = find(
-      (year: number): number => {
-        const expenses =
-          parseInt(state.livingExpenses) + parseInt(state.rental);
-        const renterYield = totalYield(state, year);
-        const renterGoal = compound(expenses, state.inflation, year);
-
-        return compare(renterYield, renterGoal);
-      },
-    );
-
-    const homeownerYears = state.isHomeOwner
-      ? find(year => {
-          const expenses =
-            parseInt(state.livingExpenses) +
-            percentage(state.price, state.maintenance) +
-            percentage(state.price, state.propertyTax);
-          const homeownerYield = liquidYield(state, year);
-          const homeownerGoal = compound(expenses, state.inflation, year);
-
-          return compare(homeownerYield, homeownerGoal);
-        })
-      : Number.MAX_SAFE_INTEGER;
-
-    return Math.min(renterYears, homeownerYears);
+    return Math.min(renter.year, homeOwner.year, earlyPayoff.year);
   },
 );

@@ -8,6 +8,7 @@ import { changeTab } from 'action/navigation';
 import Future from 'component/page/future';
 import Financial from 'component/page/financial';
 import House from 'component/page/house';
+import Summary from 'component/page/summary';
 import { type State } from 'model/state';
 
 type StateProps = {|
@@ -47,6 +48,7 @@ const SwipeableView = ({ tabIndex, onNavigation }: Props) => (
     <Financial />
     <House />
     <Future />
+    <Summary />
   </SwipeableViews>
 );
 

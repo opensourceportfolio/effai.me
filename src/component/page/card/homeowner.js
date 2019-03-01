@@ -58,11 +58,13 @@ const Homeowner = ({ onChange, inputs }: Props) => {
     toggled: inputs.isHomeOwner,
   };
 
+  const futurePrice = compound(inputs.price, inputs.houseGrowth, yrs);
   const price = {
     name: 'price',
     onChange: (_, value) => onChange({ price: value }),
     text: {
       placeholder: text.price.placeholder,
+      additional: text.houseGrowth.additional(futurePrice),
       error: i18n.error.between(meta.house.price.min, meta.house.price.max),
     },
     value: inputs.price,
@@ -110,13 +112,11 @@ const Homeowner = ({ onChange, inputs }: Props) => {
     fullWidth: true,
   };
 
-  const futurePrice = compound(inputs.price, inputs.houseGrowth, yrs);
   const houseGrowth = {
     name: 'houseGrowth',
     onChange: (_, value) => onChange({ houseGrowth: value }),
     text: {
       placeholder: text.houseGrowth.placeholder,
-      additional: text.houseGrowth.additional(futurePrice),
       error: i18n.error.between(
         meta.house.houseGrowth.min,
         meta.house.houseGrowth.max,

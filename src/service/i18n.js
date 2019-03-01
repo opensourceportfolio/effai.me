@@ -43,7 +43,7 @@ export const i18n = {
           )} years`;
         },
       },
-      legend: ['Years to Effai'],
+      legend: ['Years to Effai according to your savings'],
       formatter: formattedCurrency,
       xlabel: 'Savings rate',
       ylabel: 'Years to Effai',
@@ -114,7 +114,7 @@ export const i18n = {
       additional: (v: number) => `${formattedCurrency(v)} per year`,
     },
     rental: {
-      placeholder: 'Estimated rental cost',
+      placeholder: 'Equivalent/current rental cost',
       additional: (v: number) => `${formattedCurrency(v)} after inflation`,
     },
   },
@@ -139,7 +139,7 @@ export const i18n = {
       ylabel: 'Years to Effai',
     },
     livingExpenses: {
-      placeholder: 'Living expenses',
+      placeholder: 'Living expenses (not including rent or mortgage)',
       additional: (v: string) => `${v} after inflation`,
     },
     inflation: {

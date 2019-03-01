@@ -11,7 +11,7 @@ import {
   longCurrency,
   formattedShortFloat,
 } from 'service/formatter';
-import { years, compound, investment } from 'service/calculator';
+import { years, compound, totalNetworth } from 'service/calculator';
 import { xrange, yrange, chartFn } from 'service/chart';
 import { getInputs } from 'reducer/fi';
 import Chart from 'component/fi/chart';
@@ -86,7 +86,7 @@ const Financial = ({ inputs, onChange }: Props) => {
     rangeInfo: meta.ror,
   };
 
-  const fiNetworth = formattedCurrency(investment(inputs, yrs));
+  const fiNetworth = formattedCurrency(totalNetworth(inputs, yrs));
   const networthInput = {
     name: 'networth',
     onChange: (_, value) => onChange({ networth: value }),

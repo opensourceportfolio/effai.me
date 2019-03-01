@@ -62,4 +62,7 @@ module.exports = {
   resolve: {
     modules: [paths.src, 'node_modules'],
   },
+  devServer: {
+    overlay: true,
+  },
 };
