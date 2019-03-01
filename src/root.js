@@ -8,13 +8,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from 'app';
 import configureStore from 'redux-store';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { originalState } from 'service/user-setting';
 
 const store = configureStore(originalState);
-
-injectTapEventPlugin();
 
 ReactDOM.render(
   <Provider store={store}>
