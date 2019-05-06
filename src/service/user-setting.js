@@ -27,7 +27,7 @@ export const originalState: State = {
     rental: '1500',
     livingExpenses: '4000',
     tabIndex: '0',
-    purchaseDate: Date.now(),
+    purchaseDate: '2012-12-12',
     isHomeOwner: true,
   },
   navigation: {
@@ -41,7 +41,9 @@ function getFromUrl(): $Shape<State> {
     const params = new URLSearchParams(location.search.slice(1));
     const preconfiguredStr = params.get('values');
 
-    return isEmpty(preconfiguredStr) ? {} : JSON.parse(preconfiguredStr);
+    return preconfiguredStr == null || isEmpty(preconfiguredStr)
+      ? {}
+      : JSON.parse(preconfiguredStr);
   } catch (err) {
     return {};
   }

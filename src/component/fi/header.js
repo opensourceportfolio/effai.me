@@ -3,11 +3,11 @@
 import React from 'react';
 import { always, cond, lt, gte, either, T } from 'ramda';
 import { connect } from 'react-redux';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import MenuItem from 'material-ui/MenuItem';
-import IconMenu from 'material-ui/IconMenu';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import { years } from 'service/calculator';
 import { meta } from 'service/meta';
 import { i18n } from 'service/i18n';
@@ -47,24 +47,17 @@ const Header = ({ input, onToggleShare }: Props) => {
   const yrs = years(input);
 
   return (
-    <AppBar
-      showMenuIconButton={false}
-      title={fiAge(yrs)}
-      iconElementRight={
-        <IconMenu
-          iconButtonElement={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
-          targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-          anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-        >
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="title" color="inherit">
+          {fiAge(yrs)}
+        </Typography>
+        <Menu open={false}>
           <MenuItem primaryText="Share Results" onClick={onToggleShare} />
           <MenuItem primaryText="My Blog" onClick={navigateToBlog} />
-        </IconMenu>
-      }
-    />
+        </Menu>
+      </Toolbar>
+    </AppBar>
   );
 };
 

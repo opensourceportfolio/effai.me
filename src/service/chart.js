@@ -57,7 +57,7 @@ export function xrange(val: number, rangeInfo: RangeInfo): number[] {
   return xval;
 }
 
-type Fn = number => number;
+type Fn = (string | number) => number;
 
 export function yrange(
   xval: number[],
@@ -71,14 +71,10 @@ export function yrange(
 
 // TODO: refactor this
 export function chartFn<V>(
-  setter: (obj: FormInputs, value: V) => void,
-  state: FormInputs,
-) {
-  const stateCopy = { ...state };
+  initial: FormInputs,
+  next: (FormInputs, V) => FormInputs,
+): V => number {
+  const copy: FormInputs = { ...initial };
 
-  return (e: V) => {
-    setter(stateCopy, e);
-
-    return years(stateCopy);
-  };
+  return (v: V) => years(next(copy, v));
 }

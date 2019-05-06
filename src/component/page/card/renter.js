@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import Paper from 'material-ui/Paper';
-import { Row, Column } from 'component/grid';
+import Paper from '@material-ui/core/Paper';
 import Currency from 'component/form/currency';
 import { changeValue } from 'action/fi';
 import { getInputs } from 'reducer/fi';
@@ -48,12 +47,8 @@ const Renter = ({ inputs, onChange }: Props) => {
   };
 
   return (
-    <Paper className="page__input" zDepth={1}>
-      <Row>
-        <Column>
-          <Currency {...rental} />
-        </Column>
-      </Row>
+    <Paper className="page__input">
+      <Currency {...rental} />
     </Paper>
   );
 };

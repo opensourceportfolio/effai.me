@@ -14,7 +14,7 @@ export function formattedFloat(digits: number, number: ?NumberLike): string {
       .split('')
       .reverse()
       .reduce((acc, num, i) => {
-        return num + (i && !(i % 3) ? ',' : '') + acc;
+        return num + (i !== 0 && !(i % 3) ? ',' : '') + acc;
       }, '');
     const remainder = p[1].slice(0, digits);
 

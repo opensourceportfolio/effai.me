@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import Paper from 'material-ui/Paper';
+import Paper from '@material-ui/core/Paper';
 import { changeValue } from 'action/fi';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
@@ -15,7 +15,6 @@ import { years, compound, totalNetworth } from 'service/calculator';
 import { xrange, yrange, chartFn } from 'service/chart';
 import { getInputs } from 'reducer/fi';
 import Chart from 'component/fi/chart';
-import { Row, Column, Column2 } from 'component/grid';
 import Page from 'component/fi/page';
 import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
@@ -45,10 +44,10 @@ const Financial = ({ inputs, onChange }: Props) => {
   const text = i18n.financial;
   const yrs = years(inputs);
 
-  const fn = chartFn(
-    (formInputs, value) => (formInputs.savings = value),
-    inputs,
-  );
+  const fn = chartFn(inputs, (formInputs, value: string | number) => ({
+    ...formInputs,
+    savings: value.toString(),
+  }));
   const rangeInfo = meta.savings;
   const x = xrange(parseFloat(inputs.savings), rangeInfo);
   const y = yrange(x, rangeInfo, fn);
@@ -95,28 +94,19 @@ const Financial = ({ inputs, onChange }: Props) => {
       additional: text.networth.additional(fiNetworth),
       error: i18n.error.between(meta.networth.min, meta.networth.max),
     },
+    classes: ['page__span--2'],
     value: inputs.networth,
     rangeInfo: meta.networth,
   };
 
   return (
     <Page>
-      <Paper className="page__input" zDepth={1}>
-        <Row>
-          <Column2>
-            <Currency {...savings} />
-          </Column2>
-          <Column2>
-            <Percent {...ror} />
-          </Column2>
-        </Row>
-        <Row>
-          <Column>
-            <Currency {...networthInput} />
-          </Column>
-        </Row>
+      <Paper className="page__input page__split--2">
+        <Currency {...savings} />
+        <Percent {...ror} />
+        <Currency {...networthInput} />
       </Paper>
-      <Paper className="page__media" zDepth={1}>
+      <Paper className="page__media">
         <Chart {...chart} />
       </Paper>
     </Page>

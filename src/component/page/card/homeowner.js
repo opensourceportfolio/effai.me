@@ -2,11 +2,14 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import Toggle from 'material-ui/Toggle';
-import Divider from 'material-ui/Divider';
-import Paper from 'material-ui/Paper';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Switch from '@material-ui/core/Switch';
+import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
 import { changeValue } from 'action/fi';
 import { getInputs } from 'reducer/fi';
 import { i18n } from 'service/i18n';
@@ -19,10 +22,9 @@ import {
   monthsToNow,
 } from 'service/calculator';
 import { pmt } from 'service/amortization';
-import { Row, Column2, Column } from 'component/grid';
-import Currency from 'component/form/currency';
-import Percent from 'component/form/percent';
-import DateComponent from 'component/form/date';
+import Currency, { type Props as CurrencyProps } from 'component/form/currency';
+import Percent, { type Props as PercentProps } from 'component/form/percent';
+import DateComponent, { type Props as DateProps } from 'component/form/date';
 import { type FormInputs, type State } from 'model/state';
 import { type Dispatch } from 'model/redux';
 
@@ -53,13 +55,13 @@ const Homeowner = ({ onChange, inputs }: Props) => {
 
   const isHomeOwner = {
     name: 'isHomeOwner',
-    onToggle: (_, value) => onChange({ isHomeOwner: value }),
+    onChange: (_, value) => onChange({ isHomeOwner: value }),
     label: <span>I am a home owner</span>,
-    toggled: inputs.isHomeOwner,
+    checked: inputs.isHomeOwner,
   };
 
   const futurePrice = compound(inputs.price, inputs.houseGrowth, yrs);
-  const price = {
+  const price: CurrencyProps = {
     name: 'price',
     onChange: (_, value) => onChange({ price: value }),
     text: {
@@ -71,7 +73,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
     rangeInfo: meta.house.price,
   };
 
-  const downpayment = {
+  const downpayment: PercentProps = {
     name: 'downpayment',
     onChange: (_, value) => onChange({ downpayment: value }),
     text: {
@@ -92,7 +94,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
     -parseFloat(inputs.price) + downpaymentAmount,
     0,
   );
-  const rate = {
+  const rate: PercentProps = {
     name: 'rate',
     onChange: (_, value) => onChange({ rate: value }),
     text: {
@@ -105,14 +107,17 @@ const Homeowner = ({ onChange, inputs }: Props) => {
   };
 
   const term = {
+    inputProps: {
+      name: 'term',
+    },
     name: 'term',
-    onChange: (e, i, val) => onChange({ term: val }),
-    floatingLabelText: text.term.placeholder,
+    onChange: e => onChange({ term: e.target.value }),
+    label: text.term.placeholder,
     value: inputs.term,
     fullWidth: true,
   };
 
-  const houseGrowth = {
+  const houseGrowth: PercentProps = {
     name: 'houseGrowth',
     onChange: (_, value) => onChange({ houseGrowth: value }),
     text: {
@@ -126,21 +131,19 @@ const Homeowner = ({ onChange, inputs }: Props) => {
     rangeInfo: meta.house.houseGrowth,
   };
 
-  const purchaseDate = {
+  const now = new Date();
+  const purchaseDate: DateProps = {
     name: 'purchaseDate',
-    onChange: (_: string, value: Date) =>
-      onChange({ purchaseDate: value.getTime() }),
+    onChange: (_: string, value: string) => onChange({ purchaseDate: value }),
     text: {
       placeholder: text.purchaseDate.placeholder,
     },
-    value: new Date(inputs.purchaseDate),
-    openToYearSelection: true,
-    autoOk: true,
-    maxDate: new Date(),
+    value: inputs.purchaseDate,
+    max: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
   };
 
   const futureMaintenance = percentage(inputs.price, inputs.maintenance);
-  const maintenance = {
+  const maintenance: PercentProps = {
     name: 'maintenance',
     onChange: (_, value) => onChange({ maintenance: value }),
     text: {
@@ -156,7 +159,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
   };
 
   const futurePropertyTax = percentage(inputs.price, inputs.propertyTax);
-  const propertyTax = {
+  const propertyTax: PercentProps = {
     name: 'propertyTax',
     onChange: (_, value) => onChange({ propertyTax: value }),
     text: {
@@ -172,58 +175,33 @@ const Homeowner = ({ onChange, inputs }: Props) => {
   };
 
   return (
-    <Paper className="page__input" zDepth={1}>
-      <Row className="mui-input-row">
-        <Column>
-          <Toggle {...isHomeOwner} />
-        </Column>
-      </Row>
-      <Divider />
-      {inputs.isHomeOwner ? (
-        <div>
-          <Row>
-            <Column2>
-              <Currency {...price} />
-            </Column2>
-            <Column2>
-              <Percent {...houseGrowth} />
-            </Column2>
-          </Row>
-          <Row>
-            <Column2>
-              <SelectField {...term}>
-                {terms.map((year, i) => (
-                  <MenuItem
-                    key={i}
-                    value={year}
-                    primaryText={`${year} years`}
-                  />
-                ))}
-              </SelectField>
-            </Column2>
-            <Column2>
-              <Percent {...rate} />
-            </Column2>
-          </Row>
-          <Row>
-            <Column2>
-              {/* $FlowFixMe */}
-              <DateComponent {...purchaseDate} />
-            </Column2>
-            <Column2>
-              <Percent {...downpayment} />
-            </Column2>
-          </Row>
-          <Row>
-            <Column2>
-              <Percent {...maintenance} />
-            </Column2>
-            <Column2>
-              <Percent {...propertyTax} />
-            </Column2>
-          </Row>
-        </div>
-      ) : null}
+    <Paper className="page__input page__split--2">
+      <div className="page__span--2">
+        <FormControlLabel
+          control={<Switch {...isHomeOwner} />}
+          label="Are you a home owner"
+        />
+        {inputs.isHomeOwner && <Divider classes={{ root: 'page__span--2' }} />}
+      </div>
+      {inputs.isHomeOwner && (
+        <React.Fragment>
+          <Currency {...price} />
+          <Percent {...houseGrowth} />
+          <FormControl classes={{ root: 'is-full-width' }}>
+            <InputLabel htmlFor="term">Term of loan</InputLabel>
+            <Select {...term}>
+              {terms.map((year, i) => (
+                <MenuItem key={i} value={year}>{`${year} years`}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Percent {...rate} />
+          <DateComponent {...purchaseDate} />
+          <Percent {...downpayment} />
+          <Percent {...maintenance} />
+          <Percent {...propertyTax} />
+        </React.Fragment>
+      )}
     </Paper>
   );
 };

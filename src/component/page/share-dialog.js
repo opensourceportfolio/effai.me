@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import Dialog from 'material-ui/Dialog';
-import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog from '@material-ui/core/Dialog';
+import TextField from '@material-ui/core/TextField';
+import FlatButton from '@material-ui/core/Button';
 import { toggleShare } from 'action/navigation';
 import type { State, FormInputs } from 'model/state';
 import type { Dispatch } from 'model/redux';

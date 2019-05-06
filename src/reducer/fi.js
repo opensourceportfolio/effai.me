@@ -7,7 +7,7 @@ import type { Action } from 'model/redux';
 export function input(
   state: $ReadOnly<FormInputs> = originalState.input,
   action: Action,
-) {
+): $ReadOnly<FormInputs> {
   switch (action.type) {
     case CHANGE_VALUE: {
       const { payload } = action;

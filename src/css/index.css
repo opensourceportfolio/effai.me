@@ -48,7 +48,7 @@ html {
 
 .mui-text-field__mask-text {
   position: absolute;
-  top: 40px;
+  top: 24px;
   left: 0;
 }
 
@@ -72,4 +72,8 @@ html {
 
 .react-swipeable-view-container {
   height: 100%;
+}
+
+.is-full-width {
+  width: 100%;
 }

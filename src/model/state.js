@@ -18,7 +18,7 @@ export type FormInputs = {|
   rental: string,
   livingExpenses: string,
   tabIndex: string,
-  purchaseDate: number,
+  purchaseDate: string,
   isHomeOwner: boolean,
 |};
 

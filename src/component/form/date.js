@@ -1,33 +1,33 @@
 // @flow
 
 import React from 'react';
-import DatePicker from 'material-ui/DatePicker';
+import TextField from '@material-ui/core/TextField';
 
 export type DateText = {
   placeholder: string,
 };
 
-export type Props = {
+export type Props = {|
   name: string,
-  onChange: (string, Date) => void,
+  onChange: (string, string) => void,
   text: DateText,
-  value: Date,
-  openToYearSelection: boolean,
-  autoOk: boolean,
-  maxDate: Date,
-};
+  value: string,
+  max: string,
+|};
 
-const Date = (props: Props) => {
+const DateComponent = (props: Props) => {
   const { onChange, text, name } = props;
 
   return (
-    <DatePicker
+    <TextField
+      type="date"
       {...props}
-      floatingLabelText={text.placeholder}
       fullWidth={true}
-      onChange={(_, newDate: Date) => onChange(name, newDate)}
+      label={text.placeholder}
+      onChange={e => onChange(name, e.target.value)}
+      value={props.value}
     />
   );
 };
 
-export default Date;
+export default DateComponent;

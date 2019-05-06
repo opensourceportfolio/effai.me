@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import Paper from 'material-ui/Paper';
+import Paper from '@material-ui/core/Paper';
 import { changeValue } from 'action/fi';
 import { getInputs } from 'reducer/fi';
 import { i18n } from 'service/i18n';
@@ -14,7 +14,6 @@ import {
 } from 'service/formatter';
 import { years, compound } from 'service/calculator';
 import { xrange, yrange, chartFn } from 'service/chart';
-import { Row, Column, Column2 } from 'component/grid';
 import BarChart from 'component/chart/bar';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
@@ -45,10 +44,10 @@ const Future = ({ inputs, onChange }: Props) => {
   const text = i18n.future;
   const yrs = years(inputs);
 
-  const fn = chartFn(
-    (formInputs, val) => (formInputs.livingExpenses = val),
-    inputs,
-  );
+  const fn = chartFn(inputs, (formInputs, value: string | number) => ({
+    ...formInputs,
+    livingExpenses: value.toString(),
+  }));
   const rangeInfo = meta.livingExpenses;
   const x = xrange(parseFloat(inputs.livingExpenses), rangeInfo);
   const y = yrange(x, rangeInfo, fn);
@@ -64,6 +63,7 @@ const Future = ({ inputs, onChange }: Props) => {
     compound(inputs.livingExpenses, inputs.inflation, yrs),
   );
   const livingExpenses = {
+    classes: ['page__span--2'],
     name: 'livingExpenses',
     onChange: (_, value) => onChange({ livingExpenses: value }),
     text: {
@@ -102,22 +102,12 @@ const Future = ({ inputs, onChange }: Props) => {
 
   return (
     <Page>
-      <Paper className="page__input" zDepth={1}>
-        <Row>
-          <Column>
-            <Currency {...livingExpenses} />
-          </Column>
-        </Row>
-        <Row>
-          <Column2>
-            <Percent {...inflation} />
-          </Column2>
-          <Column2>
-            <Percent {...withdrawl} />
-          </Column2>
-        </Row>
+      <Paper className="page__input page__split--2">
+        <Currency {...livingExpenses} />
+        <Percent {...inflation} />
+        <Percent {...withdrawl} />
       </Paper>
-      <Paper className="page__media" zDepth={1}>
+      <Paper className="page__media">
         <Chart {...chart} />
       </Paper>
     </Page>

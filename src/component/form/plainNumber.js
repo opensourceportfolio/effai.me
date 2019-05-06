@@ -1,9 +1,9 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 import scrollIntoView from 'scroll-into-view';
-import TextField from 'material-ui/TextField';
-import { cyanA700 } from 'material-ui/styles/colors';
+import TextField from '@material-ui/core/TextField';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import { type RangeInfo } from 'model/rangeInfo';
 
 type PlainNumberTextSettings = {
@@ -13,18 +13,25 @@ type PlainNumberTextSettings = {
 };
 
 export type Props = {|
-  name: string,
-  text: PlainNumberTextSettings,
-  rangeInfo: RangeInfo,
-  value: string,
+  classes?: string[],
   formatter?: number => string,
   onChange: (string, string) => void,
+  name: string,
+  rangeInfo: RangeInfo,
+  text: PlainNumberTextSettings,
+  value: string,
 |};
 
 export default class PlainNumber extends React.Component<Props> {
-  plainNumber: ?HTMLDivElement;
+  plainNumber: {| current: ?HTMLDivElement |};
 
-  plainNumberInput: ?HTMLInputElement;
+  plainNumberInput: {| current: ?HTMLInputElement |};
+
+  constructor(props: Props) {
+    super(props);
+    this.plainNumber = React.createRef();
+    this.plainNumberInput = React.createRef();
+  }
 
   isValid(rangeInfo: RangeInfo, value: string) {
     const val = parseFloat(value);
@@ -45,10 +52,10 @@ export default class PlainNumber extends React.Component<Props> {
   }
 
   toggleMask(isFocus: boolean) {
-    if (this.plainNumber && this.plainNumberInput) {
-      isFocus && this.plainNumberInput.focus();
+    if (this.plainNumber.current && this.plainNumberInput.current) {
+      isFocus && this.plainNumberInput.current.focus();
 
-      this.plainNumber.classList.toggle(
+      this.plainNumber.current.classList.toggle(
         'mui-text-field__masked-text--focus',
         isFocus,
       );
@@ -56,7 +63,14 @@ export default class PlainNumber extends React.Component<Props> {
   }
 
   render() {
-    const { name, text, rangeInfo, value = '', formatter } = this.props;
+    const {
+      classes,
+      name,
+      text,
+      rangeInfo,
+      value = '',
+      formatter,
+    } = this.props;
     const { onChange } = this.props;
     const additional =
       typeof text.additional === 'function'
@@ -66,31 +80,26 @@ export default class PlainNumber extends React.Component<Props> {
 
     return (
       <div
-        className="mui-text-field__masked-text"
-        ref={e => (this.plainNumber = e)}
+        className={`mui-text-field__masked-text ${(classes || []).join(' ')}`}
+        ref={this.plainNumber}
       >
         <TextField
-          ref={e => (this.plainNumberInput = e)}
+          inputRef={this.plainNumberInput}
           className="mui-text-field__input-text"
           name={name}
           type="number"
           value={value}
           fullWidth={true}
-          floatingLabelText={text.placeholder}
-          errorText={isValid ? null : text.error}
+          label={text.placeholder}
           onChange={({ target }) => onChange(name, target.value)}
           onFocus={() => this.toggleMask(true)}
           onBlur={() => this.toggleMask(false)}
         />
-        {isValid ? (
-          <label
-            htmlFor={name}
-            className="mui-text-field__additional-text"
-            style={{ color: cyanA700 }}
-          >
+        {isValid && (
+          <FormHelperText id="component-error-text">
             {additional}
-          </label>
-        ) : null}
+          </FormHelperText>
+        )}
         <div
           className="mui-text-field__mask-text"
           onClick={() => this.toggleMask(true)}

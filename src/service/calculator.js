@@ -1,7 +1,6 @@
 // @flow
 import { memoize } from 'ramda';
 import { remainder } from 'service/amortization';
-import * as dateUtils from 'material-ui/DatePicker/dateUtils';
 import { type FormInputs } from 'model/state';
 import { type NumberLike } from 'model/number-like';
 
@@ -21,8 +20,8 @@ export const compound = (
   return parseFloat(amount) * Math.pow(1 + toFraction(rate), parseFloat(yrs));
 };
 
-export const monthsToNow = (date: Date | NumberLike): number => {
-  return dateUtils.monthDiff(new Date(), new Date(date));
+export const monthsToNow = (date: string): number => {
+  return Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24 * 30));
 };
 
 const mortgageDebt = (state: FormInputs, yrs: NumberLike): number => {
