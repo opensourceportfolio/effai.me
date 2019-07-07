@@ -16,7 +16,6 @@
   },
   "plugins": [
     "react",
-    "import",
     "prettier",
     "promise",
     "flowtype"

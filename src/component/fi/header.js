@@ -49,7 +49,7 @@ const Header = ({ input, onToggleShare }: Props) => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="title" color="inherit">
+        <Typography variant="h4" color="inherit">
           {fiAge(yrs)}
         </Typography>
         <Menu open={false}>

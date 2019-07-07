@@ -1,10 +1,10 @@
 // @flow
-import idb from 'idb';
+import { openDB } from 'idb';
 import { type State, type FormInputs } from 'model/state';
 import { isEmpty } from 'ramda';
 
 const OBJECT_STORE = 'user-settings';
-const dbPromise = idb.open('ficalculator-db', 1, upgradeDB => {
+const dbPromise = openDB('ficalculator-db', 1, upgradeDB => {
   upgradeDB.createObjectStore(OBJECT_STORE);
 });
 

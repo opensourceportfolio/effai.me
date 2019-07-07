@@ -1,9 +1,8 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
-        "useBuiltIns": true,
         "targets": {
           "browsers": [
             "last 2 versions",
@@ -13,15 +12,10 @@
         }
       }
     ],
-    "react",
-    "flow"
+    "@babel/preset-react",
+    "@babel/preset-flow"
   ],
   "plugins": [
-    [
-      "transform-object-rest-spread",
-      {
-        "useBuiltIns": true
-      }
-    ]
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }

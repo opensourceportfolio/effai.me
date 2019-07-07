@@ -1,5 +1,5 @@
 // @flow
-import { memoize } from 'ramda';
+import { memoizeWith } from 'ramda';
 import { remainder } from 'service/amortization';
 import { type FormInputs } from 'model/state';
 import { type NumberLike } from 'model/number-like';
@@ -163,7 +163,8 @@ export const effai = (formInputs: FormInputs) => {
   };
 };
 
-export const years = memoize(
+export const years = memoizeWith<FormInputs, number, string>(
+  (state: FormInputs): string => JSON.stringify(state),
   (state: FormInputs): number => {
     const { renter, homeOwner, earlyPayoff } = effai(state);
 
