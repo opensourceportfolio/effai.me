@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
-import { formattedCurrency } from 'service/formatter';
 import PlainNumber, {
   type Props as PlainNumberProps,
 } from 'component/form/plainNumber';
+import React from 'react';
+import { formattedCurrency } from 'service/formatter';
 
 export type Props = PlainNumberProps;
 

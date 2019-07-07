@@ -1,10 +1,18 @@
 // @flow
 
+import Chart, {
+  type ChartText,
+  type Formatter,
+  type Plot,
+} from 'component/chart';
 import React from 'react';
-import Base, { type Props as BaseProps } from 'component/chart/base';
 
-const Bar = ({ data, options }: BaseProps) => (
-  <Base type="bar" data={data} options={options} />
-);
+export type Props = {|
+  plot: Plot,
+  formatter: Formatter,
+  text: ChartText,
+|};
+
+const Bar = (props: Props) => <Chart type="bar" {...props} />;
 
 export default Bar;

@@ -1,10 +1,10 @@
 // @flow
 import debounce from 'debounce';
-import { key } from 'redux-store';
 import type { Dispatch, GetState, ThunkAction } from 'model/redux';
-import type { SimpleAction, PayloadAction } from 'utils/react-redux';
 import type { FormInputs, State } from 'model/state';
+import { key } from 'redux-store';
 import { get, set } from 'service/user-setting';
+import type { PayloadAction, SimpleAction } from 'utils/react-redux';
 
 const write = debounce((state: State) => {
   set(key, state.input);

@@ -1,10 +1,10 @@
 // @flow
 
-import React from 'react';
-import { percent } from 'service/formatter';
 import PlainNumber, {
   type Props as PlainNumberProps,
 } from 'component/form/plainNumber';
+import React from 'react';
+import { percent } from 'service/formatter';
 
 export type Props = PlainNumberProps;
 

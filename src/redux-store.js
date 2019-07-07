@@ -1,8 +1,8 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger';
-import thunk from 'redux-thunk';
 import { input } from 'reducer/fi';
 import { navigation } from 'reducer/navigation';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
 
 export const key = 'settings';
 

@@ -1,10 +1,9 @@
 // @flow
 
-import { originalState } from 'service/user-setting';
-import type { Navigation } from 'model/state';
-import type { Action } from 'model/redux';
-
 import * as actions from 'action/navigation';
+import type { Action } from 'model/redux';
+import type { Navigation } from 'model/state';
+import { originalState } from 'service/user-setting';
 
 export function navigation(
   state: $ReadOnly<Navigation> = originalState.navigation,

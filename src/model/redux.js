@@ -1,7 +1,7 @@
 // @flow
-import type { State } from 'model/state';
-import type { NavigationAction } from 'action/navigation';
 import type { FIAction } from 'action/fi';
+import type { NavigationAction } from 'action/navigation';
+import type { State } from 'model/state';
 
 export type GetState = () => State;
 export type Action = NavigationAction | FIAction;

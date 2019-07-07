@@ -1,15 +1,15 @@
 // @flow
+import Paper from '@material-ui/core/Paper';
+import { changeValue } from 'action/fi';
+import Currency from 'component/form/currency';
+import type { Dispatch } from 'model/redux';
+import { type FormInputs, type State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
-import Paper from '@material-ui/core/Paper';
-import Currency from 'component/form/currency';
-import { changeValue } from 'action/fi';
 import { getInputs } from 'reducer/fi';
+import { compound, monthsToNow, years } from 'service/calculator';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
-import { compound, years, monthsToNow } from 'service/calculator';
-import { type FormInputs, type State } from 'model/state';
-import type { Dispatch } from 'model/redux';
 
 type StateProps = {|
   inputs: FormInputs,

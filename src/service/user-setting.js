@@ -1,6 +1,6 @@
 // @flow
 import { openDB } from 'idb';
-import { type State, type FormInputs } from 'model/state';
+import { type FormInputs, type State } from 'model/state';
 import { isEmpty } from 'ramda';
 
 const OBJECT_STORE = 'user-settings';

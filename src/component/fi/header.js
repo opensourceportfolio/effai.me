@@ -1,19 +1,19 @@
 // @flow
 
-import React from 'react';
-import { always, cond, lt, gte, either, T } from 'ramda';
-import { connect } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { years } from 'service/calculator';
-import { meta } from 'service/meta';
-import { i18n } from 'service/i18n';
-import type { State, FormInputs } from 'model/state';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import { toggleShare } from 'action/navigation';
 import type { Dispatch } from 'model/redux';
+import type { FormInputs, State } from 'model/state';
+import { always, cond, either, gte, lt, T } from 'ramda';
+import React from 'react';
+import { connect } from 'react-redux';
+import { years } from 'service/calculator';
+import { i18n } from 'service/i18n';
+import { meta } from 'service/meta';
 
 type StateProps = {
   input: FormInputs,

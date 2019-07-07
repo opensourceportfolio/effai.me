@@ -1,8 +1,8 @@
 // @flow
-import { originalState } from 'service/user-setting';
 import { CHANGE_VALUE, LOADED_USER_DATA } from 'action/fi';
-import { type State, type FormInputs } from 'model/state';
 import type { Action } from 'model/redux';
+import { type FormInputs, type State } from 'model/state';
+import { originalState } from 'service/user-setting';
 
 export function input(
   state: $ReadOnly<FormInputs> = originalState.input,

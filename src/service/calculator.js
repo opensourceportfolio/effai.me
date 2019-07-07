@@ -1,8 +1,8 @@
 // @flow
+import { type NumberLike } from 'model/number-like';
+import { type FormInputs } from 'model/state';
 import { memoizeWith } from 'ramda';
 import { remainder } from 'service/amortization';
-import { type FormInputs } from 'model/state';
-import { type NumberLike } from 'model/number-like';
 
 export const toFraction = (num: NumberLike): number => {
   return parseFloat(num) / 100;

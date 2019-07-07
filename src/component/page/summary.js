@@ -1,12 +1,11 @@
 // @flow
+import Paper from '@material-ui/core/Paper';
+import Page from 'component/fi/page';
+import type { FormInputs, State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
-import Paper from '@material-ui/core/Paper';
-import { effai } from 'service/calculator';
-
-import type { State, FormInputs } from 'model/state';
 import { getInputs } from 'reducer/fi';
-import Page from 'component/fi/page';
+import { effai } from 'service/calculator';
 
 type StateProps = {|
   inputs: FormInputs,

@@ -1,15 +1,15 @@
 // @flow
 
-import React from 'react';
-import type { Dispatch } from 'model/redux';
-import { connect } from 'react-redux';
-import SwipeableViews from 'react-swipeable-views';
 import { changeTab } from 'action/navigation';
-import Future from 'component/page/future';
 import Financial from 'component/page/financial';
+import Future from 'component/page/future';
 import House from 'component/page/house';
 import Summary from 'component/page/summary';
+import type { Dispatch } from 'model/redux';
 import { type State } from 'model/state';
+import React from 'react';
+import { connect } from 'react-redux';
+import SwipeableViews from 'react-swipeable-views';
 
 type StateProps = {|
   tabIndex: number,

@@ -1,10 +1,10 @@
 // @flow
 
+import FormHelperText from '@material-ui/core/FormHelperText';
+import TextField from '@material-ui/core/TextField';
+import { type RangeInfo } from 'model/rangeInfo';
 import * as React from 'react';
 import scrollIntoView from 'scroll-into-view';
-import TextField from '@material-ui/core/TextField';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import { type RangeInfo } from 'model/rangeInfo';
 
 type PlainNumberTextSettings = {
   additional?: (mixed => string) | string,

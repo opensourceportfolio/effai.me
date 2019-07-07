@@ -1,17 +1,17 @@
 // @flow
 
-import React from 'react';
-import { connect } from 'react-redux';
-import type { Dispatch } from 'model/redux';
 import AppBar from '@material-ui/core/AppBar';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
-import { changeTab } from 'action/navigation';
-import Home from '@material-ui/icons/Home';
 import AttachMoney from '@material-ui/icons/AttachMoney';
-import WatchLater from '@material-ui/icons/WatchLater';
+import Home from '@material-ui/icons/Home';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
+import WatchLater from '@material-ui/icons/WatchLater';
+import { changeTab } from 'action/navigation';
+import type { Dispatch } from 'model/redux';
 import { type State } from 'model/state';
+import React from 'react';
+import { connect } from 'react-redux';
 
 type StateProps = {|
   tabIndex: number,

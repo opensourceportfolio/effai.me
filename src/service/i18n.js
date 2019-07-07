@@ -1,10 +1,11 @@
 // @flow
+
+import { type TooltipItem, type TooltipItems } from 'model/chart';
 import {
-  longNumber,
   formattedCurrency,
   formattedFloat,
+  longNumber,
 } from 'service/formatter';
-import { type TooltipItem, type TooltipItems } from 'model/chart';
 
 export const i18n = {
   fiStatus: {

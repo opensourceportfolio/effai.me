@@ -2,14 +2,15 @@ import 'css/icon.css';
 import 'css/index.css';
 import 'css/card.css';
 import 'babel-polyfill';
-import React from 'react';
-import ReactDOM from 'react-dom';
+
 import cyan from '@material-ui/core/colors/cyan';
 import red from '@material-ui/core/colors/red';
-import { Provider } from 'react-redux';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import App from 'app';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import configureStore from 'redux-store';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { originalState } from 'service/user-setting';
 
 const store = configureStore(originalState);

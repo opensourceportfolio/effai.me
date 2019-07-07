@@ -1,26 +1,25 @@
 // @flow
 
-import React from 'react';
-import { connect } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import { changeValue } from 'action/fi';
-import { i18n } from 'service/i18n';
-import { meta } from 'service/meta';
-import {
-  formattedCurrency,
-  longCurrency,
-  formattedShortFloat,
-} from 'service/formatter';
-import { years, compound, totalNetworth } from 'service/calculator';
-import { xrange, yrange, chartFn } from 'service/chart';
-import { getInputs } from 'reducer/fi';
-import Chart from 'component/fi/chart';
-import Page from 'component/fi/page';
 import BarChart from 'component/chart/bar';
+import Page from 'component/fi/page';
 import Currency from 'component/form/currency';
 import Percent from 'component/form/percent';
-import type { State, FormInputs } from 'model/state';
 import type { Dispatch } from 'model/redux';
+import type { FormInputs, State } from 'model/state';
+import React from 'react';
+import { connect } from 'react-redux';
+import { getInputs } from 'reducer/fi';
+import { compound, totalNetworth, years } from 'service/calculator';
+import { chartFn, xrange, yrange } from 'service/chart';
+import {
+  formattedCurrency,
+  formattedShortFloat,
+  longCurrency,
+} from 'service/formatter';
+import { i18n } from 'service/i18n';
+import { meta } from 'service/meta';
 
 type StateProps = {|
   inputs: FormInputs,
@@ -51,9 +50,8 @@ const Financial = ({ inputs, onChange }: Props) => {
   const rangeInfo = meta.savings;
   const x = xrange(parseFloat(inputs.savings), rangeInfo);
   const y = yrange(x, rangeInfo, fn);
-  const formatted2DecimalPoints = val => formattedShortFloat(2, val);
+  const formatted2DecimalPoints = (val: number) => formattedShortFloat(2, val);
   const chart = {
-    type: BarChart,
     plot: { x, y },
     text: text.chart,
     formatter: { x: longCurrency, y: formatted2DecimalPoints },
@@ -107,7 +105,7 @@ const Financial = ({ inputs, onChange }: Props) => {
         <Currency {...networthInput} />
       </Paper>
       <Paper className="page__media">
-        <Chart {...chart} />
+        <BarChart {...chart} />
       </Paper>
     </Page>
   );

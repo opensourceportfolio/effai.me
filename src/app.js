@@ -1,12 +1,12 @@
 // @flow
+import { loadUserData } from 'action/fi';
+import FiHeader from 'component/fi/header';
+import FiSwipeableViews from 'component/fi/swipeable-view';
+import FiTab from 'component/fi/tab';
+import ShareDialog from 'component/page/share-dialog';
+import type { FormInputs, State } from 'model/state';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import FiHeader from 'component/fi/header';
-import FiTab from 'component/fi/tab';
-import FiSwipeableViews from 'component/fi/swipeable-view';
-import ShareDialog from 'component/page/share-dialog';
-import type { State, FormInputs } from 'model/state';
-import { loadUserData } from 'action/fi';
 
 type StateProps = {
   isShareMenuShowing: boolean,

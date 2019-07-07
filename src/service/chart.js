@@ -1,11 +1,11 @@
 // @flow
 
-import { subtract } from 'ramda';
-import { start, generate } from 'service/range';
-import { years } from 'service/calculator';
+import { type Data } from 'model/chart';
 import { type RangeInfo } from 'model/rangeInfo';
 import { type FormInputs } from 'model/state';
-import { type Data } from 'model/chart';
+import { subtract } from 'ramda';
+import { years } from 'service/calculator';
+import { generate, start } from 'service/range';
 
 const chartColors = [
   'rgba(255, 99, 132, 0.8)',

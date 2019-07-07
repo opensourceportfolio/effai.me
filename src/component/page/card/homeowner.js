@@ -1,32 +1,32 @@
 // @flow
 
-import React from 'react';
-import { connect } from 'react-redux';
+import Divider from '@material-ui/core/Divider';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import Switch from '@material-ui/core/Switch';
-import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
+import Select from '@material-ui/core/Select';
+import Switch from '@material-ui/core/Switch';
 import { changeValue } from 'action/fi';
+import Currency, { type Props as CurrencyProps } from 'component/form/currency';
+import DateComponent, { type Props as DateProps } from 'component/form/date';
+import Percent, { type Props as PercentProps } from 'component/form/percent';
+import { type Dispatch } from 'model/redux';
+import { type FormInputs, type State } from 'model/state';
+import React from 'react';
+import { connect } from 'react-redux';
 import { getInputs } from 'reducer/fi';
-import { i18n } from 'service/i18n';
-import { meta } from 'service/meta';
+import { pmt } from 'service/amortization';
 import {
   compound,
+  monthsToNow,
   percentage,
   toFraction,
   years,
-  monthsToNow,
 } from 'service/calculator';
-import { pmt } from 'service/amortization';
-import Currency, { type Props as CurrencyProps } from 'component/form/currency';
-import Percent, { type Props as PercentProps } from 'component/form/percent';
-import DateComponent, { type Props as DateProps } from 'component/form/date';
-import { type FormInputs, type State } from 'model/state';
-import { type Dispatch } from 'model/redux';
+import { i18n } from 'service/i18n';
+import { meta } from 'service/meta';
 
 type StateProps = {|
   inputs: FormInputs,
