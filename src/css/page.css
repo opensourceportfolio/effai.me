@@ -34,24 +34,27 @@
 }
 
 @media (min-width: 600px) {
-  .page{
+  .page {
     flex-direction: row;
   }
 
-  .page__input, .page__media {
+  .page__input,
+  .page__media {
     width: 50%;
     margin-bottom: 0;
   }
 
-  .page__split--2 {
+  /* .page__split--2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px 10px;
-  }
+  } */
 
   .page__split--2 {
     display: block;
     grid-template-columns: none;
+    > .mui-field {
+      padding-bottom: 20px;
+    }
   }
 }
-

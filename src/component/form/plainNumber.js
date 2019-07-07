@@ -80,7 +80,9 @@ export default class PlainNumber extends React.Component<Props> {
 
     return (
       <div
-        className={`mui-text-field__masked-text ${(classes || []).join(' ')}`}
+        className={`mui-field mui-text-field__masked-text ${(
+          classes || []
+        ).join(' ')}`}
         ref={this.plainNumber}
       >
         <TextField
@@ -95,11 +97,7 @@ export default class PlainNumber extends React.Component<Props> {
           onFocus={() => this.toggleMask(true)}
           onBlur={() => this.toggleMask(false)}
         />
-        {isValid && (
-          <FormHelperText id="component-error-text">
-            {additional}
-          </FormHelperText>
-        )}
+        {isValid && additional && <FormHelperText>{additional}</FormHelperText>}
         <div
           className="mui-text-field__mask-text"
           onClick={() => this.toggleMask(true)}

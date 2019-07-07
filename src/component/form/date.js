@@ -19,14 +19,16 @@ const DateComponent = (props: Props) => {
   const { onChange, text, name } = props;
 
   return (
-    <TextField
-      type="date"
-      {...props}
-      fullWidth={true}
-      label={text.placeholder}
-      onChange={e => onChange(name, e.target.value)}
-      value={props.value}
-    />
+    <div className="mui-field">
+      <TextField
+        type="date"
+        {...props}
+        fullWidth={true}
+        label={text.placeholder}
+        onChange={e => onChange(name, e.target.value)}
+        value={props.value}
+      />
+    </div>
   );
 };
 

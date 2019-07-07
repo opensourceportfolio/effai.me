@@ -187,7 +187,7 @@ const Homeowner = ({ onChange, inputs }: Props) => {
         <React.Fragment>
           <Currency {...price} />
           <Percent {...houseGrowth} />
-          <FormControl classes={{ root: 'is-full-width' }}>
+          <FormControl classes={{ root: 'mui-field is-full-width' }}>
             <InputLabel htmlFor="term">Term of loan</InputLabel>
             <Select {...term}>
               {terms.map((year, i) => (
