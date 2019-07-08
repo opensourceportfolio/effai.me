@@ -1,4 +1,3 @@
-
 export function pmt(
   rate: number,
   nperiod: number,
@@ -41,7 +40,7 @@ export function ppmt(
   presentValue: number,
   futureValue: number,
   type: number,
-)number | null | undefined {
+): number | null | undefined {
   if (period < 1 || period >= nperiod + 1) {
     return null;
   }

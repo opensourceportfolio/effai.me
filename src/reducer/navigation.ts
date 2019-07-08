@@ -1,5 +1,3 @@
-
-
 import * as actions from 'action/navigation';
 import { Action } from 'model/redux';
 import { Navigation } from 'model/state';

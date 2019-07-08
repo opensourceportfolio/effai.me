@@ -1,10 +1,10 @@
-import CleanWebpackPlugin from 'clean-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import path from 'path';
-import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin';
-import webpack from 'webpack';
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const webpack = require('webpack');
 
 const paths = {
   src: path.resolve(__dirname, '../src'),
@@ -12,7 +12,7 @@ const paths = {
 
 module.exports = {
   entry: {
-    main: './src/root.js',
+    main: './src/root.tsx',
   },
   output: {
     filename: '[name].[chunkhash].js',
@@ -25,6 +25,10 @@ module.exports = {
         test: /(\.js)$/,
         include: paths.src,
         use: ['babel-loader'],
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
       },
       {
         test: /\.css$/,
@@ -62,6 +66,7 @@ module.exports = {
   ],
   resolve: {
     modules: [paths.src, 'node_modules'],
+    extensions: ['.ts', '.tsx', '.js'],
   },
   devServer: {
     overlay: true,

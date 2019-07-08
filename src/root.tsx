@@ -6,12 +6,13 @@ import 'babel-polyfill';
 import cyan from '@material-ui/core/colors/cyan';
 import red from '@material-ui/core/colors/red';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import App from 'app';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-store';
-import { originalState } from 'service/user-setting';
+
+import App from './app';
+import { originalState } from './service/user-setting';
 
 const store = configureStore(originalState);
 

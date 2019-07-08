@@ -1,4 +1,3 @@
-
 import { NumberLike } from 'model/number-like';
 import { FormInputs } from 'model/state';
 import { memoizeWith } from 'ramda';
@@ -95,9 +94,9 @@ const monthlyLiquidYield = (state: FormInputs, yrs: number): number => {
 };
 
 interface EffaiStrategyResult {
-  year: number,
-  networth: number,
-};
+  year: number;
+  networth: number;
+}
 
 export const effai = (formInputs: FormInputs) => {
   const increment = 0.25;

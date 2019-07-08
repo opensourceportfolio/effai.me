@@ -1,6 +1,4 @@
-
-
-import { TooltipItem TooltipItems } from 'model/chart';
+import { TooltipItem, TooltipItems } from 'model/chart';
 import {
   formattedCurrency,
   formattedFloat,
@@ -12,7 +10,7 @@ export const i18n = {
     done: 'Done',
     never: 'Never',
     formatter(val: number) {
-      return `${parseFloat(val).toFixed(2)} years to Effai`;
+      return `${parseFloat(val.toString()).toFixed(2)} years to Effai`;
     },
   },
 

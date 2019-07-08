@@ -1,13 +1,12 @@
-
 import { CHANGE_VALUE, LOADED_USER_DATA } from 'action/fi';
 import { Action } from 'model/redux';
-import { FormInputs State } from 'model/state';
+import { FormInputs, State } from 'model/state';
 import { originalState } from 'service/user-setting';
 
 export function input(
-  state: $ReadOnly<FormInputs> = originalState.input,
+  state: FormInputs = originalState.input,
   action: Action,
-): $ReadOnly<FormInputs> {
+): FormInputs {
   switch (action.type) {
     case CHANGE_VALUE: {
       const { payload } = action;

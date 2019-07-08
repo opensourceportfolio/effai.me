@@ -1,5 +1,3 @@
-
-
 import Paper from '@material-ui/core/Paper';
 import { changeValue } from 'action/fi';
 import BarChart from 'component/chart/bar';
@@ -23,11 +21,11 @@ import { meta } from 'service/meta';
 
 interface StateProps {
   inputs: FormInputs;
-};
+}
 
 interface DispatchProps {
   onChange: (payload: Partial<FormInputs>) => void;
-};
+}
 
 type Props = StateProps & DispatchProps;
 

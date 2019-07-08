@@ -1,7 +1,5 @@
-
-
 export interface RangeInfo {
-  min: number,
-  max: number,
-  step: number,
-};
+  min: number;
+  max: number;
+  step: number;
+}

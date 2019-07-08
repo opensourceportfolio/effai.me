@@ -1,10 +1,4 @@
-
-
-import Chart, {
-   ChartText,
-   Formatter,
-   Plot,
-} from 'component/chart';
+import Chart, { ChartText, Formatter, Plot } from 'component/chart';
 import React from 'react';
 
 export interface Props {

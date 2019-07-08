@@ -1,6 +1,5 @@
-
 import { openDB } from 'idb';
-import { FormInputs State } from 'model/state';
+import { FormInputs, State } from 'model/state';
 import { isEmpty } from 'ramda';
 
 const OBJECT_STORE = 'user-settings';

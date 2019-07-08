@@ -1,5 +1,3 @@
-
-
 import { Data } from 'model/chart';
 import { RangeInfo } from 'model/rangeInfo';
 import { FormInputs } from 'model/state';
@@ -57,7 +55,7 @@ export function xrange(val: number, rangeInfo: RangeInfo): number[] {
   return xval;
 }
 
-type Fn = (string | number) => number;
+type Fn = (v: string | number) => number;
 
 export function yrange(
   xval: number[],
@@ -72,8 +70,8 @@ export function yrange(
 // TODO: refactor this
 export function chartFn<V>(
   initial: FormInputs,
-  next: (FormInputs, V) => FormInputs,
-): V => number {
+  next: (inputs: FormInputs, val: V) => FormInputs,
+): (v: V) => number {
   const copy: FormInputs = { ...initial };
 
   return (v: V) => years(next(copy, v));

@@ -1,5 +1,3 @@
-
-
 import AppBar from '@material-ui/core/AppBar';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,12 +14,12 @@ import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 
 interface StateProps {
-  input: FormInputs,
-};
+  input: FormInputs;
+}
 
 interface DispatchProps {
-  onToggleShare: () => void,
-};
+  onToggleShare: () => void;
+}
 
 type Props = StateProps & DispatchProps;
 
@@ -33,7 +31,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   onToggleShare: () => dispatch(toggleShare()),
 });
 
-const fiAge: number => string = cond([
+const fiAge: (v: number) => string = cond([
   [either(lt(meta.range), isNaN), always(i18n.fiStatus.never)],
   [gte(0), always(i18n.fiStatus.done)],
   [T, i18n.fiStatus.formatter],

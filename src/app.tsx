@@ -1,4 +1,3 @@
-
 import { loadUserData } from 'action/fi';
 import FiHeader from 'component/fi/header';
 import FiSwipeableViews from 'component/fi/swipeable-view';
@@ -11,11 +10,11 @@ import { connect } from 'react-redux';
 interface StateProps {
   isShareMenuShowing: boolean;
   input: FormInputs;
-};
+}
 
 interface DispatchProps {
   onLoad: () => Promise<void>;
-};
+}
 
 type Props = StateProps & DispatchProps;
 
@@ -29,11 +28,11 @@ const mapDispatchToProps = {
 };
 
 class App extends React.Component<Props> {
-  componentDidMount() {
+  public componentDidMount() {
     this.props.onLoad();
   }
 
-  render() {
+  public render() {
     return (
       <div>
         <FiHeader />

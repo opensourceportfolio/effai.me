@@ -1,5 +1,3 @@
-
-
 import { changeTab } from 'action/navigation';
 import Financial from 'component/page/financial';
 import Future from 'component/page/future';
@@ -12,12 +10,12 @@ import { connect } from 'react-redux';
 import SwipeableViews from 'react-swipeable-views';
 
 interface StateProps {
-  tabIndex: number,
-};
+  tabIndex: number;
+}
 
 interface DispatchProps {
-  onNavigation: number => void,
-};
+  onNavigation: (v: number) => void;
+}
 
 type Props = StateProps & DispatchProps;
 

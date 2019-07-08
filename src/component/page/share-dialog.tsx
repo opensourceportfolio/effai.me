@@ -1,4 +1,3 @@
-
 import FlatButton from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import TextField from '@material-ui/core/TextField';
@@ -9,14 +8,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 interface StateProps {
-  open: boolean,
-  input: FormInputs,
-};
+  open: boolean;
+  input: FormInputs;
+}
 
 interface DispatchProps {
-  onToggleShare: () => void,
-  onCopy: (textfieldHTMLInputElement | null | undefined) => void,
-};
+  onToggleShare: () => void;
+  onCopy: (textfield: HTMLInputElement | null | undefined) => void;
+}
 
 type Props = StateProps & DispatchProps;
 
@@ -27,7 +26,7 @@ const mapState = (state: State) => ({
 
 const mapDispatch = (dispatch: Dispatch) => ({
   onToggleShare: () => dispatch(toggleShare()),
-  onCopy: (textfieldHTMLInputElement | null | undefined) => {
+  onCopy: (textfield: HTMLInputElement | null | undefined) => {
     if (textfield) {
       textfield.select();
       document.execCommand('copy');
@@ -40,9 +39,9 @@ const getLinkRepresentation = (formInputs: FormInputs) => {
 };
 
 class ShareDialog extends React.Component<Props> {
-  textfieldHTMLInputElement | null | undefined;
+  private textfield: HTMLInputElement | null | undefined;
 
-  render() {
+  public render() {
     const { open, input, onCopy, onToggleShare } = this.props;
 
     const actions = [

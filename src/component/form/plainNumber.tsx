@@ -1,5 +1,3 @@
-
-
 import FormHelperText from '@material-ui/core/FormHelperText';
 import TextField from '@material-ui/core/TextField';
 import { RangeInfo } from 'model/rangeInfo';
@@ -7,39 +5,39 @@ import * as React from 'react';
 import scrollIntoView from 'scroll-into-view';
 
 interface PlainNumberTextSettings {
-  additional?: (mixed => string) | string,
-  placeholder?: string,
-  error?: string,
-};
+  additional: (s: string) => string | undefined;
+  placeholder: string | undefined;
+  error: string | undefined;
+}
 
 export interface Props {
-  classes?: string[],
-  formatter?: number => string,
-  onChange: (string, string) => void,
-  name: string,
-  rangeInfo: RangeInfo,
-  text: PlainNumberTextSettings,
-  value: string,
-};
+  classes?: string[];
+  formatter?: (v: number) => string;
+  onChange: (name: string, value: string) => void;
+  name: string;
+  rangeInfo: RangeInfo;
+  text: PlainNumberTextSettings;
+  value: string;
+}
 
 export default class PlainNumber extends React.Component<Props> {
-  plainNumber: { currentHTMLDivElement | null | undefined };
+  private plainNumber: { current: HTMLDivElement | null | undefined };
 
-  plainNumberInput: { currentHTMLInputElement | null | undefined };
+  private plainNumberInput: { current: HTMLInputElement | null | undefined };
 
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props);
     this.plainNumber = React.createRef();
     this.plainNumberInput = React.createRef();
   }
 
-  isValid(rangeInfo: RangeInfo, value: string) {
+  private isValid(rangeInfo: RangeInfo, value: string) {
     const val = parseFloat(value);
 
     return val != null && val <= rangeInfo.max && val >= rangeInfo.min;
   }
 
-  scrollIntoViewOnFocus() {
+  private scrollIntoViewOnFocus() {
     const plainNumber = this.plainNumber;
 
     scrollIntoView(plainNumber, {
@@ -51,7 +49,7 @@ export default class PlainNumber extends React.Component<Props> {
     });
   }
 
-  toggleMask(isFocus: boolean) {
+  private toggleMask(isFocus: boolean) {
     if (this.plainNumber.current && this.plainNumberInput.current) {
       isFocus && this.plainNumberInput.current.focus();
 
@@ -62,7 +60,7 @@ export default class PlainNumber extends React.Component<Props> {
     }
   }
 
-  render() {
+  public render() {
     const {
       classes,
       name,

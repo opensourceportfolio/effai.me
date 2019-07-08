@@ -1,5 +1,3 @@
-
-
 import Divider from '@material-ui/core/Divider';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -13,7 +11,7 @@ import Currency, { Props as CurrencyProps } from 'component/form/currency';
 import DateComponent, { Props as DateProps } from 'component/form/date';
 import Percent, { Props as PercentProps } from 'component/form/percent';
 import { Dispatch } from 'model/redux';
-import { FormInputs,State } from 'model/state';
+import { FormInputs, State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getInputs } from 'reducer/fi';
@@ -30,11 +28,11 @@ import { meta } from 'service/meta';
 
 interface StateProps {
   inputs: FormInputs;
-};
+}
 
 interface DispatchProps {
   onChange: (payload: Partial<FormInputs>) => void;
-};
+}
 
 type Props = StateProps & DispatchProps;
 

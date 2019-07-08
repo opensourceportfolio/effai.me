@@ -1,7 +1,5 @@
-
-
 import PlainNumber, {
-  type Props as PlainNumberProps,
+  Props as PlainNumberProps,
 } from 'component/form/plainNumber';
 import React from 'react';
 import { percent } from 'service/formatter';

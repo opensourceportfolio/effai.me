@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
+const common = require('./webpack.common');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 
 module.exports = merge(common, {

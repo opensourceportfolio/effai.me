@@ -1,5 +1,3 @@
-
-
 import Chartjs from 'chart.js';
 import debounce from 'debounce';
 import { TooltipItem, TooltipItems } from 'model/chart';
@@ -13,7 +11,7 @@ export interface Tooltips {
 }
 
 export interface Plot {
-  x: number[]; 
+  x: number[];
   y: number[][];
 }
 
@@ -29,14 +27,14 @@ export interface ChartText {
 }
 
 export interface Props {
-  type: 'bar' | 'line',
-  plot: Plot,
-  formatter: Formatter,
-  text: ChartText,
-};
+  type: 'bar' | 'line';
+  plot: Plot;
+  formatter: Formatter;
+  text: ChartText;
+}
 
 export default class Chart extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props);
     this.update = debounce(() => {
       const { plot, text } = this.props;
@@ -50,15 +48,15 @@ export default class Chart extends React.Component<Props> {
     }, 350);
   }
 
-  update: () => void;
+  private update: () => void;
 
-  chart: Chartjs;
+  private chart: Chartjs;
 
-  chartEl: HTMLCanvasElement | null | undefined;
+  private chartEl: HTMLCanvasElement | null | undefined;
 
-  componentDidMount() {
+  public componentDidMount() {
     const $chart = this.chartEl;
-    const { plot, text } = this.props;
+    const { type, plot, text } = this.props;
     const overridden = this.override(this.props);
     const data = this.deriveData(plot, text);
 
@@ -69,18 +67,18 @@ export default class Chart extends React.Component<Props> {
     });
   }
 
-  componentDidUpdate() {
+  public componentDidUpdate() {
     this.update();
   }
 
-  deriveData(plot: Plot, text: ChartText) {
+  private deriveData(plot: Plot, text: ChartText) {
     const xval = plot.x.map(item => item.toString());
     const yval = plot.y;
 
     return toModel(xval, yval, text.legend);
   }
 
-  override({ text, formatter }: Props) {
+  private override({ text, formatter }: Props) {
     return {
       maintainAspectRatio: false,
       title: {
@@ -110,7 +108,7 @@ export default class Chart extends React.Component<Props> {
     };
   }
 
-  render() {
+  public render() {
     return <canvas style={{ height: '100%' }} ref={e => (this.chartEl = e)} />;
   }
 }

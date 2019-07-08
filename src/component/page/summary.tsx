@@ -1,4 +1,3 @@
-
 import Paper from '@material-ui/core/Paper';
 import Page from 'component/fi/page';
 import { FormInputs, State } from 'model/state';
@@ -9,7 +8,7 @@ import { effai } from 'service/calculator';
 
 interface StateProps {
   inputs: FormInputs;
-};
+}
 
 const mapStateToProps = (state: State): StateProps => ({
   inputs: getInputs(state),

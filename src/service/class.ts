@@ -1,4 +1,3 @@
-
 import { compose, concat, defaultTo, join, split, uniq } from 'ramda';
 
 const toList = compose(

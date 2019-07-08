@@ -1,9 +1,8 @@
-
 import Paper from '@material-ui/core/Paper';
 import { changeValue } from 'action/fi';
 import Currency from 'component/form/currency';
 import { Dispatch } from 'model/redux';
-import { FormInputs State } from 'model/state';
+import { FormInputs, State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getInputs } from 'reducer/fi';
@@ -12,12 +11,12 @@ import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 
 interface StateProps {
-  inputs: FormInputs,
-};
+  inputs: FormInputs;
+}
 
 interface DispatchProps {
-  onChange: (payload: Partial<FormInputs>) => void,
-};
+  onChange: (payload: Partial<FormInputs>) => void;
+}
 
 type Props = StateProps & DispatchProps;
 

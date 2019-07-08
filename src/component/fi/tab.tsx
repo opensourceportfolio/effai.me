@@ -1,5 +1,3 @@
-
-
 import AppBar from '@material-ui/core/AppBar';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -14,12 +12,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 interface StateProps {
-  tabIndex: number,
-};
+  tabIndex: number;
+}
 
 interface DispatchProps {
-  onNavigation: (mixed, number) => void,
-};
+  onNavigation: (mixed, number) => void;
+}
 
 type Props = StateProps & DispatchProps;
 
