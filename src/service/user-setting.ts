@@ -3,8 +3,10 @@ import { FormInputs, State } from 'model/state';
 import { isEmpty } from 'ramda';
 
 const OBJECT_STORE = 'user-settings';
-const dbPromise = openDB('ficalculator-db', 1, upgradeDB => {
-  upgradeDB.createObjectStore(OBJECT_STORE);
+const dbPromise = openDB('ficalculator-db', 1, {
+  upgrade(db) {
+    db.createObjectStore(OBJECT_STORE);
+  },
 });
 
 export const originalState: State = {

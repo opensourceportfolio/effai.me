@@ -5,7 +5,7 @@ export function generate(
   from: number = 0,
   step: number = 1,
 ): number[] {
-  return [...Array(count)].map((e, i) => {
+  return [...Array(count)].map((_, i) => {
     return parseFloat((from + i * step).toFixed(1));
   });
 }
@@ -18,7 +18,7 @@ export function start(
   const { min, max } = rangeInfo;
   const current = Math.min(curr, max);
   const step = rangeInfo.step;
-  const steps = parseInt(count / 2);
+  const steps = parseInt((count / 2).toString());
   const stepsFromMin = (current - min) / step;
   const stepsFromMax = (max - current) / step;
 

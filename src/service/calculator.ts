@@ -4,11 +4,11 @@ import { memoizeWith } from 'ramda';
 import { remainder } from 'service/amortization';
 
 export const toFraction = (num: NumberLike): number => {
-  return parseFloat(num) / 100;
+  return parseFloat(num.toString()) / 100;
 };
 
 export const percentage = (amount: NumberLike, rate: NumberLike): number => {
-  return parseFloat(amount) * toFraction(rate);
+  return parseFloat(amount.toString()) * toFraction(rate);
 };
 
 export const compound = (
@@ -16,7 +16,7 @@ export const compound = (
   rate: NumberLike,
   yrs: NumberLike,
 ): number => {
-  return parseFloat(amount) * Math.pow(1 + toFraction(rate), parseFloat(yrs));
+  return parseFloat(amount.toString()) * Math.pow(1 + toFraction(rate), parseFloat(yrs.toString()));
 };
 
 export const monthsToNow = (date: string): number => {
@@ -30,7 +30,7 @@ const mortgageDebt = (state: FormInputs, yrs: NumberLike): number => {
   const loan = parseFloat(price) - downpaymentAmount;
   const rateFraction = toFraction(parseFloat(rate) / 12);
   const periods = parseFloat(term) * 12;
-  const year = parseInt(yrs);
+  const year = parseInt(yrs.toString());
   const period = year * 12 + passedPeriods;
 
   return Math.max(0, remainder(loan, periods, rateFraction, period));

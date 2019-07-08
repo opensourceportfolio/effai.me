@@ -4,9 +4,9 @@ import { Navigation } from 'model/state';
 import { originalState } from 'service/user-setting';
 
 export function navigation(
-  state: $ReadOnly<Navigation> = originalState.navigation,
+  state: Navigation = originalState.navigation,
   action: Action,
-): $ReadOnly<Navigation> {
+): Navigation {
   switch (action.type) {
     case actions.CHANGE_TAB: {
       const { payload } = action;

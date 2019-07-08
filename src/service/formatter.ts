@@ -1,14 +1,14 @@
 import { NumberLike } from 'model/number-like';
 
-export function isProperNumber(num: NumberLike | null | undefined): boolean {
-  return num != null && Number(parseFloat(num)) == parseFloat(num);
+export function isProperNumber(num?: NumberLike): boolean {
+  return num != null && Number(parseFloat(num.toString())) == parseFloat(num.toString());
 }
 
 export function formattedFloat(
   digits: number,
-  number: NumberLike | null | undefined,
+  number?: NumberLike,
 ): string {
-  const value = parseFloat(number);
+  const value = parseFloat(number.toString());
 
   if (isProperNumber(value)) {
     const p = value.toFixed(2).split('.');
@@ -41,10 +41,10 @@ export function formattedNumber(number: number): string {
 }
 
 export function longNumber(num: number | string): string {
-  const value = parseFloat(num);
+  const value = parseFloat(num.toString());
 
   if (value > 0) {
-    const e = parseInt(Math.log(value) / Math.log(1000)),
+    const e = parseInt((Math.log(value) / Math.log(1000)).toString()),
       extension = ['', 'k', 'M', 'B', 'T'],
       fix = e === 0 ? 0 : 1;
 
@@ -71,7 +71,7 @@ export function longCurrency(number: number): string {
 }
 
 export function percent(number: number): string {
-  const value = parseFloat(number);
+  const value = parseFloat(number.toString());
 
   if (isProperNumber(value)) {
     return `${value}%`;

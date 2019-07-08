@@ -7,7 +7,7 @@ export interface DateText {
 
 export interface Props {
   name: string;
-  onChange: (string, string) => void;
+  onChange: (name: string, value: string) => void;
   text: DateText;
   value: string;
   max: string;

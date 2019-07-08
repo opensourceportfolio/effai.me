@@ -40,17 +40,19 @@ export default class Chart extends React.Component<Props> {
       const { plot, text } = this.props;
       const data = this.deriveData(plot, text);
 
-      this.chart.data.datasets.forEach((dataset, i) => {
-        dataset.data = data.datasets[i].data;
-      });
-      this.chart.data.labels = data.labels;
-      this.chart.update();
+      if (this.chart) {
+        this.chart.data.datasets.forEach((dataset, i) => {
+          dataset.data = data.datasets[i].data;
+        });
+        this.chart.data.labels = data.labels;
+        this.chart.update();
+      }
     }, 350);
   }
 
   private update: () => void;
 
-  private chart: Chartjs;
+  private chart: Chartjs = null;
 
   private chartEl: HTMLCanvasElement | null | undefined;
 
@@ -60,11 +62,13 @@ export default class Chart extends React.Component<Props> {
     const overridden = this.override(this.props);
     const data = this.deriveData(plot, text);
 
-    this.chart = new Chartjs($chart, {
-      type,
-      data,
-      options: overridden,
-    });
+    if ($chart) {
+      this.chart = new Chartjs($chart, {
+        type,
+        data,
+        options: overridden,
+      });
+    }
   }
 
   public componentDidUpdate() {

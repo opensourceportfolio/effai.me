@@ -22,11 +22,11 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 const mapStateToProps = (state: State): StateProps => ({
-  tabIndex: parseInt(state.navigation.tabIndex),
+  tabIndex: parseInt(state.navigation.tabIndex.toString()),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  onNavigation: (e, tabIndex) => dispatch(changeTab(tabIndex)),
+  onNavigation: (_, tabIndex) => dispatch(changeTab(tabIndex)),
 });
 
 const tabLabel = (text: string) => (

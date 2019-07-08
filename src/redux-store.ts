@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import * as Redux from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
@@ -8,8 +8,8 @@ import { navigation } from './reducer/navigation';
 export const key = 'settings';
 
 export default function configureStore(originalState) {
-  const reducers = combineReducers({ input, navigation });
-  const middleware = [];
+  const reducers = Redux.combineReducers({ input, navigation });
+  const middleware: Redux.Middleware[] = [];
 
   middleware.push(thunk);
 
@@ -17,10 +17,10 @@ export default function configureStore(originalState) {
     middleware.push(createLogger());
   }
 
-  const store = createStore(
+  const store = Redux.createStore(
     reducers,
     originalState,
-    applyMiddleware(...middleware),
+    Redux.applyMiddleware(...middleware),
   );
 
   return store;

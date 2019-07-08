@@ -42,7 +42,7 @@ export function toModel(
 }
 
 export function xrange(val: number, rangeInfo: RangeInfo): number[] {
-  const value = parseFloat(val);
+  const value = parseFloat(val.toString());
   const { min, max } = rangeInfo;
   const step = Math.max(value * 0.1, rangeInfo.step);
   const minStep = Math.max(
