@@ -1,21 +1,4 @@
 {
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "browsers": [
-            "last 2 versions",
-            "safari > 8",
-            "not ie < 11"
-          ]
-        }
-      }
-    ],
-    "@babel/preset-react",
-    "@babel/preset-flow"
-  ],
-  "plugins": [
-    "@babel/plugin-proposal-object-rest-spread"
-  ]
+  "presets": ["@babel/env", "@babel/typescript", "@babel/react"],
+  "plugins": ["@babel/proposal-object-rest-spread"]
 }

@@ -3,24 +3,24 @@
     "browser": true,
     "node": true
   },
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 10,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "project": "./tsconfig.json"
   },
-  "plugins": ["react", "prettier", "promise", "simple-import-sort", "flowtype"],
+  "plugins": ["react", "prettier", "promise", "simple-import-sort", "@typescript-eslint"],
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:promise/recommended",
-    "plugin:flowtype/recommended",
     "prettier",
-    "prettier/babel",
-    "prettier/flowtype",
-    "prettier/react"
+    "prettier/react",
+    "prettier/@typescript-eslint"
   ],
   "rules": {
     "no-shadow": "error",
@@ -64,7 +64,9 @@
       }
     ],
     //Sorting
-    "simple-import-sort/sort": "error"
+    "simple-import-sort/sort": "error",
+    //Typescript
+    "@typescript-eslint/explicit-function-return-type": "off"
   },
   "settings": {
     "react": {

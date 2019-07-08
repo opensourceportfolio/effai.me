@@ -1,10 +1,10 @@
-const path = require('path');
-const webpack = require('webpack');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import CleanWebpackPlugin from 'clean-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from 'path';
+import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin';
+import webpack from 'webpack';
 
 const paths = {
   src: path.resolve(__dirname, '../src'),
