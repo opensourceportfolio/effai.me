@@ -19,7 +19,7 @@
     "build:prod": "webpack --config script/webpack.prod.js --progress",
     "build:dev": "webpack --config script/webpack.dev.js --progress --profile",
     "deploy": "npm run build:prod && firebase deploy",
-    "typelint": "tsc --noEmit && eslint --fix ./src",
+    "typelint": "tsc --noEmit && eslint ./src --fix --ext .ts,.tsx",
     "precommit": "lint-staged",
     "start": "webpack-dev-server --open --config script/webpack.dev.js --progress --profile"
   },

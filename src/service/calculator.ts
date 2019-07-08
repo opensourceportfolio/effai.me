@@ -16,7 +16,10 @@ export const compound = (
   rate: NumberLike,
   yrs: NumberLike,
 ): number => {
-  return parseFloat(amount.toString()) * Math.pow(1 + toFraction(rate), parseFloat(yrs.toString()));
+  return (
+    parseFloat(amount.toString()) *
+    Math.pow(1 + toFraction(rate), parseFloat(yrs.toString()))
+  );
 };
 
 export const monthsToNow = (date: string): number => {

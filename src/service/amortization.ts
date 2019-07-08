@@ -38,7 +38,7 @@ export function ppmt(
   period: number,
   nperiod: number,
   presentValue: number,
-  futureValue: number
+  futureValue: number,
 ): number | null | undefined {
   if (period < 1 || period >= nperiod + 1) {
     return null;
