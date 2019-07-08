@@ -1,4 +1,4 @@
-// @flow
+
 import Paper from '@material-ui/core/Paper';
 import { changeValue } from 'action/fi';
 import Currency from 'component/form/currency';

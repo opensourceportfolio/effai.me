@@ -1,4 +1,4 @@
-// @flow
+
 
 import Chartjs from 'chart.js';
 import debounce from 'debounce';

@@ -1,4 +1,4 @@
-// @flow
+
 import { RangeInfo } from 'model/rangeInfo';
 
 export function generate(

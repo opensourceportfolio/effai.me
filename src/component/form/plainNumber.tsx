@@ -1,4 +1,4 @@
-// @flow
+
 
 import FormHelperText from '@material-ui/core/FormHelperText';
 import TextField from '@material-ui/core/TextField';

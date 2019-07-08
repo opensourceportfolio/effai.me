@@ -1,4 +1,4 @@
-// @flow
+
 import { NumberLike } from 'model/number-like';
 
 export function isProperNumber(numNumberLike | null | undefined): boolean {

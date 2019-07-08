@@ -1,4 +1,4 @@
-// @flow
+
 
 import AppBar from '@material-ui/core/AppBar';
 import Menu from '@material-ui/core/Menu';

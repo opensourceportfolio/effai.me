@@ -1,4 +1,4 @@
-// @flow
+
 
 export interface FormInputs {
   networth: string,

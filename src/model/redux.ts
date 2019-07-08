@@ -1,4 +1,4 @@
-// @flow
+
 import { FIAction } from 'action/fi';
 import { NavigationAction } from 'action/navigation';
 import { State } from 'model/state';

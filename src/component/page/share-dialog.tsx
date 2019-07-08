@@ -1,4 +1,4 @@
-// @flow
+
 import FlatButton from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import TextField from '@material-ui/core/TextField';

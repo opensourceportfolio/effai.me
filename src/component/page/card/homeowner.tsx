@@ -1,4 +1,4 @@
-// @flow
+
 
 import Divider from '@material-ui/core/Divider';
 import FormControl from '@material-ui/core/FormControl';

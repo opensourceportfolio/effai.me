@@ -1,4 +1,4 @@
-// @flow
+
 
 import { Data } from 'model/chart';
 import { RangeInfo } from 'model/rangeInfo';

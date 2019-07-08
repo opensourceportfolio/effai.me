@@ -1,4 +1,4 @@
-// @flow
+
 
 import { changeTab } from 'action/navigation';
 import Financial from 'component/page/financial';

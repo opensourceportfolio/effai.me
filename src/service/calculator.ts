@@ -1,4 +1,4 @@
-// @flow
+
 import { NumberLike } from 'model/number-like';
 import { FormInputs } from 'model/state';
 import { memoizeWith } from 'ramda';

@@ -1,4 +1,4 @@
-// @flow
+
 
 export interface RangeInfo {
   min: number,

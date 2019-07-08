@@ -1,4 +1,4 @@
-// @flow
+
 
 import { TooltipItem TooltipItems } from 'model/chart';
 import {

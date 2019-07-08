@@ -1,4 +1,4 @@
-// @flow
+
 
 import Chart, {
    ChartText,

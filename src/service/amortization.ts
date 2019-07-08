@@ -1,4 +1,4 @@
-// @flow
+
 export function pmt(
   rate: number,
   nperiod: number,

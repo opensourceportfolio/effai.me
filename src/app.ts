@@ -1,4 +1,4 @@
-// @flow
+
 import { loadUserData } from 'action/fi';
 import FiHeader from 'component/fi/header';
 import FiSwipeableViews from 'component/fi/swipeable-view';

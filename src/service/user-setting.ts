@@ -1,4 +1,4 @@
-// @flow
+
 import { openDB } from 'idb';
 import { FormInputs State } from 'model/state';
 import { isEmpty } from 'ramda';

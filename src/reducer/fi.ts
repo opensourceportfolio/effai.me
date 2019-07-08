@@ -1,4 +1,4 @@
-// @flow
+
 import { CHANGE_VALUE, LOADED_USER_DATA } from 'action/fi';
 import { Action } from 'model/redux';
 import { FormInputs State } from 'model/state';

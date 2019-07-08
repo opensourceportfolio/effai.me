@@ -1,4 +1,4 @@
-// @flow
+
 import debounce from 'debounce';
 import { Dispatch, GetState, ThunkAction } from 'model/redux';
 import { FormInputs, State } from 'model/state';

@@ -1,4 +1,4 @@
-// @flow
+
 import { PayloadAction, SimpleAction } from 'utils/react-redux';
 
 export const CHANGE_TAB: 'navigation/change-tab' = 'navigation/change-tab';

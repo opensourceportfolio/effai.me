@@ -1,4 +1,4 @@
-// @flow
+
 
 import * as actions from 'action/navigation';
 import { Action } from 'model/redux';

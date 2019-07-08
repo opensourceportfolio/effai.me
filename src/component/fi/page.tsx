@@ -1,4 +1,4 @@
-// @flow
+
 
 import 'css/page.css';
 

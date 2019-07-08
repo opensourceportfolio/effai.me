@@ -1,4 +1,4 @@
-// @flow
+
 export interface ChartSize {
   width: number,
   height: number,

@@ -1,4 +1,4 @@
-// @flow
+
 import Chart, {
   type ChartText,
   type Formatter,

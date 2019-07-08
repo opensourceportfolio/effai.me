@@ -1,4 +1,4 @@
-// @flow
+
 import PlainNumber, { Props as PlainNumberProps } from 'component/form/plainNumber';
 import React from 'react';
 import { formattedCurrency } from 'service/formatter';

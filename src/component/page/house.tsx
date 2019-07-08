@@ -1,4 +1,4 @@
-// @flow
+
 import Page from 'component/fi/page';
 import Homeowner from 'component/page/card/homeowner';
 import Renter from 'component/page/card/renter';

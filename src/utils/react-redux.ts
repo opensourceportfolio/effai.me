@@ -1,4 +1,4 @@
-// @flow
+
 
 export type PayloadAction<Type: string, Payload> = {
   type: Type,
