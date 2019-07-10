@@ -40,7 +40,7 @@ export default class Chart extends React.Component<Props> {
       const { plot, text } = this.props;
       const data = this.deriveData(plot, text);
 
-      if (this.chart) {
+      if (this.chart && this.chart.data && this.chart.data.datasets) {
         this.chart.data.datasets.forEach((dataset, i) => {
           dataset.data = data.datasets[i].data;
         });
@@ -52,7 +52,7 @@ export default class Chart extends React.Component<Props> {
 
   private update: () => void;
 
-  private chart: Chartjs = null;
+  private chart?: Chartjs = undefined;
 
   private chartEl: HTMLCanvasElement | null | undefined;
 

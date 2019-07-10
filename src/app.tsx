@@ -18,12 +18,12 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps;
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: State): StateProps => ({
   isShareMenuShowing: state.navigation.isShareMenuShowing,
   input: state.input,
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps: DispatchProps = {
   onLoad: loadUserData,
 };
 

@@ -2,10 +2,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import TextField from '@material-ui/core/TextField';
 import { RangeInfo } from 'model/rangeInfo';
 import * as React from 'react';
-import scrollIntoView from 'scroll-into-view';
 
 interface PlainNumberTextSettings {
-  additional: (s: string) => string | undefined;
+  additional?: ((s: string) => string | undefined) | string;
   placeholder: string | undefined;
   error: string | undefined;
 }
@@ -21,7 +20,7 @@ export interface Props {
 }
 
 export default class PlainNumber extends React.Component<Props> {
-  private plainNumber: { current: HTMLDivElement | null | undefined };
+  private plainNumber: { current: HTMLElement | null | undefined };
 
   private plainNumberInput: { current: HTMLInputElement | null | undefined };
 
@@ -35,18 +34,6 @@ export default class PlainNumber extends React.Component<Props> {
     const val = parseFloat(value);
 
     return val != null && val <= rangeInfo.max && val >= rangeInfo.min;
-  }
-
-  private scrollIntoViewOnFocus() {
-    const plainNumber = this.plainNumber;
-
-    scrollIntoView(plainNumber, {
-      time: 500,
-      align: {
-        top: 0.5,
-        left: 1,
-      },
-    });
   }
 
   private toggleMask(isFocus: boolean) {

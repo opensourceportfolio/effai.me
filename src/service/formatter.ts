@@ -7,7 +7,7 @@ export function isProperNumber(num?: NumberLike): boolean {
   );
 }
 
-export function formattedFloat(digits: number, number?: NumberLike): string {
+export function formattedFloat(digits: number, number: NumberLike): string {
   const value = parseFloat(number.toString());
 
   if (isProperNumber(value)) {

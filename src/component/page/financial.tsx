@@ -1,14 +1,14 @@
 import Paper from '@material-ui/core/Paper';
 import { changeValue } from 'action/fi';
-import BarChart from 'component/chart/bar';
+import BarChart, { Props as BarProps } from 'component/chart/bar';
 import Page from 'component/fi/page';
-import Currency from 'component/form/currency';
-import Percent from 'component/form/percent';
-import { Dispatch } from 'model/redux';
+import Currency, { Props as CurrencyProps } from 'component/form/currency';
+import Percent, { Props as PercentProps } from 'component/form/percent';
 import { FormInputs, State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getInputs } from 'reducer/fi';
+import { Dispatch } from 'redux';
 import { compound, totalNetworth, years } from 'service/calculator';
 import { chartFn, xrange, yrange } from 'service/chart';
 import {
@@ -47,9 +47,9 @@ const Financial = ({ inputs, onChange }: Props) => {
   }));
   const rangeInfo = meta.savings;
   const x = xrange(parseFloat(inputs.savings), rangeInfo);
-  const y = yrange(x, rangeInfo, fn);
+  const y = yrange(x, fn);
   const formatted2DecimalPoints = (val: number) => formattedShortFloat(2, val);
-  const chart = {
+  const chart: BarProps = {
     plot: { x, y },
     text: text.chart,
     formatter: { x: longCurrency, y: formatted2DecimalPoints },
@@ -58,7 +58,7 @@ const Financial = ({ inputs, onChange }: Props) => {
   const fiSavings = formattedCurrency(
     compound(inputs.savings, inputs.inflation, yrs),
   );
-  const savings = {
+  const savings: CurrencyProps = {
     name: 'savings',
     onChange: (_, value) => onChange({ savings: value }),
     text: {
@@ -70,7 +70,7 @@ const Financial = ({ inputs, onChange }: Props) => {
     rangeInfo: meta.savings,
   };
 
-  const ror = {
+  const ror: PercentProps = {
     name: 'ror',
     onChange: (_, value) => onChange({ ror: value }),
     text: {
@@ -82,7 +82,7 @@ const Financial = ({ inputs, onChange }: Props) => {
   };
 
   const fiNetworth = formattedCurrency(totalNetworth(inputs, yrs));
-  const networthInput = {
+  const networthInput: CurrencyProps = {
     name: 'networth',
     onChange: (_, value) => onChange({ networth: value }),
     text: {

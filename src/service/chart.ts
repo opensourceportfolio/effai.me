@@ -57,11 +57,7 @@ export function xrange(val: number, rangeInfo: RangeInfo): number[] {
 
 type Fn = (v: string | number) => number;
 
-export function yrange(
-  xval: number[],
-  rangeInfo: RangeInfo,
-  fn: Fn | Fn[],
-): number[][] {
+export function yrange(xval: number[], fn: Fn | Fn[]): number[][] {
   const fns = Array.isArray(fn) ? fn : [fn];
 
   return fns.map(rangeFn => normalizeToMiddle(xval.map(rangeFn)));

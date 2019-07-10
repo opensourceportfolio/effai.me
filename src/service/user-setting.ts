@@ -78,5 +78,5 @@ export async function set(key: string, value: FormInputs) {
 
   store.put(value, key);
 
-  return transaction.complete;
+  return transaction.done;
 }

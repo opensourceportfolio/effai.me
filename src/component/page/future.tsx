@@ -2,13 +2,13 @@ import Paper from '@material-ui/core/Paper';
 import { changeValue } from 'action/fi';
 import BarChart from 'component/chart/bar';
 import Page from 'component/fi/page';
-import Currency from 'component/form/currency';
-import Percent from 'component/form/percent';
-import { Dispatch } from 'model/redux';
+import Currency, { Props as CurrencyProps } from 'component/form/currency';
+import Percent, { Props as PercentProps } from 'component/form/percent';
 import { FormInputs, State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getInputs } from 'reducer/fi';
+import { Dispatch } from 'redux';
 import { compound, years } from 'service/calculator';
 import { chartFn, xrange, yrange } from 'service/chart';
 import {
@@ -47,7 +47,7 @@ const Future = ({ inputs, onChange }: Props) => {
   }));
   const rangeInfo = meta.livingExpenses;
   const x = xrange(parseFloat(inputs.livingExpenses), rangeInfo);
-  const y = yrange(x, rangeInfo, fn);
+  const y = yrange(x, fn);
   const formatted2DecimalPoints = (val: number) => formattedShortFloat(2, val);
   const chart = {
     plot: { x, y },
@@ -58,7 +58,7 @@ const Future = ({ inputs, onChange }: Props) => {
   const futureLivingExpenses = formattedCurrency(
     compound(inputs.livingExpenses, inputs.inflation, yrs),
   );
-  const livingExpenses = {
+  const livingExpenses: CurrencyProps = {
     classes: ['page__span--2'],
     name: 'livingExpenses',
     onChange: (_, value) => onChange({ livingExpenses: value }),
@@ -74,7 +74,7 @@ const Future = ({ inputs, onChange }: Props) => {
     rangeInfo: meta.livingExpenses,
   };
 
-  const inflation = {
+  const inflation: PercentProps = {
     name: 'inflation',
     onChange: (_, value) => onChange({ inflation: value }),
     text: {
@@ -85,7 +85,7 @@ const Future = ({ inputs, onChange }: Props) => {
     rangeInfo: meta.inflation,
   };
 
-  const withdrawl = {
+  const withdrawl: PercentProps = {
     name: 'withdrawl',
     onChange: (_, value) => onChange({ withdrawl: value }),
     text: {

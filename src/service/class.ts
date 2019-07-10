@@ -1,13 +1,8 @@
-import { compose, concat, defaultTo, join, split, uniq } from 'ramda';
+import { concat, defaultTo, join, split, uniq } from 'ramda';
 
-const toList = compose(
-  split(' '),
-  defaultTo(''),
-);
-const joinUnique = compose(
-  join(' '),
-  uniq,
-);
+const defaultOrBlank: (input: string) => string = defaultTo<string>('');
+const splitBySpace = (s: string) => split(' ', defaultOrBlank(s));
+const joinWithSpace = join(' ');
 
 export const cs = (first: string, second: string) =>
-  joinUnique(concat(toList(first), toList(second)));
+  joinWithSpace(uniq(concat(splitBySpace(first), splitBySpace(second))));

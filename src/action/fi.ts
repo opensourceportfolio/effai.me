@@ -1,6 +1,7 @@
 import debounce from 'debounce';
-import { Dispatch, GetState, ThunkAction } from 'model/redux';
+import { GetState, ThunkAction } from 'model/redux';
 import { FormInputs, State } from 'model/state';
+import { Dispatch } from 'redux';
 import { key } from 'redux-store';
 import { get, set } from 'service/user-setting';
 import { PayloadAction, SimpleAction } from 'utils/react-redux';
@@ -28,7 +29,7 @@ export const LOADED_USER_DATA: 'fi/loaded-user-data' = 'fi/loaded-user-data';
 type LoadUserDataAction = SimpleAction<typeof LOAD_USER_DATA>;
 type LoadedUserDataAction = PayloadAction<typeof LOADED_USER_DATA, FormInputs>;
 export function loadUserData(): ThunkAction {
-  return function(dispatch: Dispatch) {
+  return function(dispatch: Dispatch){
     dispatch({ type: LOAD_USER_DATA });
 
     return get(key).then((userData: FormInputs) =>

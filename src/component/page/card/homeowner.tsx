@@ -10,11 +10,11 @@ import { changeValue } from 'action/fi';
 import Currency, { Props as CurrencyProps } from 'component/form/currency';
 import DateComponent, { Props as DateProps } from 'component/form/date';
 import Percent, { Props as PercentProps } from 'component/form/percent';
-import { Dispatch } from 'model/redux';
 import { FormInputs, State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getInputs } from 'reducer/fi';
+import { Dispatch } from 'redux';
 import { pmt } from 'service/amortization';
 import {
   compound,

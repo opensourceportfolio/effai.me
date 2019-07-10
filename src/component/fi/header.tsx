@@ -4,11 +4,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { toggleShare } from 'action/navigation';
-import { Dispatch } from 'model/redux';
 import { FormInputs, State } from 'model/state';
 import { always, cond, either, gte, lt, T } from 'ramda';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { years } from 'service/calculator';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
@@ -51,8 +51,8 @@ const Header = ({ input, onToggleShare }: Props) => {
           {fiAge(yrs)}
         </Typography>
         <Menu open={false}>
-          <MenuItem primaryText="Share Results" onClick={onToggleShare} />
-          <MenuItem primaryText="My Blog" onClick={navigateToBlog} />
+          <MenuItem onClick={onToggleShare}>Share Results</MenuItem>
+          <MenuItem onClick={navigateToBlog}>My Blog</MenuItem>
         </Menu>
       </Toolbar>
     </AppBar>

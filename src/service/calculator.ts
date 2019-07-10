@@ -23,7 +23,9 @@ export const compound = (
 };
 
 export const monthsToNow = (date: string): number => {
-  return Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24 * 30));
+  return Math.floor(
+    (Date.now() - new Date(date).getTime()) / (1000 * 60 * 60 * 24 * 30),
+  );
 };
 
 const mortgageDebt = (state: FormInputs, yrs: NumberLike): number => {
@@ -165,7 +167,7 @@ export const effai = (formInputs: FormInputs) => {
   };
 };
 
-export const years = memoizeWith<FormInputs, number, string>(
+export const years = memoizeWith(
   (state: FormInputs): string => JSON.stringify(state),
   (state: FormInputs): number => {
     const { renter, homeOwner, earlyPayoff } = effai(state);

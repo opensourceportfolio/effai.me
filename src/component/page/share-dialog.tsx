@@ -2,10 +2,10 @@ import FlatButton from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import TextField from '@material-ui/core/TextField';
 import { toggleShare } from 'action/navigation';
-import { Dispatch } from 'model/redux';
 import { FormInputs, State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 interface StateProps {
   open: boolean;
@@ -69,7 +69,7 @@ class ShareDialog extends React.Component<Props> {
         name="ShareableDialog"
       >
         <TextField
-          ref={link => (this.textfield = link)}
+          inputRef={link => (this.textfield = link)}
           fullWidth={true}
           value={getLinkRepresentation(input)}
         />

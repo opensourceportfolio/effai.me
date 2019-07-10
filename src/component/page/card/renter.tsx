@@ -1,7 +1,7 @@
 import Paper from '@material-ui/core/Paper';
 import { changeValue } from 'action/fi';
 import Currency from 'component/form/currency';
-import { Dispatch } from 'model/redux';
+import { Dispatch } from 'redux';
 import { FormInputs, State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
