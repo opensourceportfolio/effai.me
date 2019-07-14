@@ -3,6 +3,7 @@ import FiHeader from 'component/fi/header';
 import FiSwipeableViews from 'component/fi/swipeable-view';
 import FiTab from 'component/fi/tab';
 import ShareDialog from 'component/page/share-dialog';
+import { ThunkDispatch } from 'model/redux';
 import { FormInputs, State } from 'model/state';
 import * as React from 'react';
 import { connect } from 'react-redux';
@@ -13,7 +14,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  onLoad: () => Promise<void>;
+  onLoad: () => void;
 }
 
 type Props = StateProps & DispatchProps;
@@ -23,9 +24,9 @@ const mapStateToProps = (state: State): StateProps => ({
   input: state.input,
 });
 
-const mapDispatchToProps: DispatchProps = {
-  onLoad: loadUserData,
-};
+const mapDispatchToProps = (dispatch: ThunkDispatch): DispatchProps => ({
+  onLoad: () => dispatch(loadUserData()),
+});
 
 class App extends React.Component<Props> {
   public componentDidMount() {

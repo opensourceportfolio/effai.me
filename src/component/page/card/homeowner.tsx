@@ -14,7 +14,6 @@ import { FormInputs, State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getInputs } from 'reducer/fi';
-import { Dispatch } from 'redux';
 import { pmt } from 'service/amortization';
 import {
   compound,
@@ -25,6 +24,8 @@ import {
 } from 'service/calculator';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
+
+import { ThunkDispatch } from '../../../model/redux';
 
 interface StateProps {
   inputs: FormInputs;
@@ -42,7 +43,7 @@ const mapStateToProps = (state: State): StateProps => ({
   inputs: getInputs(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch): DispatchProps => ({
   onChange: (payload: Partial<FormInputs>) => dispatch(changeValue(payload)),
 });
 

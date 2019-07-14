@@ -20,9 +20,9 @@ export interface Props {
 }
 
 export default class PlainNumber extends React.Component<Props> {
-  private plainNumber: { current: HTMLElement | null | undefined };
+  private plainNumber: React.RefObject<HTMLDivElement>;
 
-  private plainNumberInput: { current: HTMLInputElement | null | undefined };
+  private plainNumberInput: React.RefObject<HTMLDivElement>;
 
   public constructor(props: Props) {
     super(props);

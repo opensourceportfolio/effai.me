@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { toggleShare } from 'action/navigation';
 import { FormInputs, State } from 'model/state';
-import { always, cond, either, gte, lt, T } from 'ramda';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -31,12 +30,15 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   onToggleShare: () => dispatch(toggleShare()),
 });
 
-const fiAge: (v: number) => string = cond([
-  [either(lt(meta.range), isNaN), always(i18n.fiStatus.never)],
-  [gte(0), always(i18n.fiStatus.done)],
-  [T, i18n.fiStatus.formatter],
-]);
-
+const fiAge = (age: number): string => {
+  if (age > meta.range || isNaN(age)) {
+    return i18n.fiStatus.never;
+  } else if (age <= 0) {
+    return i18n.fiStatus.done;
+  } else {
+    return i18n.fiStatus.formatter(age);
+  }
+};
 const navigateToBlog = () => {
   window.location.href = 'https://www.medium.com/effai-me';
 };

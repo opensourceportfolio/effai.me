@@ -1,5 +1,7 @@
 import FlatButton from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { toggleShare } from 'action/navigation';
 import { FormInputs, State } from 'model/state';
@@ -44,35 +46,26 @@ class ShareDialog extends React.Component<Props> {
   public render() {
     const { open, input, onCopy, onToggleShare } = this.props;
 
-    const actions = [
-      <FlatButton
-        key="cancel"
-        label="Cancel"
-        primary={true}
-        onClick={onToggleShare}
-      />,
-      <FlatButton
-        key="copy"
-        label="Copy"
-        primary={true}
-        keyboardFocused={true}
-        onClick={() => onCopy(this.textfield)}
-      />,
-    ];
-
     return (
-      <Dialog
-        actions={actions}
-        title="Shareable URL"
-        modal={false}
-        open={open}
-        name="ShareableDialog"
-      >
+      <Dialog open={open}>
+        <DialogTitle>Shareable URL</DialogTitle>
         <TextField
           inputRef={link => (this.textfield = link)}
           fullWidth={true}
           value={getLinkRepresentation(input)}
         />
+        <DialogActions>
+          <FlatButton key="cancel" color="primary" onClick={onToggleShare}>
+            Cancel
+          </FlatButton>
+          <FlatButton
+            key="copy"
+            color="secondary"
+            onClick={() => onCopy(this.textfield)}
+          >
+            Copy
+          </FlatButton>
+        </DialogActions>
       </Dialog>
     );
   }

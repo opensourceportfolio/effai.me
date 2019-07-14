@@ -17,7 +17,6 @@ import { originalState } from './service/user-setting';
 const store = configureStore(originalState);
 
 const theme = createMuiTheme({
-  useNextVariants: true,
   palette: {
     primary: { main: cyan[400], contrastText: '#fff' },
     secondary: {

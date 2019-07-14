@@ -1,7 +1,6 @@
 import Paper from '@material-ui/core/Paper';
 import { changeValue } from 'action/fi';
 import Currency from 'component/form/currency';
-import { Dispatch } from 'redux';
 import { FormInputs, State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -9,6 +8,8 @@ import { getInputs } from 'reducer/fi';
 import { compound, monthsToNow, years } from 'service/calculator';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
+
+import { ThunkDispatch } from '../../../model/redux';
 
 interface StateProps {
   inputs: FormInputs;
@@ -24,7 +25,7 @@ const mapStateToProps = (state: State): StateProps => ({
   inputs: getInputs(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch): DispatchProps => ({
   onChange: (payload: Partial<FormInputs>) => dispatch(changeValue(payload)),
 });
 

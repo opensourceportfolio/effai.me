@@ -6,10 +6,10 @@ import Home from '@material-ui/icons/Home';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
 import WatchLater from '@material-ui/icons/WatchLater';
 import { changeTab } from 'action/navigation';
-import { Dispatch } from 'redux';
 import { State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 interface StateProps {
   tabIndex: number;

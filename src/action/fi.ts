@@ -1,8 +1,9 @@
 import debounce from 'debounce';
-import { GetState, ThunkAction } from 'model/redux';
+import { GetState } from 'model/redux';
 import { FormInputs, State } from 'model/state';
 import { Dispatch } from 'redux';
 import { key } from 'redux-store';
+import { ThunkAction } from 'redux-thunk';
 import { get, set } from 'service/user-setting';
 import { PayloadAction, SimpleAction } from 'utils/react-redux';
 
@@ -15,7 +16,9 @@ type ChangeFieldAction = PayloadAction<
   typeof CHANGE_VALUE,
   Partial<FormInputs>
 >;
-export function changeValue(payload: Partial<FormInputs>): ThunkAction {
+export function changeValue(
+  payload: Partial<FormInputs>,
+): ThunkAction<void, State, {}, FIAction> {
   return function(dispatch: Dispatch, getState: GetState) {
     const action: ChangeFieldAction = { type: CHANGE_VALUE, payload };
 
@@ -28,8 +31,8 @@ export const LOAD_USER_DATA: 'fi/load-user-data' = 'fi/load-user-data';
 export const LOADED_USER_DATA: 'fi/loaded-user-data' = 'fi/loaded-user-data';
 type LoadUserDataAction = SimpleAction<typeof LOAD_USER_DATA>;
 type LoadedUserDataAction = PayloadAction<typeof LOADED_USER_DATA, FormInputs>;
-export function loadUserData(): ThunkAction {
-  return function(dispatch: Dispatch){
+export function loadUserData(): ThunkAction<void, State, {}, FIAction> {
+  return function(dispatch: Dispatch) {
     dispatch({ type: LOAD_USER_DATA });
 
     return get(key).then((userData: FormInputs) =>
