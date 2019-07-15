@@ -21,14 +21,6 @@ html {
   padding-bottom: 150px
 }
 
-/*
-@media (max-width: 360px) {
-  .mui-tab__label {
-    display: none;
-  }
-}
-*/
-
 .mui-input-row {
   margin-top: 14px;
 }

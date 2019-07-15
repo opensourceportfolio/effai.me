@@ -43,7 +43,6 @@ module.exports = {
       },
     ],
     quotes: ['error', 'single'],
-    'quote-props': ['error', 'consistent-as-needed'],
     //ECMAScript 6
     'no-duplicate-imports': 'error',
     'no-useless-computed-key': 'error',
