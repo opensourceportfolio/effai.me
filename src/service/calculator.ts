@@ -82,7 +82,7 @@ export const totalNetworth = (state: FormInputs, yrs: number): number => {
   return investment(state, yrs) + homeEquity(state, yrs);
 };
 
-const liquidNetworth = (state: FormInputs, yrs: number): number => {
+export const liquidNetworth = (state: FormInputs, yrs: number): number => {
   return investment(state, yrs) - mortgageDebt(state, yrs);
 };
 
@@ -135,6 +135,7 @@ export const effai = (formInputs: FormInputs) => {
       const remaining = renter(
         {
           ...state,
+          networth: (investments - debt).toString(),
           rental: compound(
             monthlyHomeCosts(state),
             state.inflation,
@@ -148,9 +149,7 @@ export const effai = (formInputs: FormInputs) => {
       return { year: effaiYear, networth: totalNetworth(state, year) };
     } else {
       const expenses =
-        parseFloat(state.livingExpenses) +
-        percentage(state.price, state.maintenance) +
-        percentage(state.price, state.propertyTax);
+        parseFloat(state.livingExpenses) + monthlyHomeCosts(state);
       const homeownerYield = monthlyLiquidYield(state, year);
       const homeownerGoal = compound(expenses, state.inflation, year);
 

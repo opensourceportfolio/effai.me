@@ -1,7 +1,7 @@
 import Currency from 'component/form/currency';
 import { FormInputs } from 'model/state';
 import React from 'react';
-import { compound, years } from 'service/calculator';
+import { liquidNetworth, years } from 'service/calculator';
 import { formattedCurrency } from 'service/formatter';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
@@ -19,9 +19,7 @@ type Props = StateProps & DispatchProps;
 export default function Networth(props: Props) {
   const { inputs, onChange } = props;
   const yrs = years(inputs);
-  const finalNetWorth = formattedCurrency(
-    compound(inputs.networth, inputs.inflation, yrs),
-  );
+  const finalNetWorth = formattedCurrency(liquidNetworth(inputs, yrs));
   const onChangeHandler = (_, value: string) => onChange({ networth: value });
   const text = {
     placeholder: i18n.financial.networth.placeholder,
