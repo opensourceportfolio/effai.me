@@ -5,7 +5,7 @@ import { FormInputs } from '../../../model/state';
 import { i18n } from '../../../service/i18n';
 
 interface StateProps {
-  inputs: FormInputs;
+  purchaseDate: string;
 }
 
 interface DispatchProps {
@@ -15,7 +15,7 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 export default function Term(props: Props) {
-  const { onChange, inputs } = props;
+  const { onChange, purchaseDate } = props;
 
   const onChangeHandler = (_, value: string) =>
     onChange({ purchaseDate: value });
@@ -28,7 +28,7 @@ export default function Term(props: Props) {
     <DateComponent
       onChange={onChangeHandler}
       name={'purchaseDate'}
-      value={inputs.purchaseDate}
+      value={purchaseDate}
       max={`${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`}
       text={text}
     />

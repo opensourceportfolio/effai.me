@@ -1,3 +1,4 @@
+import { Percent as PercentModel } from 'model/percent';
 import React from 'react';
 
 import { FormInputs } from '../../../model/state';
@@ -7,7 +8,8 @@ import { meta } from '../../../service/meta';
 import Percent from '../../form/percent';
 
 interface StateProps {
-  inputs: FormInputs;
+  price: number;
+  propertyTax: PercentModel;
 }
 
 interface DispatchProps {
@@ -17,8 +19,8 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 export default function PropertyTax(props: Props) {
-  const { inputs, onChange } = props;
-  const futurePropertyTax = percentage(inputs.price, inputs.propertyTax);
+  const { price, propertyTax, onChange } = props;
+  const futurePropertyTax = percentage(price, propertyTax);
   const onChangeHandler = (_, value: string) =>
     onChange({ propertyTax: value });
   const text = {
@@ -35,7 +37,7 @@ export default function PropertyTax(props: Props) {
       name="propertyTax"
       onChange={onChangeHandler}
       text={text}
-      value={inputs.propertyTax}
+      value={propertyTax}
       rangeInfo={meta.house.propertyTax}
     />
   );

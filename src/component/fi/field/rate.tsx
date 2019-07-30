@@ -1,14 +1,14 @@
+import { Percent as PercentModel } from 'model/percent';
 import React from 'react';
 
 import { FormInputs } from '../../../model/state';
-import { pmt } from '../../../service/amortization';
-import { percentage, toFraction } from '../../../service/calculator';
 import { i18n } from '../../../service/i18n';
 import { meta } from '../../../service/meta';
 import Percent from '../../form/percent';
 
 interface StateProps {
-  inputs: FormInputs;
+  payment: number;
+  rate: PercentModel;
 }
 
 interface DispatchProps {
@@ -18,14 +18,8 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 export default function Rate(props: Props) {
-  const { inputs, onChange } = props;
-  const downpaymentAmount = percentage(inputs.price, inputs.downpayment);
-  const payment = pmt(
-    toFraction(parseFloat(inputs.rate) / 12),
-    parseFloat(inputs.term) * 12,
-    -parseFloat(inputs.price) + downpaymentAmount,
-    0,
-  );
+  const { payment, rate, onChange } = props;
+
   const onChangeHandler = (_, value: string) => onChange({ rate: value });
   const text = {
     placeholder: i18n.house.rate.placeholder,
@@ -38,7 +32,7 @@ export default function Rate(props: Props) {
       name="rate"
       onChange={onChangeHandler}
       text={text}
-      value={inputs.rate}
+      value={rate}
       rangeInfo={meta.house.rate}
     />
   );

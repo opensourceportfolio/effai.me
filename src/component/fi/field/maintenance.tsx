@@ -1,3 +1,4 @@
+import { Percent as PercentModel } from 'model/percent';
 import React from 'react';
 
 import { FormInputs } from '../../../model/state';
@@ -7,7 +8,8 @@ import { meta } from '../../../service/meta';
 import Percent from '../../form/percent';
 
 interface StateProps {
-  inputs: FormInputs;
+  price: number;
+  maintenance: PercentModel;
 }
 
 interface DispatchProps {
@@ -17,8 +19,8 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 export default function Maintenance(props: Props) {
-  const { inputs, onChange } = props;
-  const futureMaintenance = percentage(inputs.price, inputs.maintenance);
+  const { price, maintenance, onChange } = props;
+  const futureMaintenance = percentage(price, maintenance);
   const onChangeHandler = (_, value: string) =>
     onChange({ maintenance: value });
   const text = {
@@ -35,7 +37,7 @@ export default function Maintenance(props: Props) {
       name="maintenance"
       onChange={onChangeHandler}
       text={text}
-      value={inputs.maintenance}
+      value={maintenance}
       rangeInfo={meta.house.maintenance}
     />
   );

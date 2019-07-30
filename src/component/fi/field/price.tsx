@@ -2,12 +2,12 @@ import React from 'react';
 
 import Currency from '../../../component/form/currency';
 import { FormInputs } from '../../../model/state';
-import { compound, monthsToNow, years } from '../../../service/calculator';
 import { i18n } from '../../../service/i18n';
 import { meta } from '../../../service/meta';
 
 interface StateProps {
-  inputs: FormInputs;
+  price: number;
+  priceAtFI: number;
 }
 
 interface DispatchProps {
@@ -17,14 +17,11 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 export default function Price(props: Props) {
-  const { inputs, onChange } = props;
-  const yrs = years(inputs) + monthsToNow(inputs.purchaseDate) / 12;
-
-  const futurePrice = compound(inputs.price, inputs.houseGrowth, yrs);
+  const { price, priceAtFI, onChange } = props;
   const onChangeHandler = (_, value: string) => onChange({ price: value });
   const text = {
     placeholder: i18n.house.price.placeholder,
-    additional: i18n.house.houseGrowth.additional(futurePrice),
+    additional: i18n.house.houseGrowth.additional(priceAtFI),
     error: i18n.error.between(meta.house.price.min, meta.house.price.max),
   };
 
@@ -33,7 +30,7 @@ export default function Price(props: Props) {
       name="price"
       onChange={onChangeHandler}
       text={text}
-      value={inputs.price}
+      value={price}
       rangeInfo={meta.house.price}
     />
   );

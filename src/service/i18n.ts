@@ -38,7 +38,7 @@ export const i18n = {
         label: (tooltip: TooltipItem) => {
           return `Effai date will be different by ${formattedFloat(
             1,
-            tooltip.yLabel,
+            parseFloat(tooltip.yLabel),
           )} years`;
         },
       },
@@ -129,7 +129,7 @@ export const i18n = {
         label: (tooltip: TooltipItem) =>
           `Effai date will be different by ${formattedFloat(
             1,
-            tooltip.yLabel,
+            parseFloat(tooltip.yLabel),
           )} years`,
       },
       legend: ['Years to Effai'],

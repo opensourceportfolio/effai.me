@@ -16,7 +16,7 @@ export interface Props {
   name: string;
   rangeInfo: RangeInfo;
   text: PlainNumberTextSettings;
-  value: string;
+  value: number;
 }
 
 export default class PlainNumber extends React.Component<Props> {
@@ -48,20 +48,13 @@ export default class PlainNumber extends React.Component<Props> {
   }
 
   public render() {
-    const {
-      classes,
-      name,
-      text,
-      rangeInfo,
-      value = '',
-      formatter,
-    } = this.props;
+    const { classes, name, text, rangeInfo, value = 0, formatter } = this.props;
     const { onChange } = this.props;
     const additional =
       typeof text.additional === 'function'
-        ? text.additional(value)
+        ? text.additional(value.toString())
         : text.additional;
-    const isValid = this.isValid(rangeInfo, value);
+    const isValid = this.isValid(rangeInfo, value.toString());
 
     return (
       <div
@@ -87,7 +80,9 @@ export default class PlainNumber extends React.Component<Props> {
           className="mui-text-field__mask-text"
           onClick={() => this.toggleMask(true)}
         >
-          {isValid && formatter ? formatter(parseFloat(value)) : value}
+          {isValid && formatter
+            ? formatter(parseFloat(value.toString()))
+            : value}
         </div>
       </div>
     );

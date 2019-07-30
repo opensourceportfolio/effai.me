@@ -1,11 +1,12 @@
 import Percent from 'component/form/percent';
+import { Percent as PercentModel } from 'model/percent';
 import { FormInputs } from 'model/state';
 import React from 'react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 
 interface StateProps {
-  inputs: FormInputs;
+  withdrawl: PercentModel;
 }
 
 interface DispatchProps {
@@ -15,7 +16,7 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 export default function Withdrawl(props: Props) {
-  const { inputs, onChange } = props;
+  const { withdrawl, onChange } = props;
   const onChangeHandler = (_, value: string) => onChange({ withdrawl: value });
   const text = {
     placeholder: i18n.future.withdrawl.placeholder,
@@ -27,7 +28,7 @@ export default function Withdrawl(props: Props) {
       name="withdrawl"
       onChange={onChangeHandler}
       text={text}
-      value={inputs.withdrawl}
+      value={withdrawl}
       rangeInfo={meta.withdrawl}
     />
   );

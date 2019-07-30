@@ -1,13 +1,11 @@
-import { NumberLike } from 'model/number-like';
-
-export function isProperNumber(num?: NumberLike): boolean {
+export function isProperNumber(num?: number): boolean {
   return (
     num != null &&
     Number(parseFloat(num.toString())) == parseFloat(num.toString())
   );
 }
 
-export function formattedFloat(digits: number, number: NumberLike): string {
+export function formattedFloat(digits: number, number: number): string {
   const value = parseFloat(number.toString());
 
   if (isProperNumber(value)) {

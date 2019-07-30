@@ -1,3 +1,4 @@
+import { Percent as PercentModel } from 'model/percent';
 import React from 'react';
 
 import { FormInputs } from '../../../model/state';
@@ -6,7 +7,7 @@ import { meta } from '../../../service/meta';
 import Percent from '../../form/percent';
 
 interface StateProps {
-  inputs: FormInputs;
+  houseGrowth: PercentModel;
 }
 
 interface DispatchProps {
@@ -16,7 +17,7 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 export default function HouseGrowth(props: Props) {
-  const { inputs, onChange } = props;
+  const { houseGrowth, onChange } = props;
   const onChangeHandler = (_, value: string) =>
     onChange({ houseGrowth: value });
   const text = {
@@ -32,7 +33,7 @@ export default function HouseGrowth(props: Props) {
       name="houseGrowth"
       onChange={onChangeHandler}
       text={text}
-      value={inputs.houseGrowth}
+      value={houseGrowth}
       rangeInfo={meta.house.houseGrowth}
     />
   );

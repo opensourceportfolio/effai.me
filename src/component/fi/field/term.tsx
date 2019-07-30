@@ -7,7 +7,7 @@ import React from 'react';
 import { FormInputs } from '../../../model/state';
 
 interface StateProps {
-  inputs: FormInputs;
+  term: number;
 }
 
 interface DispatchProps {
@@ -17,7 +17,7 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 export default function Term(props: Props) {
-  const { onChange, inputs } = props;
+  const { onChange, term } = props;
   const onChangeHandler = (e: React.ChangeEvent<{ value: unknown }>) =>
     onChange({ term: e.target.value as string });
 
@@ -30,7 +30,7 @@ export default function Term(props: Props) {
         inputProps={{ name: 'term' }}
         name="term"
         onChange={onChangeHandler}
-        value={inputs.term}
+        value={term}
       >
         {terms.map(year => (
           <MenuItem key={year} value={year}>{`${year} years`}</MenuItem>

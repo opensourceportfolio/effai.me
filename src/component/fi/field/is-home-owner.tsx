@@ -5,7 +5,7 @@ import React from 'react';
 import { FormInputs } from '../../../model/state';
 
 interface StateProps {
-  inputs: FormInputs;
+  isHomeOwner: boolean;
 }
 
 interface DispatchProps {
@@ -21,7 +21,7 @@ export default function IsHomeOwner(props: Props) {
         <Switch
           name="isHomeOwner"
           onChange={(_, value) => props.onChange({ isHomeOwner: value })}
-          checked={props.inputs.isHomeOwner}
+          checked={props.isHomeOwner}
         />
       }
       label="Are you a home owner"

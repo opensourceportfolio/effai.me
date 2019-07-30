@@ -1,13 +1,14 @@
+import { Percent as PercentModel } from 'model/percent';
 import React from 'react';
 
 import { FormInputs } from '../../../model/state';
-import { percentage } from '../../../service/calculator';
 import { i18n } from '../../../service/i18n';
 import { meta } from '../../../service/meta';
 import Percent from '../../form/percent';
 
 interface StateProps {
-  inputs: FormInputs;
+  downpayment: PercentModel;
+  downpaymentAmount: number;
 }
 
 interface DispatchProps {
@@ -17,8 +18,7 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 export default function Downpayment(props: Props) {
-  const { inputs, onChange } = props;
-  const downpaymentAmount = percentage(inputs.price, inputs.downpayment);
+  const { downpayment, downpaymentAmount, onChange } = props;
   const onChangeHandler = (_, value: string) =>
     onChange({ downpayment: value });
   const text = {
@@ -35,7 +35,7 @@ export default function Downpayment(props: Props) {
       name="downpayment"
       onChange={onChangeHandler}
       text={text}
-      value={inputs.downpayment}
+      value={downpayment}
       rangeInfo={meta.house.downpayment}
     />
   );

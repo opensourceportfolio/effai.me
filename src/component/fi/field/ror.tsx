@@ -1,11 +1,12 @@
 import Percent from 'component/form/percent';
+import { Percent as PercentType } from 'model/percent';
 import { FormInputs } from 'model/state';
 import React from 'react';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 
 interface StateProps {
-  inputs: FormInputs;
+  ror: PercentType;
 }
 
 interface DispatchProps {
@@ -15,7 +16,7 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 export default function ROR(props: Props) {
-  const { inputs, onChange } = props;
+  const { ror, onChange } = props;
   const text = {
     placeholder: i18n.financial.ror.placeholder,
     error: i18n.error.between(meta.ror.min, meta.ror.max),
@@ -27,7 +28,7 @@ export default function ROR(props: Props) {
       name="ror"
       onChange={onChangeHandler}
       text={text}
-      value={inputs.ror}
+      value={ror}
       rangeInfo={meta.ror}
     />
   );

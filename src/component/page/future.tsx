@@ -4,16 +4,22 @@ import Inflation from 'component/fi/field/inflation';
 import LivingExpenses from 'component/fi/field/living-expenses';
 import Withdrawl from 'component/fi/field/withdrawl';
 import Page from 'component/fi/page';
+import { FutureData } from 'model/future-data';
+import { HomeData } from 'model/home-data';
+import { InvestmentData } from 'model/investment-data';
 import { FormInputs, State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
-import { getInputs } from 'reducer/fi';
+import { getFutureData, getHomeData, getInvestmentData } from 'reducer/fi';
+import { compound, years } from 'service/calculator';
 
 import { ThunkDispatch } from '../../model/redux';
 import FutureChart from '../fi/chart/future';
 
 interface StateProps {
-  inputs: FormInputs;
+  investmentData: InvestmentData;
+  homeData: HomeData;
+  futureData: FutureData;
 }
 
 interface DispatchProps {
@@ -23,23 +29,40 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 const mapStateToProps = (state: State): StateProps => ({
-  inputs: getInputs(state),
+  investmentData: getInvestmentData(state),
+  homeData: getHomeData(state),
+  futureData: getFutureData(state),
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch): DispatchProps => ({
   onChange: (payload: Partial<FormInputs>) => dispatch(changeValue(payload)),
 });
 
-const Future = ({ inputs, onChange }: Props) => {
+const Future = ({ investmentData, homeData, futureData, onChange }: Props) => {
+  const inflation = futureData.inflation;
+  const livingExpenses = futureData.livingExpenses;
+  const yearsToFI = years(investmentData, homeData, futureData);
+  const livingExpensesAtFI = compound(livingExpenses, inflation, yearsToFI);
+
+  const withdrawl = futureData.withdrawl;
+
   return (
     <Page>
       <Paper className="page__input page__split--2">
-        <LivingExpenses inputs={inputs} onChange={onChange}></LivingExpenses>
-        <Inflation inputs={inputs} onChange={onChange}></Inflation>
-        <Withdrawl inputs={inputs} onChange={onChange}></Withdrawl>
+        <LivingExpenses
+          livingExpenses={livingExpenses}
+          livingExpensesAtFI={livingExpensesAtFI}
+          onChange={onChange}
+        ></LivingExpenses>
+        <Inflation inflation={inflation} onChange={onChange}></Inflation>
+        <Withdrawl withdrawl={withdrawl} onChange={onChange}></Withdrawl>
       </Paper>
       <Paper className="page__media">
-        <FutureChart inputs={inputs}></FutureChart>
+        <FutureChart
+          investmentData={investmentData}
+          homeData={homeData}
+          futureData={futureData}
+        ></FutureChart>
       </Paper>
     </Page>
   );

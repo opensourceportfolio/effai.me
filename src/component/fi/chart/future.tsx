@@ -1,25 +1,32 @@
 import BarChart from 'component/chart/bar';
-import { FormInputs } from 'model/state';
+import { FutureData } from 'model/future-data';
+import { HomeData } from 'model/home-data';
+import { InvestmentData } from 'model/investment-data';
 import React from 'react';
-import { chartFn, xrange, yrange } from 'service/chart';
+import { years } from 'service/calculator';
+import { xrange, yrange } from 'service/chart';
 import { formattedShortFloat, longCurrency } from 'service/formatter';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 
 interface StateProps {
-  inputs: FormInputs;
+  investmentData: InvestmentData;
+  homeData: HomeData;
+  futureData: FutureData;
 }
 
 type Props = StateProps;
 
-export default function Future({ inputs }: Props) {
+export default function Future({
+  investmentData,
+  homeData,
+  futureData,
+}: Props) {
   const text = i18n.future;
-  const fn = chartFn(inputs, (formInputs, value: string | number) => ({
-    ...formInputs,
-    livingExpenses: value.toString(),
-  }));
+  const fn = (livingExpenses: number) =>
+    years(investmentData, homeData, { ...futureData, livingExpenses });
   const rangeInfo = meta.livingExpenses;
-  const x = xrange(parseFloat(inputs.livingExpenses), rangeInfo);
+  const x = xrange(futureData.livingExpenses, rangeInfo);
   const y = yrange(x, fn);
   const formatted2DecimalPoints = (val: number) => formattedShortFloat(2, val);
 

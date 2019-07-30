@@ -4,16 +4,22 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { toggleShare } from 'action/navigation';
-import { FormInputs, State } from 'model/state';
+import { FutureData } from 'model/future-data';
+import { HomeData } from 'model/home-data';
+import { InvestmentData } from 'model/investment-data';
+import { State } from 'model/state';
 import React from 'react';
 import { connect } from 'react-redux';
+import { getFutureData, getHomeData, getInvestmentData } from 'reducer/fi';
 import { Dispatch } from 'redux';
 import { years } from 'service/calculator';
 import { i18n } from 'service/i18n';
 import { meta } from 'service/meta';
 
 interface StateProps {
-  input: FormInputs;
+  investmentData: InvestmentData;
+  homeData: HomeData;
+  futureData: FutureData;
 }
 
 interface DispatchProps {
@@ -23,7 +29,9 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 const mapStateToProps = (state: State): StateProps => ({
-  input: state.input,
+  investmentData: getInvestmentData(state),
+  homeData: getHomeData(state),
+  futureData: getFutureData(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
@@ -43,14 +51,19 @@ const navigateToBlog = () => {
   window.location.href = 'https://www.medium.com/effai-me';
 };
 
-const Header = ({ input, onToggleShare }: Props) => {
-  const yrs = years(input);
+const Header = ({
+  investmentData,
+  homeData,
+  futureData,
+  onToggleShare,
+}: Props) => {
+  const yearsToFI = years(investmentData, homeData, futureData);
 
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h4" color="inherit">
-          {fiAge(yrs)}
+          {fiAge(yearsToFI)}
         </Typography>
         <Menu open={false}>
           <MenuItem onClick={onToggleShare}>Share Results</MenuItem>

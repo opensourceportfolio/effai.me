@@ -1,8 +1,6 @@
 import { Data } from 'model/chart';
 import { RangeInfo } from 'model/rangeInfo';
-import { FormInputs } from 'model/state';
 import { subtract } from 'ramda';
-import { years } from 'service/calculator';
 import { generate, start } from 'service/range';
 
 const chartColors = [
@@ -55,20 +53,10 @@ export function xrange(val: number, rangeInfo: RangeInfo): number[] {
   return xval;
 }
 
-type Fn = (v: string | number) => number;
+type Fn = (v: number) => number;
 
 export function yrange(xval: number[], fn: Fn | Fn[]): number[][] {
   const fns = Array.isArray(fn) ? fn : [fn];
 
   return fns.map(rangeFn => normalizeToMiddle(xval.map(rangeFn)));
-}
-
-// TODO: refactor this
-export function chartFn<V>(
-  initial: FormInputs,
-  next: (inputs: FormInputs, val: V) => FormInputs,
-): (v: V) => number {
-  const copy: FormInputs = { ...initial };
-
-  return (v: V) => years(next(copy, v));
 }

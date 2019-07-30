@@ -1,25 +1,24 @@
-import { NumberLike } from 'model/number-like';
-import { FormInputs } from 'model/state';
-import { memoizeWith } from 'ramda';
+import { Percent } from 'model/percent';
 import { remainder } from 'service/amortization';
 
-export const toFraction = (num: NumberLike): number => {
-  return parseFloat(num.toString()) / 100;
+import { FutureData } from '../model/future-data';
+import { HomeData } from '../model/home-data';
+import { InvestmentData } from '../model/investment-data';
+
+export const toFraction = (num: number): number => {
+  return num / 100;
 };
 
-export const percentage = (amount: NumberLike, rate: NumberLike): number => {
-  return parseFloat(amount.toString()) * toFraction(rate);
+export const percentage = (amount: number, rate: Percent): number => {
+  return amount * toFraction(rate);
 };
 
 export const compound = (
-  amount: NumberLike,
-  rate: NumberLike,
-  yrs: NumberLike,
+  amount: number,
+  rate: Percent,
+  years: number,
 ): number => {
-  return (
-    parseFloat(amount.toString()) *
-    Math.pow(1 + toFraction(rate), parseFloat(yrs.toString()))
-  );
+  return amount * Math.pow(1 + toFraction(rate), years);
 };
 
 export const monthsToNow = (date: string): number => {
@@ -28,149 +27,197 @@ export const monthsToNow = (date: string): number => {
   );
 };
 
-const mortgageDebt = (state: FormInputs, yrs: NumberLike): number => {
-  const { price, downpayment, rate, purchaseDate, term } = state;
+const mortgageDebt = (homeData: HomeData, yearsToFI: number): number => {
+  const { price, downpayment, rate, purchaseDate, term } = homeData;
   const passedPeriods = monthsToNow(purchaseDate);
   const downpaymentAmount = percentage(price, downpayment);
-  const loan = parseFloat(price) - downpaymentAmount;
-  const rateFraction = toFraction(parseFloat(rate) / 12);
-  const periods = parseFloat(term) * 12;
-  const year = parseInt(yrs.toString());
-  const period = year * 12 + passedPeriods;
+  const loan = price - downpaymentAmount;
+  const rateFraction = toFraction(rate / 12);
+  const periods = term * 12;
+  const period = yearsToFI * 12 + passedPeriods;
 
   return Math.max(0, remainder(loan, periods, rateFraction, period));
 };
 
-const homeEquity = (state: FormInputs, yrs: NumberLike): number => {
-  const { price, houseGrowth } = state;
-  const value = compound(parseFloat(price), parseFloat(houseGrowth), yrs);
-  const remaining = mortgageDebt(state, yrs) || 0;
-
-  return state.isHomeOwner ? value - remaining : 0;
-};
-
-const monthlyHomeCosts = (state: FormInputs): number => {
+const monthlyHomeCosts = (
+  price: number,
+  maintenance: Percent,
+  propertyTax: Percent,
+): number => {
   return (
-    percentage(state.price, state.maintenance) / 12 +
-    percentage(state.price, state.propertyTax) / 12
+    percentage(price, maintenance) / 12 + percentage(price, propertyTax) / 12
   );
 };
 
-export const investment = (state: FormInputs, yrs: number): number => {
-  const { ror, savings, inflation, networth } = state;
-  const currentNetworth = parseInt(networth) || 0;
+export const investment = (
+  investmentData: InvestmentData,
+  futureData: FutureData,
+  years: number,
+): number => {
+  const { ror, savings, networth } = investmentData;
+  const { inflation } = futureData;
+  const currentNetworth = networth || 0;
   const rorFraction = 1 + toFraction(ror);
-  const annualSavings = parseFloat(savings) * 12;
+  const annualSavings = savings * 12;
   const inflationFraction = 1 + toFraction(inflation);
   const factor = rorFraction / inflationFraction;
-  const futureSavings = annualSavings * Math.pow(inflationFraction, yrs);
-  const futureNetworth = currentNetworth * Math.pow(rorFraction, yrs);
+  const futureSavings = annualSavings * Math.pow(inflationFraction, years);
+  const futureNetworth = currentNetworth * Math.pow(rorFraction, years);
 
-  const f1 = 1 - Math.pow(factor, yrs + 1);
+  const f1 = 1 - Math.pow(factor, years + 1);
   const f2 = 1 - factor;
 
   if (inflationFraction === rorFraction) {
     return Math.floor(
-      (futureSavings / inflationFraction) * yrs + futureNetworth,
+      (futureSavings / inflationFraction) * years + futureNetworth,
     );
   } else {
     return Math.floor(futureSavings * (f1 / f2) + futureNetworth) + 1;
   }
 };
 
-export const totalNetworth = (state: FormInputs, yrs: number): number => {
-  return investment(state, yrs) + homeEquity(state, yrs);
+export const calcLiquidNetworth = (
+  investmentData: InvestmentData,
+  homeData: HomeData,
+  futureData: FutureData,
+  years: number,
+): number => {
+  return (
+    investment(investmentData, futureData, years) -
+    mortgageDebt(homeData, years)
+  );
 };
 
-export const liquidNetworth = (state: FormInputs, yrs: number): number => {
-  return investment(state, yrs) - mortgageDebt(state, yrs);
+const monthlyYield = (networth: number, withdrawl: Percent): number => {
+  return Math.floor(percentage(networth, withdrawl) / 12);
 };
 
-const monthlyYield = (state: FormInputs, yrs: number): number => {
-  const currentNetworth = totalNetworth(state, yrs);
-
-  return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
+const monthlyLiquidYield = (networth: number, withdrawl: Percent): number => {
+  return Math.floor(percentage(networth, withdrawl) / 12);
 };
 
-const monthlyLiquidYield = (state: FormInputs, yrs: number): number => {
-  const currentNetworth = liquidNetworth(state, yrs);
+const increment = 0.25;
 
-  return Math.floor(percentage(currentNetworth, state.withdrawl) / 12);
-};
+function calcRenter(
+  investmentData: InvestmentData,
+  homeData: HomeData,
+  futureData: FutureData,
+  year: number,
+): number {
+  const { rental } = homeData;
+  const { livingExpenses, withdrawl, inflation } = futureData;
+  const networth = investment(investmentData, futureData, year);
 
-interface EffaiStrategyResult {
-  year: number;
-  networth: number;
+  const renterYield = monthlyYield(networth, withdrawl);
+  const renterGoal = compound(livingExpenses + rental, inflation, year);
+
+  return renterYield > renterGoal + 100 || year === 45
+    ? year
+    : calcRenter(investmentData, homeData, futureData, year + increment);
 }
 
-export const effai = (formInputs: FormInputs) => {
-  const increment = 0.25;
+function calcHomeOwner(
+  investmentData: InvestmentData,
+  homeData: HomeData,
+  futureData: FutureData,
+  year: number,
+  cb: (
+    investmentData: InvestmentData,
+    homeData: HomeData,
+    futureData: FutureData,
+    year: number,
+  ) => number,
+) {
+  const { price, maintenance, propertyTax } = homeData;
+  const { livingExpenses, withdrawl, inflation } = futureData;
 
-  function renter(state: FormInputs, year: number): EffaiStrategyResult {
-    const livingExpenses = parseFloat(state.livingExpenses);
-    const rent = parseFloat(state.rental);
-    const renterYield = monthlyYield(state, year);
-    const renterGoal = compound(livingExpenses + rent, state.inflation, year);
+  const liquidNetworth = calcLiquidNetworth(
+    investmentData,
+    homeData,
+    futureData,
+    year,
+  );
+  const expenses =
+    livingExpenses + monthlyHomeCosts(price, maintenance, propertyTax);
+  const homeownerYield = monthlyLiquidYield(liquidNetworth, withdrawl);
+  const homeownerGoal = compound(expenses, inflation, year);
 
-    return renterYield > renterGoal + 100 || year === 45
-      ? { year, networth: totalNetworth(state, year) }
-      : renter(state, year + increment);
+  return homeownerYield > homeownerGoal + 100 || year === 45
+    ? year
+    : cb(investmentData, homeData, futureData, year + increment);
+}
+
+function calcPayoffAtFI(
+  investmentData: InvestmentData,
+  homeData: HomeData,
+  futureData: FutureData,
+  year: number,
+): number {
+  return calcHomeOwner(
+    investmentData,
+    homeData,
+    futureData,
+    year,
+    calcPayoffAtFI,
+  );
+}
+
+function calcEarlyPayoff(
+  investmentData: InvestmentData,
+  homeData: HomeData,
+  futureData: FutureData,
+  year: number,
+): number {
+  const { price, maintenance, propertyTax } = homeData;
+  const debt = mortgageDebt(homeData, year);
+  const investments = investment(investmentData, futureData, year);
+
+  if (investments > debt) {
+    return calcRenter(
+      {
+        ...investmentData,
+        networth: investments - debt,
+      },
+      {
+        ...homeData,
+        rental: monthlyHomeCosts(price, maintenance, propertyTax),
+      },
+      futureData,
+      year,
+    );
+  } else {
+    return calcHomeOwner(
+      investmentData,
+      homeData,
+      futureData,
+      year,
+      calcEarlyPayoff,
+    );
   }
+}
 
-  function homeOwner(state: FormInputs, year: number): EffaiStrategyResult {
-    const expenses = parseFloat(state.livingExpenses) + monthlyHomeCosts(state);
-    const homeownerYield = monthlyLiquidYield(state, year);
-    const homeownerGoal = compound(expenses, state.inflation, year);
-
-    return homeownerYield > homeownerGoal + 100 || year === 45
-      ? { year, networth: totalNetworth(state, year) }
-      : homeOwner(state, year + increment);
-  }
-
-  function earlyPayoff(state: FormInputs, year: number): EffaiStrategyResult {
-    const debt = mortgageDebt(state, year);
-    const investments = investment(state, year);
-
-    if (investments > debt) {
-      const remaining = renter(
-        {
-          ...state,
-          networth: (investments - debt).toString(),
-          rental: compound(
-            monthlyHomeCosts(state),
-            state.inflation,
-            year,
-          ).toString(),
-        },
-        0,
-      ).year;
-      const effaiYear = year + remaining;
-
-      return { year: effaiYear, networth: totalNetworth(state, year) };
-    } else {
-      const expenses =
-        parseFloat(state.livingExpenses) + monthlyHomeCosts(state);
-      const homeownerYield = monthlyLiquidYield(state, year);
-      const homeownerGoal = compound(expenses, state.inflation, year);
-
-      return homeownerYield > homeownerGoal + 100 || year === 45
-        ? { year, networth: totalNetworth(state, year) }
-        : earlyPayoff(state, year + increment);
-    }
-  }
-
+export const effai = (
+  investmentData: InvestmentData,
+  homeData: HomeData,
+  futureData: FutureData,
+) => {
   return {
-    renter: renter(formInputs, 0),
-    homeOwner: homeOwner(formInputs, 0),
-    earlyPayoff: earlyPayoff(formInputs, 0),
+    renter: calcRenter(investmentData, homeData, futureData, 0),
+    homeOwner: calcPayoffAtFI(investmentData, homeData, futureData, 0),
+    earlyPayoff: calcEarlyPayoff(investmentData, homeData, futureData, 0),
   };
 };
 
-export const years = memoizeWith(
-  (state: FormInputs): string => JSON.stringify(state),
-  (state: FormInputs): number => {
-    const { renter, homeOwner, earlyPayoff } = effai(state);
+export const years = (
+  investmentData: InvestmentData,
+  homeData: HomeData,
+  futureData: FutureData,
+): number => {
+  const { renter, homeOwner, earlyPayoff } = effai(
+    investmentData,
+    homeData,
+    futureData,
+  );
 
-    return Math.min(renter.year, homeOwner.year, earlyPayoff.year);
-  },
-);
+  return Math.min(renter, homeOwner, earlyPayoff);
+};
