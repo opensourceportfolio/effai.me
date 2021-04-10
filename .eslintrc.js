@@ -10,18 +10,21 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react', 'prettier', 'promise', 'simple-import-sort', '@typescript-eslint'],
+  plugins: [
+    'react',
+    'prettier',
+    'promise',
+    'simple-import-sort',
+    '@typescript-eslint',
+  ],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:promise/recommended',
     'prettier',
-    'prettier/react',
-    'prettier/@typescript-eslint',
   ],
   rules: {
     'no-shadow': 'error',
@@ -64,9 +67,11 @@ module.exports = {
       },
     ],
     //Sorting
-    'simple-import-sort/sort': 'error',
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
     //Typescript
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
   settings: {
     react: {

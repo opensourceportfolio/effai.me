@@ -47,7 +47,4 @@ const Renter = ({ investmentData, homeData, futureData, onChange }: Props) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Renter);
+export default connect(mapStateToProps, mapDispatchToProps)(Renter);

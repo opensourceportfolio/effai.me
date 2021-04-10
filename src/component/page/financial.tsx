@@ -86,7 +86,4 @@ const Financial = ({
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Financial);
+export default connect(mapStateToProps, mapDispatchToProps)(Financial);

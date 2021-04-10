@@ -127,7 +127,4 @@ const Homeowner = ({
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Homeowner);
+export default connect(mapStateToProps, mapDispatchToProps)(Homeowner);

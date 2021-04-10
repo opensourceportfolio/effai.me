@@ -2,8 +2,8 @@ export function pmt(
   rate: number,
   nperiod: number,
   presentValue: number,
-  futureValue: number = 0,
-  type: number = 0,
+  futureValue = 0,
+  type = 0,
 ): number {
   if (rate === 0) {
     return -(presentValue + futureValue) / nperiod;

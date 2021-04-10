@@ -24,7 +24,7 @@ const mapStateToProps = (state: State): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  onNavigation: tabIndex => dispatch(changeTab(tabIndex)),
+  onNavigation: (tabIndex) => dispatch(changeTab(tabIndex)),
 });
 
 const style = {
@@ -37,7 +37,7 @@ const slideStyle = {
 
 const SwipeableView: React.FC<Props> = ({ tabIndex, onNavigation }: Props) => (
   <SwipeableViews
-    onChangeIndex={i => onNavigation(i)}
+    onChangeIndex={(i) => onNavigation(i)}
     index={tabIndex}
     resistance={true}
     style={style}
@@ -50,7 +50,4 @@ const SwipeableView: React.FC<Props> = ({ tabIndex, onNavigation }: Props) => (
   </SwipeableViews>
 );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SwipeableView);
+export default connect(mapStateToProps, mapDispatchToProps)(SwipeableView);

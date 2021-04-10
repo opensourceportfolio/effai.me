@@ -23,7 +23,7 @@ const DateComponent = (props: Props) => {
         {...props}
         fullWidth={true}
         label={text.placeholder}
-        onChange={e => onChange(name, e.target.value)}
+        onChange={(e) => onChange(name, e.target.value)}
         value={props.value}
       />
     </div>

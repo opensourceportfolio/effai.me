@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -10,7 +11,7 @@ const paths = {
   src: path.resolve(__dirname, '../src'),
 };
 
-module.exports = {
+const config = {
   entry: './src/root.tsx',
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -31,16 +32,7 @@ module.exports = {
       {
         test: /\.css$/,
         include: path.resolve(__dirname, '../src/css'),
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-            },
-          },
-          'css-loader',
-          'postcss-loader',
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
     ],
   },
@@ -49,13 +41,17 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Effai.me',
-      template: path.join(__dirname, '../assets/index.html'),
+      filename: 'index.html',
+      template: path.join(__dirname, '../assets/index.ejs'),
       hash: true,
     }),
-    new CopyWebpackPlugin([{ from: 'assets/' }]),
-    new SWPrecacheWebpackPlugin({
+    new CopyWebpackPlugin({
+      patterns: [{ from: 'assets/' }],
+    }),
+    new MiniCssExtractPlugin(),
+    new GenerateSW({
       cacheId: 'osp.effai',
-      filename: 'sw.js',
+      swDest: 'sw.js',
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
@@ -67,3 +63,5 @@ module.exports = {
     overlay: true,
   },
 };
+
+module.exports = config;

@@ -32,7 +32,7 @@ export default function Term(props: Props) {
         onChange={onChangeHandler}
         value={term}
       >
-        {terms.map(year => (
+        {terms.map((year) => (
           <MenuItem key={year} value={year}>{`${year} years`}</MenuItem>
         ))}
       </Select>

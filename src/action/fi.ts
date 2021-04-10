@@ -11,15 +11,15 @@ const write = debounce((state: State) => {
   set(key, state.input);
 }, 1000);
 
-export const CHANGE_VALUE: 'fi/change-value' = 'fi/change-value';
+export const CHANGE_VALUE = 'fi/change-value' as const;
 type ChangeFieldAction = PayloadAction<
   typeof CHANGE_VALUE,
   Partial<FormInputs>
 >;
 export function changeValue(
   payload: Partial<FormInputs>,
-): ThunkAction<void, State, {}, FIAction> {
-  return function(dispatch: Dispatch, getState: GetState) {
+): ThunkAction<void, State, unknown, FIAction> {
+  return function (dispatch: Dispatch, getState: GetState) {
     const action: ChangeFieldAction = { type: CHANGE_VALUE, payload };
 
     dispatch(action);
@@ -27,12 +27,12 @@ export function changeValue(
   };
 }
 
-export const LOAD_USER_DATA: 'fi/load-user-data' = 'fi/load-user-data';
-export const LOADED_USER_DATA: 'fi/loaded-user-data' = 'fi/loaded-user-data';
+export const LOAD_USER_DATA = 'fi/load-user-data' as const;
+export const LOADED_USER_DATA = 'fi/loaded-user-data' as const;
 type LoadUserDataAction = SimpleAction<typeof LOAD_USER_DATA>;
 type LoadedUserDataAction = PayloadAction<typeof LOADED_USER_DATA, FormInputs>;
-export function loadUserData(): ThunkAction<void, State, {}, FIAction> {
-  return function(dispatch: Dispatch) {
+export function loadUserData(): ThunkAction<void, State, unknown, FIAction> {
+  return function (dispatch: Dispatch) {
     dispatch({ type: LOAD_USER_DATA });
 
     return get(key).then((userData: FormInputs) =>

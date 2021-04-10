@@ -122,10 +122,10 @@ function calcHomeOwner(
   futureData: FutureData,
   year: number,
   cb: (
-    investmentData: InvestmentData,
-    homeData: HomeData,
-    futureData: FutureData,
-    year: number,
+    invData: InvestmentData,
+    hData: HomeData,
+    fData: FutureData,
+    y: number,
   ) => number,
 ) {
   const { price, maintenance, propertyTax } = homeData;

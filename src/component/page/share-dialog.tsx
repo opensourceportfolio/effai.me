@@ -50,7 +50,7 @@ class ShareDialog extends React.Component<Props> {
       <Dialog open={open}>
         <DialogTitle>Shareable URL</DialogTitle>
         <TextField
-          inputRef={link => (this.textfield = link)}
+          inputRef={(link) => (this.textfield = link)}
           fullWidth={true}
           value={getLinkRepresentation(input)}
         />
@@ -71,7 +71,4 @@ class ShareDialog extends React.Component<Props> {
   }
 }
 
-export default connect(
-  mapState,
-  mapDispatch,
-)(ShareDialog);
+export default connect(mapState, mapDispatch)(ShareDialog);

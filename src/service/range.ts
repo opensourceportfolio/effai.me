@@ -1,10 +1,6 @@
 import { RangeInfo } from 'model/rangeInfo';
 
-export function generate(
-  count: number,
-  from: number = 0,
-  step: number = 1,
-): number[] {
+export function generate(count: number, from = 0, step = 1): number[] {
   return [...Array(count)].map((_, i) => {
     return parseFloat((from + i * step).toFixed(1));
   });

@@ -68,7 +68,4 @@ const Future = ({ investmentData, homeData, futureData, onChange }: Props) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Future);
+export default connect(mapStateToProps, mapDispatchToProps)(Future);

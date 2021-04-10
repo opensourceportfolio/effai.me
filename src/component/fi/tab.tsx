@@ -46,7 +46,4 @@ const FiTab = ({ tabIndex, onNavigation }: Props) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(FiTab);
+export default connect(mapStateToProps, mapDispatchToProps)(FiTab);
