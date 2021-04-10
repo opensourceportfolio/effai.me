@@ -1,5 +1,5 @@
-# ficalculator3
+# effai.me
 
-A way to calculate your financial independence age
+A mobile first, progressive web app designed to calculate your financial independence age
 
 http://effai.me
